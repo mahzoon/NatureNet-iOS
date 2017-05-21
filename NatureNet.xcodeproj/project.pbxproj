@@ -13,6 +13,7 @@
 		2D5D103C1ECEBFFB008A8FEA /* UITable+HeaderAutoResize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D5D103B1ECEBFFB008A8FEA /* UITable+HeaderAutoResize.swift */; };
 		2D5D103E1ECF9471008A8FEA /* RoundedTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D5D103D1ECF9471008A8FEA /* RoundedTextView.swift */; };
 		2D5D10601ED01603008A8FEA /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D5D105F1ED01603008A8FEA /* ImageViewController.swift */; };
+		2D632E1E1ED1349E007ECF51 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2D632E1D1ED1349E007ECF51 /* GoogleService-Info.plist */; };
 		55CF19DD967736F8B7750455 /* Pods_NatureNetUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B238D5A0816A2E3FC6B7731A /* Pods_NatureNetUITests.framework */; };
 		682C31681ECE316F00F6D87D /* UtilityFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682C31671ECE316F00F6D87D /* UtilityFunctions.swift */; };
 		682C316B1ECE366B00F6D87D /* ToDo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682C316A1ECE366B00F6D87D /* ToDo.swift */; };
@@ -72,6 +73,7 @@
 		2D5D103B1ECEBFFB008A8FEA /* UITable+HeaderAutoResize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITable+HeaderAutoResize.swift"; sourceTree = "<group>"; };
 		2D5D103D1ECF9471008A8FEA /* RoundedTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedTextView.swift; sourceTree = "<group>"; };
 		2D5D105F1ED01603008A8FEA /* ImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
+		2D632E1D1ED1349E007ECF51 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3D47BBC3D482560B7F12A934 /* Pods_NatureNet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NatureNet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		57426900216948F158F226CD /* Pods-NatureNetUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NatureNetUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-NatureNetUITests/Pods-NatureNetUITests.release.xcconfig"; sourceTree = "<group>"; };
 		682C31671ECE316F00F6D87D /* UtilityFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilityFunctions.swift; sourceTree = "<group>"; };
@@ -228,6 +230,7 @@
 				689E31021ECA1E630039C2F3 /* View */,
 				689E31011ECA1E550039C2F3 /* Controller */,
 				68FA5A3F1ECA1538002E66B1 /* AppDelegate.swift */,
+				2D632E1D1ED1349E007ECF51 /* GoogleService-Info.plist */,
 				68FA5A431ECA1538002E66B1 /* Main.storyboard */,
 				68FA5A491ECA1538002E66B1 /* Assets.xcassets */,
 				68FA5A4B1ECA1538002E66B1 /* LaunchScreen.storyboard */,
@@ -431,6 +434,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				68FA5A4D1ECA1538002E66B1 /* LaunchScreen.storyboard in Resources */,
+				2D632E1E1ED1349E007ECF51 /* GoogleService-Info.plist in Resources */,
 				68FA5A4A1ECA1538002E66B1 /* Assets.xcassets in Resources */,
 				68FA5A451ECA1538002E66B1 /* Main.storyboard in Resources */,
 			);

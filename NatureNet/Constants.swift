@@ -54,6 +54,12 @@ let COMMENT_TEXTBOX_PLACEHOLDER = "Comment"
 // Messages
 //
 
+// Sign in Screen
+let SIGN_IN_ERRORS_TITLE = "Sign in"
+let SIGN_IN_ERRORS_BUTTON_TEXT = "OK"
+let SIGN_IN_NO_EMAIL_PROVIDED = "Please enter your email."
+let SIGN_IN_NO_PASSWORD_PROVIDED = "Please enter your password."
+
 // Join Screen
 let JOIN_PROFILE_IMAGE_OPTIONS_TITLE = "Choose an Option: "
 let JOIN_PROFILE_IMAGE_OPTIONS_MSG: String? = nil
@@ -93,5 +99,12 @@ let SAVE_OBSV_ERROR_BUTTON_TEXT = "OK"
 let SAVE_OBSV_SUCCESS_TITLE = "Saved!"
 let SAVE_OBSV_SUCCESS_MESSAGE = "The observation has been saved successfuly."
 let SAVE_OBSV_SUCCESS_BUTTON_TEXT = "OK"
+
+
+//
+// Segue names
+//
+let SEGUE_EXPLORE = "Explore"
+let SEGUE_SIGNIN = "SignIn"
 
 

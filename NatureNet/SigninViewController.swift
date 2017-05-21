@@ -10,35 +10,79 @@ import UIKit
 
 class SigninViewController: UITableViewController, UITextFieldDelegate {
 
+    // reference to the email text box
     @IBOutlet weak var emailAddress: UITextField!
+    // reference to the password text box
     @IBOutlet weak var password: UITextField!
+    // reference to the table view containing textboxes for sign in
+    @IBOutlet var signInTableView: UITableView!
+    
+    // reference to the main window that opened this signin window, this will be set in the "prepare for segue" function in the main controller. (before this view appears)
+    var parentVC: MainViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         emailAddress.delegate = self
         password.delegate = self
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        
+        // when user taps outside the textbox area the keyboard should disappear
+        hideKeyboardWhenTappedOutside()
     }
     
+    // This simulates a behavior similar to having "tab" for a real keyboard when interacting with textboxes
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        // if the "next" button clicked and email is under focus, then the next focus should be the password textbox
         if textField == self.emailAddress {
+            // set focus to the password text box
             self.password.becomeFirstResponder()
         } else {
-        self.view.endEditing(true)
+            // if the last item has focus then "next" should finish editing and make the keyboard disappear
+            self.view.endEditing(true)
         }
         return true
     }
+    
+    // This scrolls the text box up if it will be obscured under the keyboard when the keyboard appears
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        let scrollOffset = CGPoint(x: textField.frame.minX, y: self.view.frame.maxY - textField.frame.maxY)
+        signInTableView.setContentOffset(scrollOffset, animated: true)
+        
+        // we need to get a reference to the cell in the table view, the cell has a container view and the text box is in the container view, so we need two "superview"
+        let cell = textField.superview?.superview
+        if let _cell = cell as? UITableViewCell {
+            if let _idx = signInTableView.indexPath(for: _cell) {
+                signInTableView.scrollToRow(at: _idx, at: UITableViewScrollPosition.top, animated: true)
+            }
+        }
+    }
 
+    // This is called when the user taps the sign in button
     @IBAction func submitSignIn(_ sender: Any) {
-        self.dismiss(animated: true) {}
+        // proceed with sign in if email and password text boxes are not empty
+        if let email = emailAddress.text, email != "" {
+            if let pass = password.text, pass != "" {
+                DataService.ds.Authenticate(email: email, pass: pass, completion: { wasSuccess, err in
+                    if wasSuccess {
+                        // if authentication was successful then go to the explore screen. To do this we need to dismiss this view and upon completion ask the parent (main controller) to perform the segue to the explore screen
+                        self.dismiss(animated: true) {
+                            if let p = self.parentVC {
+                                p.performSegue(withIdentifier: SEGUE_EXPLORE, sender: nil)
+                            }
+                        }
+                    } else {
+                        UtilityFunctions.showErrorMessage(theView: self, title: SIGN_IN_ERRORS_TITLE, message: err, buttonText: SIGN_IN_ERRORS_BUTTON_TEXT)
+                    }
+                })
+            } else {
+                UtilityFunctions.showErrorMessage(theView: self, title: SIGN_IN_ERRORS_TITLE, message: SIGN_IN_NO_PASSWORD_PROVIDED, buttonText: SIGN_IN_ERRORS_BUTTON_TEXT)
+            }
+        } else {
+            UtilityFunctions.showErrorMessage(theView: self, title: SIGN_IN_ERRORS_TITLE, message: SIGN_IN_NO_EMAIL_PROVIDED, buttonText: SIGN_IN_ERRORS_BUTTON_TEXT)
+        }
     }
     
-    
+    // This is called when the user taps the cancel button which just dismisses this view
     @IBAction func cancelSignIn(_ sender: Any) {
         self.dismiss(animated: true) {}
     }
