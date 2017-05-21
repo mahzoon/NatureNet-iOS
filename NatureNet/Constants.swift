@@ -45,12 +45,25 @@ let GALLERY_CELL_ITEM_HEIGHT = 300.0
 let COMMUNITY_CELL_ITEM_HEIGHT = 50.0
 let COMMENT_TEXTBOX_MAX_HEIGHT = 150
 let MAP_CENTER_REGION_RADIUS: CLLocationDistance = 10000 // in meters, which is 10Km
+//
+let COMMUNITY_LIST_INIT_COUNT = 15
+let COMMUNITY_LIST_LOAD_MORE_COUNT = 15
+//
+let PROJECTS_LIST_INIT_COUNT = 20
+let PROJECTS_LIST_LOAD_MORE_COUNT = 20
+//
+let DESIGN_IDEA_LIST_INIT_COUNT = 10
+let DESIGN_IDEA_LIST_LOAD_MORE_COUNT = 10
+//
+let GALLERY_LIST_INIT_COUNT = 5
+let GALLERY_LIST_LOAD_MORE_COUNT = 5
 
 
 //
 // Texts
 //
 let COMMENT_TEXTBOX_PLACEHOLDER = "Comment"
+let PICKER_NO_SELECTION = "Select one"
 
 //
 // Messages
@@ -114,4 +127,13 @@ let SAVE_OBSV_SUCCESS_BUTTON_TEXT = "OK"
 let SEGUE_SIGNIN = "SignIn"
 let SEGUE_EXPLORE = "Explore"
 let SEGUE_PROFILE = "Profile"
+
+//
+// Database reference names
+//
+let DB_SITES_PATH = "sites"
+let DB_PROJECTS_PATH = "projects"
+let DB_USERS_PATH = "users"
+let DB_OBSERVATIONS_PATH = "observations"
+
 

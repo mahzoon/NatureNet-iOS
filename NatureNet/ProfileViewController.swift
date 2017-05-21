@@ -21,8 +21,6 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
     @IBOutlet weak var displayName: UITextField!
     @IBOutlet weak var fullName: UITextField!
     
-    var items = ["Aspen", "Anacostia", "Reedy Creek", "Elsewhere"]
-    
     @IBOutlet weak var affiliationPicker: UIPickerView!
     
     var imagePicker: UIImagePickerController!
@@ -76,16 +74,25 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
         return true
     }
     
+    // the affiliation picker has only one section
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
     
+    // returns the number of options for affiliation picker
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return 4
+        // considering the [no selection] option we have sites + 1 objects to return
+        return DataService.ds.GetSites().count + 1
     }
     
+    // returns the values for options of affiliation picker
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return items[row]
+        // the first option is [no selection]
+        if row == 0 {
+            return PICKER_NO_SELECTION
+        } else {
+            return DataService.ds.GetSiteNames()[row-1]
+        }
     }
     
     // This function is called when the user picked the image from the library. After picking the image we need to change the avatar icon (here called "profileButton") to the new image.
