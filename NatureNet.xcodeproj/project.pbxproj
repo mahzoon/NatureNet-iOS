@@ -7,10 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		133C14B401C71355193C8758 /* Pods_NatureNet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D47BBC3D482560B7F12A934 /* Pods_NatureNet.framework */; };
+		2457FA8CEE8E2A30FCC7ABB8 /* Pods_NatureNetTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82B281EA9CADC8590AB3AB68 /* Pods_NatureNetTests.framework */; };
 		2D272F421ED1273B00401CE6 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D272F411ED1273B00401CE6 /* DataService.swift */; };
 		2D5D103C1ECEBFFB008A8FEA /* UITable+HeaderAutoResize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D5D103B1ECEBFFB008A8FEA /* UITable+HeaderAutoResize.swift */; };
 		2D5D103E1ECF9471008A8FEA /* RoundedTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D5D103D1ECF9471008A8FEA /* RoundedTextView.swift */; };
 		2D5D10601ED01603008A8FEA /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D5D105F1ED01603008A8FEA /* ImageViewController.swift */; };
+		55CF19DD967736F8B7750455 /* Pods_NatureNetUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B238D5A0816A2E3FC6B7731A /* Pods_NatureNetUITests.framework */; };
 		682C31681ECE316F00F6D87D /* UtilityFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682C31671ECE316F00F6D87D /* UtilityFunctions.swift */; };
 		682C316B1ECE366B00F6D87D /* ToDo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682C316A1ECE366B00F6D87D /* ToDo.swift */; };
 		682C316D1ECE48BB00F6D87D /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682C316C1ECE48BB00F6D87D /* CommentCell.swift */; };
@@ -64,10 +67,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		14C42650132EA9362369106F /* Pods-NatureNet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NatureNet.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NatureNet/Pods-NatureNet.debug.xcconfig"; sourceTree = "<group>"; };
 		2D272F411ED1273B00401CE6 /* DataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		2D5D103B1ECEBFFB008A8FEA /* UITable+HeaderAutoResize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITable+HeaderAutoResize.swift"; sourceTree = "<group>"; };
 		2D5D103D1ECF9471008A8FEA /* RoundedTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedTextView.swift; sourceTree = "<group>"; };
 		2D5D105F1ED01603008A8FEA /* ImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
+		3D47BBC3D482560B7F12A934 /* Pods_NatureNet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NatureNet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		57426900216948F158F226CD /* Pods-NatureNetUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NatureNetUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-NatureNetUITests/Pods-NatureNetUITests.release.xcconfig"; sourceTree = "<group>"; };
 		682C31671ECE316F00F6D87D /* UtilityFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilityFunctions.swift; sourceTree = "<group>"; };
 		682C316A1ECE366B00F6D87D /* ToDo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToDo.swift; sourceTree = "<group>"; };
 		682C316C1ECE48BB00F6D87D /* CommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
@@ -107,6 +113,12 @@
 		68FB9BE31ECCF944006C88B1 /* GalleryDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryDetailController.swift; sourceTree = "<group>"; };
 		68FB9BE51ECCFA11006C88B1 /* DesignIdeaDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesignIdeaDetailController.swift; sourceTree = "<group>"; };
 		68FB9BE71ECCFA47006C88B1 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		82B281EA9CADC8590AB3AB68 /* Pods_NatureNetTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NatureNetTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		86713FC734CFA2CDCF458E9F /* Pods-NatureNetUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NatureNetUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NatureNetUITests/Pods-NatureNetUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		A472F43C1699FD33B9A1FB5B /* Pods-NatureNetTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NatureNetTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NatureNetTests/Pods-NatureNetTests.debug.xcconfig"; sourceTree = "<group>"; };
+		B238D5A0816A2E3FC6B7731A /* Pods_NatureNetUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NatureNetUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D3BA5C7F0CDDC64F30967187 /* Pods-NatureNet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NatureNet.release.xcconfig"; path = "Pods/Target Support Files/Pods-NatureNet/Pods-NatureNet.release.xcconfig"; sourceTree = "<group>"; };
+		D4638C50FFC5348CF221982A /* Pods-NatureNetTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NatureNetTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-NatureNetTests/Pods-NatureNetTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +126,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				133C14B401C71355193C8758 /* Pods_NatureNet.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -121,6 +134,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2457FA8CEE8E2A30FCC7ABB8 /* Pods_NatureNetTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -128,6 +142,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55CF19DD967736F8B7750455 /* Pods_NatureNetUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -189,6 +204,8 @@
 				68FA5A561ECA1538002E66B1 /* NatureNetTests */,
 				68FA5A611ECA1538002E66B1 /* NatureNetUITests */,
 				68FA5A3D1ECA1538002E66B1 /* Products */,
+				D85357508044B618CCA50CD7 /* Pods */,
+				F059AEEE073B7FC1AE62F02F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -271,6 +288,29 @@
 			name = Add;
 			sourceTree = "<group>";
 		};
+		D85357508044B618CCA50CD7 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				14C42650132EA9362369106F /* Pods-NatureNet.debug.xcconfig */,
+				D3BA5C7F0CDDC64F30967187 /* Pods-NatureNet.release.xcconfig */,
+				A472F43C1699FD33B9A1FB5B /* Pods-NatureNetTests.debug.xcconfig */,
+				D4638C50FFC5348CF221982A /* Pods-NatureNetTests.release.xcconfig */,
+				86713FC734CFA2CDCF458E9F /* Pods-NatureNetUITests.debug.xcconfig */,
+				57426900216948F158F226CD /* Pods-NatureNetUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		F059AEEE073B7FC1AE62F02F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3D47BBC3D482560B7F12A934 /* Pods_NatureNet.framework */,
+				82B281EA9CADC8590AB3AB68 /* Pods_NatureNetTests.framework */,
+				B238D5A0816A2E3FC6B7731A /* Pods_NatureNetUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -278,9 +318,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 68FA5A671ECA1538002E66B1 /* Build configuration list for PBXNativeTarget "NatureNet" */;
 			buildPhases = (
+				BE3221B827CF1D55C2BC6D20 /* [CP] Check Pods Manifest.lock */,
 				68FA5A381ECA1538002E66B1 /* Sources */,
 				68FA5A391ECA1538002E66B1 /* Frameworks */,
 				68FA5A3A1ECA1538002E66B1 /* Resources */,
+				1B8F5E02C63FC8A9AE31057B /* [CP] Embed Pods Frameworks */,
+				154E99F99EFF6B6B852A4177 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -295,9 +338,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 68FA5A6A1ECA1538002E66B1 /* Build configuration list for PBXNativeTarget "NatureNetTests" */;
 			buildPhases = (
+				1B7E74968E60C178AF9A9080 /* [CP] Check Pods Manifest.lock */,
 				68FA5A4F1ECA1538002E66B1 /* Sources */,
 				68FA5A501ECA1538002E66B1 /* Frameworks */,
 				68FA5A511ECA1538002E66B1 /* Resources */,
+				ED5A929E8786189D3F464666 /* [CP] Embed Pods Frameworks */,
+				9272F3AB9B4BC4E75715EC95 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -313,9 +359,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 68FA5A6D1ECA1538002E66B1 /* Build configuration list for PBXNativeTarget "NatureNetUITests" */;
 			buildPhases = (
+				17DE4CF65241AB75676ED94F /* [CP] Check Pods Manifest.lock */,
 				68FA5A5A1ECA1538002E66B1 /* Sources */,
 				68FA5A5B1ECA1538002E66B1 /* Frameworks */,
 				68FA5A5C1ECA1538002E66B1 /* Resources */,
+				1A91D91F8CE65BCCF81E62F6 /* [CP] Embed Pods Frameworks */,
+				E4E345BB0E95E3CCCA812A11 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -402,6 +451,144 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		154E99F99EFF6B6B852A4177 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-NatureNet/Pods-NatureNet-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		17DE4CF65241AB75676ED94F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		1A91D91F8CE65BCCF81E62F6 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-NatureNetUITests/Pods-NatureNetUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		1B7E74968E60C178AF9A9080 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		1B8F5E02C63FC8A9AE31057B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-NatureNet/Pods-NatureNet-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9272F3AB9B4BC4E75715EC95 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-NatureNetTests/Pods-NatureNetTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BE3221B827CF1D55C2BC6D20 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		E4E345BB0E95E3CCCA812A11 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-NatureNetUITests/Pods-NatureNetUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		ED5A929E8786189D3F464666 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-NatureNetTests/Pods-NatureNetTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		68FA5A381ECA1538002E66B1 /* Sources */ = {
@@ -591,6 +778,7 @@
 		};
 		68FA5A681ECA1538002E66B1 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 14C42650132EA9362369106F /* Pods-NatureNet.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 34N446J27K;
@@ -605,6 +793,7 @@
 		};
 		68FA5A691ECA1538002E66B1 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D3BA5C7F0CDDC64F30967187 /* Pods-NatureNet.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 34N446J27K;
@@ -619,6 +808,7 @@
 		};
 		68FA5A6B1ECA1538002E66B1 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A472F43C1699FD33B9A1FB5B /* Pods-NatureNetTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -634,6 +824,7 @@
 		};
 		68FA5A6C1ECA1538002E66B1 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D4638C50FFC5348CF221982A /* Pods-NatureNetTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -649,6 +840,7 @@
 		};
 		68FA5A6E1ECA1538002E66B1 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 86713FC734CFA2CDCF458E9F /* Pods-NatureNetUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = J6AJ4835YU;
@@ -663,6 +855,7 @@
 		};
 		68FA5A6F1ECA1538002E66B1 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 57426900216948F158F226CD /* Pods-NatureNetUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = J6AJ4835YU;
