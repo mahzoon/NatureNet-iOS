@@ -88,6 +88,7 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
         return items[row]
     }
     
+    // This function is called when the user picked the image from the library. After picking the image we need to change the avatar icon (here called "profileButton") to the new image.
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
             imagePicker.dismiss(animated: true, completion: {
@@ -98,8 +99,8 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
         imagePicker.dismiss(animated: true, completion: nil)
     }
     
+    // This function is called when the avatar icon is tapped. Tapping the icon will bring up a prompt asking if the user wants to choose from an existing photo from the library or take a new one using the camera. In case the photo is already selected the user has the option to remove the photo (the icon switches to the default avatar)
     @IBAction func profileButtonTapped(_ sender: Any) {
-        //present(imagePicker, animated: true, completion: nil)
         let alert = UIAlertController(title: JOIN_PROFILE_IMAGE_OPTIONS_TITLE, message: JOIN_PROFILE_IMAGE_OPTIONS_MSG, preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: JOIN_PROFILE_IMAGE_OPTIONS_CANCEL, style: .cancel, handler: nil))
         alert.addAction(UIAlertAction(title: JOIN_PROFILE_IMAGE_OPTIONS_PICK_EXISTING, style: .default, handler: { (action: UIAlertAction) in
@@ -125,6 +126,16 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
             }))
         }
         present(alert, animated: true, completion: nil)
+    }
+    
+    // When signing out, if successful, dismiss to the caller view, else show the error message
+    @IBAction func signOutTapped(_ sender: Any) {
+        let (result, result_str) = DataService.ds.SignOut()
+        if !result {
+            UtilityFunctions.showErrorMessage(theView: self, title: PROFILE_ERRORS_TITLE, message: result_str, buttonText: PROFILE_ERRORS_BUTTON_TEXT)
+        } else {
+            dismiss(animated: true, completion: nil)
+        }
     }
     
     @IBAction func doneButtonTapped(_ sender: Any) {

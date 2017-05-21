@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import MapKit
 
 //
 // Colors
@@ -29,8 +30,9 @@ let ADD_OBSV_IMAGE = "icon - observation default"
 let HIDE_KEYBOARD = "icon - down"
 let SHOW_KEYBOARD = "icon - up"
 // Icons used in code
-let HIDE_KEYBOARD_IMAGE = UIImage(named: "icon - down")
-let SHOW_KEYBOARD_IMAGE = UIImage(named: "icon - up")
+let ICON_PROFILE_ONLINE = UIImage(named: "icon - profile - online")
+let ICON_PROFILE_OFFLINE = UIImage(named: "icon - profile - offline")
+
 
 //
 // Sizes
@@ -42,7 +44,7 @@ let PROJECT_CELL_ITEM_HEIGHT = 50.0
 let GALLERY_CELL_ITEM_HEIGHT = 300.0
 let COMMUNITY_CELL_ITEM_HEIGHT = 50.0
 let COMMENT_TEXTBOX_MAX_HEIGHT = 150
-
+let MAP_CENTER_REGION_RADIUS: CLLocationDistance = 10000 // in meters, which is 10Km
 
 
 //
@@ -59,6 +61,11 @@ let SIGN_IN_ERRORS_TITLE = "Sign in"
 let SIGN_IN_ERRORS_BUTTON_TEXT = "OK"
 let SIGN_IN_NO_EMAIL_PROVIDED = "Please enter your email."
 let SIGN_IN_NO_PASSWORD_PROVIDED = "Please enter your password."
+
+// Profile Screen
+let PROFILE_ERRORS_TITLE = "Sign Out"
+let PROFILE_ERRORS_BUTTON_TEXT = "Ok"
+
 
 // Join Screen
 let JOIN_PROFILE_IMAGE_OPTIONS_TITLE = "Choose an Option: "
@@ -104,7 +111,7 @@ let SAVE_OBSV_SUCCESS_BUTTON_TEXT = "OK"
 //
 // Segue names
 //
-let SEGUE_EXPLORE = "Explore"
 let SEGUE_SIGNIN = "SignIn"
-
+let SEGUE_EXPLORE = "Explore"
+let SEGUE_PROFILE = "Profile"
 

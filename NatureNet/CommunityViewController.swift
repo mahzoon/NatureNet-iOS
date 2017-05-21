@@ -10,8 +10,12 @@ import UIKit
 
 class CommunityViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
 
+    // reference to the search text box at the top of the view
     @IBOutlet weak var searchBar: UISearchBar!
+    // reference to the list of members in the table
     @IBOutlet weak var communityTable: UITableView!
+    // reference to the profile icon button on the top left corner
+    @IBOutlet weak var profileButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,9 +25,14 @@ class CommunityViewController: UIViewController, UITableViewDelegate, UITableVie
         searchBar.delegate = self
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    // Whenever this view appears, it should update user's status on the profile icon on the top left corner.
+    override func viewWillAppear(_ animated: Bool) {
+        // set the status of the user (i.e signed in or not) on the profile icon
+        if DataService.ds.LoggedIn() {
+            profileButton.setImage(ICON_PROFILE_ONLINE, for: .normal)
+        } else {
+            profileButton.setImage(ICON_PROFILE_OFFLINE, for: .normal)
+        }
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -65,6 +74,30 @@ class CommunityViewController: UIViewController, UITableViewDelegate, UITableVie
         }
     }
     
+    // When the profile button is tapped, we need to check if the user is authenticated, if not it should go to the sign in screen
+    @IBAction func profileButtonTapped(_ sender: Any) {
+        if DataService.ds.LoggedIn() {
+            performSegue(withIdentifier: SEGUE_PROFILE, sender: nil)
+        } else {
+            performSegue(withIdentifier: SEGUE_SIGNIN, sender: nil)
+        }
+    }
+    
+    // In case we needed to go to the profile screen but authentication was required we need to go to the sign in screen and set the "parentVC" and the "successSegueId" so that when the sign in was successful the segue to the profile screen is performed
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let id = segue.identifier {
+            if id == SEGUE_SIGNIN {
+                // the sign in screen is embedded in a nav controller
+                let signInNav = segue.destination as! UINavigationController
+                // and the nav controller has only one child i.e the sign in view controller
+                let signInVC = signInNav.viewControllers.first as! SigninViewController
+                signInVC.parentVC = self
+                signInVC.successSegueId = SEGUE_PROFILE
+            }
+        }
+    }
+    
+    // remove the focus from the search bar if the user clicked on the cross button on the search bar. This will also causes the keyboard to hide.
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         view.endEditing(true)
     }

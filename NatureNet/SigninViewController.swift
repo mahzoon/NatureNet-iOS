@@ -17,8 +17,10 @@ class SigninViewController: UITableViewController, UITextFieldDelegate {
     // reference to the table view containing textboxes for sign in
     @IBOutlet var signInTableView: UITableView!
     
-    // reference to the main window that opened this signin window, this will be set in the "prepare for segue" function in the main controller. (before this view appears)
-    var parentVC: MainViewController?
+    // reference to the main window that opened this signin window, this will be set in the "prepare for segue" function in the main controller. (before this view appears) The main controller could be any view that needs authentication.
+    var parentVC: UIViewController?
+    // This variable is set by the main view controller (the caller) to contain the segue identifier which is performed in case of success authentication
+    var successSegueId: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +30,13 @@ class SigninViewController: UITableViewController, UITextFieldDelegate {
         
         // when user taps outside the textbox area the keyboard should disappear
         hideKeyboardWhenTappedOutside()
+    }
+    
+    // When this view is appeared, if the user is already signed in, dismiss this view
+    override func viewWillAppear(_ animated: Bool) {
+        if DataService.ds.LoggedIn() {
+            self.dismiss(animated: true, completion: nil)
+        }
     }
     
     // This simulates a behavior similar to having "tab" for a real keyboard when interacting with textboxes
@@ -66,8 +75,8 @@ class SigninViewController: UITableViewController, UITextFieldDelegate {
                     if wasSuccess {
                         // if authentication was successful then go to the explore screen. To do this we need to dismiss this view and upon completion ask the parent (main controller) to perform the segue to the explore screen
                         self.dismiss(animated: true) {
-                            if let p = self.parentVC {
-                                p.performSegue(withIdentifier: SEGUE_EXPLORE, sender: nil)
+                            if let p = self.parentVC, let segueId = self.successSegueId  {
+                                p.performSegue(withIdentifier: segueId, sender: nil)
                             }
                         }
                     } else {

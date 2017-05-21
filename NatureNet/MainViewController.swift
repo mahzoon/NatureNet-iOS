@@ -31,6 +31,7 @@ class MainViewController: UIViewController {
                 // and the nav controller has only one child i.e the sign in view controller
                 let signInVC = signInNav.viewControllers.first as! SigninViewController
                 signInVC.parentVC = self
+                signInVC.successSegueId = SEGUE_EXPLORE
             }
         }
     }

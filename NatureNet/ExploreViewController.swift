@@ -11,10 +11,12 @@ import MapKit
 
 class ExploreViewController: UIViewController, MKMapViewDelegate, UISearchBarDelegate {
 
+    // reference to the search bar
     @IBOutlet weak var searchBar: UISearchBar!
+    // reference to the map component
     @IBOutlet weak var mapView: MKMapView!
-    
-    let regionRadius: CLLocationDistance = 10000
+    // reference to the profile icon button on the top left corner
+    @IBOutlet weak var profileButton: UIButton!
     
     let sample_latitude1 = 35.232279//39.1949966
     let sample_longitude1 = -80.700205//-106.8214056
@@ -48,14 +50,21 @@ class ExploreViewController: UIViewController, MKMapViewDelegate, UISearchBarDel
                                       coordinate: CLLocationCoordinate2D(latitude: sample_latitude2, longitude: sample_longitude2), activityId: 1)
         mapView.addAnnotation(observation2)
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    // Whenever this view appears, it should update user's status on the profile icon on the top left corner.
+    override func viewWillAppear(_ animated: Bool) {
+        // set the status of the user (i.e signed in or not) on the profile icon
+        if DataService.ds.LoggedIn() {
+            profileButton.setImage(ICON_PROFILE_ONLINE, for: .normal)
+        } else {
+            profileButton.setImage(ICON_PROFILE_OFFLINE, for: .normal)
+        }
     }
     
+    // To center the map on location we need a location (the input parameter) and a region radius. The radius is defined in the Constants.swift file
     func centerMapOnLocation(location: CLLocation) {
-        let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, regionRadius * 2.0, regionRadius * 2.0)
+        // the parameters: long. and lat. distances, are defined as the region diameter = 2*the region radius
+        let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, MAP_CENTER_REGION_RADIUS * 2.0, MAP_CENTER_REGION_RADIUS * 2.0)
         mapView.setRegion(coordinateRegion, animated: true)
     }
     
@@ -128,6 +137,30 @@ class ExploreViewController: UIViewController, MKMapViewDelegate, UISearchBarDel
         }
     }
     
+    // When the profile button is tapped, we need to check if the user is authenticated, if not it should go to the sign in screen
+    @IBAction func profileButtonTapped(_ sender: Any) {
+        if DataService.ds.LoggedIn() {
+            performSegue(withIdentifier: SEGUE_PROFILE, sender: nil)
+        } else {
+            performSegue(withIdentifier: SEGUE_SIGNIN, sender: nil)
+        }
+    }
+    
+    // In case we needed to go to the profile screen but authentication was required we need to go to the sign in screen and set the "parentVC" and the "successSegueId" so that when the sign in was successful the segue to the profile screen is performed
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let id = segue.identifier {
+            if id == SEGUE_SIGNIN {
+                // the sign in screen is embedded in a nav controller
+                let signInNav = segue.destination as! UINavigationController
+                // and the nav controller has only one child i.e the sign in view controller
+                let signInVC = signInNav.viewControllers.first as! SigninViewController
+                signInVC.parentVC = self
+                signInVC.successSegueId = SEGUE_PROFILE
+            }
+        }
+    }
+    
+    // remove the focus from the search bar if the user clicked on the cross button on the search bar. This will also causes the keyboard to hide.
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         view.endEditing(true)
     }
