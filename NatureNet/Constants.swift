@@ -63,6 +63,9 @@ let GALLERY_LIST_LOAD_MORE_COUNT = 5
 //
 let DETAILED_OBSV_LIST_INIT_COUNT = 5
 let DETAILED_OBSV_LIST_LOAD_MORE_COUNT = 5
+//
+let COMMENT_LIST_INIT_COUNT = 5
+let COMMENT_LIST_LOAD_MORE_COUNT = 5
 
 
 //
@@ -71,6 +74,7 @@ let DETAILED_OBSV_LIST_LOAD_MORE_COUNT = 5
 let COMMENT_TEXTBOX_PLACEHOLDER = "Comment"
 let PICKER_NO_SELECTION = "Select one"
 let LISTS_SHOW_MORE_TEXT = "Show more..."
+let NO_COMMENTS_TEXT = "No comments."
 
 //
 // Messages
@@ -144,4 +148,5 @@ let DB_PROJECTS_PATH = "activities"
 let DB_USERS_PATH = "users"
 let DB_OBSERVATIONS_PATH = "observations"
 let DB_DESIGNIDEAS_PATH = "ideas"
+let DB_COMMENTS_PATH = "comments"
 

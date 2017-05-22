@@ -48,6 +48,12 @@ class DataService  {
     // reference to the observer handle of design ideas. This observer looks for additions to the design ideas, and updates the "designIdeas" array if new idea is being added. The reference is mainly for "dispose" to remove the handle.
     private var designIdeasHandle: UInt!
     
+    // The comments stored in an array sorted by their recency. The first item is the most recent one.
+    private var commentsOnObservations = [NNComment]()
+    private var commentsOnDesignIdeas = [NNComment]()
+    // reference to the observer handle of comments. This observer looks for additions to the comments, and updates the "commentsOnObservations" or "commentsOnDesignIdeas" arrays if new comment is being added. The reference is mainly for "dispose" to remove the handle.
+    private var commentsHandle: UInt!
+    
     init() {
         // initializing the reference to the database
         db_ref = Database.database().reference()
@@ -58,6 +64,7 @@ class DataService  {
         initUsersObserver()
         initObservationsObserver()
         initDesignIdeasObserver()
+        initCommentsObserver()
     }
     
     func dispose() {
@@ -65,6 +72,10 @@ class DataService  {
         sites.removeAll()
         projects.removeAll()
         users.removeAll()
+        observations.removeAll()
+        designIdeas.removeAll()
+        commentsOnDesignIdeas.removeAll()
+        commentsOnObservations.removeAll()
         currentUser = nil
         // remove site observer
         db_ref.removeObserver(withHandle: sitesHandle)
@@ -76,6 +87,8 @@ class DataService  {
         db_ref.removeObserver(withHandle: observationsHandle)
         // remove design ideas observer
         db_ref.removeObserver(withHandle: designIdeasHandle)
+        // remove comment observer
+        db_ref.removeObserver(withHandle: commentsHandle)
     }
     
     //////////////////////////////////////////////////////////////
@@ -326,7 +339,7 @@ class DataService  {
     
     private func initObservationsObserver() {
         // adding observer to the observations
-        sitesHandle = db_ref.child(DB_OBSERVATIONS_PATH).observe(.childAdded, with: { (snapshot) in
+        observationsHandle = db_ref.child(DB_OBSERVATIONS_PATH).observe(.childAdded, with: { (snapshot) in
             // snapshot.value is a dictionary for one Observation
             if let obsDict = snapshot.value as? [String: AnyObject] {
                 let observation = NNObservation.createObservationFromFirebase(with: obsDict)
@@ -409,7 +422,7 @@ class DataService  {
     
     private func initDesignIdeasObserver() {
         // adding observer to the design ideas
-        sitesHandle = db_ref.child(DB_DESIGNIDEAS_PATH).observe(.childAdded, with: { (snapshot) in
+        designIdeasHandle = db_ref.child(DB_DESIGNIDEAS_PATH).observe(.childAdded, with: { (snapshot) in
             // snapshot.value is a dictionary for one Design Idea
             if let ideaDict = snapshot.value as? [String: AnyObject] {
                 let idea = NNDesignIdea.createDesignIdeaFromFirebase(with: ideaDict)
@@ -471,4 +484,57 @@ class DataService  {
         return listIdea
     }
 
+    
+    //////////////////////////////////////////////////////////////
+    //
+    //                          Comments
+    //
+    //////////////////////////////////////////////////////////////
+    
+    private func initCommentsObserver() {
+        // adding observer to the comments
+        commentsHandle = db_ref.child(DB_COMMENTS_PATH).observe(.childAdded, with: { (snapshot) in
+            // snapshot.value is a dictionary for one Comment
+            if let commentDict = snapshot.value as? [String: AnyObject] {
+                let comment = NNComment.createCommentFromFirebase(with: commentDict)
+                // we don't bother adding comments that do not have updated_at timestamp. They are possibly test comments.
+                if comment.updatedAt != 0 {
+                    if comment.isCommentOnObservation {
+                        self.commentsOnObservations.append(comment)
+                    }
+                    if comment.isCommentOnDesignIdea {
+                        self.commentsOnDesignIdeas.append(comment)
+                    }
+                }
+            }
+            self.commentsOnObservations.sort(by: { (first, second) -> Bool in
+                return first.updatedAt.decimalValue > second.updatedAt.decimalValue
+            })
+            self.commentsOnDesignIdeas.sort(by: { (first, second) -> Bool in
+                return first.updatedAt.decimalValue > second.updatedAt.decimalValue
+            })
+        })
+    }
+    
+    func GetCommentsOnDesignIdea(with id: String) -> [NNComment] {
+        let commentList = self.commentsOnDesignIdeas.filter { (comment) -> Bool in
+            if comment.parentContribution == id {
+                return true
+            } else {
+                return false
+            }
+        }
+        return commentList
+    }
+    
+    func GetCommentsOnObservation(with id: String) -> [NNComment] {
+        let commentList = self.commentsOnObservations.filter { (comment) -> Bool in
+            if comment.parentContribution == id {
+                return true
+            } else {
+                return false
+            }
+        }
+        return commentList
+    }
 }

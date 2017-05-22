@@ -13,8 +13,8 @@ class CommentCell: UITableViewCell {
     @IBOutlet weak var username: UILabel!
     @IBOutlet weak var comment: UILabel!
     
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+    override func awakeFromNib() {
+        super.awakeFromNib()
     }
     
     func configureCell(name: String, comment: String) {

@@ -117,6 +117,13 @@ class DesignIdeasViewController: UIViewController, UITableViewDelegate, UITableV
                 signInVC.parentVC = self
                 signInVC.successSegueId = SEGUE_PROFILE
             }
+            if id == SEGUE_DETAILS {
+                if let cell = sender as? DesignIdeasCell, !cell.isShowMore {
+                    if let dest = segue.destination as? DesignIdeaDetailController {
+                        dest.designIdea = cell.designIdea
+                    }
+                }
+            }
         }
     }
     
