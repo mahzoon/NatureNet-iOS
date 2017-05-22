@@ -31,9 +31,7 @@ class GalleryCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-    }
-    
-    override func draw(_ rect: CGRect) {
+        
         if avatar != nil {
             avatar.layer.cornerRadius = avatar.frame.size.width / 2
             avatar.clipsToBounds = true

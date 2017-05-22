@@ -122,7 +122,7 @@ class GalleryViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
     }
     
-    // When seeing details of a project, we need to check if the sender (the cell) is a "show more" cell or not. If so, then the transition is not possible, instead another "page" should be added to the data.
+    // When seeing details of an observation, we need to check if the sender (the cell) is a "show more" cell or not. If so, then the transition is not possible, instead another "page" should be added to the data.
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         if identifier == SEGUE_DETAILS {
             if let cell = sender as? GalleryCell {

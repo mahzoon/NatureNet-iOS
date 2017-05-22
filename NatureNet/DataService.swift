@@ -43,6 +43,11 @@ class DataService  {
     // reference to the observer handle of observations. This observer looks for additions to the observations, and updates the "observations" array if new observation is being added. The reference is mainly for "dispose" to remove the handle.
     private var observationsHandle: UInt!
     
+    // The design ideas stored in an array sorted by their recency. The first item is the most recent one.
+    private var designIdeas = [NNDesignIdea]()
+    // reference to the observer handle of design ideas. This observer looks for additions to the design ideas, and updates the "designIdeas" array if new idea is being added. The reference is mainly for "dispose" to remove the handle.
+    private var designIdeasHandle: UInt!
+    
     init() {
         // initializing the reference to the database
         db_ref = Database.database().reference()
@@ -52,6 +57,7 @@ class DataService  {
         initProjectsObserver()
         initUsersObserver()
         initObservationsObserver()
+        initDesignIdeasObserver()
     }
     
     func dispose() {
@@ -68,6 +74,8 @@ class DataService  {
         db_ref.removeObserver(withHandle: usersHandle)
         // remove observations observer
         db_ref.removeObserver(withHandle: observationsHandle)
+        // remove design ideas observer
+        db_ref.removeObserver(withHandle: designIdeasHandle)
     }
     
     //////////////////////////////////////////////////////////////
@@ -370,4 +378,64 @@ class DataService  {
         }
         return nil
     }
+    
+    //////////////////////////////////////////////////////////////
+    //
+    //                        Design Ideas
+    //
+    //////////////////////////////////////////////////////////////
+    
+    private func initDesignIdeasObserver() {
+        // adding observer to the design ideas
+        sitesHandle = db_ref.child(DB_DESIGNIDEAS_PATH).observe(.childAdded, with: { (snapshot) in
+            // snapshot.value is a dictionary for one Design Idea
+            if let ideaDict = snapshot.value as? [String: AnyObject] {
+                let idea = NNDesignIdea.createDesignIdeaFromFirebase(with: ideaDict)
+                // we don't bother adding ideas that do not have updated_at timestamp. They are possibly test ideas.
+                if idea.updatedAt != 0 {
+                    self.designIdeas.append(idea)
+                }
+            }
+            self.designIdeas.sort(by: { (first, second) -> Bool in
+                return first.updatedAt.decimalValue > second.updatedAt.decimalValue
+            })
+        })
+    }
+    
+    func GetNumDesignIdeas(searchFilter: String) -> Int {
+        if searchFilter != "" {
+            return self.designIdeas.filter({ (idea) -> Bool in
+                if (idea.content.lowercased().range(of: searchFilter.lowercased()) != nil) ||
+                    ((GetUser(by: idea.submitter)?.displayName.lowercased().range(of: searchFilter.lowercased())) != nil) {
+                    return true
+                } else {
+                    return false
+                }
+            }).count
+        } else {
+            return self.designIdeas.count
+        }
+    }
+    
+    func GetDesignIdea(at index: Int, searchFilter: String) -> NNDesignIdea? {
+        if searchFilter != "" {
+            let listIdeas = self.designIdeas.filter({ (idea) -> Bool in
+                if (idea.content.lowercased().range(of: searchFilter.lowercased()) != nil) ||
+                    ((GetUser(by: idea.submitter)?.displayName.lowercased().range(of: searchFilter.lowercased())) != nil) {
+                    return true
+                } else {
+                    return false
+                }
+            })
+            if index < listIdeas.count {
+                return listIdeas[index]
+            }
+        } else {
+            if index < self.designIdeas.count {
+                return self.designIdeas[index]
+            }
+        }
+        return nil
+    }
+
 }
