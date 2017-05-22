@@ -38,17 +38,17 @@ class ExploreViewController: UIViewController, MKMapViewDelegate, UISearchBarDel
         let initialLocation = CLLocation(latitude: sample_latitude1, longitude: sample_longitude1)
         centerMapOnLocation(location: initialLocation)
         
-        let observation1 = Observation(title: "Trees", pic: sample_image1!,
-                              locationName: "Location Name",
-                              discipline: "More info",
-                              coordinate: CLLocationCoordinate2D(latitude: sample_latitude1, longitude: sample_longitude1), activityId: 0)
-        mapView.addAnnotation(observation1)
-        
-        let observation2 = Observation(title: "Colored turtle", pic: sample_image2!,
-                                      locationName: "Location Name",
-                                      discipline: "More info",
-                                      coordinate: CLLocationCoordinate2D(latitude: sample_latitude2, longitude: sample_longitude2), activityId: 1)
-        mapView.addAnnotation(observation2)
+//        let observation1 = Observation(title: "Trees", pic: sample_image1!,
+//                              locationName: "Location Name",
+//                              discipline: "More info",
+//                              coordinate: CLLocationCoordinate2D(latitude: sample_latitude1, longitude: sample_longitude1), activityId: 0)
+//        mapView.addAnnotation(observation1)
+//        
+//        let observation2 = Observation(title: "Colored turtle", pic: sample_image2!,
+//                                      locationName: "Location Name",
+//                                      discipline: "More info",
+//                                      coordinate: CLLocationCoordinate2D(latitude: sample_latitude2, longitude: sample_longitude2), activityId: 1)
+//        mapView.addAnnotation(observation2)
     }
     
     // Whenever this view appears, it should update user's status on the profile icon on the top left corner.
@@ -69,7 +69,7 @@ class ExploreViewController: UIViewController, MKMapViewDelegate, UISearchBarDel
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        if let annotation = annotation as? Observation {
+        if let annotation = annotation as? NNObservation {
             
             let identifier = "MyCustomAnnotation"
             
@@ -103,15 +103,14 @@ class ExploreViewController: UIViewController, MKMapViewDelegate, UISearchBarDel
                     let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: self.width, height: self.height))
                     imageView.contentMode = .scaleAspectFill
                     imageView.clipsToBounds = true
-                    imageView.image = annotation.Picture
+                    //imageView.image = annotation.Picture
+                    // set the picture here
                     snapshotView.addSubview(imageView)
             //    }
             //}
             
             annotationView?.detailCalloutAccessoryView = snapshotView
-            if annotation.ActivityId == 0 {
-                (annotationView as! MKPinAnnotationView).pinTintColor = UIColor.blue
-            }
+            (annotationView as! MKPinAnnotationView).pinTintColor = annotation.pinColor
             
             let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapped))
             snapshotView.addGestureRecognizer(tapGesture)

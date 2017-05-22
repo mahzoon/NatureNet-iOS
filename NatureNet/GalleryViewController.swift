@@ -17,6 +17,10 @@ class GalleryViewController: UIViewController, UITableViewDelegate, UITableViewD
     // reference to the profile icon button on the top left corner
     @IBOutlet weak var profileButton: UIButton!
     
+    var pages = 0
+    var maxNV = 0
+    var maxNB = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -40,15 +44,43 @@ class GalleryViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        let n = GALLERY_LIST_INIT_COUNT + pages * GALLERY_LIST_LOAD_MORE_COUNT
+        let searchText = self.searchBar.text ?? ""
+        let total = DataService.ds.GetNumObervations(searchFilter: searchText)
+        var ret_val = 0
+        if n < total {
+            maxNV = n
+            maxNB = true
+            ret_val = n + 1
+        } else {
+            maxNV = total
+            maxNB = false
+            ret_val = total
+        }
+        return ret_val
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if maxNB && maxNV == indexPath.row {
+            return CGFloat(50.0)
+        }
         return CGFloat(GALLERY_CELL_ITEM_HEIGHT)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "GalleryCell") as? GalleryCell {
+            if maxNB && maxNV == indexPath.row {
+                cell.configureCell(username: LISTS_SHOW_MORE_TEXT, affiliation: "", project: "", avatar: "", obsImage: "", text: "", num_likes: "", num_dislikes: "", num_comments: "", date: 0, isShowMore: true, observation: nil)
+                return cell
+            }
+            let searchText = self.searchBar.text ?? ""
+            if let observation = DataService.ds.GetObservation(at: indexPath.row, searchFilter: searchText) {
+                if let user = DataService.ds.GetUser(by: observation.observer) {
+                    if let project = DataService.ds.GetProject(by: observation.project) {
+                        cell.configureCell(username: user.displayName, affiliation: DataService.ds.GetSiteName(with: user.affiliation), project: project.name, avatar: user.avatarUrl, obsImage: observation.observationImageUrl, text: observation.observationText, num_likes: "0", num_dislikes: "0", num_comments: "0", date: observation.updatedAt, isShowMore: false, observation: observation)
+                    }
+                }
+            }
             return cell
         } else {
             return UITableViewCell()
@@ -57,11 +89,14 @@ class GalleryViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        if searchBar.text != nil && searchText != "" {
-            //let lowerText = searchBar.text!.lowercased()
-        } else {
+        // reset the pages for each section
+        self.pages = 0
+        // hide the keyboard if the user cleared the text in the search bar
+        if searchBar.text == nil || searchText == "" {
             searchBar.perform(#selector(resignFirstResponder), with: nil, afterDelay: 0.1)
         }
+        // reload the data
+        galleryTable.reloadData()
     }
     
     // When the profile button is tapped, we need to check if the user is authenticated, if not it should go to the sign in screen
@@ -85,6 +120,20 @@ class GalleryViewController: UIViewController, UITableViewDelegate, UITableViewD
                 signInVC.successSegueId = SEGUE_PROFILE
             }
         }
+    }
+    
+    // When seeing details of a project, we need to check if the sender (the cell) is a "show more" cell or not. If so, then the transition is not possible, instead another "page" should be added to the data.
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        if identifier == SEGUE_DETAILS {
+            if let cell = sender as? GalleryCell {
+                if cell.isShowMore {
+                    pages = pages + 1
+                    galleryTable.reloadData()
+                    return false
+                }
+            }
+        }
+        return true
     }
     
     // remove the focus from the search bar if the user clicked on the cross button on the search bar. This will also causes the keyboard to hide.

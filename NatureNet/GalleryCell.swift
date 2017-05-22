@@ -19,6 +19,15 @@ class GalleryCell: UITableViewCell {
     @IBOutlet weak var dislikes: UILabel!
     @IBOutlet weak var comments: UILabel!
     @IBOutlet weak var postDate: UILabel!
+    @IBOutlet weak var projectName: UILabel!
+    
+    
+    @IBOutlet weak var bottomInfoStackView: UIStackView!
+    
+    @IBOutlet weak var affiliationIcon: UILabel!
+    
+    var observation: NNObservation?
+    var isShowMore = false
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -32,15 +41,55 @@ class GalleryCell: UITableViewCell {
         observationImage.clipsToBounds = true
     }
     
-    func configureCell(username: String, affiliation: String, avatar: String, obsImage: String, text: String,
-                       num_likes: String, num_dislikes: String, num_comments: String, date: String) {
+    func configureCell(username: String, affiliation: String, project: String, avatar: String, obsImage: String, text: String,
+                       num_likes: String, num_dislikes: String, num_comments: String, date: NSNumber, isShowMore: Bool, observation: NNObservation?) {
         self.username.text = username
         self.affiliation.text = affiliation
+        self.projectName.text = project
         self.descriptionText.text = text
         self.likes.text = num_likes
         self.dislikes.text = num_dislikes
         self.comments.text = num_comments
-        self.postDate.text = date
+        
+        let d = NSDate(timeIntervalSince1970:Double(date)/1000)
+        let formatter = DateFormatter()
+        formatter.locale = NSLocale.current
+        formatter.timeZone = NSTimeZone.local
+        formatter.dateStyle = .full
+        formatter.timeStyle = .short
+        self.postDate.text = formatter.string(from: d as Date)
+        
+        self.observation = observation
+        self.isShowMore = isShowMore
+        
+        self.avatar.image = nil
+        self.observationImage.image = nil
+        self.observationImage.isHidden = true
+        
+        if isShowMore {
+            self.postDate.isHidden = true
+            self.comments.isHidden = true
+            self.dislikes.isHidden = true
+            self.likes.isHidden = true
+            self.descriptionText.isHidden = true
+            self.affiliation.isHidden = true
+            self.affiliationIcon.isHidden = true
+            self.bottomInfoStackView.isHidden = true
+        } else {
+            
+            self.postDate.isHidden = false
+            self.comments.isHidden = false
+            self.dislikes.isHidden = false
+            self.likes.isHidden = false
+            self.descriptionText.isHidden = false
+            self.affiliation.isHidden = false
+            self.affiliationIcon.isHidden = false
+            self.bottomInfoStackView.isHidden = false
+            
+            self.avatar.image = UIImage(named: JOIN_PROFILE_IMAGE)
+            self.observationImage.isHidden = false
+            self.observationImage.image = UIImage(named: "sample_image3")
+        }
         
         // load the avatar
         

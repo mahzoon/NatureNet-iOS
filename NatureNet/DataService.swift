@@ -38,6 +38,10 @@ class DataService  {
     // reference to the observer handle of users. This observer looks for changes in users, and updates the "users" array if new user is being added, or changed. The reference is mainly for "dispose" to remove the handle.
     private var usersHandle: UInt!
     
+    // The observations stored in an array sorted by their recency. The first item is the most recent one.
+    private var observations = [NNObservation]()
+    // reference to the observer handle of observations. This observer looks for additions to the observations, and updates the "observations" array if new observation is being added. The reference is mainly for "dispose" to remove the handle.
+    private var observationsHandle: UInt!
     
     init() {
         // initializing the reference to the database
@@ -47,6 +51,7 @@ class DataService  {
         initSitesObserver()
         initProjectsObserver()
         initUsersObserver()
+        initObservationsObserver()
     }
     
     func dispose() {
@@ -61,6 +66,8 @@ class DataService  {
         db_ref.removeObserver(withHandle: projectsHandle)
         // remove users observer
         db_ref.removeObserver(withHandle: usersHandle)
+        // remove observations observer
+        db_ref.removeObserver(withHandle: observationsHandle)
     }
     
     //////////////////////////////////////////////////////////////
@@ -141,6 +148,15 @@ class DataService  {
     func GetSiteNames() -> [String] {
         return self.sites.map{(k, v) -> String in return v}
     }
+    // returning site name by id
+    func GetSiteName(with id: String) -> String {
+        for (k, v) in self.sites {
+            if k == id {
+                return v
+            }
+        }
+        return ""
+    }
 
     
     //////////////////////////////////////////////////////////////
@@ -203,6 +219,17 @@ class DataService  {
                 if position < ps.count {
                     return ps[position]
                 }
+            }
+        }
+        return nil
+    }
+    
+    func GetProject(by id: String) -> NNProject? {
+        for (_, v) in self.projects {
+            if let p = v.first(where: { (project) -> Bool in
+                project.id == id
+            }) {
+                return p
             }
         }
         return nil
@@ -270,6 +297,77 @@ class DataService  {
         }
         return nil
     }
+    
+    func GetUser(by id: String) -> NNUser? {
+        for (_, v) in self.users {
+            if let u = v.first(where: { (user) -> Bool in
+                user.id == id
+            }) {
+                return u
+            }
+        }
+        return nil
+    }
 
     
+    //////////////////////////////////////////////////////////////
+    //
+    //                         Observations
+    //
+    //////////////////////////////////////////////////////////////
+    
+    private func initObservationsObserver() {
+        // adding observer to the observations
+        sitesHandle = db_ref.child(DB_OBSERVATIONS_PATH).observe(.childAdded, with: { (snapshot) in
+            // snapshot.value is a dictionary for one Observation
+            if let obsDict = snapshot.value as? [String: AnyObject] {
+                let observation = NNObservation.createObservationFromFirebase(with: obsDict)
+                // we don't bother adding observations that do not have updated_at timestamp. They are possibly test observations.
+                if observation.updatedAt != 0 {
+                    self.observations.append(observation)
+                }
+            }
+            self.observations.sort(by: { (first, second) -> Bool in
+                return first.updatedAt.decimalValue > second.updatedAt.decimalValue
+            })
+        })
+    }
+    
+    func GetNumObervations(searchFilter: String) -> Int {
+        if searchFilter != "" {
+            return self.observations.filter({ (observation) -> Bool in
+                if (observation.observationText.lowercased().range(of: searchFilter.lowercased()) != nil) ||
+                    ((GetUser(by: observation.observer)?.displayName.lowercased().range(of: searchFilter.lowercased())) != nil) ||
+                    ((GetProject(by: observation.project)?.name.lowercased().range(of: searchFilter.lowercased())) != nil) {
+                    return true
+                } else {
+                    return false
+                }
+            }).count
+        } else {
+            return self.observations.count
+        }
+    }
+    
+    func GetObservation(at index: Int, searchFilter: String) -> NNObservation? {
+        if searchFilter != "" {
+            let listObs = self.observations.filter({ (observation) -> Bool in
+                if (observation.observationText.lowercased().range(of: searchFilter.lowercased()) != nil) ||
+                    ((GetUser(by: observation.observer)?.displayName.lowercased().range(of: searchFilter.lowercased())) != nil) ||
+                    ((GetProject(by: observation.project)?.name.lowercased().range(of: searchFilter.lowercased())) != nil) {
+                    return true
+                } else {
+                    return false
+                }
+            })
+            if index < listObs.count {
+                return listObs[index]
+            }
+        } else {
+            if index < self.observations.count {
+                return self.observations[index]
+            }
+        }
+        return nil
+    }
 }
