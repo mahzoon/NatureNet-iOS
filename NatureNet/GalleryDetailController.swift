@@ -26,6 +26,13 @@ class GalleryDetailController: UIViewController, UITableViewDelegate, UITableVie
     @IBOutlet weak var commentTextHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var keyboardViewHeightConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var commentLabel: UILabel!
+    var observationObj: NNObservation?
+    
+    var pages = 0
+    var maxNV = 0
+    var maxNB = false
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -46,14 +53,25 @@ class GalleryDetailController: UIViewController, UITableViewDelegate, UITableVie
         commentText.textColor = UIColor.lightGray
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        if let obsv = self.observationObj {
+            if let user = DataService.ds.GetUser(by: obsv.observer) {
+                self.username.text = user.displayName
+                self.affiliation.text = DataService.ds.GetSiteName(with: user.affiliation)
+            }
+            self.postDate.text = UtilityFunctions.convertTimestampToDateString(date: obsv.updatedAt)
+            self.descriptionText.text = obsv.observationText
+            if DataService.ds.GetCommentsOnObservation(with: obsv.id).count == 0 {
+                self.commentLabel.text = NO_COMMENTS_TEXT
+            }
+            self.numLikes.text = "\(obsv.Likes.count)"
+            self.numDislikes.text = "\(obsv.Dislikes.count)"
+        }
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         galleryDetailsTable.FixHeaderLayout()
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -61,21 +79,58 @@ class GalleryDetailController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        let n = COMMENT_LIST_INIT_COUNT + pages * COMMENT_LIST_LOAD_MORE_COUNT
+        var total = 0
+        if let obsv = self.observationObj {
+            total = DataService.ds.GetCommentsOnObservation(with: obsv.id).count
+        }
+        var ret_val = 0
+        if n < total {
+            maxNV = n
+            maxNB = true
+            ret_val = n + 1
+        } else {
+            maxNV = total
+            maxNB = false
+            ret_val = total
+        }
+        return ret_val
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if maxNB && maxNV == indexPath.row {
+            return CGFloat(SHOW_MORE_CELL_HEIGHT)
+        }
         return CGFloat(COMMENT_CELL_ESTIMATED_HEIGHT)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: "CommentCell") as? CommentCell {
-            cell.configureCell(name: "Username", comment: "comment text...")
-            return cell
-        } else {
-            return UITableViewCell()
+        
+        // the case which we should dequeue a ShowMoreCell
+        if maxNB && maxNV == indexPath.row {
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "ShowMoreCell") as? ShowMoreCell {
+                cell.configureCell()
+                return cell
+            } else {
+                return ShowMoreCell()
+            }
         }
         
+        // the case which we should dequeue a regular cell (CommentCell)
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "CommentCell") as? CommentCell {
+            if let obsv = self.observationObj {
+                let listComments = DataService.ds.GetCommentsOnObservation(with: obsv.id)
+                if indexPath.row < listComments.count {
+                    let comment = listComments[indexPath.row]
+                    if let user = DataService.ds.GetUser(by: comment.commenter) {
+                        cell.configureCell(name: user.displayName, comment: comment.comment)
+                    }
+                }
+            }
+            return cell
+        } else {
+            return CommentCell()
+        }
     }
     
     func textViewDidChange(_ textView: UITextView) {
@@ -150,4 +205,10 @@ class GalleryDetailController: UIViewController, UITableViewDelegate, UITableVie
             present(ac, animated: true)
         }
     }
+    
+    @IBAction func showMoreTapped(_ sender: Any) {
+        self.pages = self.pages + 1
+        galleryDetailsTable.reloadData()
+    }
+    
 }

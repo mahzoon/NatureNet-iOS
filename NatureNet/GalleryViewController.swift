@@ -119,6 +119,13 @@ class GalleryViewController: UIViewController, UITableViewDelegate, UITableViewD
                 signInVC.parentVC = self
                 signInVC.successSegueId = SEGUE_PROFILE
             }
+            if id == SEGUE_DETAILS {
+                if let cell = sender as? GalleryCell, !cell.isShowMore {
+                    if let dest = segue.destination as? GalleryDetailController {
+                        dest.observationObj = cell.observation
+                    }
+                }
+            }
         }
     }
     

@@ -64,8 +64,8 @@ class DesignIdeaDetailController: UIViewController, UITableViewDelegate, UITable
             if DataService.ds.GetCommentsOnDesignIdea(with: idea.id).count == 0 {
                 self.commentLabel.text = NO_COMMENTS_TEXT
             }
-            self.numLikes.text = "0"
-            self.numDislikes.text = "0"
+            self.numLikes.text = "\(idea.Likes.count)"
+            self.numDislikes.text = "\(idea.Dislikes.count)"
         }
         
     }

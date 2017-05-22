@@ -27,6 +27,28 @@ class NNDesignIdea {
     var group: String!
     // likes is a dictionary of users who liked/disliked this idea. If the value of the dictionary is true the user liked this else disliked it. So, the key is user id and the value is true(like) or false(dislike).
     var likes: [String: Bool]
+    // return likes
+    var Likes: [String: Bool] {
+        let l = likes.filter({ (_: String, value: Bool) -> Bool in
+            return value
+        })
+        var ret_val = [String:Bool]()
+        for result in l {
+            ret_val[result.0] = result.1
+        }
+        return ret_val
+    }
+    // return dislikes
+    var Dislikes: [String: Bool] {
+        let l = likes.filter({ (_: String, value: Bool) -> Bool in
+            return !value
+        })
+        var ret_val = [String:Bool]()
+        for result in l {
+            ret_val[result.0] = result.1
+        }
+        return ret_val
+    }
     
     // the initializer.
     init(submitter: String, content: String, id: String, created: NSNumber, updated: NSNumber, status: String, type: String, group: String, likes: [String: Bool]) {

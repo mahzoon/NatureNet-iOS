@@ -136,4 +136,16 @@ class CommunityDetailController: UIViewController, UITableViewDelegate, UITableV
         }
         return true
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let id = segue.identifier {
+            if id == SEGUE_DETAILS {
+                if let cell = sender as? GalleryCell, !cell.isShowMore {
+                    if let dest = segue.destination as? GalleryDetailController {
+                        dest.observationObj = cell.observation
+                    }
+                }
+            }
+        }
+    }
 }
