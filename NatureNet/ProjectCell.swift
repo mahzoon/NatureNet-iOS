@@ -28,7 +28,7 @@ class ProjectCell: UITableViewCell {
         //projectIcon.clipsToBounds = true
     }
     
-    // This function is called when creating a project cell. The content usaully should have a string (project name) and an icon. The only case that we might not expect to have icon is when the cell is "show more...". In that case the call would be like: configureCell("Show more...", "", false)
+    // This function is called when creating a project cell. The content usaully should have a string (project name) and an icon. The only case that we might not expect to have icon is when the cell is "show more...". In that case the call would be like: configureCell(name: "Show more...", icon: "", useDefaultIcon: false, isShowMore: true, section: X)
     func configureCell(name: String, icon: String, useDefaultIcon: Bool, isShowMore: Bool, section: Int) {
         self.projectName.text = name
         self.isShowMore = isShowMore

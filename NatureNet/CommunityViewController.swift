@@ -17,6 +17,13 @@ class CommunityViewController: UIViewController, UITableViewDelegate, UITableVie
     // reference to the profile icon button on the top left corner
     @IBOutlet weak var profileButton: UIButton!
     
+    // the page values for each section is stored in "pages". An example of the contents would be: pages[0] = 3. This means that we are displaying 3 pages of users associated with the first site i.e: "aspen". The actual number of users that are shown in the example is equal to 3 * COMMUNITY_LIST_LOAD_MORE_COUNT + COMMUNITY_LIST_INIT_COUNT
+    var pages = [Int: Int]()
+    // maxNV is a dictionary of number of cells currently shown in each section. maxNV[1] = 2 means that in section 1 two pages of cells (2* COMMUNITY_LIST_LOAD_MORE_COUNT + COMMUNITY_LIST_INIT_COUNT cells) are currently being displayed.
+    var maxNV = [Int: Int]()
+    // maxNB states that if all possible cells for each section is being displayed or not. For example, maxNB[0] = false means that in section 0 (first section) we are not showing all possible items (i.e we have "show more" button being displayed in the first section).
+    var maxNB = [Int: Bool]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -35,31 +42,55 @@ class CommunityViewController: UIViewController, UITableViewDelegate, UITableVie
         }
     }
     
+    // returns the number of sections in the tableview which is equal to the number of sites
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return DataService.ds.GetNumSites()
     }
     
+    // The title of each section of the tableview is site name.
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if section == 0 {
-            return "Aspen"
-        } else if section == 1 {
-            return "Anacostia"
-        } else {
-            return "Reedy Creek"
-        }
+        return DataService.ds.GetSiteNames()[section]
     }
     
+    // returns number of items in each section. To calculate this we need to look at the "pages" variable.
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        var n = COMMUNITY_LIST_INIT_COUNT
+        if let page_section = self.pages[section] {
+            n = n + page_section * COMMUNITY_LIST_LOAD_MORE_COUNT
+        }
+        let searchText = self.searchBar.text ?? ""
+        let total = DataService.ds.GetNumUsers(in: section, searchFilter: searchText)
+        var ret_val = 0
+        if n < total {
+            maxNV[section] = n
+            maxNB[section] = true
+            ret_val = n + 1
+        } else {
+            maxNV[section] = total
+            maxNB[section] = false
+            ret_val = total
+        }
+        return ret_val
     }
     
+    // returns the height of each project cell which is equal to COMMUNITY_CELL_ITEM_HEIGHT
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return CGFloat(COMMUNITY_CELL_ITEM_HEIGHT)
     }
     
+    // this is the main function for the tableview to draw each cell based on the provided data.
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "CommunityCell") as? CommunityCell {
-            cell.configureCell(name: "Username", icon: "", useDefaultIcon: true)
+            if let more = maxNB[indexPath.section], more {
+                if let n = maxNV[indexPath.section], indexPath.row == n {
+                    cell.configureCell(name: LISTS_SHOW_MORE_TEXT, icon: "", useDefaultIcon: false, isShowMore: true, section: indexPath.section)
+                    return cell
+                }
+            }
+            let searchText = self.searchBar.text ?? ""
+            if let user = DataService.ds.GetUser(in: indexPath.section, at: indexPath.row, searchFilter: searchText) {
+                cell.configureCell(name: user.displayName, icon: user.avatarUrl, useDefaultIcon: true, isShowMore: false, section: indexPath.section)
+            }
             return cell
         } else {
             return UITableViewCell()
@@ -67,12 +98,16 @@ class CommunityViewController: UIViewController, UITableViewDelegate, UITableVie
         
     }
     
+    // this function is being called every time the user types anything in the search bar.
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        if searchBar.text != nil && searchText != "" {
-            //let lowerText = searchBar.text!.lowercased()
-        } else {
+        // reset the pages for each section
+        pages.removeAll()
+        // hide the keyboard if the user cleared the text in the search bar
+        if searchBar.text == nil || searchText == "" {
             searchBar.perform(#selector(resignFirstResponder), with: nil, afterDelay: 0.1)
         }
+        // reload the data
+        communityTable.reloadData()
     }
     
     // When the profile button is tapped, we need to check if the user is authenticated, if not it should go to the sign in screen
@@ -96,6 +131,24 @@ class CommunityViewController: UIViewController, UITableViewDelegate, UITableVie
                 signInVC.successSegueId = SEGUE_PROFILE
             }
         }
+    }
+    
+    // When seeing details info of a user, we need to check if the sender (the cell) is a "show more" cell or not. If so, then the transition is not possible, instead another "page" should be added to the data.
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        if identifier == SEGUE_DETAILS {
+            if let cell = sender as? CommunityCell {
+                if cell.isShowMore {
+                    if let p = pages[cell.sectionIndex] {
+                        pages[cell.sectionIndex] = p + 1
+                    } else {
+                        pages[cell.sectionIndex] = 1
+                    }
+                    communityTable.reloadSections([cell.sectionIndex], with: .automatic)
+                    return false
+                }
+            }
+        }
+        return true
     }
     
     // remove the focus from the search bar if the user clicked on the cross button on the search bar. This will also causes the keyboard to hide.

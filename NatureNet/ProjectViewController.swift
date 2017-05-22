@@ -17,11 +17,11 @@ class ProjectViewController: UIViewController, UITableViewDelegate, UITableViewD
     // reference to the profile icon button on the top left corner
     @IBOutlet weak var profileButton: UIButton!
     
-    // the page values for each section is stored in "pages". An example of the contents would be: pages["aspen"] = 3. This means that we are displaying 3 pages of projects associated with "aspen". The actual number of projects that are shown in the example is equal to 3 * PROJECTS_LIST_LOAD_MORE_COUNT + PROJECTS_LIST_INIT_COUNT
-    //var pages = [String:Int]()
-    
+    // the page values for each section is stored in "pages". An example of the contents would be: pages[0] = 3. This means that we are displaying 3 pages of projects associated with the first site i.e: "aspen". The actual number of projects that are shown in the example is equal to 3 * PROJECTS_LIST_LOAD_MORE_COUNT + PROJECTS_LIST_INIT_COUNT
     var pages = [Int: Int]()
+    // maxNV is a dictionary of number of cells currently shown in each section. maxNV[1] = 2 means that in section 1 two pages of cells (2* PROJECTS_LIST_LOAD_MORE_COUNT + PROJECTS_LIST_INIT_COUNT cells) are currently being displayed.
     var maxNV = [Int: Int]()
+    // maxNB states that if all possible cells for each section is being displayed or not. For example, maxNB[0] = false means that in section 0 (first section) we are not showing all possible items (i.e we have "show more" button being displayed in the first section).
     var maxNB = [Int: Bool]()
     
     override func viewDidLoad() {
@@ -52,7 +52,7 @@ class ProjectViewController: UIViewController, UITableViewDelegate, UITableViewD
         return DataService.ds.GetSiteNames()[section]
     }
     
-    // returns number of items in each section. To calculate this we need to look at the "pages" variable. if pages[section]
+    // returns number of items in each section. To calculate this we need to look at the "pages" variable.
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         var n = PROJECTS_LIST_INIT_COUNT
         if let page_section = self.pages[section] {
@@ -97,11 +97,15 @@ class ProjectViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
     }
     
+    // this function is being called every time the user types anything in the search bar.
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        // reset the pages for each section
         pages.removeAll()
+        // hide the keyboard if the user cleared the text in the search bar
         if searchBar.text == nil || searchText == "" {
             searchBar.perform(#selector(resignFirstResponder), with: nil, afterDelay: 0.1)
         }
+        // reload the data
         projectTable.reloadData()
     }
     

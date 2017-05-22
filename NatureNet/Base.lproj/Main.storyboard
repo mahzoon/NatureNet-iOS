@@ -3858,9 +3858,9 @@ DESIGN this nature technology with your community</string>
         <image name="signin screen - logo" width="816" height="265"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="XBB-sL-yXV"/>
         <segue reference="aNP-t6-vCR"/>
-        <segue reference="aRp-Ov-Q5x"/>
-        <segue reference="fRi-IJ-rth"/>
+        <segue reference="XBB-sL-yXV"/>
+        <segue reference="adI-Jl-7TC"/>
+        <segue reference="R8q-c5-eIq"/>
     </inferredMetricsTieBreakers>
 </document>
