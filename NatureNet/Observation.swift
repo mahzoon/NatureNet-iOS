@@ -30,6 +30,8 @@ class NNObservation: NSObject, MKAnnotation {
     var updatedAt: NSNumber!
     // status
     var status: String!
+    // likes is a dictionary of users who liked/disliked this observation. If the value of the dictionary is true the user liked this else disliked it. So, the key is user id and the value is true(like) or false(dislike).
+    var likes: [String: Bool]
     
     // returns the text of the observation
     var observationText: String {
@@ -60,7 +62,7 @@ class NNObservation: NSObject, MKAnnotation {
     }
     
     // the initializer.
-    init(project: String, site: String, observer: String, id: String, data: [String: String], location: [Double], created: NSNumber, updated: NSNumber, status: String) {
+    init(project: String, site: String, observer: String, id: String, data: [String: String], location: [Double], created: NSNumber, updated: NSNumber, status: String, likes: [String: Bool]) {
         self.project = project
         self.site = site
         self.id = id
@@ -70,6 +72,7 @@ class NNObservation: NSObject, MKAnnotation {
         self.createdAt = created
         self.updatedAt = updated
         self.status = status
+        self.likes = likes
     }
     
     static func createObservationFromFirebase(with snapshot: [String: AnyObject]) -> NNObservation {
@@ -83,6 +86,7 @@ class NNObservation: NSObject, MKAnnotation {
         var obsCreated: NSNumber = 0
         var obsUpdated: NSNumber = 0
         var obsStatus = ""
+        var obsLikes = [String: Bool]()
         // setting values when possible
         if let tmp = snapshot["activity"], (tmp as? String) != nil {
             obsProject = tmp as! String
@@ -111,7 +115,10 @@ class NNObservation: NSObject, MKAnnotation {
         if let tmp = snapshot["status"], (tmp as? String) != nil {
             obsStatus = tmp as! String
         }
-        let observation = NNObservation(project: obsProject, site: obsSite, observer: obsObserver, id: obsId, data: obsData, location: obsLocation, created: obsCreated, updated: obsUpdated, status: obsStatus)
+        if let tmp = snapshot["likes"], (tmp as? [String: Bool]) != nil {
+            obsLikes = tmp as! [String: Bool]
+        }
+        let observation = NNObservation(project: obsProject, site: obsSite, observer: obsObserver, id: obsId, data: obsData, location: obsLocation, created: obsCreated, updated: obsUpdated, status: obsStatus, likes: obsLikes)
         return observation
     }
 

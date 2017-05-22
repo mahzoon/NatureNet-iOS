@@ -25,9 +25,11 @@ class NNDesignIdea {
     var type: String!
     // group
     var group: String!
+    // likes is a dictionary of users who liked/disliked this idea. If the value of the dictionary is true the user liked this else disliked it. So, the key is user id and the value is true(like) or false(dislike).
+    var likes: [String: Bool]
     
     // the initializer.
-    init(submitter: String, content: String, id: String, created: NSNumber, updated: NSNumber, status: String, type: String, group: String) {
+    init(submitter: String, content: String, id: String, created: NSNumber, updated: NSNumber, status: String, type: String, group: String, likes: [String: Bool]) {
         self.submitter = submitter
         self.content = content
         self.id = id
@@ -36,6 +38,7 @@ class NNDesignIdea {
         self.status = status
         self.type = type
         self.group = group
+        self.likes = likes
     }
     
     static func createDesignIdeaFromFirebase(with snapshot: [String: AnyObject]) -> NNDesignIdea {
@@ -48,6 +51,7 @@ class NNDesignIdea {
         var ideaCreated: NSNumber = 0
         var ideaUpdated: NSNumber = 0
         var ideaStatus = ""
+        var ideaLikes = [String: Bool]()
         // setting values when possible
         if let tmp = snapshot["submitter"], (tmp as? String) != nil {
             ideaSubmitter = tmp as! String
@@ -73,7 +77,10 @@ class NNDesignIdea {
         if let tmp = snapshot["status"], (tmp as? String) != nil {
             ideaStatus = tmp as! String
         }
-        let idea = NNDesignIdea(submitter: ideaSubmitter, content: ideaContent, id: ideaId, created: ideaCreated, updated: ideaUpdated, status: ideaStatus, type: ideaType, group: ideaGroup)
+        if let tmp = snapshot["likes"], (tmp as? [String: Bool]) != nil {
+            ideaLikes = tmp as! [String: Bool]
+        }
+        let idea = NNDesignIdea(submitter: ideaSubmitter, content: ideaContent, id: ideaId, created: ideaCreated, updated: ideaUpdated, status: ideaStatus, type: ideaType, group: ideaGroup, likes: ideaLikes)
         return idea
     }
 
