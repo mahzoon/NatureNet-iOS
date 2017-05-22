@@ -459,5 +459,16 @@ class DataService  {
         }
         return nil
     }
+    
+    func GetDesignIdeasForUser(with id: String) -> [NNDesignIdea] {
+        let listIdea = self.designIdeas.filter { (idea) -> Bool in
+            if idea.submitter == id {
+                return true
+            } else {
+                return false
+            }
+        }
+        return listIdea
+    }
 
 }

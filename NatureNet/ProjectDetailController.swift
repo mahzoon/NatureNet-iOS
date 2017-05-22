@@ -34,8 +34,17 @@ class ProjectDetailController: UIViewController, UITableViewDelegate, UITableVie
     override func viewWillAppear(_ animated: Bool) {
         self.projectName.text = project?.name
         if let timestamp = project?.latestContribution {
-            self.postDate.text = UtilityFunctions.convertTimestampToDateString(date: timestamp)
-            self.postDate.isHidden = false
+            if timestamp == 0 {
+                if let updatedAt = project?.updatedAt {
+                    self.postDate.text = UtilityFunctions.convertTimestampToDateString(date: updatedAt)
+                    self.postDate.isHidden = false
+                } else {
+                    self.postDate.isHidden = true
+                }
+            } else {
+                self.postDate.text = UtilityFunctions.convertTimestampToDateString(date: timestamp)
+                self.postDate.isHidden = false
+            }
         } else {
             self.postDate.isHidden = true
         }
@@ -46,12 +55,6 @@ class ProjectDetailController: UIViewController, UITableViewDelegate, UITableVie
         }
         self.descriptionText.text = project?.descriptionText
         self.title = self.projectName.text
-        
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
     override func viewDidLayoutSubviews() {

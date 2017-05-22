@@ -83,13 +83,13 @@ class CommunityViewController: UIViewController, UITableViewDelegate, UITableVie
         if let cell = tableView.dequeueReusableCell(withIdentifier: "CommunityCell") as? CommunityCell {
             if let more = maxNB[indexPath.section], more {
                 if let n = maxNV[indexPath.section], indexPath.row == n {
-                    cell.configureCell(name: LISTS_SHOW_MORE_TEXT, icon: "", useDefaultIcon: false, isShowMore: true, section: indexPath.section)
+                    cell.configureCell(name: LISTS_SHOW_MORE_TEXT, icon: "", useDefaultIcon: false, isShowMore: true, section: indexPath.section, user: nil)
                     return cell
                 }
             }
             let searchText = self.searchBar.text ?? ""
             if let user = DataService.ds.GetUser(in: indexPath.section, at: indexPath.row, searchFilter: searchText) {
-                cell.configureCell(name: user.displayName, icon: user.avatarUrl, useDefaultIcon: true, isShowMore: false, section: indexPath.section)
+                cell.configureCell(name: user.displayName, icon: user.avatarUrl, useDefaultIcon: true, isShowMore: false, section: indexPath.section, user: user)
             }
             return cell
         } else {
@@ -129,6 +129,13 @@ class CommunityViewController: UIViewController, UITableViewDelegate, UITableVie
                 let signInVC = signInNav.viewControllers.first as! SigninViewController
                 signInVC.parentVC = self
                 signInVC.successSegueId = SEGUE_PROFILE
+            }
+            if id == SEGUE_DETAILS {
+                if let cell = sender as? CommunityCell, !cell.isShowMore {
+                    if let dest = segue.destination as? CommunityDetailController {
+                        dest.user = cell.user
+                    }
+                }
             }
         }
     }

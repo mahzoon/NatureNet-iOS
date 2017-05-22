@@ -9,6 +9,7 @@
 import Foundation
 import MapKit
 
+// Modeling the "observations" key from the Firebase database.
 class NNObservation: NSObject, MKAnnotation {
     
     // the activity which this observation belongs to

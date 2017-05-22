@@ -17,6 +17,7 @@
 		2D632E491ED234FC007ECF51 /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D632E481ED234FC007ECF51 /* Project.swift */; };
 		2D632E4B1ED24941007ECF51 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D632E4A1ED24941007ECF51 /* User.swift */; };
 		2D7DF89A1ED2C48E00D509F3 /* DesignIdea.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D7DF8991ED2C48E00D509F3 /* DesignIdea.swift */; };
+		2D7DF89C1ED36D6600D509F3 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D7DF89B1ED36D6600D509F3 /* Comment.swift */; };
 		55CF19DD967736F8B7750455 /* Pods_NatureNetUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B238D5A0816A2E3FC6B7731A /* Pods_NatureNetUITests.framework */; };
 		682C31681ECE316F00F6D87D /* UtilityFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682C31671ECE316F00F6D87D /* UtilityFunctions.swift */; };
 		682C316B1ECE366B00F6D87D /* ToDo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682C316A1ECE366B00F6D87D /* ToDo.swift */; };
@@ -80,6 +81,7 @@
 		2D632E481ED234FC007ECF51 /* Project.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
 		2D632E4A1ED24941007ECF51 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		2D7DF8991ED2C48E00D509F3 /* DesignIdea.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesignIdea.swift; sourceTree = "<group>"; };
+		2D7DF89B1ED36D6600D509F3 /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		3D47BBC3D482560B7F12A934 /* Pods_NatureNet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NatureNet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		57426900216948F158F226CD /* Pods-NatureNetUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NatureNetUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-NatureNetUITests/Pods-NatureNetUITests.release.xcconfig"; sourceTree = "<group>"; };
 		682C31671ECE316F00F6D87D /* UtilityFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilityFunctions.swift; sourceTree = "<group>"; };
@@ -204,6 +206,7 @@
 				2D632E481ED234FC007ECF51 /* Project.swift */,
 				2D632E4A1ED24941007ECF51 /* User.swift */,
 				2D7DF8991ED2C48E00D509F3 /* DesignIdea.swift */,
+				2D7DF89B1ED36D6600D509F3 /* Comment.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -615,6 +618,7 @@
 				68FB9BD31ECBE242006C88B1 /* CommunityCell.swift in Sources */,
 				68FB9BD71ECBE9D7006C88B1 /* Observation.swift in Sources */,
 				68FB9BC71ECBD2A5006C88B1 /* ShadowedView.swift in Sources */,
+				2D7DF89C1ED36D6600D509F3 /* Comment.swift in Sources */,
 				68FB9BDB1ECCF856006C88B1 /* AddDesignIdeasController.swift in Sources */,
 				68FB9BC31ECBB240006C88B1 /* DesignIdeasViewController.swift in Sources */,
 				68FB9BCD1ECBD9D7006C88B1 /* GalleryViewController.swift in Sources */,

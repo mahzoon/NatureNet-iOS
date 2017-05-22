@@ -19,6 +19,8 @@ class CommunityCell: UITableViewCell {
     var isShowMore = false
     // This variable stores the section number which this cell belongs to in the tableview.
     var sectionIndex = -1
+    // reference to the Model object
+    var user: NNUser?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -28,11 +30,12 @@ class CommunityCell: UITableViewCell {
         avatar.clipsToBounds = true
     }
     
-    // This function is called when creating a community cell. The content usaully should have a string (username) and an icon. The only case that we might not expect to have icon is when the cell is "show more...". In that case the call would be like: configureCell(name: "Show more...", icon: "", useDefaultIcon: false, isShowMore: true, section: X)
-    func configureCell(name: String, icon: String, useDefaultIcon: Bool, isShowMore: Bool, section: Int) {
+    // This function is called when creating a community cell. The content usaully should have a string (username) and an icon. The only case that we might not expect to have icon is when the cell is "show more...". In that case the call would be like: configureCell(name: "Show more...", icon: "", useDefaultIcon: false, isShowMore: true, section: X, user: nil)
+    func configureCell(name: String, icon: String, useDefaultIcon: Bool, isShowMore: Bool, section: Int, user: NNUser?) {
         self.username.text = name
         self.isShowMore = isShowMore
         self.sectionIndex = section
+        self.user = user
         self.avatar.image = nil
         if useDefaultIcon {
             self.avatar.image = UIImage(named: JOIN_PROFILE_IMAGE)

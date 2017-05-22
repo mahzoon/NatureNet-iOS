@@ -41,7 +41,9 @@ class GalleryCell: UITableViewCell {
     
     func configureCell(username: String, affiliation: String, project: String, avatar: String, obsImage: String, text: String,
                        num_likes: String, num_dislikes: String, num_comments: String, date: NSNumber, isShowMore: Bool, observation: NNObservation?) {
-        self.username.text = username
+        if (self.username != nil) {
+            self.username.text = username
+        }
         self.affiliation.text = affiliation
         self.projectName.text = project
         self.descriptionText.text = text
@@ -54,7 +56,9 @@ class GalleryCell: UITableViewCell {
         self.observation = observation
         self.isShowMore = isShowMore
         
-        self.avatar.image = nil
+        if (self.avatar != nil) {
+            self.avatar.image = nil
+        }
         self.observationImage.image = nil
         self.observationImage.isHidden = true
         
@@ -64,7 +68,7 @@ class GalleryCell: UITableViewCell {
             self.dislikes.isHidden = true
             self.likes.isHidden = true
             self.descriptionText.isHidden = true
-            self.affiliation.isHidden = true
+            //self.affiliation.isHidden = true
             self.affiliationIcon.isHidden = true
             self.bottomInfoStackView.isHidden = true
         } else {
@@ -73,17 +77,24 @@ class GalleryCell: UITableViewCell {
             self.comments.isHidden = false
             self.dislikes.isHidden = false
             self.likes.isHidden = false
-            self.descriptionText.isHidden = false
+            if text != "" {
+                self.descriptionText.isHidden = false
+            } else {
+                self.descriptionText.isHidden = true
+            }
             self.affiliation.isHidden = false
             self.affiliationIcon.isHidden = false
             self.bottomInfoStackView.isHidden = false
             
-            self.avatar.image = UIImage(named: JOIN_PROFILE_IMAGE)
+            if (self.avatar != nil) {
+                self.avatar.image = UIImage(named: JOIN_PROFILE_IMAGE)
+            }
             self.observationImage.isHidden = false
             self.observationImage.image = UIImage(named: "sample_image3")
         }
         
-        // load the avatar
+        
+        // load the avatar if there is any
         
         // load the observation image
         
