@@ -19,6 +19,8 @@ class ProjectCell: UITableViewCell {
     var isShowMore = false
     // This variable stores the section number which this cell belongs to in the tableview.
     var sectionIndex = -1
+    // reference to the Model object
+    var project: NNProject?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -29,11 +31,12 @@ class ProjectCell: UITableViewCell {
     }
     
     // This function is called when creating a project cell. The content usaully should have a string (project name) and an icon. The only case that we might not expect to have icon is when the cell is "show more...". In that case the call would be like: configureCell(name: "Show more...", icon: "", useDefaultIcon: false, isShowMore: true, section: X)
-    func configureCell(name: String, icon: String, useDefaultIcon: Bool, isShowMore: Bool, section: Int) {
+    func configureCell(name: String, icon: String, useDefaultIcon: Bool, isShowMore: Bool, section: Int, project: NNProject?) {
         self.projectName.text = name
         self.isShowMore = isShowMore
         self.sectionIndex = section
         self.projectIcon.image = nil
+        self.project = project
         if useDefaultIcon {
             self.projectIcon.image = UIImage(named: PROJECT_DEFAULT_ICON)
         } else {

@@ -18,6 +18,16 @@ class UtilityFunctions {
         theView.present(alert, animated: true, completion: nil)
     }
     
+    static func convertTimestampToDateString(date: NSNumber) -> String {
+        let d = NSDate(timeIntervalSince1970:Double(date)/1000)
+        let formatter = DateFormatter()
+        formatter.locale = NSLocale.current
+        formatter.timeZone = NSTimeZone.local
+        formatter.dateStyle = .full
+        formatter.timeStyle = .short
+        return formatter.string(from: d as Date)
+    }
+    
 }
 
 extension UIViewController {

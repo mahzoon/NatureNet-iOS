@@ -62,7 +62,7 @@ class GalleryViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if maxNB && maxNV == indexPath.row {
-            return CGFloat(50.0)
+            return CGFloat(SHOW_MORE_CELL_HEIGHT)
         }
         return CGFloat(GALLERY_CELL_ITEM_HEIGHT)
     }

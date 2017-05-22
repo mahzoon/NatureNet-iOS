@@ -379,6 +379,28 @@ class DataService  {
         return nil
     }
     
+    func GetObservationsForProject(with id: String) -> [NNObservation] {
+        let listObs = self.observations.filter { (observation) -> Bool in
+            if observation.project == id {
+                return true
+            } else {
+                return false
+            }
+        }
+        return listObs
+    }
+    
+    func GetObservationsForUser(with id: String) -> [NNObservation] {
+        let listObs = self.observations.filter { (observation) -> Bool in
+            if observation.observer == id {
+                return true
+            } else {
+                return false
+            }
+        }
+        return listObs
+    }
+    
     //////////////////////////////////////////////////////////////
     //
     //                        Design Ideas

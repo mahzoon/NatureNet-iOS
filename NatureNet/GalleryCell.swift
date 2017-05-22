@@ -49,13 +49,7 @@ class GalleryCell: UITableViewCell {
         self.dislikes.text = num_dislikes
         self.comments.text = num_comments
         
-        let d = NSDate(timeIntervalSince1970:Double(date)/1000)
-        let formatter = DateFormatter()
-        formatter.locale = NSLocale.current
-        formatter.timeZone = NSTimeZone.local
-        formatter.dateStyle = .full
-        formatter.timeStyle = .short
-        self.postDate.text = formatter.string(from: d as Date)
+        self.postDate.text = UtilityFunctions.convertTimestampToDateString(date: date)
         
         self.observation = observation
         self.isShowMore = isShowMore
