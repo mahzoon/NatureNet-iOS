@@ -27,7 +27,6 @@ class GalleryCell: UITableViewCell {
     @IBOutlet weak var affiliationIcon: UILabel!
     
     var observation: NNObservation?
-    var isShowMore = false
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -40,7 +39,7 @@ class GalleryCell: UITableViewCell {
     }
     
     func configureCell(username: String, affiliation: String, project: String, avatar: String, obsImage: String, text: String,
-                       num_likes: String, num_dislikes: String, num_comments: String, date: NSNumber, isShowMore: Bool, observation: NNObservation?) {
+                       num_likes: String, num_dislikes: String, num_comments: String, date: NSNumber, observation: NNObservation?) {
         if (self.username != nil) {
             self.username.text = username
         }
@@ -54,44 +53,18 @@ class GalleryCell: UITableViewCell {
         self.postDate.text = UtilityFunctions.convertTimestampToDateString(date: date)
         
         self.observation = observation
-        self.isShowMore = isShowMore
         
         if (self.avatar != nil) {
-            self.avatar.image = nil
+            self.avatar.image = UIImage(named: JOIN_PROFILE_IMAGE)
         }
-        self.observationImage.image = nil
-        self.observationImage.isHidden = true
         
-        if isShowMore {
-            self.postDate.isHidden = true
-            self.comments.isHidden = true
-            self.dislikes.isHidden = true
-            self.likes.isHidden = true
-            self.descriptionText.isHidden = true
-            //self.affiliation.isHidden = true
-            self.affiliationIcon.isHidden = true
-            self.bottomInfoStackView.isHidden = true
+        if text != "" {
+            self.descriptionText.isHidden = false
         } else {
-            
-            self.postDate.isHidden = false
-            self.comments.isHidden = false
-            self.dislikes.isHidden = false
-            self.likes.isHidden = false
-            if text != "" {
-                self.descriptionText.isHidden = false
-            } else {
-                self.descriptionText.isHidden = true
-            }
-            self.affiliation.isHidden = false
-            self.affiliationIcon.isHidden = false
-            self.bottomInfoStackView.isHidden = false
-            
-            if (self.avatar != nil) {
-                self.avatar.image = UIImage(named: JOIN_PROFILE_IMAGE)
-            }
-            self.observationImage.isHidden = false
-            self.observationImage.image = UIImage(named: "sample_image3")
+            self.descriptionText.isHidden = true
         }
+        
+        self.observationImage.image = UIImage(named: "sample_image3")
         
         
         // load the avatar if there is any

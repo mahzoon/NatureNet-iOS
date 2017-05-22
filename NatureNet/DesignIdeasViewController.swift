@@ -68,20 +68,31 @@ class DesignIdeasViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: "DesignIdeasCell") as? DesignIdeasCell {
-            if maxNB && maxNV == indexPath.row {
-                cell.configureCell(username: LISTS_SHOW_MORE_TEXT, affiliation: "", avatar: "", text: "", num_likes: "", num_dislikes: "", num_comments: "", status: "", date: 0, isShowMore: true, designIdea: nil)
+        
+        // the case which we should dequeue a ShowMoreCell
+        if maxNB && maxNV == indexPath.row {
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "ShowMoreCell") as? ShowMoreCell {
+                cell.configureCell()
                 return cell
+            } else {
+                return ShowMoreCell()
             }
+        }
+        
+        // the case which we should dequeue a regular cell (DesignIdeasCell)
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "DesignIdeasCell") as? DesignIdeasCell {
             let searchText = self.searchBar.text ?? ""
             if let idea = DataService.ds.GetDesignIdea(at: indexPath.row, searchFilter: searchText) {
                 if let user = DataService.ds.GetUser(by: idea.submitter) {
-                    cell.configureCell(username: user.displayName, affiliation: DataService.ds.GetSiteName(with: user.affiliation), avatar: user.avatarUrl, text: idea.content, num_likes: "0", num_dislikes: "0", num_comments: "0", status: idea.status, date: idea.updatedAt, isShowMore: false, designIdea: idea)
+                    let numComment = DataService.ds.GetCommentsOnDesignIdea(with: idea.id).count
+                    let numLikes = idea.Likes.count
+                    let numDislikes = idea.Dislikes.count
+                    cell.configureCell(username: user.displayName, affiliation: DataService.ds.GetSiteName(with: user.affiliation), avatar: user.avatarUrl, text: idea.content, num_likes: "\(numLikes)", num_dislikes: "\(numDislikes)", num_comments: "\(numComment)", status: idea.status, date: idea.updatedAt, designIdea: idea)
                 }
             }
             return cell
         } else {
-            return UITableViewCell()
+            return DesignIdeasCell()
         }
         
     }
@@ -118,7 +129,7 @@ class DesignIdeasViewController: UIViewController, UITableViewDelegate, UITableV
                 signInVC.successSegueId = SEGUE_PROFILE
             }
             if id == SEGUE_DETAILS {
-                if let cell = sender as? DesignIdeasCell, !cell.isShowMore {
+                if let cell = sender as? DesignIdeasCell {
                     if let dest = segue.destination as? DesignIdeaDetailController {
                         dest.designIdea = cell.designIdea
                     }
@@ -127,22 +138,14 @@ class DesignIdeasViewController: UIViewController, UITableViewDelegate, UITableV
         }
     }
     
-    // When seeing details of a design idea, we need to check if the sender (the cell) is a "show more" cell or not. If so, then the transition is not possible, instead another "page" should be added to the data.
-    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-        if identifier == SEGUE_DETAILS {
-            if let cell = sender as? DesignIdeasCell {
-                if cell.isShowMore {
-                    pages = pages + 1
-                    designIdeasTable.reloadData()
-                    return false
-                }
-            }
-        }
-        return true
-    }
-    
     // remove the focus from the search bar if the user clicked on the cross button on the search bar. This will also causes the keyboard to hide.
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         view.endEditing(true)
     }
+    
+    @IBAction func showMoreTapped(_ sender: Any) {
+        pages = pages + 1
+        designIdeasTable.reloadData()
+    }
+    
 }

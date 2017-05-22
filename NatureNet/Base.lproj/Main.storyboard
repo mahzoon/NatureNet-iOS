@@ -776,6 +776,46 @@ DESIGN this nature technology with your community</string>
                                             <segue destination="2em-3J-HRi" kind="show" identifier="Details" id="XBB-sL-yXV"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="ShowMoreCell" rowHeight="60" id="jbY-U2-XbD" customClass="ShowMoreCell" customModule="NatureNet" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="328" width="320" height="60"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jbY-U2-XbD" id="5X6-gB-stl">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xdy-9L-TV2" customClass="ShadowedView" customModule="NatureNet" customModuleProvider="target">
+                                                    <rect key="frame" x="5" y="5" width="310" height="53"/>
+                                                    <subviews>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="baq-nA-XB0">
+                                                            <rect key="frame" x="0.0" y="0.0" width="310" height="53"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                            <state key="normal" title="Show More"/>
+                                                            <connections>
+                                                                <action selector="showMoreTapped:" destination="T2M-sH-wfj" eventType="touchUpInside" id="1dq-lR-260"/>
+                                                            </connections>
+                                                        </button>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="trailing" secondItem="baq-nA-XB0" secondAttribute="trailing" id="2D9-NO-wXV"/>
+                                                        <constraint firstAttribute="bottom" secondItem="baq-nA-XB0" secondAttribute="bottom" id="5j6-g3-Oai"/>
+                                                        <constraint firstItem="baq-nA-XB0" firstAttribute="top" secondItem="xdy-9L-TV2" secondAttribute="top" id="FYD-cg-Gmp"/>
+                                                        <constraint firstItem="baq-nA-XB0" firstAttribute="leading" secondItem="xdy-9L-TV2" secondAttribute="leading" id="cPC-Aw-MOK"/>
+                                                    </constraints>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="xdy-9L-TV2" secondAttribute="bottom" constant="2" id="7iV-2E-kfy"/>
+                                                <constraint firstItem="xdy-9L-TV2" firstAttribute="top" secondItem="5X6-gB-stl" secondAttribute="top" constant="5" id="OI3-Ac-btt"/>
+                                                <constraint firstItem="xdy-9L-TV2" firstAttribute="leading" secondItem="5X6-gB-stl" secondAttribute="leading" constant="5" id="aBE-3v-fz2"/>
+                                                <constraint firstAttribute="trailing" secondItem="xdy-9L-TV2" secondAttribute="trailing" constant="5" id="qyM-ZH-SrW"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <outlet property="showMoreButton" destination="baq-nA-XB0" id="SQY-Hm-m0s"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </prototypes>
                             </tableView>
                         </subviews>
@@ -1035,7 +1075,7 @@ DESIGN this nature technology with your community</string>
                                                     </constraints>
                                                 </view>
                                                 <prototypes>
-                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CommentCell" id="Phg-JP-I6E" customClass="CommentCell" customModule="NatureNet" customModuleProvider="target">
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="CommentCell" id="Phg-JP-I6E" customClass="CommentCell" customModule="NatureNet" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="388" width="300" height="44"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Phg-JP-I6E" id="5Ah-Fb-f77">
@@ -1609,6 +1649,46 @@ DESIGN this nature technology with your community</string>
                                             <segue destination="2em-3J-HRi" kind="show" identifier="Details" id="MJm-91-2Fo"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="ShowMoreCell" rowHeight="55" id="lLT-io-D3X" customClass="ShowMoreCell" customModule="NatureNet" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="432" width="300" height="55"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lLT-io-D3X" id="20A-Mn-8R2">
+                                            <rect key="frame" x="0.0" y="0.0" width="300" height="54.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yWk-Ih-nZM">
+                                                    <rect key="frame" x="0.0" y="2" width="300" height="50.5"/>
+                                                    <subviews>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Eua-fW-lAG">
+                                                            <rect key="frame" x="0.0" y="0.0" width="300" height="50.5"/>
+                                                            <state key="normal" title="Show more">
+                                                                <color key="titleColor" red="0.32537341120000002" green="0.34457534550000002" blue="0.3732254505" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            </state>
+                                                            <connections>
+                                                                <action selector="showMoreTapped:" destination="5M4-3n-D3C" eventType="touchUpInside" id="QcI-HX-Mx6"/>
+                                                            </connections>
+                                                        </button>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="bottom" secondItem="Eua-fW-lAG" secondAttribute="bottom" id="R9E-MM-xQf"/>
+                                                        <constraint firstItem="Eua-fW-lAG" firstAttribute="leading" secondItem="yWk-Ih-nZM" secondAttribute="leading" id="cRh-D4-9zG"/>
+                                                        <constraint firstItem="Eua-fW-lAG" firstAttribute="top" secondItem="yWk-Ih-nZM" secondAttribute="top" id="i9X-Bw-ias"/>
+                                                        <constraint firstAttribute="trailing" secondItem="Eua-fW-lAG" secondAttribute="trailing" id="wcR-IQ-6ZT"/>
+                                                    </constraints>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="yWk-Ih-nZM" secondAttribute="bottom" constant="2" id="Grl-7B-Eex"/>
+                                                <constraint firstAttribute="trailing" secondItem="yWk-Ih-nZM" secondAttribute="trailing" id="Ob7-1c-d8J"/>
+                                                <constraint firstItem="yWk-Ih-nZM" firstAttribute="leading" secondItem="20A-Mn-8R2" secondAttribute="leading" id="cf8-OR-369"/>
+                                                <constraint firstItem="yWk-Ih-nZM" firstAttribute="top" secondItem="20A-Mn-8R2" secondAttribute="top" constant="2" id="oKb-3t-omq"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="showMoreButton" destination="Eua-fW-lAG" id="3di-c4-m4O"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </prototypes>
                             </tableView>
                         </subviews>
@@ -1925,6 +2005,45 @@ DESIGN this nature technology with your community</string>
                                             <segue destination="zJX-Qg-ZB2" kind="show" identifier="Details" id="THR-gx-VTB"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="ShowMoreCell" rowHeight="55" id="uaf-nH-GJH" customClass="ShowMoreCell" customModule="NatureNet" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="178" width="320" height="55"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="uaf-nH-GJH" id="XtI-qJ-RZN">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="55"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="15I-xa-Gvv" customClass="ShadowedView" customModule="NatureNet" customModuleProvider="target">
+                                                    <rect key="frame" x="5" y="5" width="310" height="48"/>
+                                                    <subviews>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J5Q-D1-h6X">
+                                                            <rect key="frame" x="0.0" y="0.0" width="310" height="48"/>
+                                                            <state key="normal" title="Show more"/>
+                                                            <connections>
+                                                                <action selector="showMoreTapped:" destination="a8h-AG-Hf6" eventType="touchUpInside" id="mUY-58-RJ5"/>
+                                                            </connections>
+                                                        </button>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="bottom" secondItem="J5Q-D1-h6X" secondAttribute="bottom" id="E8v-M8-ZrH"/>
+                                                        <constraint firstItem="J5Q-D1-h6X" firstAttribute="top" secondItem="15I-xa-Gvv" secondAttribute="top" id="Npt-dN-N2B"/>
+                                                        <constraint firstItem="J5Q-D1-h6X" firstAttribute="leading" secondItem="15I-xa-Gvv" secondAttribute="leading" id="p32-L1-BA9"/>
+                                                        <constraint firstAttribute="trailing" secondItem="J5Q-D1-h6X" secondAttribute="trailing" id="vm0-na-fdA"/>
+                                                    </constraints>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="15I-xa-Gvv" firstAttribute="top" secondItem="XtI-qJ-RZN" secondAttribute="top" constant="5" id="M65-jp-YgR"/>
+                                                <constraint firstAttribute="bottom" secondItem="15I-xa-Gvv" secondAttribute="bottom" constant="2" id="NMt-Vw-WUd"/>
+                                                <constraint firstAttribute="trailing" secondItem="15I-xa-Gvv" secondAttribute="trailing" constant="5" id="PE7-bO-mED"/>
+                                                <constraint firstItem="15I-xa-Gvv" firstAttribute="leading" secondItem="XtI-qJ-RZN" secondAttribute="leading" constant="5" id="rnL-aJ-h3e"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <outlet property="showMoreButton" destination="J5Q-D1-h6X" id="39p-VZ-WFE"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </prototypes>
                             </tableView>
                         </subviews>
@@ -2174,7 +2293,7 @@ DESIGN this nature technology with your community</string>
                                                     </constraints>
                                                 </view>
                                                 <prototypes>
-                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CommentCell" id="Ift-LE-fcB" customClass="CommentCell" customModule="NatureNet" customModuleProvider="target">
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="CommentCell" id="Ift-LE-fcB" customClass="CommentCell" customModule="NatureNet" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="238" width="300" height="44"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ift-LE-fcB" id="rJU-Az-kZg">
@@ -2900,6 +3019,46 @@ DESIGN this nature technology with your community</string>
                                             <outlet property="postDate" destination="9fF-Ag-VGi" id="sFk-xG-mx1"/>
                                             <outlet property="projectName" destination="2GU-Ye-Y5F" id="qce-D6-iSn"/>
                                             <segue destination="2em-3J-HRi" kind="show" identifier="Details" id="DYA-Za-9QJ"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="ShowMoreCell" rowHeight="55" id="CrR-6e-vEG" customClass="ShowMoreCell" customModule="NatureNet" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="448" width="300" height="55"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="CrR-6e-vEG" id="0kL-qe-0jL">
+                                            <rect key="frame" x="0.0" y="0.0" width="300" height="54.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zQa-0V-ujc">
+                                                    <rect key="frame" x="0.0" y="2" width="300" height="50.5"/>
+                                                    <subviews>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ONx-4w-fLw">
+                                                            <rect key="frame" x="0.0" y="0.0" width="300" height="50.5"/>
+                                                            <state key="normal" title="Show more">
+                                                                <color key="titleColor" red="0.32537341120000002" green="0.34457534550000002" blue="0.3732254505" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            </state>
+                                                            <connections>
+                                                                <action selector="showMoreTapped:" destination="xWJ-n3-6QI" eventType="touchUpInside" id="Yo2-8c-prd"/>
+                                                            </connections>
+                                                        </button>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="trailing" secondItem="ONx-4w-fLw" secondAttribute="trailing" id="FmZ-Kz-9Rs"/>
+                                                        <constraint firstItem="ONx-4w-fLw" firstAttribute="leading" secondItem="zQa-0V-ujc" secondAttribute="leading" id="MU4-83-Ork"/>
+                                                        <constraint firstAttribute="bottom" secondItem="ONx-4w-fLw" secondAttribute="bottom" id="jh0-4t-1SY"/>
+                                                        <constraint firstItem="ONx-4w-fLw" firstAttribute="top" secondItem="zQa-0V-ujc" secondAttribute="top" id="pf4-36-U7P"/>
+                                                    </constraints>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="zQa-0V-ujc" secondAttribute="bottom" constant="2" id="2b7-E0-RoJ"/>
+                                                <constraint firstAttribute="trailing" secondItem="zQa-0V-ujc" secondAttribute="trailing" id="Dr1-GK-nSB"/>
+                                                <constraint firstItem="zQa-0V-ujc" firstAttribute="leading" secondItem="0kL-qe-0jL" secondAttribute="leading" id="Mqp-GE-BZE"/>
+                                                <constraint firstItem="zQa-0V-ujc" firstAttribute="top" secondItem="0kL-qe-0jL" secondAttribute="top" constant="2" id="S6i-3u-aPs"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="showMoreButton" destination="ONx-4w-fLw" id="zEz-L0-BHZ"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

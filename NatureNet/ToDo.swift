@@ -8,7 +8,13 @@
 
 import Foundation
 
-// add another prototype cell for all tables for the "show more" cell type 
+
 // add keep me signed in to the sign in view
 // add forgot password to the sign in view
-
+// join -> create new user
+// add idea
+// add observation
+// profile -> edit current user info
+// add comment
+// add "like"
+// populate observations in "Explore" screen

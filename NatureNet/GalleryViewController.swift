@@ -68,24 +68,34 @@ class GalleryViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: "GalleryCell") as? GalleryCell {
-            if maxNB && maxNV == indexPath.row {
-                cell.configureCell(username: LISTS_SHOW_MORE_TEXT, affiliation: "", project: "", avatar: "", obsImage: "", text: "", num_likes: "", num_dislikes: "", num_comments: "", date: 0, isShowMore: true, observation: nil)
+        
+        // the case which we should dequeue a ShowMoreCell
+        if maxNB && maxNV == indexPath.row {
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "ShowMoreCell") as? ShowMoreCell {
+                cell.configureCell()
                 return cell
+            } else {
+                return ShowMoreCell()
             }
+        }
+        
+        // the case which we should dequeue a regular cell (GalleryCell)
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "GalleryCell") as? GalleryCell {
             let searchText = self.searchBar.text ?? ""
             if let observation = DataService.ds.GetObservation(at: indexPath.row, searchFilter: searchText) {
                 if let user = DataService.ds.GetUser(by: observation.observer) {
                     if let project = DataService.ds.GetProject(by: observation.project) {
-                        cell.configureCell(username: user.displayName, affiliation: DataService.ds.GetSiteName(with: user.affiliation), project: project.name, avatar: user.avatarUrl, obsImage: observation.observationImageUrl, text: observation.observationText, num_likes: "0", num_dislikes: "0", num_comments: "0", date: observation.updatedAt, isShowMore: false, observation: observation)
+                        let numComment = DataService.ds.GetCommentsOnObservation(with: observation.id).count
+                        let numLikes = observation.Likes.count
+                        let numDislikes = observation.Dislikes.count
+                        cell.configureCell(username: user.displayName, affiliation: DataService.ds.GetSiteName(with: user.affiliation), project: project.name, avatar: user.avatarUrl, obsImage: observation.observationImageUrl, text: observation.observationText, num_likes: "\(numLikes)", num_dislikes: "\(numDislikes)", num_comments: "\(numComment)", date: observation.updatedAt, observation: observation)
                     }
                 }
             }
             return cell
         } else {
-            return UITableViewCell()
+            return GalleryCell()
         }
-        
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -120,7 +130,7 @@ class GalleryViewController: UIViewController, UITableViewDelegate, UITableViewD
                 signInVC.successSegueId = SEGUE_PROFILE
             }
             if id == SEGUE_DETAILS {
-                if let cell = sender as? GalleryCell, !cell.isShowMore {
+                if let cell = sender as? GalleryCell {
                     if let dest = segue.destination as? GalleryDetailController {
                         dest.observationObj = cell.observation
                     }
@@ -129,22 +139,13 @@ class GalleryViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
     }
     
-    // When seeing details of an observation, we need to check if the sender (the cell) is a "show more" cell or not. If so, then the transition is not possible, instead another "page" should be added to the data.
-    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-        if identifier == SEGUE_DETAILS {
-            if let cell = sender as? GalleryCell {
-                if cell.isShowMore {
-                    pages = pages + 1
-                    galleryTable.reloadData()
-                    return false
-                }
-            }
-        }
-        return true
-    }
-    
     // remove the focus from the search bar if the user clicked on the cross button on the search bar. This will also causes the keyboard to hide.
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         view.endEditing(true)
+    }
+    
+    @IBAction func showMoreTapped(_ sender: Any) {
+        pages = pages + 1
+        galleryTable.reloadData()
     }
 }

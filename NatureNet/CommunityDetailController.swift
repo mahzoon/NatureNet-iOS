@@ -104,43 +104,40 @@ class CommunityDetailController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: "GalleryCell") as? GalleryCell {
-            if maxNB && maxNV == indexPath.row {
-                cell.configureCell(username: "", affiliation: LISTS_SHOW_MORE_TEXT, project: "", avatar: "", obsImage: "", text: "", num_likes: "", num_dislikes: "", num_comments: "", date: 0, isShowMore: true, observation: nil)
+        
+        // the case which we should dequeue a ShowMoreCell
+        if maxNB && maxNV == indexPath.row {
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "ShowMoreCell") as? ShowMoreCell {
+                cell.configureCell()
                 return cell
+            } else {
+                return ShowMoreCell()
             }
+        }
+        
+        // the case which we should dequeue a regular cell (GalleryCell)
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "GalleryCell") as? GalleryCell {
             if let user = self.user {
                 let listObsv = DataService.ds.GetObservationsForUser(with: user.id)
                 if indexPath.row < listObsv.count {
                     let observation = listObsv[indexPath.row]
+                    let numComment = DataService.ds.GetCommentsOnObservation(with: observation.id).count
+                    let numLikes = observation.Likes.count
+                    let numDislikes = observation.Dislikes.count
                     let projectName = DataService.ds.GetProject(by: observation.project)?.name ?? ""
-                    cell.configureCell(username: user.displayName, affiliation: DataService.ds.GetSiteName(with: user.affiliation), project: projectName, avatar: user.avatarUrl, obsImage: observation.observationImageUrl, text: observation.observationText, num_likes: "0", num_dislikes: "0", num_comments: "0", date: observation.updatedAt, isShowMore: false, observation: observation)
+                    cell.configureCell(username: user.displayName, affiliation: DataService.ds.GetSiteName(with: user.affiliation), project: projectName, avatar: user.avatarUrl, obsImage: observation.observationImageUrl, text: observation.observationText, num_likes: "\(numLikes)", num_dislikes: "\(numDislikes)", num_comments: "\(numComment)", date: observation.updatedAt, observation: observation)
                 }
             }
             return cell
         } else {
-            return UITableViewCell()
+            return GalleryCell()
         }
-    }
-    
-    // When seeing details of an observation, we need to check if the sender (the cell) is a "show more" cell or not. If so, then the transition is not possible, instead another "page" should be added to the data.
-    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-        if identifier == SEGUE_DETAILS {
-            if let cell = sender as? GalleryCell {
-                if cell.isShowMore {
-                    pages = pages + 1
-                    userDetailTable.reloadData()
-                    return false
-                }
-            }
-        }
-        return true
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let id = segue.identifier {
             if id == SEGUE_DETAILS {
-                if let cell = sender as? GalleryCell, !cell.isShowMore {
+                if let cell = sender as? GalleryCell {
                     if let dest = segue.destination as? GalleryDetailController {
                         dest.observationObj = cell.observation
                     }
@@ -148,4 +145,10 @@ class CommunityDetailController: UIViewController, UITableViewDelegate, UITableV
             }
         }
     }
+    
+    @IBAction func showMoreTapped(_ sender: Any) {
+        pages = pages + 1
+        userDetailTable.reloadData()
+    }
+    
 }

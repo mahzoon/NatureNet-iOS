@@ -25,7 +25,6 @@ class DesignIdeasCell: UITableViewCell {
     @IBOutlet weak var bottomIdeaInfoStackView: UIStackView!
     
     var designIdea: NNDesignIdea?
-    var isShowMore = false
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -38,7 +37,7 @@ class DesignIdeasCell: UITableViewCell {
     
     func configureCell(username: String, affiliation: String, avatar: String, text: String,
                        num_likes: String, num_dislikes: String, num_comments: String,
-                       status: String, date: NSNumber, isShowMore: Bool, designIdea: NNDesignIdea?) {
+                       status: String, date: NSNumber, designIdea: NNDesignIdea?) {
         self.username.text = username
         self.affiliation.text = affiliation
         self.Ideatext.text = text
@@ -49,25 +48,11 @@ class DesignIdeasCell: UITableViewCell {
         self.postDate.text = UtilityFunctions.convertTimestampToDateString(date: date)
         
         self.designIdea = designIdea
-        self.isShowMore = isShowMore
         
-        self.avatar.image = nil
-        if (isShowMore) {
-            self.bottomIdeaInfoStackView.isHidden = true
-            self.postDate.isHidden = true
-            self.affiliation.isHidden = true
-            self.affiliationIcon.isHidden = true
-            self.Ideatext.isHidden = true
-        } else {
-            self.bottomIdeaInfoStackView.isHidden = false
-            self.postDate.isHidden = false
-            self.affiliation.isHidden = false
-            self.affiliationIcon.isHidden = false
-            self.Ideatext.isHidden = false
-            
-            // load the avatar
-            self.avatar.image = UIImage(named: JOIN_PROFILE_IMAGE)
-            // load the status image
-        }
+        self.avatar.image = UIImage(named: JOIN_PROFILE_IMAGE)
+        
+        // load the avatar
+        
+        // load the status image
     }
 }
