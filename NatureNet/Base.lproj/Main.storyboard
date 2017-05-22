@@ -573,7 +573,7 @@ DESIGN this nature technology with your community</string>
                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="LYj-5m-OR5">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                 <color key="barTintColor" red="0.20784313730000001" green="0.2901960784" blue="0.37254901959999998" alpha="1" colorSpace="calibratedRGB"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="search"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
                             </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="154" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ZTS-TZ-J9w">
                                 <rect key="frame" x="0.0" y="44" width="320" height="411"/>
@@ -772,7 +772,7 @@ DESIGN this nature technology with your community</string>
                                             <outlet property="observationImage" destination="Yfj-CH-bdf" id="qO3-em-g1i"/>
                                             <outlet property="postDate" destination="UbF-si-Pfb" id="7h6-2V-Z9Q"/>
                                             <outlet property="username" destination="af3-cV-OQM" id="RA8-ca-yGO"/>
-                                            <segue destination="2em-3J-HRi" kind="show" id="XBB-sL-yXV"/>
+                                            <segue destination="2em-3J-HRi" kind="show" identifier="Details" id="XBB-sL-yXV"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -1549,7 +1549,7 @@ DESIGN this nature technology with your community</string>
                                             <outlet property="observationImage" destination="AYg-8w-W3Z" id="5sL-Aw-P3V"/>
                                             <outlet property="postDate" destination="SZw-Za-CcR" id="M1v-Lg-KTS"/>
                                             <outlet property="username" destination="2dv-4i-iV0" id="IKD-UN-LAA"/>
-                                            <segue destination="2em-3J-HRi" kind="show" id="MJm-91-2Fo"/>
+                                            <segue destination="2em-3J-HRi" kind="show" identifier="Details" id="MJm-91-2Fo"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -1655,7 +1655,7 @@ DESIGN this nature technology with your community</string>
                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="08e-kp-sTm">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                 <color key="barTintColor" red="0.20784313730000001" green="0.2901960784" blue="0.37254901959999998" alpha="1" colorSpace="calibratedRGB"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="search"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
                             </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="203" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="UiN-Tz-v1N">
                                 <rect key="frame" x="0.0" y="44" width="320" height="411"/>
@@ -1874,7 +1874,7 @@ DESIGN this nature technology with your community</string>
                                             <outlet property="likes" destination="sE8-eu-dMh" id="XpL-w2-CLW"/>
                                             <outlet property="status" destination="YIz-92-Tq6" id="piA-o2-UEC"/>
                                             <outlet property="username" destination="YZ5-vS-VsT" id="zZP-fK-aQy"/>
-                                            <segue destination="zJX-Qg-ZB2" kind="show" id="THR-gx-VTB"/>
+                                            <segue destination="zJX-Qg-ZB2" kind="show" identifier="Details" id="THR-gx-VTB"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -2292,7 +2292,7 @@ DESIGN this nature technology with your community</string>
                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="zB0-4G-SGT">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                 <color key="barTintColor" red="0.20784313730000001" green="0.2901960784" blue="0.37254901959999998" alpha="1" colorSpace="calibratedRGB"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="search"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
                             </searchBar>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EKO-l3-FUS">
                                 <rect key="frame" x="0.0" y="44" width="320" height="411"/>
@@ -2354,7 +2354,7 @@ DESIGN this nature technology with your community</string>
                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="yxb-SB-drx">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                 <color key="barTintColor" red="0.20784313730000001" green="0.2901960784" blue="0.37254901959999998" alpha="1" colorSpace="calibratedRGB"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="search"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                 <scopeButtonTitles>
                                     <string>Title</string>
                                     <string>Title</string>
@@ -2374,7 +2374,7 @@ DESIGN this nature technology with your community</string>
                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="1oV-Ns-9je">
                                                     <rect key="frame" x="5" y="5" width="310" height="33.5"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="join screen - user" translatesAutoresizingMaskIntoConstraints="NO" id="1W7-dQ-mg8">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="join screen - user" translatesAutoresizingMaskIntoConstraints="NO" id="1W7-dQ-mg8">
                                                             <rect key="frame" x="0.0" y="0.0" width="33.5" height="33.5"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="1W7-dQ-mg8" secondAttribute="height" multiplier="40:40" id="fAo-us-kSv"/>
@@ -2403,7 +2403,7 @@ DESIGN this nature technology with your community</string>
                                         <connections>
                                             <outlet property="avatar" destination="1W7-dQ-mg8" id="3bS-ah-qpl"/>
                                             <outlet property="username" destination="2Hk-4A-OEk" id="xze-xs-IkL"/>
-                                            <segue destination="xWJ-n3-6QI" kind="show" id="pqj-RP-MI2"/>
+                                            <segue destination="xWJ-n3-6QI" kind="show" identifier="Details" id="pqj-RP-MI2"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -2763,7 +2763,7 @@ DESIGN this nature technology with your community</string>
                                             <outlet property="likes" destination="tu5-ia-qMR" id="7yc-tL-x6m"/>
                                             <outlet property="observationImage" destination="nxb-Vw-p18" id="9u9-NO-1AQ"/>
                                             <outlet property="postDate" destination="7dX-XO-LbV" id="NH0-wq-Qsf"/>
-                                            <segue destination="2em-3J-HRi" kind="show" id="DYA-Za-9QJ"/>
+                                            <segue destination="2em-3J-HRi" kind="show" identifier="Details" id="DYA-Za-9QJ"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -2810,7 +2810,7 @@ DESIGN this nature technology with your community</string>
                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="GLN-LM-EpK">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                 <color key="barTintColor" red="0.20784313730000001" green="0.2901960784" blue="0.37254901959999998" alpha="1" colorSpace="calibratedRGB"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="search"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
                             </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="50" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="9fU-1P-3tl">
                                 <rect key="frame" x="0.0" y="44" width="320" height="411"/>
@@ -2855,7 +2855,7 @@ DESIGN this nature technology with your community</string>
                                         <connections>
                                             <outlet property="projectIcon" destination="GvH-S8-P1C" id="k0L-Y1-RlA"/>
                                             <outlet property="projectName" destination="HRh-bA-xXf" id="4Xg-I7-Cf3"/>
-                                            <segue destination="5M4-3n-D3C" kind="show" id="Xhw-6e-EnZ"/>
+                                            <segue destination="5M4-3n-D3C" kind="show" identifier="Details" id="Xhw-6e-EnZ"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -3859,8 +3859,8 @@ DESIGN this nature technology with your community</string>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="XBB-sL-yXV"/>
-        <segue reference="j97-fr-U8g"/>
-        <segue reference="VGZ-Ad-eZH"/>
-        <segue reference="L4E-hR-TbY"/>
+        <segue reference="aNP-t6-vCR"/>
+        <segue reference="aRp-Ov-Q5x"/>
+        <segue reference="fRi-IJ-rth"/>
     </inferredMetricsTieBreakers>
 </document>

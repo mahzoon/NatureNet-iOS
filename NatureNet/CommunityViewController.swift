@@ -59,6 +59,7 @@ class CommunityViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "CommunityCell") as? CommunityCell {
+            cell.configureCell(name: "Username", icon: "", useDefaultIcon: true)
             return cell
         } else {
             return UITableViewCell()

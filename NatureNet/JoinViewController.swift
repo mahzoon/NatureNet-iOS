@@ -82,7 +82,7 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
     // returns the number of options for affiliation picker
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         // considering the [no selection] option we have sites + 1 objects to return
-        return DataService.ds.GetSites().count + 1
+        return DataService.ds.GetNumSites() + 1
     }
     
     // returns the values for options of affiliation picker

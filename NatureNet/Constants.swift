@@ -27,8 +27,7 @@ let APP_COLOR_SHADOW = UIColor(red: 157.0/255.0, green: 157.0/255.0, blue: 157.0
 //
 let JOIN_PROFILE_IMAGE = "join screen - user"
 let ADD_OBSV_IMAGE = "icon - observation default"
-let HIDE_KEYBOARD = "icon - down"
-let SHOW_KEYBOARD = "icon - up"
+let PROJECT_DEFAULT_ICON = "icon - project - default"
 // Icons used in code
 let ICON_PROFILE_ONLINE = UIImage(named: "icon - profile - online")
 let ICON_PROFILE_OFFLINE = UIImage(named: "icon - profile - offline")
@@ -49,8 +48,8 @@ let MAP_CENTER_REGION_RADIUS: CLLocationDistance = 10000 // in meters, which is 
 let COMMUNITY_LIST_INIT_COUNT = 15
 let COMMUNITY_LIST_LOAD_MORE_COUNT = 15
 //
-let PROJECTS_LIST_INIT_COUNT = 20
-let PROJECTS_LIST_LOAD_MORE_COUNT = 20
+let PROJECTS_LIST_INIT_COUNT = 3
+let PROJECTS_LIST_LOAD_MORE_COUNT = 3
 //
 let DESIGN_IDEA_LIST_INIT_COUNT = 10
 let DESIGN_IDEA_LIST_LOAD_MORE_COUNT = 10
@@ -64,6 +63,7 @@ let GALLERY_LIST_LOAD_MORE_COUNT = 5
 //
 let COMMENT_TEXTBOX_PLACEHOLDER = "Comment"
 let PICKER_NO_SELECTION = "Select one"
+let LISTS_SHOW_MORE_TEXT = "Show more..."
 
 //
 // Messages
@@ -127,12 +127,13 @@ let SAVE_OBSV_SUCCESS_BUTTON_TEXT = "OK"
 let SEGUE_SIGNIN = "SignIn"
 let SEGUE_EXPLORE = "Explore"
 let SEGUE_PROFILE = "Profile"
+let SEGUE_DETAILS = "Details"
 
 //
 // Database reference names
 //
 let DB_SITES_PATH = "sites"
-let DB_PROJECTS_PATH = "projects"
+let DB_PROJECTS_PATH = "activities"
 let DB_USERS_PATH = "users"
 let DB_OBSERVATIONS_PATH = "observations"
 

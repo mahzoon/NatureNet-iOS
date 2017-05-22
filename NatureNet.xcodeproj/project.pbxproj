@@ -14,6 +14,8 @@
 		2D5D103E1ECF9471008A8FEA /* RoundedTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D5D103D1ECF9471008A8FEA /* RoundedTextView.swift */; };
 		2D5D10601ED01603008A8FEA /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D5D105F1ED01603008A8FEA /* ImageViewController.swift */; };
 		2D632E1E1ED1349E007ECF51 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2D632E1D1ED1349E007ECF51 /* GoogleService-Info.plist */; };
+		2D632E491ED234FC007ECF51 /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D632E481ED234FC007ECF51 /* Project.swift */; };
+		2D632E4B1ED24941007ECF51 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D632E4A1ED24941007ECF51 /* User.swift */; };
 		55CF19DD967736F8B7750455 /* Pods_NatureNetUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B238D5A0816A2E3FC6B7731A /* Pods_NatureNetUITests.framework */; };
 		682C31681ECE316F00F6D87D /* UtilityFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682C31671ECE316F00F6D87D /* UtilityFunctions.swift */; };
 		682C316B1ECE366B00F6D87D /* ToDo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682C316A1ECE366B00F6D87D /* ToDo.swift */; };
@@ -74,6 +76,8 @@
 		2D5D103D1ECF9471008A8FEA /* RoundedTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedTextView.swift; sourceTree = "<group>"; };
 		2D5D105F1ED01603008A8FEA /* ImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
 		2D632E1D1ED1349E007ECF51 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		2D632E481ED234FC007ECF51 /* Project.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
+		2D632E4A1ED24941007ECF51 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		3D47BBC3D482560B7F12A934 /* Pods_NatureNet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NatureNet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		57426900216948F158F226CD /* Pods-NatureNetUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NatureNetUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-NatureNetUITests/Pods-NatureNetUITests.release.xcconfig"; sourceTree = "<group>"; };
 		682C31671ECE316F00F6D87D /* UtilityFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilityFunctions.swift; sourceTree = "<group>"; };
@@ -195,6 +199,8 @@
 			isa = PBXGroup;
 			children = (
 				68FB9BD61ECBE9D7006C88B1 /* Observation.swift */,
+				2D632E481ED234FC007ECF51 /* Project.swift */,
+				2D632E4A1ED24941007ECF51 /* User.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -623,11 +629,13 @@
 				682C316B1ECE366B00F6D87D /* ToDo.swift in Sources */,
 				689E310D1ECB7AE00039C2F3 /* Constants.swift in Sources */,
 				2D272F421ED1273B00401CE6 /* DataService.swift in Sources */,
+				2D632E4B1ED24941007ECF51 /* User.swift in Sources */,
 				68FB9BD51ECBE267006C88B1 /* CommunityViewController.swift in Sources */,
 				689E31051ECA4C150039C2F3 /* JoinViewController.swift in Sources */,
 				68FB9BCF1ECBE075006C88B1 /* ProjectViewController.swift in Sources */,
 				68FB9BD11ECBE096006C88B1 /* ProjectCell.swift in Sources */,
 				68FB9BE81ECCFA47006C88B1 /* ProfileViewController.swift in Sources */,
+				2D632E491ED234FC007ECF51 /* Project.swift in Sources */,
 				68FB9BE61ECCFA11006C88B1 /* DesignIdeaDetailController.swift in Sources */,
 				68FA5A401ECA1538002E66B1 /* AppDelegate.swift in Sources */,
 				682C316D1ECE48BB00F6D87D /* CommentCell.swift in Sources */,
