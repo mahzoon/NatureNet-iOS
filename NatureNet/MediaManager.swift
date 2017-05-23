@@ -21,6 +21,8 @@ class MediaManager {
     //private var managedContext = (UIApplication.shared.delegate as! AppDelegate).managedObjectContext
     
     private let iconCache = NSCache<NSString, UIImage>()
+    private let imageCache = NSCache<NSString, UIImage>()
+    
     private var tasks = [String: URLSessionDataTask]()
     
     func getOrDownloadIcon(requesterId: String, urlString: String, completion: @escaping (UIImage?, String) -> Void) {
@@ -32,11 +34,24 @@ class MediaManager {
             completion(img, "")
         } else {
             // step 3: the image needs to be downloaded and set in the cache
-            downloadImage(requesterId: requesterId, urlString: url, completion: completion)
+            downloadImage(requesterId: requesterId, urlString: url, cache: self.iconCache, completion: completion)
         }
     }
     
-    private func downloadImage(requesterId: String, urlString: String, completion: @escaping (UIImage?, String) -> Void) {
+    func getOrDownloadImage(requesterId: String, urlString: String, completion: @escaping (UIImage?, String) -> Void) {
+        let url = makeUrlSecure(url: urlString)
+        // step 1: cancel previous requests with the same requester if any
+        tasks[requesterId]?.cancel()
+        // step 2: check cache, if the image is already downloaded send back the image
+        if let img = imageCache.object(forKey: url as NSString) {
+            completion(img, "")
+        } else {
+            // step 3: the image needs to be downloaded and set in the cache
+            downloadImage(requesterId: requesterId, urlString: url, cache: self.imageCache, completion: completion)
+        }
+    }
+    
+    private func downloadImage(requesterId: String, urlString: String, cache: NSCache<NSString, UIImage>, completion: @escaping (UIImage?, String) -> Void) {
         if let url = URL(string: urlString) {
             let task = URLSession(configuration: URLSessionConfiguration.default).dataTask(with: URLRequest(url: url),
                                                                                            completionHandler: { (data, response, error) in
@@ -50,7 +65,7 @@ class MediaManager {
                     if let d = data {
                         if let img = UIImage(data: d) {
                             // set the image in cache
-                            self.iconCache.setObject(img, forKey: urlString as NSString)
+                            cache.setObject(img, forKey: urlString as NSString)
                             completion(img, "")
                         } else {
                             completion(nil, "cannot covert the downloaded content to an image.")

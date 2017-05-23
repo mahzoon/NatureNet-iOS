@@ -32,7 +32,6 @@
 		68FA5A401ECA1538002E66B1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68FA5A3F1ECA1538002E66B1 /* AppDelegate.swift */; };
 		68FA5A421ECA1538002E66B1 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68FA5A411ECA1538002E66B1 /* MainViewController.swift */; };
 		68FA5A451ECA1538002E66B1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68FA5A431ECA1538002E66B1 /* Main.storyboard */; };
-		68FA5A481ECA1538002E66B1 /* NatureNet.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 68FA5A461ECA1538002E66B1 /* NatureNet.xcdatamodeld */; };
 		68FA5A4A1ECA1538002E66B1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 68FA5A491ECA1538002E66B1 /* Assets.xcassets */; };
 		68FA5A4D1ECA1538002E66B1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68FA5A4B1ECA1538002E66B1 /* LaunchScreen.storyboard */; };
 		68FA5A581ECA1538002E66B1 /* NatureNetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68FA5A571ECA1538002E66B1 /* NatureNetTests.swift */; };
@@ -100,7 +99,6 @@
 		68FA5A3F1ECA1538002E66B1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		68FA5A411ECA1538002E66B1 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		68FA5A441ECA1538002E66B1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		68FA5A471ECA1538002E66B1 /* NatureNet.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = NatureNet.xcdatamodel; sourceTree = "<group>"; };
 		68FA5A491ECA1538002E66B1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		68FA5A4C1ECA1538002E66B1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		68FA5A4E1ECA1538002E66B1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -253,7 +251,6 @@
 				68FA5A491ECA1538002E66B1 /* Assets.xcassets */,
 				68FA5A4B1ECA1538002E66B1 /* LaunchScreen.storyboard */,
 				68FA5A4E1ECA1538002E66B1 /* Info.plist */,
-				68FA5A461ECA1538002E66B1 /* NatureNet.xcdatamodeld */,
 			);
 			path = NatureNet;
 			sourceTree = "<group>";
@@ -634,7 +631,6 @@
 				689E310B1ECB7A2F0039C2F3 /* RoundedButton.swift in Sources */,
 				68FB9BE41ECCF944006C88B1 /* GalleryDetailController.swift in Sources */,
 				689E31091ECA87530039C2F3 /* SigninViewController.swift in Sources */,
-				68FA5A481ECA1538002E66B1 /* NatureNet.xcdatamodeld in Sources */,
 				689E310F1ECB7E660039C2F3 /* ExploreViewController.swift in Sources */,
 				2D5D10601ED01603008A8FEA /* ImageViewController.swift in Sources */,
 				68FB9BD91ECCF7FE006C88B1 /* AddObservationController.swift in Sources */,
@@ -936,19 +932,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		68FA5A461ECA1538002E66B1 /* NatureNet.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				68FA5A471ECA1538002E66B1 /* NatureNet.xcdatamodel */,
-			);
-			currentVersion = 68FA5A471ECA1538002E66B1 /* NatureNet.xcdatamodel */;
-			path = NatureNet.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 68FA5A341ECA1538002E66B1 /* Project object */;
 }
