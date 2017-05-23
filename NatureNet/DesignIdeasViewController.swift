@@ -71,7 +71,7 @@ class DesignIdeasViewController: UIViewController, UITableViewDelegate, UITableV
         
         // the case which we should dequeue a ShowMoreCell
         if maxNB && maxNV == indexPath.row {
-            if let cell = tableView.dequeueReusableCell(withIdentifier: "ShowMoreCell") as? ShowMoreCell {
+            if let cell = tableView.dequeueReusableCell(withIdentifier: SHOW_MORE_CELL_ID) as? ShowMoreCell {
                 cell.configureCell()
                 return cell
             } else {
@@ -80,14 +80,15 @@ class DesignIdeasViewController: UIViewController, UITableViewDelegate, UITableV
         }
         
         // the case which we should dequeue a regular cell (DesignIdeasCell)
-        if let cell = tableView.dequeueReusableCell(withIdentifier: "DesignIdeasCell") as? DesignIdeasCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: DESIGN_IDEAS_CELL_ID) as? DesignIdeasCell {
             let searchText = self.searchBar.text ?? ""
             if let idea = DataService.ds.GetDesignIdea(at: indexPath.row, searchFilter: searchText) {
                 if let user = DataService.ds.GetUser(by: idea.submitter) {
                     let numComment = DataService.ds.GetCommentsOnDesignIdea(with: idea.id).count
                     let numLikes = idea.Likes.count
                     let numDislikes = idea.Dislikes.count
-                    cell.configureCell(username: user.displayName, affiliation: DataService.ds.GetSiteName(with: user.affiliation), avatar: user.avatarUrl, text: idea.content, num_likes: "\(numLikes)", num_dislikes: "\(numDislikes)", num_comments: "\(numComment)", status: idea.status, date: idea.updatedAt, designIdea: idea)
+                    cell.configureCell(id: DESIGN_IDEAS_CELL_ID + "\(indexPath.section).\(indexPath.row)",
+                        username: user.displayName, affiliation: DataService.ds.GetSiteName(with: user.affiliation), avatar: user.avatarUrl, text: idea.content, num_likes: "\(numLikes)", num_dislikes: "\(numDislikes)", num_comments: "\(numComment)", status: idea.status, date: idea.updatedAt, designIdea: idea)
                 }
             }
             return cell

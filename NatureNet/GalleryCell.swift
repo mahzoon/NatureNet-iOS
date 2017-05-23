@@ -28,9 +28,13 @@ class GalleryCell: UITableViewCell {
     
     var observation: NNObservation?
     
+    // an id for the cell. This id is used for requesting icons and images
+    var cellId: String = ""
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        // in CommunityDetailsController we use a header-less version of this gallery cell, so avatar might be nil in this case.
         if avatar != nil {
             avatar.layer.cornerRadius = avatar.frame.size.width / 2
             avatar.clipsToBounds = true
@@ -38,8 +42,10 @@ class GalleryCell: UITableViewCell {
         observationImage.clipsToBounds = true
     }
     
-    func configureCell(username: String, affiliation: String, project: String, avatar: String, obsImage: String, text: String,
+    func configureCell(id: String, username: String, affiliation: String, project: String, avatar: String, obsImage: String, text: String,
                        num_likes: String, num_dislikes: String, num_comments: String, date: NSNumber, observation: NNObservation?) {
+        self.cellId = id
+        // in CommunityDetailsController we use a header-less version of this gallery cell, so username might be nil in this case.
         if (self.username != nil) {
             self.username.text = username
         }
@@ -55,7 +61,15 @@ class GalleryCell: UITableViewCell {
         self.observation = observation
         
         if (self.avatar != nil) {
-            self.avatar.image = UIImage(named: JOIN_PROFILE_IMAGE)
+            self.avatar.image = ICON_DEFAULT_USER_AVATAR
+            // requesting the icon
+            MediaManager.md.getOrDownloadIcon(requesterId: cellId, urlString: avatar, completion: { img, err in
+                if let i = img {
+                    DispatchQueue.main.async {
+                        self.avatar.image = i
+                    }
+                }
+            })
         }
         
         if text != "" {

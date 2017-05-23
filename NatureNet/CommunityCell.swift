@@ -21,6 +21,8 @@ class CommunityCell: UITableViewCell {
     var sectionIndex = -1
     // reference to the Model object
     var user: NNUser?
+    // an id for the cell. This id is used for requesting icons and images
+    var cellId: String = ""
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -31,16 +33,28 @@ class CommunityCell: UITableViewCell {
     }
     
     // This function is called when creating a community cell. The content usaully should have a string (username) and an icon. The only case that we might not expect to have icon is when the cell is "show more...". In that case the call would be like: configureCell(name: "Show more...", icon: "", useDefaultIcon: false, isShowMore: true, section: X, user: nil)
-    func configureCell(name: String, icon: String, useDefaultIcon: Bool, isShowMore: Bool, section: Int, user: NNUser?) {
+    func configureCell(id: String, name: String, icon: String, useDefaultIcon: Bool, isShowMore: Bool, section: Int, user: NNUser?) {
+        self.cellId = id
         self.username.text = name
         self.isShowMore = isShowMore
         self.sectionIndex = section
         self.user = user
-        self.avatar.image = nil
-        if useDefaultIcon {
-            self.avatar.image = UIImage(named: JOIN_PROFILE_IMAGE)
+        
+        if isShowMore {
+            self.avatar.image = nil
         } else {
-            // load the "icon"
+            self.avatar.image = ICON_DEFAULT_USER_AVATAR
+        }
+        
+        if !useDefaultIcon {
+            // requesting the icon
+            MediaManager.md.getOrDownloadIcon(requesterId: cellId, urlString: icon, completion: { img, err in
+                if let i = img {
+                    DispatchQueue.main.async {
+                        self.avatar.image = i
+                    }
+                }
+            })
         }
     }
 }

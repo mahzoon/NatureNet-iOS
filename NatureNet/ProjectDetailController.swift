@@ -55,6 +55,18 @@ class ProjectDetailController: UIViewController, UITableViewDelegate, UITableVie
         }
         self.descriptionText.text = project?.descriptionText
         self.title = self.projectName.text
+        
+        self.projectIcon.image = ICON_DEFAULT_PROJECT
+        // requesting the icon
+        if let p = project {
+            MediaManager.md.getOrDownloadIcon(requesterId: "ProjectDetailController", urlString: p.iconUrl, completion: { img, err in
+                if let i = img {
+                    DispatchQueue.main.async {
+                        self.projectIcon.image = i
+                    }
+                }
+            })
+        }
     }
 
     override func viewDidLayoutSubviews() {
@@ -96,7 +108,7 @@ class ProjectDetailController: UIViewController, UITableViewDelegate, UITableVie
         
         // the case which we should dequeue a ShowMoreCell
         if maxNB && maxNV == indexPath.row {
-            if let cell = tableView.dequeueReusableCell(withIdentifier: "ShowMoreCell") as? ShowMoreCell {
+            if let cell = tableView.dequeueReusableCell(withIdentifier: SHOW_MORE_CELL_ID) as? ShowMoreCell {
                 cell.configureCell()
                 return cell
             } else {
@@ -105,7 +117,7 @@ class ProjectDetailController: UIViewController, UITableViewDelegate, UITableVie
         }
         
         // the case which we should dequeue a regular cell (GalleryCell)
-        if let cell = tableView.dequeueReusableCell(withIdentifier: "GalleryCell") as? GalleryCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: GALLERY_CELL_ID) as? GalleryCell {
             if let project = self.project {
                 let listObsv = DataService.ds.GetObservationsForProject(with: project.id)
                 if indexPath.row < listObsv.count {
@@ -114,7 +126,8 @@ class ProjectDetailController: UIViewController, UITableViewDelegate, UITableVie
                         let numComment = DataService.ds.GetCommentsOnObservation(with: observation.id).count
                         let numLikes = observation.Likes.count
                         let numDislikes = observation.Dislikes.count
-                        cell.configureCell(username: user.displayName, affiliation: DataService.ds.GetSiteName(with: user.affiliation), project: project.name, avatar: user.avatarUrl, obsImage: observation.observationImageUrl, text: observation.observationText, num_likes: "\(numLikes)", num_dislikes: "\(numDislikes)", num_comments: "\(numComment)", date: observation.updatedAt, observation: observation)
+                        cell.configureCell(id: GALLERY_CELL_ID + "\(indexPath.section).\(indexPath.row)",
+                            username: user.displayName, affiliation: DataService.ds.GetSiteName(with: user.affiliation), project: project.name, avatar: user.avatarUrl, obsImage: observation.observationImageUrl, text: observation.observationText, num_likes: "\(numLikes)", num_dislikes: "\(numDislikes)", num_comments: "\(numComment)", date: observation.updatedAt, observation: observation)
                     }
                 }
             }

@@ -58,6 +58,16 @@ class GalleryDetailController: UIViewController, UITableViewDelegate, UITableVie
             if let user = DataService.ds.GetUser(by: obsv.observer) {
                 self.username.text = user.displayName
                 self.affiliation.text = DataService.ds.GetSiteName(with: user.affiliation)
+                
+                self.profileImage.image = ICON_DEFAULT_USER_AVATAR
+                // requesting the avatar icon
+                MediaManager.md.getOrDownloadIcon(requesterId: "GalleryDetailController", urlString: user.avatarUrl, completion: { img, err in
+                    if let i = img {
+                        DispatchQueue.main.async {
+                            self.profileImage.image = i
+                        }
+                    }
+                })
             }
             self.postDate.text = UtilityFunctions.convertTimestampToDateString(date: obsv.updatedAt)
             self.descriptionText.text = obsv.observationText
@@ -108,7 +118,7 @@ class GalleryDetailController: UIViewController, UITableViewDelegate, UITableVie
         
         // the case which we should dequeue a ShowMoreCell
         if maxNB && maxNV == indexPath.row {
-            if let cell = tableView.dequeueReusableCell(withIdentifier: "ShowMoreCell") as? ShowMoreCell {
+            if let cell = tableView.dequeueReusableCell(withIdentifier: SHOW_MORE_CELL_ID) as? ShowMoreCell {
                 cell.configureCell()
                 return cell
             } else {
@@ -117,7 +127,7 @@ class GalleryDetailController: UIViewController, UITableViewDelegate, UITableVie
         }
         
         // the case which we should dequeue a regular cell (CommentCell)
-        if let cell = tableView.dequeueReusableCell(withIdentifier: "CommentCell") as? CommentCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: COMMENT_CELL_ID) as? CommentCell {
             if let obsv = self.observationObj {
                 let listComments = DataService.ds.GetCommentsOnObservation(with: obsv.id)
                 if indexPath.row < listComments.count {

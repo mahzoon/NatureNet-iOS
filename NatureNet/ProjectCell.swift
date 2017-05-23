@@ -22,6 +22,9 @@ class ProjectCell: UITableViewCell {
     // reference to the Model object
     var project: NNProject?
     
+    // an id for the cell. This id is used for requesting icons and images
+    var cellId: String = ""
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -31,16 +34,28 @@ class ProjectCell: UITableViewCell {
     }
     
     // This function is called when creating a project cell. The content usaully should have a string (project name) and an icon. The only case that we might not expect to have icon is when the cell is "show more...". In that case the call would be like: configureCell(name: "Show more...", icon: "", useDefaultIcon: false, isShowMore: true, section: X, project: nil)
-    func configureCell(name: String, icon: String, useDefaultIcon: Bool, isShowMore: Bool, section: Int, project: NNProject?) {
+    func configureCell(id: String, name: String, icon: String, useDefaultIcon: Bool, isShowMore: Bool, section: Int, project: NNProject?) {
+        self.cellId = id
         self.projectName.text = name
         self.isShowMore = isShowMore
         self.sectionIndex = section
-        self.projectIcon.image = nil
         self.project = project
-        if useDefaultIcon {
-            self.projectIcon.image = UIImage(named: PROJECT_DEFAULT_ICON)
+        
+        if isShowMore {
+            self.projectIcon.image = nil
         } else {
-            // load the "icon"
+            self.projectIcon.image = ICON_DEFAULT_PROJECT
+        }
+        
+        if !useDefaultIcon {
+            // requesting the icon
+            MediaManager.md.getOrDownloadIcon(requesterId: cellId, urlString: icon, completion: { img, err in
+                if let i = img {
+                    DispatchQueue.main.async {
+                        self.projectIcon.image = i
+                    }
+                }
+            })
         }
     }
 

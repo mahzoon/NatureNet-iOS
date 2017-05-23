@@ -219,7 +219,7 @@ class DataService  {
     func GetNumProjects(in siteIndex: Int, searchFilter: String) -> Int {
         if searchFilter != "" {
             return self.projects[self.sites[siteIndex].key]?.filter({ (e: NNProject) -> Bool in
-                return (e.name.range(of: searchFilter) != nil)
+                return (e.name.lowercased().range(of: searchFilter.lowercased()) != nil)
             }).count ?? 0
         } else {
             return self.projects[self.sites[siteIndex].key]?.count ?? 0
@@ -293,7 +293,7 @@ class DataService  {
     func GetNumUsers(in siteIndex: Int, searchFilter: String) -> Int {
         if searchFilter != "" {
             return self.users[self.sites[siteIndex].key]?.filter({ (e: NNUser) -> Bool in
-                return (e.displayName.range(of: searchFilter) != nil)
+                return (e.displayName.lowercased().range(of: searchFilter.lowercased()) != nil)
             }).count ?? 0
         } else {
             return self.users[self.sites[siteIndex].key]?.count ?? 0

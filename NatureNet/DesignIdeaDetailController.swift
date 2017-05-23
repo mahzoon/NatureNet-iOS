@@ -58,6 +58,16 @@ class DesignIdeaDetailController: UIViewController, UITableViewDelegate, UITable
             if let user = DataService.ds.GetUser(by: idea.submitter) {
                 self.username.text = user.displayName
                 self.affiliation.text = DataService.ds.GetSiteName(with: user.affiliation)
+                
+                self.profileImage.image = ICON_DEFAULT_USER_AVATAR
+                // requesting the avatar icon
+                MediaManager.md.getOrDownloadIcon(requesterId: "DesignIdeaDetailController", urlString: user.avatarUrl, completion: { img, err in
+                    if let i = img {
+                        DispatchQueue.main.async {
+                            self.profileImage.image = i
+                        }
+                    }
+                })
             }
             self.postDate.text = UtilityFunctions.convertTimestampToDateString(date: idea.updatedAt)
             self.ideaText.text = idea.content
@@ -66,6 +76,15 @@ class DesignIdeaDetailController: UIViewController, UITableViewDelegate, UITable
             }
             self.numLikes.text = "\(idea.Likes.count)"
             self.numDislikes.text = "\(idea.Dislikes.count)"
+            
+            // load the status image
+            self.status.image = nil
+            if idea.status.lowercased() == DESIGN_IDEA_STATUS_DONE {
+                self.status.image = ICON_DESIGN_IDEA_STATUS_DONE
+            }
+            if idea.status.lowercased() == DESIGN_IDEA_STATUS_DISCUSSING || idea.status.lowercased() == DESIGN_IDEA_STATUS_TO_DO {
+                self.status.image = ICON_DESIGN_IDEA_STATUS_DISCUSSING
+            }
         }
         
     }
@@ -109,7 +128,7 @@ class DesignIdeaDetailController: UIViewController, UITableViewDelegate, UITable
         
         // the case which we should dequeue a ShowMoreCell
         if maxNB && maxNV == indexPath.row {
-            if let cell = tableView.dequeueReusableCell(withIdentifier: "ShowMoreCell") as? ShowMoreCell {
+            if let cell = tableView.dequeueReusableCell(withIdentifier: SHOW_MORE_CELL_ID) as? ShowMoreCell {
                 cell.configureCell()
                 return cell
             } else {
@@ -118,7 +137,7 @@ class DesignIdeaDetailController: UIViewController, UITableViewDelegate, UITable
         }
         
         // the case which we should dequeue a regular cell (CommentCell)
-        if let cell = tableView.dequeueReusableCell(withIdentifier: "CommentCell") as? CommentCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: COMMENT_CELL_ID) as? CommentCell {
             if let idea = self.designIdea {
                 let listComments = DataService.ds.GetCommentsOnDesignIdea(with: idea.id)
                 if indexPath.row < listComments.count {

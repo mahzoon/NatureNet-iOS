@@ -30,11 +30,13 @@ let DEFAULT_PIN_COLOR = UIColor.darkGray
 //
 let JOIN_PROFILE_IMAGE = "join screen - user"
 let ADD_OBSV_IMAGE = "icon - observation default"
-let PROJECT_DEFAULT_ICON = "icon - project - default"
 // Icons used in code
 let ICON_PROFILE_ONLINE = UIImage(named: "icon - profile - online")
 let ICON_PROFILE_OFFLINE = UIImage(named: "icon - profile - offline")
-
+let ICON_DESIGN_IDEA_STATUS_DONE = UIImage(named: "icon - done")
+let ICON_DESIGN_IDEA_STATUS_DISCUSSING = UIImage(named: "icon - discussing")
+let ICON_DEFAULT_USER_AVATAR = UIImage(named: "join screen - user")
+let ICON_DEFAULT_PROJECT = UIImage(named: "icon - project - default")
 
 //
 // Sizes
@@ -141,6 +143,16 @@ let SEGUE_PROFILE = "Profile"
 let SEGUE_DETAILS = "Details"
 
 //
+// Cell Identifiers
+//
+let PROJECT_CELL_ID = "ProjectCell"
+let COMMUNITY_CELL_ID = "CommunityCell"
+let DESIGN_IDEAS_CELL_ID = "DesignIdeasCell"
+let GALLERY_CELL_ID = "GalleryCell"
+let SHOW_MORE_CELL_ID = "ShowMoreCell"
+let COMMENT_CELL_ID = "CommentCell"
+
+//
 // Database reference names
 //
 let DB_SITES_PATH = "sites"
@@ -149,4 +161,13 @@ let DB_USERS_PATH = "users"
 let DB_OBSERVATIONS_PATH = "observations"
 let DB_DESIGNIDEAS_PATH = "ideas"
 let DB_COMMENTS_PATH = "comments"
+
+//
+// Other constants
+//
+let DESIGN_IDEA_STATUS_DISCUSSING = "doing"
+let DESIGN_IDEA_STATUS_TO_DO = "to do"
+let DESIGN_IDEA_STATUS_DONE = "done"
+
+
 

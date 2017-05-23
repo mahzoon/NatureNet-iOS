@@ -80,16 +80,17 @@ class CommunityViewController: UIViewController, UITableViewDelegate, UITableVie
     
     // this is the main function for the tableview to draw each cell based on the provided data.
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: "CommunityCell") as? CommunityCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: COMMUNITY_CELL_ID) as? CommunityCell {
             if let more = maxNB[indexPath.section], more {
                 if let n = maxNV[indexPath.section], indexPath.row == n {
-                    cell.configureCell(name: LISTS_SHOW_MORE_TEXT, icon: "", useDefaultIcon: false, isShowMore: true, section: indexPath.section, user: nil)
+                    cell.configureCell(id: COMMUNITY_CELL_ID, name: LISTS_SHOW_MORE_TEXT, icon: "", useDefaultIcon: false, isShowMore: true, section: indexPath.section, user: nil)
                     return cell
                 }
             }
             let searchText = self.searchBar.text ?? ""
             if let user = DataService.ds.GetUser(in: indexPath.section, at: indexPath.row, searchFilter: searchText) {
-                cell.configureCell(name: user.displayName, icon: user.avatarUrl, useDefaultIcon: true, isShowMore: false, section: indexPath.section, user: user)
+                cell.configureCell(id: COMMUNITY_CELL_ID + "\(indexPath.section).\(indexPath.row)",
+                    name: user.displayName, icon: user.avatarUrl, useDefaultIcon: false, isShowMore: false, section: indexPath.section, user: user)
             }
             return cell
         } else {

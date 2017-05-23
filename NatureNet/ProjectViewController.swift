@@ -80,16 +80,17 @@ class ProjectViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     // this is the main function for the tableview to draw each cell based on the provided data.
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: "ProjectCell") as? ProjectCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: PROJECT_CELL_ID) as? ProjectCell {
             if let more = maxNB[indexPath.section], more {
                 if let n = maxNV[indexPath.section], indexPath.row == n {
-                    cell.configureCell(name: LISTS_SHOW_MORE_TEXT, icon: "", useDefaultIcon: false, isShowMore: true, section: indexPath.section, project: nil)
+                    cell.configureCell(id: PROJECT_CELL_ID, name: LISTS_SHOW_MORE_TEXT, icon: "", useDefaultIcon: false, isShowMore: true, section: indexPath.section, project: nil)
                     return cell
                 }
             }
             let searchText = self.searchBar.text ?? ""
             if let project = DataService.ds.GetProject(in: indexPath.section, at: indexPath.row, searchFilter: searchText) {
-                cell.configureCell(name: project.name, icon: project.iconUrl, useDefaultIcon: true, isShowMore: false, section: indexPath.section, project: project)
+                cell.configureCell(id: PROJECT_CELL_ID + "\(indexPath.section).\(indexPath.row)",
+                    name: project.name, icon: project.iconUrl, useDefaultIcon: false, isShowMore: false, section: indexPath.section, project: project)
             }
             return cell
         } else {

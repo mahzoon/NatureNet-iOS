@@ -26,18 +26,20 @@ class DesignIdeasCell: UITableViewCell {
     
     var designIdea: NNDesignIdea?
     
+    // an id for the cell. This id is used for requesting icons and images
+    var cellId: String = ""
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        if avatar != nil {
-            avatar.layer.cornerRadius = avatar.frame.size.width / 2
-            avatar.clipsToBounds = true
-        }
+        self.avatar.layer.cornerRadius = self.avatar.frame.size.width / 2
+        self.avatar.clipsToBounds = true
     }
     
-    func configureCell(username: String, affiliation: String, avatar: String, text: String,
+    func configureCell(id: String, username: String, affiliation: String, avatar: String, text: String,
                        num_likes: String, num_dislikes: String, num_comments: String,
                        status: String, date: NSNumber, designIdea: NNDesignIdea?) {
+        self.cellId = id
         self.username.text = username
         self.affiliation.text = affiliation
         self.Ideatext.text = text
@@ -49,10 +51,25 @@ class DesignIdeasCell: UITableViewCell {
         
         self.designIdea = designIdea
         
-        self.avatar.image = UIImage(named: JOIN_PROFILE_IMAGE)
+        self.avatar.image = ICON_DEFAULT_USER_AVATAR
         
         // load the avatar
+        // requesting the icon
+        MediaManager.md.getOrDownloadIcon(requesterId: cellId, urlString: avatar, completion: { img, err in
+            if let i = img {
+                DispatchQueue.main.async {
+                    self.avatar.image = i
+                }
+            }
+        })
         
         // load the status image
+        self.status.image = nil
+        if status.lowercased() == DESIGN_IDEA_STATUS_DONE {
+            self.status.image = ICON_DESIGN_IDEA_STATUS_DONE
+        }
+        if status.lowercased() == DESIGN_IDEA_STATUS_DISCUSSING || status.lowercased() == DESIGN_IDEA_STATUS_TO_DO {
+            self.status.image = ICON_DESIGN_IDEA_STATUS_DISCUSSING
+        }
     }
 }

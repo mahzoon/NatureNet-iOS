@@ -65,6 +65,15 @@ class CommunityDetailController: UIViewController, UITableViewDelegate, UITableV
         if let user = self.user {
             self.numDesignIdeas.text = "\(DataService.ds.GetDesignIdeasForUser(with: user.id).count)"
             self.numObservations.text = "\(DataService.ds.GetObservationsForUser(with: user.id).count)"
+            self.userAvatar.image = ICON_DEFAULT_USER_AVATAR
+            // requesting the avatar icon
+            MediaManager.md.getOrDownloadIcon(requesterId: "CommunityDetailController", urlString: user.avatarUrl, completion: { img, err in
+                if let i = img {
+                    DispatchQueue.main.async {
+                        self.userAvatar.image = i
+                    }
+                }
+            })
         }
     }
 
@@ -107,7 +116,7 @@ class CommunityDetailController: UIViewController, UITableViewDelegate, UITableV
         
         // the case which we should dequeue a ShowMoreCell
         if maxNB && maxNV == indexPath.row {
-            if let cell = tableView.dequeueReusableCell(withIdentifier: "ShowMoreCell") as? ShowMoreCell {
+            if let cell = tableView.dequeueReusableCell(withIdentifier: SHOW_MORE_CELL_ID) as? ShowMoreCell {
                 cell.configureCell()
                 return cell
             } else {
@@ -116,7 +125,7 @@ class CommunityDetailController: UIViewController, UITableViewDelegate, UITableV
         }
         
         // the case which we should dequeue a regular cell (GalleryCell)
-        if let cell = tableView.dequeueReusableCell(withIdentifier: "GalleryCell") as? GalleryCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: GALLERY_CELL_ID) as? GalleryCell {
             if let user = self.user {
                 let listObsv = DataService.ds.GetObservationsForUser(with: user.id)
                 if indexPath.row < listObsv.count {
@@ -125,7 +134,8 @@ class CommunityDetailController: UIViewController, UITableViewDelegate, UITableV
                     let numLikes = observation.Likes.count
                     let numDislikes = observation.Dislikes.count
                     let projectName = DataService.ds.GetProject(by: observation.project)?.name ?? ""
-                    cell.configureCell(username: user.displayName, affiliation: DataService.ds.GetSiteName(with: user.affiliation), project: projectName, avatar: user.avatarUrl, obsImage: observation.observationImageUrl, text: observation.observationText, num_likes: "\(numLikes)", num_dislikes: "\(numDislikes)", num_comments: "\(numComment)", date: observation.updatedAt, observation: observation)
+                    cell.configureCell(id: GALLERY_CELL_ID + "\(indexPath.section).\(indexPath.row)",
+                        username: user.displayName, affiliation: DataService.ds.GetSiteName(with: user.affiliation), project: projectName, avatar: user.avatarUrl, obsImage: observation.observationImageUrl, text: observation.observationText, num_likes: "\(numLikes)", num_dislikes: "\(numDislikes)", num_comments: "\(numComment)", date: observation.updatedAt, observation: observation)
                 }
             }
             return cell
