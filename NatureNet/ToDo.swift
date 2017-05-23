@@ -18,3 +18,4 @@ import Foundation
 // add comment
 // add "like"
 // populate observations in "Explore" screen
+// get observations/id/comments; this helps to count the comments quickly instead of querying
