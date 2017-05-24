@@ -38,6 +38,10 @@ let ICON_DESIGN_IDEA_STATUS_DISCUSSING = UIImage(named: "icon - discussing")
 let ICON_DEFAULT_USER_AVATAR = UIImage(named: "join screen - user")
 let ICON_DEFAULT_PROJECT = UIImage(named: "icon - project - default")
 let IMAGE_DEFAULT_OBSERVATION = UIImage(named: "image - observation - default")
+let ICON_LIKE_GRAY = UIImage(named: "icon - like - gray")
+let ICON_LIKE_GREEN = UIImage(named: "icon - like")
+let ICON_DISLIKE_GRAY = UIImage(named: "icon - dislike - gray")
+let ICON_DISLIKE_GREEN = UIImage(named: "icon - dislike")
 
 //
 // Sizes

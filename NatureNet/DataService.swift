@@ -340,6 +340,10 @@ class DataService  {
         }
         return nil
     }
+    
+    func AddUser(user: NNUser) {
+        
+    }
 
     
     //////////////////////////////////////////////////////////////
@@ -452,6 +456,10 @@ class DataService  {
         return nil
     }
     
+    func AddObservation(observation: NNObservation) {
+        
+    }
+    
     
     
     //////////////////////////////////////////////////////////////
@@ -523,6 +531,10 @@ class DataService  {
         }
         return listIdea
     }
+    
+    func AddDesignIdea(idea: NNDesignIdea) {
+        
+    }
 
     
     //////////////////////////////////////////////////////////////
@@ -583,6 +595,14 @@ class DataService  {
     }
     
     func WriteCommentOnDesignIdea(comment: String, designIdeaId: String) {
+        
+    }
+    
+    func AddLikeOrDislikeOnObservation(like: Bool, observationId: String) {
+        
+    }
+    
+    func AddLikeOrDislikeOnDesignIdea(like: Bool, designIdeaId: String) {
         
     }
 }

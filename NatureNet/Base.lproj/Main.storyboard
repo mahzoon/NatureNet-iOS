@@ -690,6 +690,9 @@ DESIGN this nature technology with your community</string>
                                                                                         <constraint firstAttribute="width" constant="25" id="tug-xg-OJ9"/>
                                                                                     </constraints>
                                                                                     <state key="normal" title="Button" image="icon - like - gray"/>
+                                                                                    <connections>
+                                                                                        <action selector="likeTapped:" destination="TWC-YM-ceg" eventType="touchUpInside" id="NX5-NO-88N"/>
+                                                                                    </connections>
                                                                                 </button>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RAq-h1-eW5">
                                                                                     <rect key="frame" x="30" y="0.0" width="50" height="30"/>
@@ -708,6 +711,9 @@ DESIGN this nature technology with your community</string>
                                                                                         <constraint firstAttribute="width" constant="25" id="qpL-4j-VOL"/>
                                                                                     </constraints>
                                                                                     <state key="normal" title="Button" image="icon - dislike - gray"/>
+                                                                                    <connections>
+                                                                                        <action selector="dislikeTapped:" destination="TWC-YM-ceg" eventType="touchUpInside" id="uV1-lx-35q"/>
+                                                                                    </connections>
                                                                                 </button>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AH1-6C-TnM">
                                                                                     <rect key="frame" x="30" y="0.0" width="50" height="30"/>
@@ -726,6 +732,9 @@ DESIGN this nature technology with your community</string>
                                                                                         <constraint firstAttribute="width" constant="25" id="rBy-JV-R21"/>
                                                                                     </constraints>
                                                                                     <state key="normal" title="Button" image="icon - comment"/>
+                                                                                    <connections>
+                                                                                        <action selector="commentTapped:" destination="TWC-YM-ceg" eventType="touchUpInside" id="gFM-BL-AdE"/>
+                                                                                    </connections>
                                                                                 </button>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MD6-wr-hcH">
                                                                                     <rect key="frame" x="30" y="0.0" width="50" height="30"/>
@@ -764,10 +773,11 @@ DESIGN this nature technology with your community</string>
                                             <outlet property="affiliation" destination="xGG-Rb-kRJ" id="paN-Xg-sNE"/>
                                             <outlet property="affiliationIcon" destination="NFt-Jh-V2u" id="fLe-mu-zDc"/>
                                             <outlet property="avatar" destination="YUq-ZK-ulP" id="erO-3R-VzE"/>
-                                            <outlet property="bottomInfoStackView" destination="xYc-9K-iH4" id="aa2-wx-VfK"/>
                                             <outlet property="comments" destination="MD6-wr-hcH" id="Be6-mg-tJe"/>
                                             <outlet property="descriptionText" destination="glb-w3-JXD" id="tCR-DW-3Oj"/>
+                                            <outlet property="dislikeButton" destination="qiS-t9-81d" id="CaY-ey-grC"/>
                                             <outlet property="dislikes" destination="AH1-6C-TnM" id="w4z-pM-4E6"/>
+                                            <outlet property="likeButton" destination="PCs-si-Dpt" id="IDP-Jd-Et5"/>
                                             <outlet property="likes" destination="RAq-h1-eW5" id="v5A-h4-oMu"/>
                                             <outlet property="observationImage" destination="Yfj-CH-bdf" id="qO3-em-g1i"/>
                                             <outlet property="postDate" destination="UbF-si-Pfb" id="7h6-2V-Z9Q"/>
@@ -1003,6 +1013,9 @@ DESIGN this nature technology with your community</string>
                                                                                                 <constraint firstAttribute="width" constant="25" id="3au-GN-PyM"/>
                                                                                             </constraints>
                                                                                             <state key="normal" title="Button" image="icon - like - gray"/>
+                                                                                            <connections>
+                                                                                                <action selector="likeTapped:" destination="2em-3J-HRi" eventType="touchUpInside" id="j5S-Zr-eGa"/>
+                                                                                            </connections>
                                                                                         </button>
                                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="99" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B8Y-bW-IHU">
                                                                                             <rect key="frame" x="30" y="0.0" width="35" height="30"/>
@@ -1024,6 +1037,9 @@ DESIGN this nature technology with your community</string>
                                                                                                 <constraint firstAttribute="width" constant="25" id="2NW-Eg-aB5"/>
                                                                                             </constraints>
                                                                                             <state key="normal" title="Button" image="icon - dislike - gray"/>
+                                                                                            <connections>
+                                                                                                <action selector="dislikeTapped:" destination="2em-3J-HRi" eventType="touchUpInside" id="KP6-Ow-I4a"/>
+                                                                                            </connections>
                                                                                         </button>
                                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="99" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N7Y-Ik-yJi">
                                                                                             <rect key="frame" x="30" y="0.0" width="35" height="30"/>
@@ -1254,8 +1270,10 @@ DESIGN this nature technology with your community</string>
                         <outlet property="commentText" destination="i4O-sE-CEM" id="Iba-To-6Zo"/>
                         <outlet property="commentTextHeightConstraint" destination="FrY-9r-ltK" id="HyI-ff-8Em"/>
                         <outlet property="descriptionText" destination="mzH-f7-150" id="dhl-YY-rZY"/>
+                        <outlet property="dislikeButton" destination="vKV-Na-gqs" id="Ygy-IM-fMs"/>
                         <outlet property="galleryDetailsTable" destination="ruZ-Fs-J6U" id="aAi-KH-hvQ"/>
                         <outlet property="keyboardViewHeightConstraint" destination="pqO-B8-zer" id="c0F-78-9EQ"/>
+                        <outlet property="likeButton" destination="fpH-yl-Bxs" id="hrF-Lo-T8b"/>
                         <outlet property="numDislikes" destination="N7Y-Ik-yJi" id="7dJ-1P-tJO"/>
                         <outlet property="numLikes" destination="B8Y-bW-IHU" id="MKe-b3-idC"/>
                         <outlet property="observation" destination="75c-a5-nCZ" id="qKk-I8-iaD"/>
@@ -1564,6 +1582,9 @@ DESIGN this nature technology with your community</string>
                                                                                         <constraint firstAttribute="width" constant="25" id="jkg-1o-3vn"/>
                                                                                     </constraints>
                                                                                     <state key="normal" title="Button" image="icon - like - gray"/>
+                                                                                    <connections>
+                                                                                        <action selector="likeTapped:" destination="Ct7-Sx-UF2" eventType="touchUpInside" id="trW-2S-LEI"/>
+                                                                                    </connections>
                                                                                 </button>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rXa-JF-1QZ">
                                                                                     <rect key="frame" x="30" y="0.0" width="46.5" height="30"/>
@@ -1582,6 +1603,9 @@ DESIGN this nature technology with your community</string>
                                                                                         <constraint firstAttribute="width" constant="25" id="5hV-t7-xfv"/>
                                                                                     </constraints>
                                                                                     <state key="normal" title="Button" image="icon - dislike - gray"/>
+                                                                                    <connections>
+                                                                                        <action selector="dislikeTapped:" destination="Ct7-Sx-UF2" eventType="touchUpInside" id="SlX-CX-p53"/>
+                                                                                    </connections>
                                                                                 </button>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wA2-1Y-YUp">
                                                                                     <rect key="frame" x="30" y="0.0" width="47" height="30"/>
@@ -1600,6 +1624,9 @@ DESIGN this nature technology with your community</string>
                                                                                         <constraint firstAttribute="width" constant="25" id="HAn-3H-uiO"/>
                                                                                     </constraints>
                                                                                     <state key="normal" title="Button" image="icon - comment"/>
+                                                                                    <connections>
+                                                                                        <action selector="commentTapped:" destination="Ct7-Sx-UF2" eventType="touchUpInside" id="ogB-22-1ci"/>
+                                                                                    </connections>
                                                                                 </button>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="clY-ir-uM1">
                                                                                     <rect key="frame" x="30" y="0.0" width="46.5" height="30"/>
@@ -1637,10 +1664,11 @@ DESIGN this nature technology with your community</string>
                                             <outlet property="affiliation" destination="m5B-Nu-kCA" id="Zfu-x1-p6B"/>
                                             <outlet property="affiliationIcon" destination="LFU-Wy-z2Z" id="Wl4-4n-63j"/>
                                             <outlet property="avatar" destination="eWi-9U-nbZ" id="YUx-Ay-d5N"/>
-                                            <outlet property="bottomInfoStackView" destination="nfM-HS-asr" id="QQV-Hw-PCc"/>
                                             <outlet property="comments" destination="clY-ir-uM1" id="TyK-gf-KdX"/>
                                             <outlet property="descriptionText" destination="sGX-2o-w4c" id="uvx-yu-71A"/>
+                                            <outlet property="dislikeButton" destination="nft-9E-JEJ" id="2kn-sI-Ak0"/>
                                             <outlet property="dislikes" destination="wA2-1Y-YUp" id="qbk-6d-K2l"/>
+                                            <outlet property="likeButton" destination="hIc-qm-gcB" id="uFc-pp-WoE"/>
                                             <outlet property="likes" destination="rXa-JF-1QZ" id="BJ4-dg-BNJ"/>
                                             <outlet property="observationImage" destination="AYg-8w-W3Z" id="5sL-Aw-P3V"/>
                                             <outlet property="postDate" destination="SZw-Za-CcR" id="M1v-Lg-KTS"/>
@@ -1901,6 +1929,9 @@ DESIGN this nature technology with your community</string>
                                                                                         <constraint firstAttribute="width" constant="25" id="QkX-nr-axc"/>
                                                                                     </constraints>
                                                                                     <state key="normal" title="Button" image="icon - like - gray"/>
+                                                                                    <connections>
+                                                                                        <action selector="likeTapped:" destination="V1D-mm-zhG" eventType="touchUpInside" id="Lgs-MP-QfE"/>
+                                                                                    </connections>
                                                                                 </button>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sE8-eu-dMh">
                                                                                     <rect key="frame" x="30" y="0.0" width="20" height="30"/>
@@ -1922,6 +1953,9 @@ DESIGN this nature technology with your community</string>
                                                                                         <constraint firstAttribute="width" constant="25" id="nXM-GT-aVj"/>
                                                                                     </constraints>
                                                                                     <state key="normal" title="Button" image="icon - dislike - gray"/>
+                                                                                    <connections>
+                                                                                        <action selector="dislikeTapped:" destination="V1D-mm-zhG" eventType="touchUpInside" id="BmX-Dq-pjV"/>
+                                                                                    </connections>
                                                                                 </button>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yrY-HU-TAM">
                                                                                     <rect key="frame" x="30" y="0.0" width="20" height="30"/>
@@ -1943,6 +1977,9 @@ DESIGN this nature technology with your community</string>
                                                                                         <constraint firstAttribute="width" constant="25" id="LwU-3n-dZk"/>
                                                                                     </constraints>
                                                                                     <state key="normal" title="Button" image="icon - comment"/>
+                                                                                    <connections>
+                                                                                        <action selector="commentTapped:" destination="V1D-mm-zhG" eventType="touchUpInside" id="j3z-oF-Qij"/>
+                                                                                    </connections>
                                                                                 </button>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="95Z-mT-SNf">
                                                                                     <rect key="frame" x="30" y="0.0" width="20" height="30"/>
@@ -1995,9 +2032,10 @@ DESIGN this nature technology with your community</string>
                                             <outlet property="affiliation" destination="C9F-b6-aiD" id="qbA-YD-XAc"/>
                                             <outlet property="affiliationIcon" destination="Tuy-8R-iIL" id="spr-Pl-rYR"/>
                                             <outlet property="avatar" destination="0It-eB-WVD" id="705-s0-CFA"/>
-                                            <outlet property="bottomIdeaInfoStackView" destination="VKM-IT-N0U" id="DCV-X6-kfw"/>
                                             <outlet property="comments" destination="95Z-mT-SNf" id="RLj-DS-6Fg"/>
+                                            <outlet property="dislikeButton" destination="JJX-TD-GKt" id="0Rr-ts-gPc"/>
                                             <outlet property="dislikes" destination="yrY-HU-TAM" id="L4g-nW-WYf"/>
+                                            <outlet property="likeButton" destination="42G-f6-LnE" id="OJp-Vr-73g"/>
                                             <outlet property="likes" destination="sE8-eu-dMh" id="XpL-w2-CLW"/>
                                             <outlet property="postDate" destination="gdb-1r-OHr" id="PT4-57-xwS"/>
                                             <outlet property="status" destination="YIz-92-Tq6" id="piA-o2-UEC"/>
@@ -2219,6 +2257,9 @@ DESIGN this nature technology with your community</string>
                                                                                                 <constraint firstAttribute="width" constant="25" id="ubh-tF-YUg"/>
                                                                                             </constraints>
                                                                                             <state key="normal" title="Button" image="icon - like - gray"/>
+                                                                                            <connections>
+                                                                                                <action selector="likeTapped:" destination="zJX-Qg-ZB2" eventType="touchUpInside" id="Yzy-yy-uWC"/>
+                                                                                            </connections>
                                                                                         </button>
                                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="99" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2lX-7V-d0t">
                                                                                             <rect key="frame" x="30" y="0.0" width="35" height="30"/>
@@ -2240,6 +2281,9 @@ DESIGN this nature technology with your community</string>
                                                                                                 <constraint firstAttribute="width" constant="25" id="aO3-2V-J0R"/>
                                                                                             </constraints>
                                                                                             <state key="normal" title="Button" image="icon - dislike - gray"/>
+                                                                                            <connections>
+                                                                                                <action selector="dislikeTapped:" destination="zJX-Qg-ZB2" eventType="touchUpInside" id="gMj-UV-Xkc"/>
+                                                                                            </connections>
                                                                                         </button>
                                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="99" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hm1-DL-u6D">
                                                                                             <rect key="frame" x="30" y="0.0" width="35" height="30"/>
@@ -2473,8 +2517,10 @@ DESIGN this nature technology with your community</string>
                         <outlet property="commentText" destination="Ex5-0t-kO6" id="W53-4h-BtU"/>
                         <outlet property="commentTextHeightConstraint" destination="eJw-dt-c8v" id="1pz-W3-JC7"/>
                         <outlet property="designIdeaDetailsTable" destination="58T-Kb-vaY" id="iWq-oG-LY5"/>
+                        <outlet property="dislikeButton" destination="p4p-vn-g3U" id="gMs-oG-QhS"/>
                         <outlet property="ideaText" destination="qpy-rf-ZQf" id="VnU-KZ-5q0"/>
                         <outlet property="keyboardViewHeightConstraint" destination="dzS-14-3eT" id="zDR-pJ-6FL"/>
+                        <outlet property="likeButton" destination="nQK-XP-QxW" id="Fw0-ct-FXV"/>
                         <outlet property="numDislikes" destination="Hm1-DL-u6D" id="B7a-jn-deP"/>
                         <outlet property="numLikes" destination="2lX-7V-d0t" id="P3r-hh-vT7"/>
                         <outlet property="postDate" destination="Sdh-np-RUG" id="i0Q-fS-oQD"/>
@@ -2939,6 +2985,9 @@ DESIGN this nature technology with your community</string>
                                                                                         <constraint firstAttribute="width" constant="25" id="KrP-n7-gNH"/>
                                                                                     </constraints>
                                                                                     <state key="normal" title="Button" image="icon - like - gray"/>
+                                                                                    <connections>
+                                                                                        <action selector="likeTapped:" destination="YIq-3t-wP3" eventType="touchUpInside" id="SRP-9f-gXi"/>
+                                                                                    </connections>
                                                                                 </button>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eP6-az-LhR">
                                                                                     <rect key="frame" x="30" y="0.0" width="46.5" height="30"/>
@@ -2957,6 +3006,9 @@ DESIGN this nature technology with your community</string>
                                                                                         <constraint firstAttribute="width" constant="25" id="Z5W-AB-crZ"/>
                                                                                     </constraints>
                                                                                     <state key="normal" title="Button" image="icon - dislike - gray"/>
+                                                                                    <connections>
+                                                                                        <action selector="dislikeTapped:" destination="YIq-3t-wP3" eventType="touchUpInside" id="Vhg-0P-UAB"/>
+                                                                                    </connections>
                                                                                 </button>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0bP-Xw-sgW">
                                                                                     <rect key="frame" x="30" y="0.0" width="47" height="30"/>
@@ -2975,6 +3027,9 @@ DESIGN this nature technology with your community</string>
                                                                                         <constraint firstAttribute="width" constant="25" id="54L-Ey-CIt"/>
                                                                                     </constraints>
                                                                                     <state key="normal" title="Button" image="icon - comment"/>
+                                                                                    <connections>
+                                                                                        <action selector="commentTapped:" destination="YIq-3t-wP3" eventType="touchUpInside" id="iYQ-ci-x3Z"/>
+                                                                                    </connections>
                                                                                 </button>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7VI-qV-eCL">
                                                                                     <rect key="frame" x="30" y="0.0" width="46.5" height="30"/>
@@ -3011,10 +3066,11 @@ DESIGN this nature technology with your community</string>
                                         <connections>
                                             <outlet property="affiliation" destination="lnI-n5-mE4" id="xR6-xd-54a"/>
                                             <outlet property="affiliationIcon" destination="Sit-Es-91I" id="MXD-fR-Iao"/>
-                                            <outlet property="bottomInfoStackView" destination="6Xi-MO-PAg" id="84w-5n-s44"/>
                                             <outlet property="comments" destination="7VI-qV-eCL" id="7Of-N7-Res"/>
                                             <outlet property="descriptionText" destination="iFM-Oe-Y22" id="eoI-9i-grT"/>
+                                            <outlet property="dislikeButton" destination="4XE-88-tzw" id="uDb-ls-Fxi"/>
                                             <outlet property="dislikes" destination="0bP-Xw-sgW" id="D0V-8R-zOn"/>
+                                            <outlet property="likeButton" destination="aaT-L2-w24" id="MK6-7O-ARU"/>
                                             <outlet property="likes" destination="eP6-az-LhR" id="1sg-R2-gd8"/>
                                             <outlet property="observationImage" destination="nxb-Vw-p18" id="9u9-NO-1AQ"/>
                                             <outlet property="postDate" destination="9fF-Ag-VGi" id="sFk-xG-mx1"/>
@@ -3681,7 +3737,7 @@ DESIGN this nature technology with your community</string>
                                         <rect key="frame" x="0.0" y="228" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7d3-v0-5PV" id="Zl9-9L-aY1">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Location (Optional)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3pc-B4-M4r">
@@ -4156,9 +4212,9 @@ DESIGN this nature technology with your community</string>
         <image name="signin screen - logo" width="816" height="265"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="VGZ-Ad-eZH"/>
-        <segue reference="iN3-Ze-sCb"/>
-        <segue reference="L4E-hR-TbY"/>
-        <segue reference="j97-fr-U8g"/>
+        <segue reference="aRp-Ov-Q5x"/>
+        <segue reference="fRi-IJ-rth"/>
+        <segue reference="XBB-sL-yXV"/>
+        <segue reference="aNP-t6-vCR"/>
     </inferredMetricsTieBreakers>
 </document>

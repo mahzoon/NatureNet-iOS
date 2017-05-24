@@ -22,7 +22,8 @@ class DesignIdeasCell: UITableViewCell {
     @IBOutlet weak var comments: UILabel!
     @IBOutlet weak var status: UIImageView!
     
-    @IBOutlet weak var bottomIdeaInfoStackView: UIStackView!
+    @IBOutlet weak var likeButton: UIButton!
+    @IBOutlet weak var dislikeButton: UIButton!
     
     var designIdea: NNDesignIdea?
     
@@ -72,4 +73,22 @@ class DesignIdeasCell: UITableViewCell {
             self.status.image = ICON_DESIGN_IDEA_STATUS_DISCUSSING
         }
     }
+    
+    @IBAction func likeTapped(_ sender: Any) {
+        if let idea = designIdea {
+            DataService.ds.AddLikeOrDislikeOnDesignIdea(like: true, designIdeaId: idea.id)
+        }
+        dislikeButton.setImage(ICON_DISLIKE_GRAY, for: .normal)
+    }
+    
+    @IBAction func dislikeTapped(_ sender: Any) {
+        if let idea = designIdea {
+            DataService.ds.AddLikeOrDislikeOnDesignIdea(like: false, designIdeaId: idea.id)
+        }
+        likeButton.setImage(ICON_LIKE_GRAY, for: .normal)
+    }
+    
+    @IBAction func commentTapped(_ sender: Any) {
+    }
+    
 }

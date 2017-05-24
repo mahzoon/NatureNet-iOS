@@ -26,6 +26,8 @@ class GalleryDetailController: UIViewController, UITableViewDelegate, UITableVie
     @IBOutlet weak var commentTextHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var keyboardViewHeightConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var likeButton: UIButton!
+    @IBOutlet weak var dislikeButton: UIButton!
     @IBOutlet weak var commentLabel: UILabel!
     var observationObj: NNObservation?
     
@@ -242,6 +244,20 @@ class GalleryDetailController: UIViewController, UITableViewDelegate, UITableVie
     @IBAction func showMoreTapped(_ sender: Any) {
         self.pages = self.pages + 1
         galleryDetailsTable.reloadData()
+    }
+    
+    @IBAction func likeTapped(_ sender: Any) {
+        if let obsv = observationObj {
+            DataService.ds.AddLikeOrDislikeOnObservation(like: true, observationId: obsv.id)
+        }
+        dislikeButton.setImage(ICON_DISLIKE_GRAY, for: .normal)
+    }
+    
+    @IBAction func dislikeTapped(_ sender: Any) {
+        if let obsv = observationObj {
+            DataService.ds.AddLikeOrDislikeOnObservation(like: false, observationId: obsv.id)
+        }
+        likeButton.setImage(ICON_LIKE_GRAY, for: .normal)
     }
     
 }

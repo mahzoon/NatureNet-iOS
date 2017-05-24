@@ -21,6 +21,8 @@ class GalleryCell: UITableViewCell {
     @IBOutlet weak var postDate: UILabel!
     @IBOutlet weak var projectName: UILabel!
     
+    @IBOutlet weak var likeButton: UIButton!
+    @IBOutlet weak var dislikeButton: UIButton!
     
     @IBOutlet weak var bottomInfoStackView: UIStackView!
     
@@ -90,5 +92,22 @@ class GalleryCell: UITableViewCell {
             }
         })
     }
-
+    
+    @IBAction func likeTapped(_ sender: Any) {
+        if let obsv = observation {
+            DataService.ds.AddLikeOrDislikeOnObservation(like: true, observationId: obsv.id)
+        }
+        dislikeButton.setImage(ICON_DISLIKE_GRAY, for: .normal)
+        
+    }
+    
+    @IBAction func dislikeTapped(_ sender: Any) {
+        if let obsv = observation {
+            DataService.ds.AddLikeOrDislikeOnObservation(like: false, observationId: obsv.id)
+        }
+        likeButton.setImage(ICON_LIKE_GRAY, for: .normal)
+    }
+    
+    @IBAction func commentTapped(_ sender: Any) {
+    }
 }

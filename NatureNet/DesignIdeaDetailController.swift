@@ -20,6 +20,8 @@ class DesignIdeaDetailController: UIViewController, UITableViewDelegate, UITable
     @IBOutlet weak var numLikes: UILabel!
     @IBOutlet weak var numDislikes: UILabel!
     @IBOutlet weak var status: UIImageView!
+    @IBOutlet weak var likeButton: UIButton!
+    @IBOutlet weak var dislikeButton: UIButton!
     
     @IBOutlet weak var commentText: RoundedTextView!
     @IBOutlet weak var commentContainer: UIView!
@@ -201,5 +203,19 @@ class DesignIdeaDetailController: UIViewController, UITableViewDelegate, UITable
     @IBAction func showMoreTapped(_ sender: Any) {
         self.pages = self.pages + 1
         designIdeaDetailsTable.reloadData()
+    }
+    
+    @IBAction func likeTapped(_ sender: Any) {
+        if let idea = designIdea {
+            DataService.ds.AddLikeOrDislikeOnDesignIdea(like: true, designIdeaId: idea.id)
+        }
+        dislikeButton.setImage(ICON_DISLIKE_GRAY, for: .normal)
+    }
+    
+    @IBAction func dislikeTapped(_ sender: Any) {
+        if let idea = designIdea {
+            DataService.ds.AddLikeOrDislikeOnDesignIdea(like: false, designIdeaId: idea.id)
+        }
+        likeButton.setImage(ICON_LIKE_GRAY, for: .normal)
     }
 }
