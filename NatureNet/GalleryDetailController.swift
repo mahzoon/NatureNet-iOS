@@ -76,6 +76,17 @@ class GalleryDetailController: UIViewController, UITableViewDelegate, UITableVie
             }
             self.numLikes.text = "\(obsv.Likes.count)"
             self.numDislikes.text = "\(obsv.Dislikes.count)"
+            
+            // load the observation image
+            self.observation.image = IMAGE_DEFAULT_OBSERVATION
+            // requesting the icon
+            MediaManager.md.getOrDownloadImage(requesterId: "GalleryDetailController.img", urlString: obsv.observationImageUrl, completion: { img, err in
+                if let i = img {
+                    DispatchQueue.main.async {
+                        self.observation.image = i
+                    }
+                }
+            })
         }
     }
     
@@ -184,6 +195,7 @@ class GalleryDetailController: UIViewController, UITableViewDelegate, UITableVie
         }, completion: nil)
     }
     
+    // this fixes the height of the comments text box under the screen. (the box that user should input comment text)
     func FixTextViewHeight() {
         self.commentTextHeightConstraint.constant = self.commentText.GetFixTextRowHight(maxHeight: CGFloat(COMMENT_TEXTBOX_MAX_HEIGHT))
     }
@@ -198,7 +210,7 @@ class GalleryDetailController: UIViewController, UITableViewDelegate, UITableVie
         }))
         alert.addAction(UIAlertAction(title: SAVE_OBSV_ALERT_OPTION_SHARE, style: .default, handler: { (action: UIAlertAction) in
             // GET CONTENTS OF THE OBSERVATION
-            let activityVC = UIActivityViewController(activityItems: ["Observation Content", self.observation.image ?? ""], applicationActivities: nil)
+            let activityVC = UIActivityViewController(activityItems: [self.descriptionText.text ?? "", self.observation.image ?? ""], applicationActivities: nil)
             self.present(activityVC, animated: true, completion: nil)
         }))
         present(alert, animated: true, completion: nil)
@@ -213,6 +225,17 @@ class GalleryDetailController: UIViewController, UITableViewDelegate, UITableVie
             let ac = UIAlertController(title: SAVE_OBSV_SUCCESS_TITLE, message: SAVE_OBSV_SUCCESS_MESSAGE, preferredStyle: .alert)
             ac.addAction(UIAlertAction(title: SAVE_OBSV_SUCCESS_BUTTON_TEXT, style: .default))
             present(ac, animated: true)
+        }
+    }
+    
+    // send the observation image to the ImageViewController
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let id = segue.identifier {
+            if id == SEGUE_DETAILS {
+                if let dest = segue.destination as? ImageViewController {
+                    dest.observationImageUrl = self.observationObj?.observationImageUrl
+                }
+            }
         }
     }
     

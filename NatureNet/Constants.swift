@@ -37,6 +37,7 @@ let ICON_DESIGN_IDEA_STATUS_DONE = UIImage(named: "icon - done")
 let ICON_DESIGN_IDEA_STATUS_DISCUSSING = UIImage(named: "icon - discussing")
 let ICON_DEFAULT_USER_AVATAR = UIImage(named: "join screen - user")
 let ICON_DEFAULT_PROJECT = UIImage(named: "icon - project - default")
+let IMAGE_DEFAULT_OBSERVATION = UIImage(named: "image - observation - default")
 
 //
 // Sizes

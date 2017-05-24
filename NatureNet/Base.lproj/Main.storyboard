@@ -1272,7 +1272,7 @@ DESIGN this nature technology with your community</string>
                 </pongPressGestureRecognizer>
                 <tapGestureRecognizer id="VrL-B8-DPe">
                     <connections>
-                        <segue destination="e63-kA-9pU" kind="show" id="uIG-5d-jgA"/>
+                        <segue destination="e63-kA-9pU" kind="show" identifier="Details" id="uIG-5d-jgA"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
@@ -2672,11 +2672,11 @@ DESIGN this nature technology with your community</string>
                                 <rect key="frame" x="10" y="10" width="300" height="445"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="ncS-VJ-yaK">
-                                    <rect key="frame" x="0.0" y="0.0" width="300" height="210"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="300" height="220"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="fGG-0m-LSV">
-                                            <rect key="frame" x="0.0" y="0.0" width="300" height="210"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="300" height="220"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pe3-hc-B8X">
                                                     <rect key="frame" x="0.0" y="0.0" width="300" height="0.0"/>
@@ -2751,7 +2751,7 @@ DESIGN this nature technology with your community</string>
                                                     </subviews>
                                                 </stackView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J3z-Md-0ke">
-                                                    <rect key="frame" x="0.0" y="80" width="300" height="50"/>
+                                                    <rect key="frame" x="0.0" y="80" width="300" height="60"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="QAZ-SX-Vcb"/>
                                                     </constraints>
@@ -2767,7 +2767,7 @@ DESIGN this nature technology with your community</string>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="8Ht-Nr-MGZ">
-                                                    <rect key="frame" x="0.0" y="140" width="300" height="30"/>
+                                                    <rect key="frame" x="0.0" y="150" width="300" height="30"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="fLp-4n-UWB">
                                                             <rect key="frame" x="0.0" y="0.0" width="138" height="30"/>
@@ -2827,7 +2827,7 @@ DESIGN this nature technology with your community</string>
                                                     </constraints>
                                                 </stackView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recent Observations:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o5g-bk-hEG">
-                                                    <rect key="frame" x="0.0" y="180" width="300" height="30"/>
+                                                    <rect key="frame" x="0.0" y="190" width="300" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="2Zx-Rv-qWG"/>
                                                     </constraints>
@@ -2852,7 +2852,7 @@ DESIGN this nature technology with your community</string>
                                 </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="GalleryCell" rowHeight="210" id="YIq-3t-wP3" customClass="GalleryCell" customModule="NatureNet" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="238" width="300" height="210"/>
+                                        <rect key="frame" x="0.0" y="248" width="300" height="210"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="YIq-3t-wP3" id="G9m-fW-zlT">
                                             <rect key="frame" x="0.0" y="0.0" width="300" height="210"/>
@@ -3022,7 +3022,7 @@ DESIGN this nature technology with your community</string>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="ShowMoreCell" rowHeight="55" id="CrR-6e-vEG" customClass="ShowMoreCell" customModule="NatureNet" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="448" width="300" height="55"/>
+                                        <rect key="frame" x="0.0" y="458" width="300" height="55"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="CrR-6e-vEG" id="0kL-qe-0jL">
                                             <rect key="frame" x="0.0" y="0.0" width="300" height="55"/>

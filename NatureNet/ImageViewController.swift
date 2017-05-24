@@ -15,15 +15,27 @@ class ImageViewController: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var imageScrollView: UIScrollView!
     @IBOutlet weak var theImage: UIImageView!
     
+    var observationImageUrl: String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         barVisible = true
         imageScrollView.delegate = self
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    override func viewWillAppear(_ animated: Bool) {
+        // load the observation image
+        self.theImage.image = IMAGE_DEFAULT_OBSERVATION
+        // requesting the icon
+        if let url = observationImageUrl {
+            MediaManager.md.getOrDownloadImage(requesterId: "ImageViewController", urlString: url, completion: { img, err in
+                if let i = img {
+                    DispatchQueue.main.async {
+                        self.theImage.image = i
+                    }
+                }
+            })
+        }
     }
     
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {

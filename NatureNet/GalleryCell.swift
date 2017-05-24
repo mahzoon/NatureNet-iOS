@@ -60,6 +60,7 @@ class GalleryCell: UITableViewCell {
         
         self.observation = observation
         
+        // load the avatar if there is any
         if (self.avatar != nil) {
             self.avatar.image = ICON_DEFAULT_USER_AVATAR
             // requesting the icon
@@ -72,19 +73,22 @@ class GalleryCell: UITableViewCell {
             })
         }
         
-        if text != "" {
-            self.descriptionText.isHidden = false
-        } else {
-            self.descriptionText.isHidden = true
-        }
-        
-        self.observationImage.image = UIImage(named: "sample_image3")
-        
-        
-        // load the avatar if there is any
+//        if text != "" {
+//            self.descriptionText.isHidden = false
+//        } else {
+//            self.descriptionText.isHidden = true
+//        }
         
         // load the observation image
-        
+        self.observationImage.image = IMAGE_DEFAULT_OBSERVATION
+        // requesting the icon
+        MediaManager.md.getOrDownloadImage(requesterId: cellId + ".img", urlString: obsImage, completion: { img, err in
+            if let i = img {
+                DispatchQueue.main.async {
+                    self.observationImage.image = i
+                }
+            }
+        })
     }
 
 }

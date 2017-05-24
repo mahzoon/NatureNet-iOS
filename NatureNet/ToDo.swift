@@ -19,3 +19,4 @@ import Foundation
 // add "like"
 // populate observations in "Explore" screen
 // get observations/id/comments; this helps to count the comments quickly instead of querying
+// get thumbnails for image instead of downloading the whole image for GalleryViewController

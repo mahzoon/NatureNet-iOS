@@ -57,9 +57,6 @@ class CommunityDetailController: UIViewController, UITableViewDelegate, UITableV
         }
         
         self.descriptionText.text = user?.bio
-        if let t = self.descriptionText.text, t == "" {
-            self.descriptionText.isHidden = true
-        }
         self.title = self.user?.displayName
         
         if let user = self.user {
@@ -160,5 +157,4 @@ class CommunityDetailController: UIViewController, UITableViewDelegate, UITableV
         pages = pages + 1
         userDetailTable.reloadData()
     }
-    
 }
