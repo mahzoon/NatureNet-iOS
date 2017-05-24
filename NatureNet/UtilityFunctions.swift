@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import MapKit
 
 class UtilityFunctions {
     
@@ -26,6 +27,13 @@ class UtilityFunctions {
         formatter.dateStyle = .full
         formatter.timeStyle = .short
         return formatter.string(from: d as Date)
+    }
+    
+    static func isPointInRegion(point: CLLocationCoordinate2D, region: MKCoordinateRegion) -> Bool {
+        var result = true
+        result = result && (cos((region.center.latitude - point.latitude) * .pi / 180.0) > cos((region.span.latitudeDelta/2.0) * .pi / 180.0))
+        result = result && (cos((region.center.longitude - point.longitude) * .pi / 180.0) > cos((region.span.longitudeDelta/2.0) * .pi / 180.0))
+        return result
     }
     
 }

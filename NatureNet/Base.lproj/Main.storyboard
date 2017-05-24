@@ -2543,6 +2543,7 @@ DESIGN this nature technology with your community</string>
                         <outlet property="searchBar" destination="zB0-4G-SGT" id="9tO-Gb-nf3"/>
                         <segue destination="3V8-pG-NBk" kind="presentation" identifier="Profile" id="L4E-hR-TbY"/>
                         <segue destination="2xp-oe-SFT" kind="presentation" identifier="SignIn" id="VGZ-Ad-eZH"/>
+                        <segue destination="2em-3J-HRi" kind="show" identifier="Details" id="iN3-Ze-sCb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b3R-Ym-JZe" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3344,6 +3345,7 @@ DESIGN this nature technology with your community</string>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="VkH-JK-ECF">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="barTintColor" red="0.1215686275" green="0.80392156859999997" blue="0.42352941179999998" alpha="1" colorSpace="calibratedRGB"/>
                         <textAttributes key="titleTextAttributes">
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -4154,9 +4156,9 @@ DESIGN this nature technology with your community</string>
         <image name="signin screen - logo" width="816" height="265"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="71W-kp-jfl"/>
-        <segue reference="aNP-t6-vCR"/>
-        <segue reference="DYA-Za-9QJ"/>
-        <segue reference="SNK-JF-Kyt"/>
+        <segue reference="VGZ-Ad-eZH"/>
+        <segue reference="iN3-Ze-sCb"/>
+        <segue reference="L4E-hR-TbY"/>
+        <segue reference="j97-fr-U8g"/>
     </inferredMetricsTieBreakers>
 </document>

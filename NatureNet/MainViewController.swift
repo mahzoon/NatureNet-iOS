@@ -16,7 +16,7 @@ class MainViewController: UIViewController {
 
     // when the main view appears, we need to check if the user logged in.
     // if the user is already logged in (from a previous session), then we go straight into "explore" screen
-    override func viewWillAppear(_ animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         if DataService.ds.LoggedIn() {
             performSegue(withIdentifier: SEGUE_EXPLORE, sender: nil)
         }

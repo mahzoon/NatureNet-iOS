@@ -8,6 +8,7 @@
 
 import Foundation
 import Firebase
+import MapKit
 
 // This class is a singleton, meaning only one instance is going to be created from this class. That only instance is DataService.ds
 // So, to use this class call its function by referencing the only instance, like this: DataService.ds.SignOut()
@@ -329,6 +330,16 @@ class DataService  {
         }
         return nil
     }
+    
+    func GetCurrentUser() -> NNUser? {
+        if let user = currentUser {
+            let id = user.uid
+            if let nnUser = GetUser(by: id) {
+                return nnUser
+            }
+        }
+        return nil
+    }
 
     
     //////////////////////////////////////////////////////////////
@@ -413,6 +424,35 @@ class DataService  {
         }
         return listObs
     }
+    
+    func GetObservations(near: MKCoordinateRegion, searchFilter: String) -> [NNObservation] {
+        if searchFilter != "" {
+            let listObs = self.observations.filter { (observation) -> Bool in
+                return UtilityFunctions.isPointInRegion(point: observation.coordinate, region: near) &&
+                    ((observation.observationText.lowercased().range(of: searchFilter.lowercased()) != nil) ||
+                        ((GetUser(by: observation.observer)?.displayName.lowercased().range(of: searchFilter.lowercased())) != nil) ||
+                        ((GetProject(by: observation.project)?.name.lowercased().range(of: searchFilter.lowercased())) != nil))
+            }
+            return listObs
+        } else {
+            let listObs = self.observations.filter { (observation) -> Bool in
+                return UtilityFunctions.isPointInRegion(point: observation.coordinate, region: near)
+            }
+            return listObs
+        }
+    }
+    
+    func GetObservation(with id: String) -> NNObservation? {
+        let listObs = self.observations.filter { (observation) -> Bool in
+            return observation.id == id
+        }
+        if listObs.count == 1 {
+            return listObs[0]
+        }
+        return nil
+    }
+    
+    
     
     //////////////////////////////////////////////////////////////
     //
@@ -536,5 +576,13 @@ class DataService  {
             }
         }
         return commentList
+    }
+    
+    func WriteCommentOnObservation(comment: String, observationId: String) {
+        
+    }
+    
+    func WriteCommentOnDesignIdea(comment: String, designIdeaId: String) {
+        
     }
 }

@@ -152,6 +152,7 @@ let DESIGN_IDEAS_CELL_ID = "DesignIdeasCell"
 let GALLERY_CELL_ID = "GalleryCell"
 let SHOW_MORE_CELL_ID = "ShowMoreCell"
 let COMMENT_CELL_ID = "CommentCell"
+let EXPLORE_ANNOTATION_ID = "ExploreAnnotation"
 
 //
 // Database reference names

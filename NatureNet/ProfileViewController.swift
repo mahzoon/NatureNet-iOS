@@ -25,6 +25,8 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
     
     var imagePicker: UIImagePickerController!
     var pickedImage = false
+    
+    var user: NNUser?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,6 +44,11 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
         
         profileImage.layer.cornerRadius = profileImage.frame.size.width / 2
         profileImage.clipsToBounds = true
+        
+        if let user = DataService.ds.GetCurrentUser() {
+            self.displayName.text = user.displayName
+            
+        }
     }
 
     override func didReceiveMemoryWarning() {
