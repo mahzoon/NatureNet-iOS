@@ -44,6 +44,19 @@ class NNComment {
         self.updatedAt = updated
     }
     
+    func getDictionaryRepresentation() -> [String: AnyObject] {
+        var retVal = [String: AnyObject]()
+        retVal["created_at"] = self.createdAt
+        retVal["updated_at"] = self.updatedAt
+        retVal["id"] = self.id as AnyObject
+        retVal["parent"] = self.parentContribution as AnyObject
+        retVal["context"] = self.context as AnyObject
+        retVal["comment"] = self.comment as AnyObject
+        retVal["commenter"] = self.commenter as AnyObject
+        retVal["source"] = DB_SOURCE as AnyObject
+        return retVal
+    }
+    
     static func createCommentFromFirebase(with snapshot: [String: AnyObject]) -> NNComment {
         // setting default values
         var commentText = ""
@@ -78,5 +91,4 @@ class NNComment {
         let comment = NNComment(comment: commentText, commenter: commentCommenter, id: commentId, context: commentContext, parentContrib: commentParent, created: commentCreated, updated: commentUpdated)
         return comment
     }
-
 }

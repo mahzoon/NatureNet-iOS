@@ -132,7 +132,7 @@ class CommunityDetailController: UIViewController, UITableViewDelegate, UITableV
                     let numDislikes = observation.Dislikes.count
                     let projectName = DataService.ds.GetProject(by: observation.project)?.name ?? ""
                     cell.configureCell(id: GALLERY_CELL_ID + "\(indexPath.section).\(indexPath.row)",
-                        username: user.displayName, affiliation: DataService.ds.GetSiteName(with: user.affiliation), project: projectName, avatar: user.avatarUrl, obsImage: observation.observationImageUrl, text: observation.observationText, num_likes: "\(numLikes)", num_dislikes: "\(numDislikes)", num_comments: "\(numComment)", date: observation.updatedAt, observation: observation)
+                        username: user.displayName, affiliation: DataService.ds.GetSiteName(with: user.affiliation), project: projectName, avatar: user.avatarUrl, obsImage: observation.observationImageUrl, text: observation.observationText, num_likes: "\(numLikes)", num_dislikes: "\(numDislikes)", num_comments: "\(numComment)", date: observation.updatedAt, observation: observation, controller: self)
                 }
             }
             return cell

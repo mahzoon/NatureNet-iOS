@@ -33,6 +33,9 @@ class GalleryCell: UITableViewCell {
     // an id for the cell. This id is used for requesting icons and images
     var cellId: String = ""
     
+    // this is a reference to the super view controller and used to display messages
+    var parentController :UIViewController?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -44,8 +47,7 @@ class GalleryCell: UITableViewCell {
         observationImage.clipsToBounds = true
     }
     
-    func configureCell(id: String, username: String, affiliation: String, project: String, avatar: String, obsImage: String, text: String,
-                       num_likes: String, num_dislikes: String, num_comments: String, date: NSNumber, observation: NNObservation?) {
+    func configureCell(id: String, username: String, affiliation: String, project: String, avatar: String, obsImage: String, text: String, num_likes: String, num_dislikes: String, num_comments: String, date: NSNumber, observation: NNObservation?, controller: UIViewController) {
         self.cellId = id
         // in CommunityDetailsController we use a header-less version of this gallery cell, so username might be nil in this case.
         if (self.username != nil) {
@@ -57,7 +59,7 @@ class GalleryCell: UITableViewCell {
         self.likes.text = num_likes
         self.dislikes.text = num_dislikes
         self.comments.text = num_comments
-        
+        self.parentController = controller
         self.postDate.text = UtilityFunctions.convertTimestampToDateString(date: date)
         
         self.observation = observation
@@ -91,21 +93,56 @@ class GalleryCell: UITableViewCell {
                 }
             }
         })
+        
+        updateLikeAndDislikeButtonImages()
     }
     
     @IBAction func likeTapped(_ sender: Any) {
-        if let obsv = observation {
-            DataService.ds.AddLikeOrDislikeOnObservation(like: true, observationId: obsv.id)
+        if !DataService.ds.LoggedIn() {
+            if let controller = parentController {
+                UtilityFunctions.showAuthenticationRequiredMessage(theView: controller, completion: {
+                    controller.performSegue(withIdentifier: SEGUE_SIGNIN, sender: nil)
+                })
+            }
+        } else {
+            if let obsv = observation {
+                DataService.ds.ToggleLikeOrDislikeOnObservation(like: true, observationId: obsv.id)
+            }
+            updateLikeAndDislikeButtonImages()
         }
-        dislikeButton.setImage(ICON_DISLIKE_GRAY, for: .normal)
-        
     }
     
     @IBAction func dislikeTapped(_ sender: Any) {
-        if let obsv = observation {
-            DataService.ds.AddLikeOrDislikeOnObservation(like: false, observationId: obsv.id)
+        if !DataService.ds.LoggedIn() {
+            if let controller = parentController {
+                UtilityFunctions.showAuthenticationRequiredMessage(theView: controller, completion: {
+                    controller.performSegue(withIdentifier: SEGUE_SIGNIN, sender: nil)
+                })
+            }
+        } else {
+            if let obsv = observation {
+                DataService.ds.ToggleLikeOrDislikeOnObservation(like: false, observationId: obsv.id)
+            }
+            updateLikeAndDislikeButtonImages()
         }
-        likeButton.setImage(ICON_LIKE_GRAY, for: .normal)
+    }
+    
+    private func updateLikeAndDislikeButtonImages() {
+        if let currentUserId = DataService.ds.GetCurrentUserId() {
+            if let like = observation?.likes[currentUserId] {
+                if like {
+                    likeButton.setImage(ICON_LIKE_GREEN, for: .normal)
+                } else {
+                    dislikeButton.setImage(ICON_DISLIKE_GREEN, for: .normal)
+                }
+            } else {
+                likeButton.setImage(ICON_LIKE_GRAY, for: .normal)
+                dislikeButton.setImage(ICON_DISLIKE_GRAY, for: .normal)
+            }
+        } else {
+            likeButton.setImage(ICON_LIKE_GRAY, for: .normal)
+            dislikeButton.setImage(ICON_DISLIKE_GRAY, for: .normal)
+        }
     }
     
     @IBAction func commentTapped(_ sender: Any) {

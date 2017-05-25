@@ -63,6 +63,21 @@ class NNDesignIdea {
         self.likes = likes
     }
     
+    func getDictionaryRepresentation() -> [String: AnyObject] {
+        var retVal = [String: AnyObject]()
+        retVal["created_at"] = self.createdAt
+        retVal["updated_at"] = self.updatedAt
+        retVal["id"] = self.id as AnyObject
+        retVal["group"] = self.group as AnyObject
+        retVal["type"] = self.type as AnyObject
+        retVal["content"] = self.content as AnyObject
+        retVal["submitter"] = self.submitter as AnyObject
+        retVal["status"] = self.status as AnyObject
+        retVal["source"] = DB_SOURCE as AnyObject
+        return retVal
+    }
+
+    
     static func createDesignIdeaFromFirebase(with snapshot: [String: AnyObject]) -> NNDesignIdea {
         // setting default values
         var ideaSubmitter = ""

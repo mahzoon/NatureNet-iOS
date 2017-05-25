@@ -46,6 +46,20 @@ class NNUser {
         self.updatedAt = updated
     }
     
+    func getDictionaryRepresentation() -> [String: AnyObject] {
+        var retVal = [String: AnyObject]()
+        retVal["created_at"] = self.createdAt
+        retVal["updated_at"] = self.updatedAt
+        retVal["id"] = self.id as AnyObject
+        retVal["avatar"] = self.avatarUrl as AnyObject
+        retVal["display_name"] = self.displayName as AnyObject
+        retVal["affiliation"] = self.affiliation as AnyObject
+        retVal["bio"] = self.bio as AnyObject
+        //retVal["groups"] = self.groups as AnyObject
+        retVal["source"] = DB_SOURCE as AnyObject
+        return retVal
+    }
+    
     static func createUserFromFirebase(with snapshot: [String: AnyObject]) -> NNUser {
         // setting default values
         var userName = ""

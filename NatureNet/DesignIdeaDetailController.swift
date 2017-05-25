@@ -206,16 +206,66 @@ class DesignIdeaDetailController: UIViewController, UITableViewDelegate, UITable
     }
     
     @IBAction func likeTapped(_ sender: Any) {
-        if let idea = designIdea {
-            DataService.ds.AddLikeOrDislikeOnDesignIdea(like: true, designIdeaId: idea.id)
+        if !DataService.ds.LoggedIn() {
+            UtilityFunctions.showAuthenticationRequiredMessage(theView: self, completion: {
+                self.performSegue(withIdentifier: SEGUE_SIGNIN, sender: nil)
+            })
+        } else {
+            if let idea = designIdea {
+                DataService.ds.ToggleLikeOrDislikeOnDesignIdea(like: true, designIdeaId: idea.id)
+            }
+            updateLikeAndDislikeButtonImages()
         }
-        dislikeButton.setImage(ICON_DISLIKE_GRAY, for: .normal)
     }
     
     @IBAction func dislikeTapped(_ sender: Any) {
-        if let idea = designIdea {
-            DataService.ds.AddLikeOrDislikeOnDesignIdea(like: false, designIdeaId: idea.id)
+        if !DataService.ds.LoggedIn() {
+            UtilityFunctions.showAuthenticationRequiredMessage(theView: self, completion: {
+                self.performSegue(withIdentifier: SEGUE_SIGNIN, sender: nil)
+            })
+        } else {
+            if let idea = designIdea {
+                DataService.ds.ToggleLikeOrDislikeOnDesignIdea(like: false, designIdeaId: idea.id)
+            }
+            updateLikeAndDislikeButtonImages()
         }
-        likeButton.setImage(ICON_LIKE_GRAY, for: .normal)
+    }
+    
+    private func updateLikeAndDislikeButtonImages() {
+        if let currentUserId = DataService.ds.GetCurrentUserId() {
+            if let like = designIdea?.likes[currentUserId] {
+                if like {
+                    likeButton.setImage(ICON_LIKE_GREEN, for: .normal)
+                } else {
+                    dislikeButton.setImage(ICON_DISLIKE_GREEN, for: .normal)
+                }
+            } else {
+                likeButton.setImage(ICON_LIKE_GRAY, for: .normal)
+                dislikeButton.setImage(ICON_DISLIKE_GRAY, for: .normal)
+            }
+        } else {
+            likeButton.setImage(ICON_LIKE_GRAY, for: .normal)
+            dislikeButton.setImage(ICON_DISLIKE_GRAY, for: .normal)
+        }
+    }
+    
+    @IBAction func commentSendTapped(_ sender: Any) {
+        if !DataService.ds.LoggedIn() {
+            UtilityFunctions.showAuthenticationRequiredMessage(theView: self, completion: {
+                self.performSegue(withIdentifier: SEGUE_SIGNIN, sender: nil)
+            })
+        } else {
+            if commentText.text == "" {
+                UtilityFunctions.showErrorMessage(theView: self, title: COMMENT_EMPTY_ERROR_TITLE,
+                                                  message: COMMENT_EMPTY_ERROR_MESSAGE,
+                                                  buttonText: COMMENT_EMPTY_ERROR_BUTTON_TEXT)
+            } else {
+                if let idea = designIdea {
+                    DataService.ds.WriteCommentOn(context: DB_DESIGNIDEAS_PATH,
+                                                  comment: commentText.text,
+                                                  contributionId: idea.id)
+                }
+            }
+        }
     }
 }

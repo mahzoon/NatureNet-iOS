@@ -88,7 +88,7 @@ class DesignIdeasViewController: UIViewController, UITableViewDelegate, UITableV
                     let numLikes = idea.Likes.count
                     let numDislikes = idea.Dislikes.count
                     cell.configureCell(id: DESIGN_IDEAS_CELL_ID + "\(indexPath.section).\(indexPath.row)",
-                        username: user.displayName, affiliation: DataService.ds.GetSiteName(with: user.affiliation), avatar: user.avatarUrl, text: idea.content, num_likes: "\(numLikes)", num_dislikes: "\(numDislikes)", num_comments: "\(numComment)", status: idea.status, date: idea.updatedAt, designIdea: idea)
+                        username: user.displayName, affiliation: DataService.ds.GetSiteName(with: user.affiliation), avatar: user.avatarUrl, text: idea.content, num_likes: "\(numLikes)", num_dislikes: "\(numDislikes)", num_comments: "\(numComment)", status: idea.status, date: idea.updatedAt, designIdea: idea, controller: self)
                 }
             }
             return cell

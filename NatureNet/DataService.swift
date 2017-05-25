@@ -42,12 +42,20 @@ class DataService  {
     // The observations stored in an array sorted by their recency. The first item is the most recent one.
     private var observations = [NNObservation]()
     // reference to the observer handle of observations. This observer looks for additions to the observations, and updates the "observations" array if new observation is being added. The reference is mainly for "dispose" to remove the handle.
-    private var observationsHandle: UInt!
+    private var observationsAddHandle: UInt!
+    // reference to the observer handle of observations. This observer looks for removals to the observations, and updates the "observations" array if an observation is being removed. The reference is mainly for "dispose" to remove the handle.
+    private var observationsRemoveHandle: UInt!
+    // reference to the observer handle of observations. This observer looks for changes to the observations, and updates the "observations" array if an observation is being changed. The reference is mainly for "dispose" to remove the handle.
+    private var observationsChangeHandle: UInt!
     
     // The design ideas stored in an array sorted by their recency. The first item is the most recent one.
     private var designIdeas = [NNDesignIdea]()
     // reference to the observer handle of design ideas. This observer looks for additions to the design ideas, and updates the "designIdeas" array if new idea is being added. The reference is mainly for "dispose" to remove the handle.
-    private var designIdeasHandle: UInt!
+    private var designIdeasAddHandle: UInt!
+    // reference to the observer handle of design ideas. This observer looks for removals to the design ideas, and updates the "designIdeas" array if an idea is being removed. The reference is mainly for "dispose" to remove the handle.
+    private var designIdeasRemoveHandle: UInt!
+    // reference to the observer handle of design ideas. This observer looks for changes to the design ideas, and updates the "designIdeas" array if an idea is being changed. The reference is mainly for "dispose" to remove the handle.
+    private var designIdeasChangeHandle: UInt!
     
     // The comments stored in an array sorted by their recency. The first item is the most recent one.
     private var commentsOnObservations = [NNComment]()
@@ -84,10 +92,18 @@ class DataService  {
         db_ref.removeObserver(withHandle: projectsHandle)
         // remove users observer
         db_ref.removeObserver(withHandle: usersHandle)
-        // remove observations observer
-        db_ref.removeObserver(withHandle: observationsHandle)
-        // remove design ideas observer
-        db_ref.removeObserver(withHandle: designIdeasHandle)
+        // remove add observations observer
+        db_ref.removeObserver(withHandle: observationsAddHandle)
+        // remove remove observations observer
+        db_ref.removeObserver(withHandle: observationsChangeHandle)
+        // remove change observations observer
+        db_ref.removeObserver(withHandle: observationsRemoveHandle)
+        // remove add design ideas observer
+        db_ref.removeObserver(withHandle: designIdeasAddHandle)
+        // remove remove design ideas observer
+        db_ref.removeObserver(withHandle: designIdeasRemoveHandle)
+        // remove changed design ideas observer
+        db_ref.removeObserver(withHandle: designIdeasChangeHandle)
         // remove comment observer
         db_ref.removeObserver(withHandle: commentsHandle)
     }
@@ -137,6 +153,10 @@ class DataService  {
         }
         currentUser = nil
         return (true, "")
+    }
+    
+    func Join(user: NNUser) {
+        
     }
     
     //////////////////////////////////////////////////////////////
@@ -341,8 +361,23 @@ class DataService  {
         return nil
     }
     
-    func AddUser(user: NNUser) {
-        
+    func GetCurrentUserId() -> String? {
+        if let user = currentUser {
+            return user.uid
+        }
+        return nil
+    }
+    
+    func UpdateUserProfile(user: NNUser, fullname: String, demographics: [String: AnyObject]) {
+        if !LoggedIn() { return }
+        var c = user.getDictionaryRepresentation()
+        let timestamp = Firebase.ServerValue.timestamp()
+        c["updated_at"] = timestamp as AnyObject
+        db_ref.child("\(DB_USERS_PATH)/\(user.id)").setValue(c)
+        // update user-private information i.e. fullname, and demographics
+        db_ref.child("\(DB_USERS_PRIVATE_PATH)/\(user.id)/name").setValue(fullname)
+        db_ref.child("\(DB_USERS_PRIVATE_PATH)/\(user.id)/updated_at").setValue(timestamp)
+        db_ref.child("\(DB_USERS_PRIVATE_PATH)/\(user.id)/demographics").setValue(demographics)
     }
 
     
@@ -353,8 +388,8 @@ class DataService  {
     //////////////////////////////////////////////////////////////
     
     private func initObservationsObserver() {
-        // adding observer to the observations
-        observationsHandle = db_ref.child(DB_OBSERVATIONS_PATH).observe(.childAdded, with: { (snapshot) in
+        // adding "add" observer to the observations
+        observationsAddHandle = db_ref.child(DB_OBSERVATIONS_PATH).observe(.childAdded, with: { (snapshot) in
             // snapshot.value is a dictionary for one Observation
             if let obsDict = snapshot.value as? [String: AnyObject] {
                 let observation = NNObservation.createObservationFromFirebase(with: obsDict)
@@ -362,6 +397,25 @@ class DataService  {
                 if observation.updatedAt != 0 {
                     self.observations.append(observation)
                 }
+            }
+            self.observations.sort(by: { (first, second) -> Bool in
+                return first.updatedAt.decimalValue > second.updatedAt.decimalValue
+            })
+        })
+        // adding "remove" observer to the observations
+        observationsRemoveHandle = db_ref.child(DB_OBSERVATIONS_PATH).observe(.childRemoved, with: { (snapshot) in
+            // snapshot.value is a dictionary for one Observation
+            if let obsDict = snapshot.value as? [String: AnyObject] {
+                let observation = NNObservation.createObservationFromFirebase(with: obsDict)
+                // find the observation in our array and remove it
+            }
+        })
+        // adding "change" observer to the observations
+        observationsChangeHandle = db_ref.child(DB_OBSERVATIONS_PATH).observe(.childRemoved, with: { (snapshot) in
+            // snapshot.value is a dictionary for one Observation
+            if let obsDict = snapshot.value as? [String: AnyObject] {
+                let observation = NNObservation.createObservationFromFirebase(with: obsDict)
+                // find the observation and replace it with the new one
             }
             self.observations.sort(by: { (first, second) -> Bool in
                 return first.updatedAt.decimalValue > second.updatedAt.decimalValue
@@ -457,9 +511,20 @@ class DataService  {
     }
     
     func AddObservation(observation: NNObservation) {
-        
+        if !LoggedIn() { return }
+        // add the observation to the path
+        let newObservationRef = db_ref.child(DB_OBSERVATIONS_PATH).childByAutoId()
+        observation.id = newObservationRef.key
+        var c = observation.getDictionaryRepresentation()
+        let timestamp = Firebase.ServerValue.timestamp()
+        c["created_at"] = timestamp as AnyObject
+        c["updated_at"] = timestamp as AnyObject
+        newObservationRef.setValue(c)
+        // change the observation's activity's latest_contribution
+        db_ref.child("\(DB_PROJECTS_PATH)/\(observation.project)/\(DB_LATEST_CONTRIBUTION)").setValue(timestamp)
+        // change the user's latest_contribution
+        db_ref.child("\(DB_USERS_PATH)/\(observation.observer)/\(DB_LATEST_CONTRIBUTION)").setValue(timestamp)
     }
-    
     
     
     //////////////////////////////////////////////////////////////
@@ -469,8 +534,8 @@ class DataService  {
     //////////////////////////////////////////////////////////////
     
     private func initDesignIdeasObserver() {
-        // adding observer to the design ideas
-        designIdeasHandle = db_ref.child(DB_DESIGNIDEAS_PATH).observe(.childAdded, with: { (snapshot) in
+        // adding "add" observer to the design ideas
+        designIdeasAddHandle = db_ref.child(DB_DESIGNIDEAS_PATH).observe(.childAdded, with: { (snapshot) in
             // snapshot.value is a dictionary for one Design Idea
             if let ideaDict = snapshot.value as? [String: AnyObject] {
                 let idea = NNDesignIdea.createDesignIdeaFromFirebase(with: ideaDict)
@@ -478,6 +543,28 @@ class DataService  {
                 if idea.updatedAt != 0 {
                     self.designIdeas.append(idea)
                 }
+            }
+            self.designIdeas.sort(by: { (first, second) -> Bool in
+                return first.updatedAt.decimalValue > second.updatedAt.decimalValue
+            })
+        })
+        // adding "remove" observer to the design ideas
+        designIdeasRemoveHandle = db_ref.child(DB_DESIGNIDEAS_PATH).observe(.childRemoved, with: { (snapshot) in
+            // snapshot.value is a dictionary for one Design Idea
+            if let ideaDict = snapshot.value as? [String: AnyObject] {
+                let idea = NNDesignIdea.createDesignIdeaFromFirebase(with: ideaDict)
+                // find the design idea in our dictionary and remove it
+            }
+            self.designIdeas.sort(by: { (first, second) -> Bool in
+                return first.updatedAt.decimalValue > second.updatedAt.decimalValue
+            })
+        })
+        // adding "changed" observer to the design ideas
+        designIdeasChangeHandle = db_ref.child(DB_DESIGNIDEAS_PATH).observe(.childChanged, with: { (snapshot) in
+            // snapshot.value is a dictionary for one Design Idea
+            if let ideaDict = snapshot.value as? [String: AnyObject] {
+                let idea = NNDesignIdea.createDesignIdeaFromFirebase(with: ideaDict)
+                // find the design idea and replace it with the new one
             }
             self.designIdeas.sort(by: { (first, second) -> Bool in
                 return first.updatedAt.decimalValue > second.updatedAt.decimalValue
@@ -532,8 +619,28 @@ class DataService  {
         return listIdea
     }
     
+    func GetDesignIdea(with id: String) -> NNDesignIdea? {
+        let listIdea = self.designIdeas.filter { (idea) -> Bool in
+            return idea.id == id
+        }
+        if listIdea.count == 1 {
+            return listIdea[0]
+        }
+        return nil
+    }
+
     func AddDesignIdea(idea: NNDesignIdea) {
-        
+        if !LoggedIn() { return }
+        // add the idea to the path
+        let newIdeaRef = db_ref.child(DB_DESIGNIDEAS_PATH).childByAutoId()
+        idea.id = newIdeaRef.key
+        var c = idea.getDictionaryRepresentation()
+        let timestamp = Firebase.ServerValue.timestamp()
+        c["created_at"] = timestamp as AnyObject
+        c["updated_at"] = timestamp as AnyObject
+        newIdeaRef.setValue(c)
+        // change the user's latest_contribution
+        db_ref.child("\(DB_USERS_PATH)/\(idea.submitter)/\(DB_LATEST_CONTRIBUTION)").setValue(timestamp)
     }
 
     
@@ -590,19 +697,55 @@ class DataService  {
         return commentList
     }
     
-    func WriteCommentOnObservation(comment: String, observationId: String) {
-        
+    func WriteCommentOn(context: String, comment: String, contributionId: String) {
+        if !LoggedIn() { return }
+        if let u = currentUser {
+            // adding the comment to the "comments" key
+            let newCommentRef = db_ref.child(DB_COMMENTS_PATH).childByAutoId()
+            var c = NNComment(comment: comment, commenter: u.uid, id: newCommentRef.key, context: context, parentContrib: contributionId, created: 0, updated: 0).getDictionaryRepresentation()
+            let timestamp = Firebase.ServerValue.timestamp()
+            c["created_at"] = timestamp as AnyObject
+            c["updated_at"] = timestamp as AnyObject
+            newCommentRef.setValue(c)
+            // adding the comment ref to the contribution (observation or design idea)
+            let contributionCommentsRef = db_ref.child("\(context)/\(contributionId)/\(DB_COMMENTS_PATH)/\(newCommentRef.key)")
+            contributionCommentsRef.setValue(true)
+        }
     }
     
-    func WriteCommentOnDesignIdea(comment: String, designIdeaId: String) {
-        
+    func ToggleLikeOrDislikeOnObservation(like: Bool, observationId: String) {
+        if !LoggedIn() { return }
+        if let u = currentUser {
+            if let obsv = self.GetObservation(with: observationId) {
+                let path = "\(DB_OBSERVATIONS_PATH)/\(observationId)/\(DB_LIKES_PATH)/\(u.uid)"
+                if let currentVal = obsv.likes[u.uid] {
+                    if currentVal == like {
+                        // this situation is either "unlike" or "undislike". In either case we should remove the value
+                        db_ref.child(path).removeValue()
+                        return
+                    }
+                }
+                // change or create the value to the new value: like
+                db_ref.child(path).setValue(like)
+            }
+        }
     }
     
-    func AddLikeOrDislikeOnObservation(like: Bool, observationId: String) {
-        
-    }
-    
-    func AddLikeOrDislikeOnDesignIdea(like: Bool, designIdeaId: String) {
-        
+    func ToggleLikeOrDislikeOnDesignIdea(like: Bool, designIdeaId: String) {
+        if !LoggedIn() { return }
+        if let u = currentUser {
+            if let idea = self.GetDesignIdea(with: designIdeaId) {
+                let path = "\(DB_DESIGNIDEAS_PATH)/\(designIdeaId)/\(DB_LIKES_PATH)/\(u.uid)"
+                if let currentVal = idea.likes[u.uid] {
+                    if currentVal == like {
+                        // this situation is either "unlike" or "undislike". In either case we should remove the value
+                        db_ref.child(path).removeValue()
+                        return
+                    }
+                }
+                // change or create the value to the new value: like
+                db_ref.child(path).setValue(like)
+            }
+        }
     }
 }

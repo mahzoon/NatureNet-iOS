@@ -53,6 +53,8 @@ class GalleryDetailController: UIViewController, UITableViewDelegate, UITableVie
         
         commentText.text = COMMENT_TEXTBOX_PLACEHOLDER
         commentText.textColor = UIColor.lightGray
+        
+        updateLikeAndDislikeButtonImages()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -247,17 +249,66 @@ class GalleryDetailController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     @IBAction func likeTapped(_ sender: Any) {
-        if let obsv = observationObj {
-            DataService.ds.AddLikeOrDislikeOnObservation(like: true, observationId: obsv.id)
+        if !DataService.ds.LoggedIn() {
+            UtilityFunctions.showAuthenticationRequiredMessage(theView: self, completion: { 
+                self.performSegue(withIdentifier: SEGUE_SIGNIN, sender: nil)
+            })
+        } else {
+            if let obsv = observationObj {
+                DataService.ds.ToggleLikeOrDislikeOnObservation(like: true, observationId: obsv.id)
+            }
+            updateLikeAndDislikeButtonImages()
         }
-        dislikeButton.setImage(ICON_DISLIKE_GRAY, for: .normal)
     }
     
     @IBAction func dislikeTapped(_ sender: Any) {
-        if let obsv = observationObj {
-            DataService.ds.AddLikeOrDislikeOnObservation(like: false, observationId: obsv.id)
+        if !DataService.ds.LoggedIn() {
+            UtilityFunctions.showAuthenticationRequiredMessage(theView: self, completion: {
+                self.performSegue(withIdentifier: SEGUE_SIGNIN, sender: nil)
+            })
+        } else {
+            if let obsv = observationObj {
+                DataService.ds.ToggleLikeOrDislikeOnObservation(like: false, observationId: obsv.id)
+            }
+            updateLikeAndDislikeButtonImages()
         }
-        likeButton.setImage(ICON_LIKE_GRAY, for: .normal)
     }
     
+    private func updateLikeAndDislikeButtonImages() {
+        if let currentUserId = DataService.ds.GetCurrentUserId() {
+            if let like = observationObj?.likes[currentUserId] {
+                if like {
+                    likeButton.setImage(ICON_LIKE_GREEN, for: .normal)
+                } else {
+                    dislikeButton.setImage(ICON_DISLIKE_GREEN, for: .normal)
+                }
+            } else {
+                likeButton.setImage(ICON_LIKE_GRAY, for: .normal)
+                dislikeButton.setImage(ICON_DISLIKE_GRAY, for: .normal)
+            }
+        } else {
+            likeButton.setImage(ICON_LIKE_GRAY, for: .normal)
+            dislikeButton.setImage(ICON_DISLIKE_GRAY, for: .normal)
+        }
+    }
+    
+    @IBAction func commentSendTapped(_ sender: Any) {
+        if !DataService.ds.LoggedIn() {
+            UtilityFunctions.showAuthenticationRequiredMessage(theView: self, completion: {
+                self.performSegue(withIdentifier: SEGUE_SIGNIN, sender: nil)
+            })
+        } else {
+            if commentText.text == "" {
+                UtilityFunctions.showErrorMessage(theView: self, title: COMMENT_EMPTY_ERROR_TITLE,
+                                                  message: COMMENT_EMPTY_ERROR_MESSAGE,
+                                                  buttonText: COMMENT_EMPTY_ERROR_BUTTON_TEXT)
+            } else {
+                if let obsv = observationObj {
+                    DataService.ds.WriteCommentOn(context: DB_OBSERVATIONS_PATH,
+                                                  comment: commentText.text,
+                                                  contributionId: obsv.id)
+                }
+            }
+        }
+    }
 }

@@ -87,6 +87,15 @@ let NO_COMMENTS_TEXT = "No comments."
 // Messages
 //
 
+// General
+let AUTHENTICATION_REQUIRED_TITLE = "You need to be signed in."
+let AUTHENTICATION_REQUIRED_MESSAGE = "Do you want to sign in now?"
+let AUTHENTICATION_REQUIRED_BUTTON_SIGNIN_TEXT = "Yes, Sign me in"
+let AUTHENTICATION_REQUIRED_BUTTON_CANCEL_TEXT = "No, not now."
+let COMMENT_EMPTY_ERROR_TITLE = "Empty text?!"
+let COMMENT_EMPTY_ERROR_MESSAGE = "You did not enter any text for the comment. Please first write your comment then tap send."
+let COMMENT_EMPTY_ERROR_BUTTON_TEXT = "OK"
+
 // Sign in Screen
 let SIGN_IN_ERRORS_TITLE = "Sign in"
 let SIGN_IN_ERRORS_BUTTON_TEXT = "OK"
@@ -95,8 +104,7 @@ let SIGN_IN_NO_PASSWORD_PROVIDED = "Please enter your password."
 
 // Profile Screen
 let PROFILE_ERRORS_TITLE = "Sign Out"
-let PROFILE_ERRORS_BUTTON_TEXT = "Ok"
-
+let PROFILE_ERRORS_BUTTON_TEXT = "OK"
 
 // Join Screen
 let JOIN_PROFILE_IMAGE_OPTIONS_TITLE = "Choose an Option: "
@@ -164,9 +172,13 @@ let EXPLORE_ANNOTATION_ID = "ExploreAnnotation"
 let DB_SITES_PATH = "sites"
 let DB_PROJECTS_PATH = "activities"
 let DB_USERS_PATH = "users"
+let DB_USERS_PRIVATE_PATH = "users-private"
 let DB_OBSERVATIONS_PATH = "observations"
 let DB_DESIGNIDEAS_PATH = "ideas"
 let DB_COMMENTS_PATH = "comments"
+let DB_LIKES_PATH = "likes"
+let DB_SOURCE = "ios"
+let DB_LATEST_CONTRIBUTION = "latest_contribution"
 
 //
 // Other constants

@@ -19,6 +19,14 @@ class UtilityFunctions {
         theView.present(alert, animated: true, completion: nil)
     }
     
+    static func showAuthenticationRequiredMessage(theView: UIViewController, completion: (() -> Void)?) {
+        let alert = UIAlertController(title: AUTHENTICATION_REQUIRED_TITLE,
+                                      message: AUTHENTICATION_REQUIRED_MESSAGE, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: AUTHENTICATION_REQUIRED_BUTTON_CANCEL_TEXT, style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: AUTHENTICATION_REQUIRED_BUTTON_SIGNIN_TEXT, style: .default, handler: nil))
+        theView.present(theView, animated: true, completion: completion)
+    }
+    
     static func convertTimestampToDateString(date: NSNumber) -> String {
         let d = NSDate(timeIntervalSince1970:Double(date)/1000)
         let formatter = DateFormatter()

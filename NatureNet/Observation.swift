@@ -97,6 +97,19 @@ class NNObservation: NSObject, MKAnnotation {
         self.likes = likes
     }
     
+    func getDictionaryRepresentation() -> [String: AnyObject] {
+        var retVal = [String: AnyObject]()
+        retVal["created_at"] = self.createdAt
+        retVal["updated_at"] = self.updatedAt
+        retVal["id"] = self.id as AnyObject
+        retVal["activity"] = self.project as AnyObject
+        retVal["site"] = self.site as AnyObject
+        retVal["l"] = ["0": self.coordinate.latitude, "1": self.coordinate.longitude] as AnyObject
+        retVal["observer"] = self.observer as AnyObject
+        retVal["source"] = DB_SOURCE as AnyObject
+        return retVal
+    }
+    
     static func createObservationFromFirebase(with snapshot: [String: AnyObject]) -> NNObservation {
         // setting default values
         var obsProject = ""
