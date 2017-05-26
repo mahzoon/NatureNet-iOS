@@ -155,8 +155,29 @@ class DataService  {
         return (true, "")
     }
     
-    func Join(user: NNUser) {
-        
+    func Join(nnuser: NNUser, email: String, pass: String, fullName: String, completion: @escaping (Bool, String) -> Void) {
+        Auth.auth().createUser(withEmail: email, password: pass) { (user, error) in
+            self.currentUser = user
+            if let e = error {
+                completion(false, e.localizedDescription)
+            } else {
+                if let u = user {
+                    // add user to the database
+                    nnuser.id = u.uid
+                    var c = nnuser.getDictionaryRepresentation()
+                    let timestamp = Firebase.ServerValue.timestamp()
+                    c["created_at"] = timestamp as AnyObject
+                    c["updated_at"] = timestamp as AnyObject
+                    self.db_ref.child("\(DB_USERS_PATH)/\(u.uid)").setValue(c)
+                    let user_private = ["id": u.uid as AnyObject,
+                                        "created_at": timestamp as AnyObject,
+                                        "updated_at": timestamp as AnyObject,
+                                        "name": fullName as AnyObject]
+                    self.db_ref.child("\(DB_USERS_PRIVATE_PATH)/\(u.uid)").setValue(user_private)
+                    completion(true, "")
+                }
+            }
+        }
     }
     
     //////////////////////////////////////////////////////////////
@@ -198,6 +219,10 @@ class DataService  {
             }
         }
         return ""
+    }
+    // returning site id by index
+    func GetSiteId(by index: Int) -> String? {
+        return self.sites[index].key
     }
 
     
@@ -275,6 +300,26 @@ class DataService  {
             }
         }
         return nil
+    }
+    
+    func GetTotalNumProjects() -> Int {
+        var count = 0
+        for (_, v) in self.projects {
+            count = count + v.count
+        }
+        return count
+    }
+    
+    func GetAllProjects() -> [NNProject] {
+        var totalList = [NNProject]()
+        for (_, v) in self.projects {
+            var localList = [NNProject]()
+            for project in v {
+                localList.append(project)
+            }
+            totalList.append(contentsOf: localList)
+        }
+        return totalList
     }
 
     //////////////////////////////////////////////////////////////
@@ -408,6 +453,12 @@ class DataService  {
             if let obsDict = snapshot.value as? [String: AnyObject] {
                 let observation = NNObservation.createObservationFromFirebase(with: obsDict)
                 // find the observation in our array and remove it
+                let index = self.observations.index(where: { obsv -> Bool in
+                    obsv.id == observation.id
+                })
+                if let i = index {
+                    self.observations.remove(at: i)
+                }
             }
         })
         // adding "change" observer to the observations
@@ -416,6 +467,12 @@ class DataService  {
             if let obsDict = snapshot.value as? [String: AnyObject] {
                 let observation = NNObservation.createObservationFromFirebase(with: obsDict)
                 // find the observation and replace it with the new one
+                let index = self.observations.index(where: { obsv -> Bool in
+                    obsv.id == observation.id
+                })
+                if let i = index {
+                    self.observations[i] = observation
+                }
             }
             self.observations.sort(by: { (first, second) -> Bool in
                 return first.updatedAt.decimalValue > second.updatedAt.decimalValue
@@ -554,6 +611,12 @@ class DataService  {
             if let ideaDict = snapshot.value as? [String: AnyObject] {
                 let idea = NNDesignIdea.createDesignIdeaFromFirebase(with: ideaDict)
                 // find the design idea in our dictionary and remove it
+                let index = self.designIdeas.index(where: { di -> Bool in
+                    di.id == idea.id
+                })
+                if let i = index {
+                    self.designIdeas.remove(at: i)
+                }
             }
             self.designIdeas.sort(by: { (first, second) -> Bool in
                 return first.updatedAt.decimalValue > second.updatedAt.decimalValue
@@ -565,6 +628,12 @@ class DataService  {
             if let ideaDict = snapshot.value as? [String: AnyObject] {
                 let idea = NNDesignIdea.createDesignIdeaFromFirebase(with: ideaDict)
                 // find the design idea and replace it with the new one
+                let index = self.designIdeas.index(where: { di -> Bool in
+                    di.id == idea.id
+                })
+                if let i = index {
+                    self.designIdeas[i] = idea
+                }
             }
             self.designIdeas.sort(by: { (first, second) -> Bool in
                 return first.updatedAt.decimalValue > second.updatedAt.decimalValue

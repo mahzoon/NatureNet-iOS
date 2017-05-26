@@ -135,10 +135,55 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
     }
     
     @IBAction func joinButtonTapped(_ sender: Any) {
-        self.dismiss(animated: true) {}
+        
+        // validation check
+        if let email = self.emailAddress.text, let pass = self.password.text,
+            let display_name = self.displayName.text, let full_name = self.fullName.text,
+        affiliationPicker.selectedRow(inComponent: 0) > 0 {
+            
+        // upload image to Cloudinary (if selected)
+        if pickedImage {
+            if let img = self.profileImage.image {
+                MediaManager.md.uploadImage(image: img, progressHandler: nil, completionHandler: { result, error in
+                    if let e = error {
+                        // completed but with error
+                        UtilityFunctions.showErrorMessage(theView: self, title: "", message: "" + e.localizedDescription, buttonText: "")
+                    } else {
+                        // completed successfully
+                        if let r = result {
+                            if let url = r.secureUrl {
+                                self.trySubmitJoinRequest(iconUrl: url, email: email, pass: pass, display_name: display_name, full_name: full_name)
+                            }
+                        }
+                    }
+                })
+            }
+        } else {
+            self.trySubmitJoinRequest(iconUrl: "", email: email, pass: pass, display_name: display_name, full_name: full_name)
+        }
+            
+            
+        } else {
+            UtilityFunctions.showErrorMessage(theView: self, title: JOIN_ERROR_VALIDATION_TITLE, message: JOIN_ERROR_VALIDATION_MESSAGE, buttonText: JOIN_ERROR_VALIDATION_BUTTON_TEXT)
+        }
     }
     
     @IBAction func cancelButtonTapped(_ sender: Any) {
         self.dismiss(animated: true) {}
+    }
+    
+    func trySubmitJoinRequest(iconUrl: String, email: String, pass: String, display_name: String, full_name: String) {
+        if let affiliation = DataService.ds.GetSiteId(by: affiliationPicker.selectedRow(inComponent: 0)) {
+            let user = NNUser(affiliation: affiliation, icon: iconUrl, id: "", bio: "", latestContrib: 0, name: display_name, groups: [String : AnyObject](), created: 0, updated: 0)
+            DataService.ds.Join(nnuser: user, email: email, pass: pass, fullName: full_name, completion: { wasSuccess, err in
+                if wasSuccess {
+                    // this is actually a welcome message, not an error!
+                    UtilityFunctions.showErrorMessage(theView: self, title: JOIN_SUCCESS_TITLE, message: JOIN_SUCCESS_MESSAGE, buttonText: JOIN_SUCCESS_BUTTON_TEXT)
+                    self.dismiss(animated: true) {}
+                } else {
+                    UtilityFunctions.showErrorMessage(theView: self, title: JOIN_ERRORS_TITLE, message: err, buttonText: JOIN_ERRORS_BUTTON_TEXT)
+                }
+            })
+        }
     }
 }

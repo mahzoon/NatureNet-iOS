@@ -9,8 +9,8 @@
 import Foundation
 import Cloudinary
 import UIKit
-import CoreData
-import Alamofire
+import MapKit
+import Photos
 
 // This class is a singleton, meaning only one instance is going to be created from this class. That only instance is MediaManager.md
 // So, to use this class call its function by referencing the only instance, like this: MediaManager.md.SomeMethod()
@@ -24,6 +24,15 @@ class MediaManager {
     private let imageCache = NSCache<NSString, UIImage>()
     
     private var tasks = [String: URLSessionDataTask]()
+    
+    private var cloudinary_config = CLDConfiguration(cloudName: CLOUDINARY_CLOUD_NAME)
+    private var cloudinary: CLDCloudinary?
+    private var cloudinary_uploader: CLDUploader?
+    
+    func setupCloudinary() {
+        cloudinary = CLDCloudinary(configuration: cloudinary_config)
+        cloudinary_uploader = cloudinary?.createUploader()
+    }
     
     func getOrDownloadIcon(requesterId: String, urlString: String, completion: @escaping (UIImage?, String) -> Void) {
         let url = makeUrlSecure(url: urlString)
@@ -86,31 +95,39 @@ class MediaManager {
     private func makeUrlSecure(url: String) -> String {
         return url.replacingOccurrences(of: "http://", with: "https://")
     }
-    
-    private func addIcon(id: String, url: String, img: UIImage) {
-//        let icon = NSEntityDescription.insertNewObject(forEntityName: "IconResource", into: managedContext)
-//        icon.setValue(id, forKey: "id")
-//        icon.setValue(url, forKey: "url")
-//        icon.setValue(img, forKey: "data")
-//        do {
-//            try managedContext.save()
-//        } catch {
-//            print("error saving data: \(error)")
-//        }
+
+    func uploadImage(image: UIImage, progressHandler: ((Progress) -> Void)?, completionHandler: ((CLDUploadResult?, NSError?) -> ())?) {
+        let imgData = UIImagePNGRepresentation(image)
+        if let data = imgData {
+            cloudinary_uploader?.upload(data: data, uploadPreset: CLOUDINARY_PRESET, params: nil, progress: progressHandler, completionHandler: completionHandler)
+        }
     }
     
-//    private func getIcon(id: String) -> IconResource? {
-//        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "IconResource")
-//        fetchRequest.predicate = NSPredicate(format: "id = %@", id)
-//        do {
-//            if let fetchResult = try managedContext.execute(fetchRequest) as? [IconResource] {
-//                if fetchResult.count > 0 {
-//                    return fetchResult[0]
-//                }
-//            }
-//            return nil
-//        } catch {
-//            print("error fetching data: \(error)")
-//        }
-//    }
+    func getImageCoordinates(url: URL) -> CLLocationCoordinate2D? {
+        let opts = PHFetchOptions()
+        opts.fetchLimit = 1
+        let assets = PHAsset.fetchAssets(withALAssetURLs: [url], options: opts)
+        let asset = assets[0]
+        return asset.location?.coordinate
+    }
+    
+    func saveImageToPhotosLib(img: UIImage, completion: @escaping (Bool, String, CLLocationCoordinate2D?) -> Void) {
+        
+        PHPhotoLibrary.shared().performChanges({ 
+            PHAssetChangeRequest.creationRequestForAsset(from: img)
+        }) { success, error in
+            if let err = error {
+                completion(false, err.localizedDescription, nil)
+            } else {
+                if success {
+                    let opts = PHFetchOptions()
+                    opts.fetchLimit = 1
+                    opts.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+                    let assets = PHAsset.fetchAssets(with: opts)
+                    let asset = assets[0]
+                    completion(true, "", asset.location?.coordinate)
+                }
+            }
+        }
+    }
 }

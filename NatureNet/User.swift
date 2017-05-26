@@ -51,7 +51,9 @@ class NNUser {
         retVal["created_at"] = self.createdAt
         retVal["updated_at"] = self.updatedAt
         retVal["id"] = self.id as AnyObject
-        retVal["avatar"] = self.avatarUrl as AnyObject
+        if self.avatarUrl != "" {
+            retVal["avatar"] = self.avatarUrl as AnyObject
+        }
         retVal["display_name"] = self.displayName as AnyObject
         retVal["affiliation"] = self.affiliation as AnyObject
         retVal["bio"] = self.bio as AnyObject

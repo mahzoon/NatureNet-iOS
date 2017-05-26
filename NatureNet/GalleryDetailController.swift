@@ -55,6 +55,8 @@ class GalleryDetailController: UIViewController, UITableViewDelegate, UITableVie
         commentText.textColor = UIColor.lightGray
         
         updateLikeAndDislikeButtonImages()
+        
+        galleryDetailsTable.estimatedRowHeight = CGFloat(COMMENT_CELL_ESTIMATED_HEIGHT)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -126,7 +128,21 @@ class GalleryDetailController: UIViewController, UITableViewDelegate, UITableVie
         if maxNB && maxNV == indexPath.row {
             return CGFloat(SHOW_MORE_CELL_HEIGHT)
         }
-        return CGFloat(COMMENT_CELL_ESTIMATED_HEIGHT)
+        //return CGFloat(COMMENT_CELL_ESTIMATED_HEIGHT)
+        if let cell = galleryDetailsTable.dequeueReusableCell(withIdentifier: COMMENT_CELL_ID) {
+            let c = cell as! CommentCell
+            if let obsv = self.observationObj {
+                let listComments = DataService.ds.GetCommentsOnObservation(with: obsv.id)
+                if indexPath.row < listComments.count {
+                    let comment = listComments[indexPath.row]
+                    if let user = DataService.ds.GetUser(by: comment.commenter) {
+                        c.configureCell(name: user.displayName, comment: comment.comment)
+                        return c.getSize() + CGFloat(5.0)
+                    }
+                }
+            }
+        }
+        return UITableViewAutomaticDimension
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MapKit
 
 class AddObservationController: UITableViewController, UIPickerViewDataSource, UIPickerViewDelegate,
 UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -20,12 +21,17 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
     @IBOutlet weak var descriptionText: UITextField!
     @IBOutlet weak var locationText: UITextField!
     
-    var items = ["Project 1", "Project 2", "Project 3", "Project 4"]
-    
     @IBOutlet weak var projectPicker: UIPickerView!
     
     var imagePicker: UIImagePickerController!
     var pickedImage = false
+    
+    var pickedImageLocation: CLLocationCoordinate2D?
+    
+    var projectList = [NNProject]()
+    
+    // activity indicator for upload
+    var activityIndicator = UIActivityIndicatorView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,11 +44,19 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
         
         imagePicker = UIImagePickerController()
         imagePicker.delegate = self
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        
+        if !DataService.ds.LoggedIn() {
+            UtilityFunctions.showAuthenticationRequiredMessage(theView: self, completion: {
+                self.performSegue(withIdentifier: SEGUE_SIGNIN, sender: nil)
+            })
+        }
+        
+        projectList = DataService.ds.GetAllProjects()
+        
+        activityIndicator.center = self.view.center
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.activityIndicatorViewStyle = .gray
+        self.view.addSubview(activityIndicator)
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -71,25 +85,46 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return 4
+        // the first item would be "select a project"
+        return projectList.count + 1
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return items[row]
+        if row == 0 {
+            return PICKER_NO_SELECTION
+        }
+        if row - 1 < projectList.count {
+            return projectList[row - 1].name
+        }
+        return nil
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            imagePicker.dismiss(animated: true, completion: {
-                self.observationImage.image = pickedImage
-                self.pickedImage = true
-            })
+            if picker.sourceType == UIImagePickerControllerSourceType.camera {
+                MediaManager.md.saveImageToPhotosLib(img: pickedImage, completion: { success, error, loc in
+                    self.pickedImageLocation = loc
+                    if !success {
+                        let ac = UIAlertController(title: SAVE_OBSV_ERROR_MESSAGE, message: error, preferredStyle: .alert)
+                        ac.addAction(UIAlertAction(title: SAVE_OBSV_ERROR_BUTTON_TEXT, style: .default))
+                        self.present(ac, animated: true)
+                    }
+                })
+            }
+            if picker.sourceType == UIImagePickerControllerSourceType.photoLibrary {
+                imagePicker.dismiss(animated: true, completion: {
+                    self.observationImage.image = pickedImage
+                    self.pickedImage = true
+                    if let url = info[UIImagePickerControllerReferenceURL] as? URL {
+                        self.pickedImageLocation = MediaManager.md.getImageCoordinates(url: url)
+                    }
+                })
+            }
         }
         imagePicker.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func observationImageButtonTapped(_ sender: Any) {
-        //present(imagePicker, animated: true, completion: nil)
         let alert = UIAlertController(title: ADD_OBSV_IMAGE_OPTIONS_TITLE, message: ADD_OBSV_IMAGE_OPTIONS_MSG, preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: ADD_OBSV_IMAGE_OPTIONS_CANCEL, style: .cancel, handler: nil))
         alert.addAction(UIAlertAction(title: ADD_OBSV_IMAGE_OPTIONS_PICK_EXISTING, style: .default, handler: { (action: UIAlertAction) in
@@ -118,10 +153,68 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
     }
 
     @IBAction func addButtonTapped(_ sender: Any) {
-        self.dismiss(animated: true) {}
+        if !DataService.ds.LoggedIn() {
+            UtilityFunctions.showAuthenticationRequiredMessage(theView: self, completion: {
+                self.performSegue(withIdentifier: SEGUE_SIGNIN, sender: nil)
+            })
+        } else {
+            // validation checks
+            if !pickedImage {
+                UtilityFunctions.showErrorMessage(theView: self, title: OBSERVATION_NO_IMAGE_ERROR_TITLE,
+                                                  message: OBSERVATION_NO_IMAGE_ERROR_MESSAGE,
+                                                  buttonText: OBSERVATION_NO_IMAGE_ERROR_BUTTON_TEXT)
+            } else if projectPicker.selectedRow(inComponent: 0) == 0 {
+                UtilityFunctions.showErrorMessage(theView: self, title: OBSERVATION_NO_PROJECT_ERROR_TITLE,
+                                                  message: OBSERVATION_NO_PROJECT_ERROR_MESSAGE,
+                                                  buttonText: OBSERVATION_NO_PROJECT_ERROR_BUTTON_TEXT)
+            } else {
+                
+                var data = ["text": self.descriptionText.text ?? "", "image": ""]
+                // upload image to Cloudinary
+                if let img = self.observationImage.image {
+                    // start activity spinner
+                    self.activityIndicator.startAnimating()
+                    UIApplication.shared.beginIgnoringInteractionEvents()
+                    MediaManager.md.uploadImage(image: img, progressHandler: { (Progress) in
+                        // progress handler
+                    }, completionHandler: { result, error in
+                        // stop activity spinner
+                        self.activityIndicator.stopAnimating()
+                        UIApplication.shared.endIgnoringInteractionEvents()
+                        if let e = error {
+                            // completed but with error
+                            UtilityFunctions.showErrorMessage(theView: self, title: ADD_OBSV_UPLOAD_FAILED_TITLE, message: ADD_OBSV_UPLOAD_FAILED_MESSAGE + e.localizedDescription, buttonText: ADD_OBSV_UPLOAD_FAILED_BUTTON_TEXT)
+                        } else {
+                            // completed successfully
+                            if let r = result {
+                                data["image"] = r.secureUrl
+                                // send to Firebase
+                                if let currentUser = DataService.ds.GetCurrentUser() {
+                                    if let projectId = self.projectList[self.projectPicker.selectedRow(inComponent: 0)].id {
+                                        var location: [Double] = [0, 0]
+                                        if let l = self.pickedImageLocation {
+                                            location[0] = Double(l.latitude)
+                                            location[1] = Double(l.longitude)
+                                        }
+                                        let obsv = NNObservation(project: projectId, site: currentUser.affiliation, observer: currentUser.id, id: "", data: data, location: location, created: 0, updated: 0, status: "", likes: [String: Bool]())
+                                        DataService.ds.AddObservation(observation: obsv)
+                                    }
+                                }
+                                // this is not an error message! actually a thank you message!!
+                                UtilityFunctions.showErrorMessage(theView: self, title: ADD_OBSV_SUCCESS_TITLE,
+                                                                  message: ADD_OBSV_SUCCESS_MESSAGE,
+                                                                  buttonText: ADD_OBSV_SUCCESS_BUTTON_TEXT)
+                                self.dismiss(animated: true) {}
+                            }
+                        }
+                    })
+                }
+            }
+        }
     }
     
     @IBAction func cancelButtonTapped(_ sender: Any) {
         self.dismiss(animated: true) {}
     }
+
 }

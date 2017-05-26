@@ -21,6 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
         // enabling offline capabilities of Firebase database object
         Database.database().isPersistenceEnabled = true
+        // creating cloudinary instances for uploading image
+        MediaManager.md.setupCloudinary()
         return true
     }
 

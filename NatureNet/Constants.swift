@@ -46,7 +46,7 @@ let ICON_DISLIKE_GREEN = UIImage(named: "icon - dislike")
 //
 // Sizes
 //
-let COMMENT_CELL_ESTIMATED_HEIGHT = 25.0
+let COMMENT_CELL_ESTIMATED_HEIGHT = 35.0
 let RECENT_OBSV_ESTIMATED_HEIGHT = 250.0
 let DESIGN_IDEA_CELL_ITEM_HEIGHT = 180.0
 let PROJECT_CELL_ITEM_HEIGHT = 50.0
@@ -95,6 +95,15 @@ let AUTHENTICATION_REQUIRED_BUTTON_CANCEL_TEXT = "No, not now."
 let COMMENT_EMPTY_ERROR_TITLE = "Empty text?!"
 let COMMENT_EMPTY_ERROR_MESSAGE = "You did not enter any text for the comment. Please first write your comment then tap send."
 let COMMENT_EMPTY_ERROR_BUTTON_TEXT = "OK"
+let DESIGNIDEA_EMPTY_ERROR_TITLE = "Empty text?!"
+let DESIGNIDEA_EMPTY_ERROR_MESSAGE = "You did not enter any text for the design idea. Please first write your idea then tap submit."
+let DESIGNIDEA_EMPTY_ERROR_BUTTON_TEXT = "OK"
+let OBSERVATION_NO_IMAGE_ERROR_TITLE = "No image?!"
+let OBSERVATION_NO_IMAGE_ERROR_MESSAGE = "You did not select any image for the observation. To select an image, tap on the image placeholder, then choose an observation image from your library or take a picture, then tap submit."
+let OBSERVATION_NO_IMAGE_ERROR_BUTTON_TEXT = "OK"
+let OBSERVATION_NO_PROJECT_ERROR_TITLE = "No project?!"
+let OBSERVATION_NO_PROJECT_ERROR_MESSAGE = "You did not select any project for your observation. Please select your project, then tap submit."
+let OBSERVATION_NO_PROJECT_ERROR_BUTTON_TEXT = "OK"
 
 // Sign in Screen
 let SIGN_IN_ERRORS_TITLE = "Sign in"
@@ -119,6 +128,14 @@ let JOIN_PROFILE_IMAGE_OPTIONS_ERR_LIB_BTN_TXT = "OK"
 let JOIN_PROFILE_IMAGE_OPTIONS_ERR_CAM_TITLE = "Error accessing camera"
 let JOIN_PROFILE_IMAGE_OPTIONS_ERR_CAM_MSG = "Can not have access to your camera. Maybe the privacy settings will not let the app use your camera."
 let JOIN_PROFILE_IMAGE_OPTIONS_ERR_CAM_BTN_TXT = "OK"
+let JOIN_SUCCESS_TITLE = "Welcome!"
+let JOIN_SUCCESS_MESSAGE = "You are now a NatureNet community member."
+let JOIN_SUCCESS_BUTTON_TEXT = "OK"
+let JOIN_ERRORS_TITLE = "Join"
+let JOIN_ERRORS_BUTTON_TEXT = "OK"
+let JOIN_ERROR_VALIDATION_TITLE = "Join"
+let JOIN_ERROR_VALIDATION_MESSAGE = "Please make sure you filled email, password, display name, fullname, and selected an affiliation."
+let JOIN_ERROR_VALIDATION_BUTTON_TEXT = "OK"
 
 // Add Observation Screen
 let ADD_OBSV_IMAGE_OPTIONS_TITLE = "Choose an Option: "
@@ -133,6 +150,12 @@ let ADD_OBSV_IMAGE_OPTIONS_ERR_LIB_BTN_TXT = "OK"
 let ADD_OBSV_IMAGE_OPTIONS_ERR_CAM_TITLE = "Error accessing camera"
 let ADD_OBSV_IMAGE_OPTIONS_ERR_CAM_MSG = "Can not have access to your camera. Maybe the privacy settings will not let the app use your camera."
 let ADD_OBSV_IMAGE_OPTIONS_ERR_CAM_BTN_TXT = "OK"
+let ADD_OBSV_SUCCESS_TITLE = "Thank you!"
+let ADD_OBSV_SUCCESS_MESSAGE = "We appreciate your contribution to the NatureNet community project."
+let ADD_OBSV_SUCCESS_BUTTON_TEXT = "Dismiss"
+let ADD_OBSV_UPLOAD_FAILED_TITLE = "Upload failed."
+let ADD_OBSV_UPLOAD_FAILED_MESSAGE = "You can tap submit again to try one more time. If you do not have internet connection, you can submit this observation again. Note that if you just took the observation image using the camera, the image is saved to your photo library. You could submit your observation later and choose the image from your photo library. Also, here is the error description: "
+let ADD_OBSV_UPLOAD_FAILED_BUTTON_TEXT = "Dismiss"
 
 // Observation Detail Screen
 let SAVE_OBSV_ALERT_TITLE:String = "How do you want to save this observation?"
@@ -146,6 +169,10 @@ let SAVE_OBSV_SUCCESS_TITLE = "Saved!"
 let SAVE_OBSV_SUCCESS_MESSAGE = "The observation has been saved successfuly."
 let SAVE_OBSV_SUCCESS_BUTTON_TEXT = "OK"
 
+// Add design idea screen
+let ADD_IDEA_SUCCESS_TITLE = "Thank you!"
+let ADD_IDEA_SUCCESS_MESSAGE = "We appreciate your contribution to the NatureNet community project. You will receive an email notification once a community member responds to your idea. We also encourage you to visit our issue tracking github page at github.com/naturenet and participate in the discussions or even involve in the software development."
+let ADD_IDEA_SUCCESS_BUTTON_TEXT = "Dismiss"
 
 //
 // Segue names
@@ -181,11 +208,19 @@ let DB_SOURCE = "ios"
 let DB_LATEST_CONTRIBUTION = "latest_contribution"
 
 //
+// Cloudinary
+//
+let CLOUDINARY_CLOUD_NAME = "university-of-colorado"
+let CLOUDINARY_PRESET = "ios-preset"
+
+//
 // Other constants
 //
 let DESIGN_IDEA_STATUS_DISCUSSING = "doing"
 let DESIGN_IDEA_STATUS_TO_DO = "to do"
 let DESIGN_IDEA_STATUS_DONE = "done"
+let DESIGN_IDEA_TYPE = ""
+let DESIGN_IDEA_GROUP = "idea"
 
 
 

@@ -53,6 +53,8 @@ class DesignIdeaDetailController: UIViewController, UITableViewDelegate, UITable
         
         commentText.text = COMMENT_TEXTBOX_PLACEHOLDER
         commentText.textColor = UIColor.lightGray
+        
+        designIdeaDetailsTable.estimatedRowHeight = CGFloat(COMMENT_CELL_ESTIMATED_HEIGHT)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -123,7 +125,21 @@ class DesignIdeaDetailController: UIViewController, UITableViewDelegate, UITable
         if maxNB && maxNV == indexPath.row {
             return CGFloat(SHOW_MORE_CELL_HEIGHT)
         }
-        return CGFloat(COMMENT_CELL_ESTIMATED_HEIGHT)
+        //return CGFloat(COMMENT_CELL_ESTIMATED_HEIGHT)
+        if let cell = designIdeaDetailsTable.dequeueReusableCell(withIdentifier: COMMENT_CELL_ID) {
+            let c = cell as! CommentCell
+            if let idea = self.designIdea {
+                let listComments = DataService.ds.GetCommentsOnDesignIdea(with: idea.id)
+                if indexPath.row < listComments.count {
+                    let comment = listComments[indexPath.row]
+                    if let user = DataService.ds.GetUser(by: comment.commenter) {
+                        c.configureCell(name: user.displayName, comment: comment.comment)
+                        return c.getSize() + CGFloat(5.0)
+                    }
+                }
+            }
+        }
+        return UITableViewAutomaticDimension
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

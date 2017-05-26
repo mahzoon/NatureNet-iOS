@@ -21,4 +21,9 @@ class CommentCell: UITableViewCell {
         self.username.text = name
         self.comment.text = comment
     }
+    
+    func getSize() -> CGFloat {
+        comment.sizeToFit()
+        return comment.frame.height
+    }
 }
