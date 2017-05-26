@@ -61,7 +61,11 @@ class DataService  {
     private var commentsOnObservations = [NNComment]()
     private var commentsOnDesignIdeas = [NNComment]()
     // reference to the observer handle of comments. This observer looks for additions to the comments, and updates the "commentsOnObservations" or "commentsOnDesignIdeas" arrays if new comment is being added. The reference is mainly for "dispose" to remove the handle.
-    private var commentsHandle: UInt!
+    private var commentsAddHandle: UInt!
+    // reference to the observer handle of comments. This observer looks for removals to the comments, and updates the "commentsOnObservations" or "commentsOnDesignIdeas" arrays if a comment is being removed. The reference is mainly for "dispose" to remove the handle.
+    private var commentsRemoveHandle: UInt!
+    // reference to the observer handle of comments. This observer looks for changes to the comments, and updates the "commentsOnObservations" or "commentsOnDesignIdeas" arrays if a comment is being changed. The reference is mainly for "dispose" to remove the handle.
+    private var commentsChangeHandle: UInt!
     
     init() {
         // initializing the reference to the database
@@ -104,8 +108,12 @@ class DataService  {
         db_ref.removeObserver(withHandle: designIdeasRemoveHandle)
         // remove changed design ideas observer
         db_ref.removeObserver(withHandle: designIdeasChangeHandle)
-        // remove comment observer
-        db_ref.removeObserver(withHandle: commentsHandle)
+        // remove add comment observer
+        db_ref.removeObserver(withHandle: commentsAddHandle)
+        // remove remove comment observer
+        db_ref.removeObserver(withHandle: commentsRemoveHandle)
+        // remove change comment observer
+        db_ref.removeObserver(withHandle: commentsChangeHandle)
     }
     
     //////////////////////////////////////////////////////////////
@@ -721,7 +729,7 @@ class DataService  {
     
     private func initCommentsObserver() {
         // adding observer to the comments
-        commentsHandle = db_ref.child(DB_COMMENTS_PATH).observe(.childAdded, with: { (snapshot) in
+        commentsAddHandle = db_ref.child(DB_COMMENTS_PATH).observe(.childAdded, with: { (snapshot) in
             // snapshot.value is a dictionary for one Comment
             if let commentDict = snapshot.value as? [String: AnyObject] {
                 let comment = NNComment.createCommentFromFirebase(with: commentDict)
@@ -741,6 +749,52 @@ class DataService  {
             self.commentsOnDesignIdeas.sort(by: { (first, second) -> Bool in
                 return first.updatedAt.decimalValue > second.updatedAt.decimalValue
             })
+        })
+        // adding observer to the comments
+        commentsRemoveHandle = db_ref.child(DB_COMMENTS_PATH).observe(.childRemoved, with: { (snapshot) in
+            // snapshot.value is a dictionary for one Comment
+            if let commentDict = snapshot.value as? [String: AnyObject] {
+                let comment = NNComment.createCommentFromFirebase(with: commentDict)
+                if comment.isCommentOnObservation {
+                    let index = self.commentsOnObservations.index(where: { c -> Bool in
+                        c.id == comment.id
+                    })
+                    if let i = index {
+                        self.commentsOnObservations.remove(at: i)
+                    }
+                }
+                if comment.isCommentOnDesignIdea {
+                    let index = self.commentsOnDesignIdeas.index(where: { c -> Bool in
+                        c.id == comment.id
+                    })
+                    if let i = index {
+                        self.commentsOnDesignIdeas.remove(at: i)
+                    }
+                }
+            }
+        })
+        // adding observer to the comments
+        commentsChangeHandle = db_ref.child(DB_COMMENTS_PATH).observe(.childChanged, with: { (snapshot) in
+            // snapshot.value is a dictionary for one Comment
+            if let commentDict = snapshot.value as? [String: AnyObject] {
+                let comment = NNComment.createCommentFromFirebase(with: commentDict)
+                if comment.isCommentOnObservation {
+                    let index = self.commentsOnObservations.index(where: { c -> Bool in
+                        c.id == comment.id
+                    })
+                    if let i = index {
+                        self.commentsOnObservations[i] = comment
+                    }
+                }
+                if comment.isCommentOnDesignIdea {
+                    let index = self.commentsOnDesignIdeas.index(where: { c -> Bool in
+                        c.id == comment.id
+                    })
+                    if let i = index {
+                        self.commentsOnDesignIdeas[i] = comment
+                    }
+                }
+            }
         })
     }
     
@@ -766,7 +820,7 @@ class DataService  {
         return commentList
     }
     
-    func WriteCommentOn(context: String, comment: String, contributionId: String) {
+    func WriteCommentOn(context: String, comment: String, contributionId: String, completion: @escaping (Bool) -> Void) {
         if !LoggedIn() { return }
         if let u = currentUser {
             // adding the comment to the "comments" key
@@ -775,10 +829,22 @@ class DataService  {
             let timestamp = Firebase.ServerValue.timestamp()
             c["created_at"] = timestamp as AnyObject
             c["updated_at"] = timestamp as AnyObject
-            newCommentRef.setValue(c)
-            // adding the comment ref to the contribution (observation or design idea)
-            let contributionCommentsRef = db_ref.child("\(context)/\(contributionId)/\(DB_COMMENTS_PATH)/\(newCommentRef.key)")
-            contributionCommentsRef.setValue(true)
+            newCommentRef.setValue(c, withCompletionBlock: { error, ref in
+                if error == nil {
+                    // adding the comment ref to the contribution (observation or design idea)
+                    let contributionCommentsRef = self.db_ref.child("\(context)/\(contributionId)/\(DB_COMMENTS_PATH)/\(newCommentRef.key)")
+                    contributionCommentsRef.setValue(true, withCompletionBlock: { error, ref in
+                        if error == nil {
+                            completion(true)
+                        } else {
+                            completion(false)
+                        }
+                    })
+                } else {
+                    completion(false)
+                }
+            })
+            
         }
     }
     

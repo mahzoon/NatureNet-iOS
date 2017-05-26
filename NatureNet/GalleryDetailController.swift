@@ -336,8 +336,12 @@ class GalleryDetailController: UIViewController, UITableViewDelegate, UITableVie
                 if let obsv = observationObj {
                     DataService.ds.WriteCommentOn(context: DB_OBSERVATIONS_PATH,
                                                   comment: commentText.text,
-                                                  contributionId: obsv.id)
-                    self.galleryDetailsTable.reloadData()
+                                                  contributionId: obsv.id,
+                                                  completion: { success in
+                                                    if success {
+                                                        self.galleryDetailsTable.reloadData()
+                                                    }
+                    })
                 }
             }
         }

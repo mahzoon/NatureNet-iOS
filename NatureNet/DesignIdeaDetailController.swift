@@ -291,10 +291,11 @@ class DesignIdeaDetailController: UIViewController, UITableViewDelegate, UITable
                                                   buttonText: COMMENT_EMPTY_ERROR_BUTTON_TEXT)
             } else {
                 if let idea = designIdea {
-                    DataService.ds.WriteCommentOn(context: DB_DESIGNIDEAS_PATH,
-                                                  comment: commentText.text,
-                                                  contributionId: idea.id)
-                    self.designIdeaDetailsTable.reloadData()
+                    DataService.ds.WriteCommentOn(context: DB_DESIGNIDEAS_PATH, comment: commentText.text, contributionId: idea.id, completion: { success in
+                        if success {
+                            self.designIdeaDetailsTable.reloadData()
+                        }
+                    })
                 }
             }
         }
