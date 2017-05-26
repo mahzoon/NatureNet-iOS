@@ -106,7 +106,9 @@ class GalleryCell: UITableViewCell {
             }
         } else {
             if let obsv = observation {
-                DataService.ds.ToggleLikeOrDislikeOnObservation(like: true, observationId: obsv.id)
+                DataService.ds.ToggleLikeOrDislikeOnObservation(like: true, observationId: obsv.id, completion: { success in
+                    if (success) { self.updateLikeAndDislikeButtonImages() }
+                })
             }
             updateLikeAndDislikeButtonImages()
         }
@@ -121,27 +123,40 @@ class GalleryCell: UITableViewCell {
             }
         } else {
             if let obsv = observation {
-                DataService.ds.ToggleLikeOrDislikeOnObservation(like: false, observationId: obsv.id)
+                DataService.ds.ToggleLikeOrDislikeOnObservation(like: false, observationId: obsv.id, completion: { success in
+                    if (success) { self.updateLikeAndDislikeButtonImages() }
+                })
             }
-            updateLikeAndDislikeButtonImages()
         }
     }
     
     private func updateLikeAndDislikeButtonImages() {
-        if let currentUserId = DataService.ds.GetCurrentUserId() {
-            if let like = observation?.likes[currentUserId] {
-                if like {
-                    likeButton.setImage(ICON_LIKE_GREEN, for: .normal)
+        // update self.observation
+        if let obsv = self.observation {
+            self.observation = DataService.ds.GetObservation(with: obsv.id)
+        }
+        if let obsv = self.observation {
+            // update like/dislike labels
+            self.likes.text = "\(obsv.Likes.count)"
+            self.dislikes.text = "\(obsv.Dislikes.count)"
+            // update buttons
+            if let currentUserId = DataService.ds.GetCurrentUserId() {
+                if let like = obsv.likes[currentUserId] {
+                    if like {
+                        likeButton.setImage(ICON_LIKE_GREEN, for: .normal)
+                        dislikeButton.setImage(ICON_DISLIKE_GRAY, for: .normal)
+                    } else {
+                        likeButton.setImage(ICON_LIKE_GRAY, for: .normal)
+                        dislikeButton.setImage(ICON_DISLIKE_RED, for: .normal)
+                    }
                 } else {
-                    dislikeButton.setImage(ICON_DISLIKE_GREEN, for: .normal)
+                    likeButton.setImage(ICON_LIKE_GRAY, for: .normal)
+                    dislikeButton.setImage(ICON_DISLIKE_GRAY, for: .normal)
                 }
             } else {
                 likeButton.setImage(ICON_LIKE_GRAY, for: .normal)
                 dislikeButton.setImage(ICON_DISLIKE_GRAY, for: .normal)
             }
-        } else {
-            likeButton.setImage(ICON_LIKE_GRAY, for: .normal)
-            dislikeButton.setImage(ICON_DISLIKE_GRAY, for: .normal)
         }
     }
     

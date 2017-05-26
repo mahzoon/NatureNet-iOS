@@ -41,7 +41,7 @@ let IMAGE_DEFAULT_OBSERVATION = UIImage(named: "image - observation - default")
 let ICON_LIKE_GRAY = UIImage(named: "icon - like - gray")
 let ICON_LIKE_GREEN = UIImage(named: "icon - like")
 let ICON_DISLIKE_GRAY = UIImage(named: "icon - dislike - gray")
-let ICON_DISLIKE_GREEN = UIImage(named: "icon - dislike")
+let ICON_DISLIKE_RED = UIImage(named: "icon - dislike")
 
 //
 // Sizes

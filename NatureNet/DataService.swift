@@ -462,7 +462,7 @@ class DataService  {
             }
         })
         // adding "change" observer to the observations
-        observationsChangeHandle = db_ref.child(DB_OBSERVATIONS_PATH).observe(.childRemoved, with: { (snapshot) in
+        observationsChangeHandle = db_ref.child(DB_OBSERVATIONS_PATH).observe(.childChanged, with: { (snapshot) in
             // snapshot.value is a dictionary for one Observation
             if let obsDict = snapshot.value as? [String: AnyObject] {
                 let observation = NNObservation.createObservationFromFirebase(with: obsDict)
@@ -782,7 +782,7 @@ class DataService  {
         }
     }
     
-    func ToggleLikeOrDislikeOnObservation(like: Bool, observationId: String) {
+    func ToggleLikeOrDislikeOnObservation(like: Bool, observationId: String, completion: @escaping (Bool) -> Void) {
         if !LoggedIn() { return }
         if let u = currentUser {
             if let obsv = self.GetObservation(with: observationId) {
@@ -790,17 +790,29 @@ class DataService  {
                 if let currentVal = obsv.likes[u.uid] {
                     if currentVal == like {
                         // this situation is either "unlike" or "undislike". In either case we should remove the value
-                        db_ref.child(path).removeValue()
+                        db_ref.child(path).removeValue(completionBlock: { error, ref in
+                            if error != nil {
+                                completion(false)
+                            } else {
+                                completion(true)
+                            }
+                        })
                         return
                     }
                 }
                 // change or create the value to the new value: like
-                db_ref.child(path).setValue(like)
+                db_ref.child(path).setValue(like, withCompletionBlock: { error, ref in
+                    if error != nil {
+                        completion(false)
+                    } else {
+                        completion(true)
+                    }
+                })
             }
         }
     }
     
-    func ToggleLikeOrDislikeOnDesignIdea(like: Bool, designIdeaId: String) {
+    func ToggleLikeOrDislikeOnDesignIdea(like: Bool, designIdeaId: String, completion: @escaping (Bool) -> Void) {
         if !LoggedIn() { return }
         if let u = currentUser {
             if let idea = self.GetDesignIdea(with: designIdeaId) {
@@ -808,12 +820,24 @@ class DataService  {
                 if let currentVal = idea.likes[u.uid] {
                     if currentVal == like {
                         // this situation is either "unlike" or "undislike". In either case we should remove the value
-                        db_ref.child(path).removeValue()
+                        db_ref.child(path).removeValue(completionBlock: { error, ref in
+                            if error != nil {
+                                completion(false)
+                            } else {
+                                completion(true)
+                            }
+                        })
                         return
                     }
                 }
                 // change or create the value to the new value: like
-                db_ref.child(path).setValue(like)
+                db_ref.child(path).setValue(like, withCompletionBlock: { error, ref in
+                    if error != nil {
+                        completion(false)
+                    } else {
+                        completion(true)
+                    }
+                })
             }
         }
     }

@@ -228,9 +228,10 @@ class DesignIdeaDetailController: UIViewController, UITableViewDelegate, UITable
             })
         } else {
             if let idea = designIdea {
-                DataService.ds.ToggleLikeOrDislikeOnDesignIdea(like: true, designIdeaId: idea.id)
+                DataService.ds.ToggleLikeOrDislikeOnDesignIdea(like: true, designIdeaId: idea.id, completion: { success in
+                    if (success) { self.updateLikeAndDislikeButtonImages() }
+                })
             }
-            updateLikeAndDislikeButtonImages()
         }
     }
     
@@ -241,27 +242,40 @@ class DesignIdeaDetailController: UIViewController, UITableViewDelegate, UITable
             })
         } else {
             if let idea = designIdea {
-                DataService.ds.ToggleLikeOrDislikeOnDesignIdea(like: false, designIdeaId: idea.id)
+                DataService.ds.ToggleLikeOrDislikeOnDesignIdea(like: false, designIdeaId: idea.id, completion: { success in
+                    if (success) { self.updateLikeAndDislikeButtonImages() }
+                })
             }
-            updateLikeAndDislikeButtonImages()
         }
     }
     
     private func updateLikeAndDislikeButtonImages() {
-        if let currentUserId = DataService.ds.GetCurrentUserId() {
-            if let like = designIdea?.likes[currentUserId] {
-                if like {
-                    likeButton.setImage(ICON_LIKE_GREEN, for: .normal)
+        // update designIdea
+        if let idea = self.designIdea {
+            self.designIdea = DataService.ds.GetDesignIdea(with: idea.id)
+        }
+        if let idea = self.designIdea {
+            // update like/dislike labels
+            self.numLikes.text = "\(idea.Likes.count)"
+            self.numDislikes.text = "\(idea.Dislikes.count)"
+            // update buttons
+            if let currentUserId = DataService.ds.GetCurrentUserId() {
+                if let like = idea.likes[currentUserId] {
+                    if like {
+                        likeButton.setImage(ICON_LIKE_GREEN, for: .normal)
+                        dislikeButton.setImage(ICON_DISLIKE_GRAY, for: .normal)
+                    } else {
+                        likeButton.setImage(ICON_LIKE_GRAY, for: .normal)
+                        dislikeButton.setImage(ICON_DISLIKE_RED, for: .normal)
+                    }
                 } else {
-                    dislikeButton.setImage(ICON_DISLIKE_GREEN, for: .normal)
+                    likeButton.setImage(ICON_LIKE_GRAY, for: .normal)
+                    dislikeButton.setImage(ICON_DISLIKE_GRAY, for: .normal)
                 }
             } else {
                 likeButton.setImage(ICON_LIKE_GRAY, for: .normal)
                 dislikeButton.setImage(ICON_DISLIKE_GRAY, for: .normal)
             }
-        } else {
-            likeButton.setImage(ICON_LIKE_GRAY, for: .normal)
-            dislikeButton.setImage(ICON_DISLIKE_GRAY, for: .normal)
         }
     }
     
@@ -280,6 +294,7 @@ class DesignIdeaDetailController: UIViewController, UITableViewDelegate, UITable
                     DataService.ds.WriteCommentOn(context: DB_DESIGNIDEAS_PATH,
                                                   comment: commentText.text,
                                                   contributionId: idea.id)
+                    self.designIdeaDetailsTable.reloadData()
                 }
             }
         }

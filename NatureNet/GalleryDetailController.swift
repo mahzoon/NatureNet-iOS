@@ -271,9 +271,10 @@ class GalleryDetailController: UIViewController, UITableViewDelegate, UITableVie
             })
         } else {
             if let obsv = observationObj {
-                DataService.ds.ToggleLikeOrDislikeOnObservation(like: true, observationId: obsv.id)
+                DataService.ds.ToggleLikeOrDislikeOnObservation(like: true, observationId: obsv.id, completion: { success in
+                    if (success) { self.updateLikeAndDislikeButtonImages() }
+                })
             }
-            updateLikeAndDislikeButtonImages()
         }
     }
     
@@ -284,27 +285,40 @@ class GalleryDetailController: UIViewController, UITableViewDelegate, UITableVie
             })
         } else {
             if let obsv = observationObj {
-                DataService.ds.ToggleLikeOrDislikeOnObservation(like: false, observationId: obsv.id)
+                DataService.ds.ToggleLikeOrDislikeOnObservation(like: false, observationId: obsv.id, completion: { success in
+                    if (success) { self.updateLikeAndDislikeButtonImages() }
+                })
             }
-            updateLikeAndDislikeButtonImages()
         }
     }
     
     private func updateLikeAndDislikeButtonImages() {
-        if let currentUserId = DataService.ds.GetCurrentUserId() {
-            if let like = observationObj?.likes[currentUserId] {
-                if like {
-                    likeButton.setImage(ICON_LIKE_GREEN, for: .normal)
+        // update self.observationObj
+        if let obsv = self.observationObj {
+            self.observationObj = DataService.ds.GetObservation(with: obsv.id)
+        }
+        if let obsv = self.observationObj {
+            // update like/dislike labels
+            self.numLikes.text = "\(obsv.Likes.count)"
+            self.numDislikes.text = "\(obsv.Dislikes.count)"
+            // update buttons
+            if let currentUserId = DataService.ds.GetCurrentUserId() {
+                if let like = obsv.likes[currentUserId] {
+                    if like {
+                        likeButton.setImage(ICON_LIKE_GREEN, for: .normal)
+                        dislikeButton.setImage(ICON_DISLIKE_GRAY, for: .normal)
+                    } else {
+                        likeButton.setImage(ICON_LIKE_GRAY, for: .normal)
+                        dislikeButton.setImage(ICON_DISLIKE_RED, for: .normal)
+                    }
                 } else {
-                    dislikeButton.setImage(ICON_DISLIKE_GREEN, for: .normal)
+                    likeButton.setImage(ICON_LIKE_GRAY, for: .normal)
+                    dislikeButton.setImage(ICON_DISLIKE_GRAY, for: .normal)
                 }
             } else {
                 likeButton.setImage(ICON_LIKE_GRAY, for: .normal)
                 dislikeButton.setImage(ICON_DISLIKE_GRAY, for: .normal)
             }
-        } else {
-            likeButton.setImage(ICON_LIKE_GRAY, for: .normal)
-            dislikeButton.setImage(ICON_DISLIKE_GRAY, for: .normal)
         }
     }
     
@@ -323,6 +337,7 @@ class GalleryDetailController: UIViewController, UITableViewDelegate, UITableVie
                     DataService.ds.WriteCommentOn(context: DB_OBSERVATIONS_PATH,
                                                   comment: commentText.text,
                                                   contributionId: obsv.id)
+                    self.galleryDetailsTable.reloadData()
                 }
             }
         }
