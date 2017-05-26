@@ -29,6 +29,8 @@ class ProjectDetailController: UIViewController, UITableViewDelegate, UITableVie
 
         projectDetailTable.delegate = self
         projectDetailTable.dataSource = self
+        
+        DataService.ds.registerTableView(group: DB_COMMENTS_PATH, tableView: projectDetailTable)
     }
     
     override func viewWillAppear(_ animated: Bool) {

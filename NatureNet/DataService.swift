@@ -67,6 +67,12 @@ class DataService  {
     // reference to the observer handle of comments. This observer looks for changes to the comments, and updates the "commentsOnObservations" or "commentsOnDesignIdeas" arrays if a comment is being changed. The reference is mainly for "dispose" to remove the handle.
     private var commentsChangeHandle: UInt!
     
+    private var reloadTableList = [DB_COMMENTS_PATH: [UITableView](),
+                                   DB_PROJECTS_PATH: [UITableView](),
+                                   DB_USERS_PATH: [UITableView](),
+                                   DB_OBSERVATIONS_PATH: [UITableView](),
+                                   DB_DESIGNIDEAS_PATH: [UITableView]()]
+    
     init() {
         // initializing the reference to the database
         db_ref = Database.database().reference()
@@ -114,6 +120,20 @@ class DataService  {
         db_ref.removeObserver(withHandle: commentsRemoveHandle)
         // remove change comment observer
         db_ref.removeObserver(withHandle: commentsChangeHandle)
+    }
+    
+    func registerTableView(group: String, tableView: UITableView) {
+        self.reloadTableList[group]?.append(tableView)
+    }
+    
+    private func reloadTables(section: String) {
+        if let tables = self.reloadTableList[section] {
+            for table in tables {
+                DispatchQueue.main.async {
+                    table.reloadData()
+                }
+            }
+        }
     }
     
     //////////////////////////////////////////////////////////////
@@ -200,6 +220,7 @@ class DataService  {
             // snapshot will be the whole "sites" key with its children to the leaf. For example, if site/aces/description value changes, added, or removed, the whole sites/ will be returned. So, we can replace the "sites" array with site names in the snapshot.
             if let sitesSnapshot = snapshot.value as? [String:[String:AnyObject]] {
                 // the sitesSnapshot is like "siteId" -> { "key" -> <object> } (the "key" that we are interested in is "name")
+                self.sites.removeAll()
                 var sitesDict = [String:String]()
                 for (siteId, v) in sitesSnapshot {
                     if let siteName = v["name"] as? String {
@@ -246,6 +267,7 @@ class DataService  {
             // snapshot will contain the whole "activities" key with its children to the leaf.
             if let activitiesDict = snapshot.value as? [String:[String:AnyObject]] {
                 // the activitiesDict looks like: {"activityId":{key:val,key:val,...}}
+                self.projects.removeAll()
                 for (_, projectSnapshot) in activitiesDict {
                     // create a project based on the snapshot
                     let project = NNProject.createProjectFromFirebase(with: projectSnapshot)
@@ -266,6 +288,7 @@ class DataService  {
             for (k, v) in self.projects {
                 self.projects[k] = v.sorted(by: { $0.name < $1.name })
             }
+            self.reloadTables(section: DB_PROJECTS_PATH)
         })
     }
     
@@ -342,6 +365,7 @@ class DataService  {
             // snapshot will contain the whole "users" key with its children to the leaf.
             if let usersDict = snapshot.value as? [String:[String:AnyObject]] {
                 // the usersDict looks like: {"userId":{key:val,key:val,...}}
+                self.users.removeAll()
                 for (_, userSnapshot) in usersDict {
                     // create a user based on the snapshot
                     let user = NNUser.createUserFromFirebase(with: userSnapshot)
@@ -360,6 +384,7 @@ class DataService  {
             for (k, v) in self.users {
                 self.users[k] = v.sorted(by: { $0.displayName < $1.displayName })
             }
+            self.reloadTables(section: DB_USERS_PATH)
         })
     }
     
@@ -454,6 +479,7 @@ class DataService  {
             self.observations.sort(by: { (first, second) -> Bool in
                 return first.updatedAt.decimalValue > second.updatedAt.decimalValue
             })
+            self.reloadTables(section: DB_OBSERVATIONS_PATH)
         })
         // adding "remove" observer to the observations
         observationsRemoveHandle = db_ref.child(DB_OBSERVATIONS_PATH).observe(.childRemoved, with: { (snapshot) in
@@ -468,6 +494,7 @@ class DataService  {
                     self.observations.remove(at: i)
                 }
             }
+            self.reloadTables(section: DB_OBSERVATIONS_PATH)
         })
         // adding "change" observer to the observations
         observationsChangeHandle = db_ref.child(DB_OBSERVATIONS_PATH).observe(.childChanged, with: { (snapshot) in
@@ -485,6 +512,7 @@ class DataService  {
             self.observations.sort(by: { (first, second) -> Bool in
                 return first.updatedAt.decimalValue > second.updatedAt.decimalValue
             })
+            self.reloadTables(section: DB_OBSERVATIONS_PATH)
         })
     }
     
@@ -575,7 +603,7 @@ class DataService  {
         return nil
     }
     
-    func AddObservation(observation: NNObservation) {
+    func AddObservation(observation: NNObservation, completion: @escaping (Bool) -> Void) {
         if !LoggedIn() { return }
         // add the observation to the path
         let newObservationRef = db_ref.child(DB_OBSERVATIONS_PATH).childByAutoId()
@@ -584,11 +612,17 @@ class DataService  {
         let timestamp = Firebase.ServerValue.timestamp()
         c["created_at"] = timestamp as AnyObject
         c["updated_at"] = timestamp as AnyObject
-        newObservationRef.setValue(c)
-        // change the observation's activity's latest_contribution
-        db_ref.child("\(DB_PROJECTS_PATH)/\(observation.project)/\(DB_LATEST_CONTRIBUTION)").setValue(timestamp)
-        // change the user's latest_contribution
-        db_ref.child("\(DB_USERS_PATH)/\(observation.observer)/\(DB_LATEST_CONTRIBUTION)").setValue(timestamp)
+        newObservationRef.setValue(c) { error, ref in
+            if error == nil {
+                // change the observation's activity's latest_contribution
+                self.db_ref.child("\(DB_PROJECTS_PATH)/\(observation.project)/\(DB_LATEST_CONTRIBUTION)").setValue(timestamp)
+                // change the user's latest_contribution
+                self.db_ref.child("\(DB_USERS_PATH)/\(observation.observer)/\(DB_LATEST_CONTRIBUTION)").setValue(timestamp)
+                completion(true)
+            } else {
+                completion(false)
+            }
+        }
     }
     
     
@@ -612,6 +646,7 @@ class DataService  {
             self.designIdeas.sort(by: { (first, second) -> Bool in
                 return first.updatedAt.decimalValue > second.updatedAt.decimalValue
             })
+            self.reloadTables(section: DB_DESIGNIDEAS_PATH)
         })
         // adding "remove" observer to the design ideas
         designIdeasRemoveHandle = db_ref.child(DB_DESIGNIDEAS_PATH).observe(.childRemoved, with: { (snapshot) in
@@ -629,6 +664,7 @@ class DataService  {
             self.designIdeas.sort(by: { (first, second) -> Bool in
                 return first.updatedAt.decimalValue > second.updatedAt.decimalValue
             })
+            self.reloadTables(section: DB_DESIGNIDEAS_PATH)
         })
         // adding "changed" observer to the design ideas
         designIdeasChangeHandle = db_ref.child(DB_DESIGNIDEAS_PATH).observe(.childChanged, with: { (snapshot) in
@@ -646,6 +682,7 @@ class DataService  {
             self.designIdeas.sort(by: { (first, second) -> Bool in
                 return first.updatedAt.decimalValue > second.updatedAt.decimalValue
             })
+            self.reloadTables(section: DB_DESIGNIDEAS_PATH)
         })
     }
     
@@ -706,7 +743,7 @@ class DataService  {
         return nil
     }
 
-    func AddDesignIdea(idea: NNDesignIdea) {
+    func AddDesignIdea(idea: NNDesignIdea, completion: @escaping (Bool) -> Void) {
         if !LoggedIn() { return }
         // add the idea to the path
         let newIdeaRef = db_ref.child(DB_DESIGNIDEAS_PATH).childByAutoId()
@@ -715,9 +752,20 @@ class DataService  {
         let timestamp = Firebase.ServerValue.timestamp()
         c["created_at"] = timestamp as AnyObject
         c["updated_at"] = timestamp as AnyObject
-        newIdeaRef.setValue(c)
-        // change the user's latest_contribution
-        db_ref.child("\(DB_USERS_PATH)/\(idea.submitter)/\(DB_LATEST_CONTRIBUTION)").setValue(timestamp)
+        newIdeaRef.setValue(c) { error, ref in
+            if error == nil {
+                // change the user's latest_contribution
+                self.db_ref.child("\(DB_USERS_PATH)/\(idea.submitter)/\(DB_LATEST_CONTRIBUTION)").setValue(timestamp, withCompletionBlock: { error, ref in
+                    if error == nil {
+                        completion(true)
+                    } else {
+                        completion(false)
+                    }
+                })
+            } else {
+                completion(false)
+            }
+        }
     }
 
     
@@ -749,6 +797,7 @@ class DataService  {
             self.commentsOnDesignIdeas.sort(by: { (first, second) -> Bool in
                 return first.updatedAt.decimalValue > second.updatedAt.decimalValue
             })
+            self.reloadTables(section: DB_COMMENTS_PATH)
         })
         // adding observer to the comments
         commentsRemoveHandle = db_ref.child(DB_COMMENTS_PATH).observe(.childRemoved, with: { (snapshot) in
@@ -772,6 +821,7 @@ class DataService  {
                     }
                 }
             }
+            self.reloadTables(section: DB_COMMENTS_PATH)
         })
         // adding observer to the comments
         commentsChangeHandle = db_ref.child(DB_COMMENTS_PATH).observe(.childChanged, with: { (snapshot) in
@@ -795,6 +845,7 @@ class DataService  {
                     }
                 }
             }
+            self.reloadTables(section: DB_COMMENTS_PATH)
         })
     }
     

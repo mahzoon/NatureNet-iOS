@@ -24,6 +24,7 @@ class AddDesignIdeasController: UITableViewController {
     }
 
     @IBAction func addButtonTapped(_ sender: Any) {
+        view.endEditing(true)
         if !DataService.ds.LoggedIn() {
             UtilityFunctions.showAuthenticationRequiredMessage(theView: self, completion: {
                 self.performSegue(withIdentifier: SEGUE_SIGNIN, sender: nil)
@@ -36,13 +37,16 @@ class AddDesignIdeasController: UITableViewController {
             } else {
                 if let currentUserId = DataService.ds.GetCurrentUserId() {
                     let idea = NNDesignIdea(submitter: currentUserId, content: ideaText.text, id: "", created: 0, updated: 0, status: DESIGN_IDEA_STATUS_DISCUSSING, type: DESIGN_IDEA_TYPE, group: DESIGN_IDEA_GROUP, likes: [String : Bool]())
-                    DataService.ds.AddDesignIdea(idea: idea)
+                    DataService.ds.AddDesignIdea(idea: idea, completion: { success in
+                        if (success) {
+                            let alert = UIAlertController(title: ADD_IDEA_SUCCESS_TITLE, message: ADD_IDEA_SUCCESS_MESSAGE, preferredStyle: .alert)
+                            alert.addAction(UIAlertAction(title: ADD_IDEA_SUCCESS_BUTTON_TEXT, style: .default, handler: { val in
+                                self.dismiss(animated: true) {}
+                            }))
+                            self.present(alert, animated: true, completion: nil)
+                        }
+                    })
                 }
-                // this is not an error message! actually a thank you message!!
-                UtilityFunctions.showErrorMessage(theView: self, title: ADD_IDEA_SUCCESS_TITLE,
-                                                  message: ADD_IDEA_SUCCESS_MESSAGE,
-                                                  buttonText: ADD_IDEA_SUCCESS_BUTTON_TEXT)
-                self.dismiss(animated: true) {}
             }
         }
     }

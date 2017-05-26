@@ -27,6 +27,8 @@ class DesignIdeasViewController: UIViewController, UITableViewDelegate, UITableV
         designIdeasTable.delegate = self
         designIdeasTable.dataSource = self
         searchBar.delegate = self
+        
+        DataService.ds.registerTableView(group: DB_DESIGNIDEAS_PATH, tableView: designIdeasTable)
     }
 
     // Whenever this view appears, it should update user's status on the profile icon on the top left corner.

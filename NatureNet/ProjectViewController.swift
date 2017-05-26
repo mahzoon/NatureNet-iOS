@@ -30,6 +30,8 @@ class ProjectViewController: UIViewController, UITableViewDelegate, UITableViewD
         projectTable.delegate = self
         projectTable.dataSource = self
         searchBar.delegate = self
+        
+        DataService.ds.registerTableView(group: DB_PROJECTS_PATH, tableView: projectTable)
     }
 
     // Whenever this view appears, it should update user's status on the profile icon on the top left corner.

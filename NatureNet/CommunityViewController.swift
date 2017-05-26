@@ -30,6 +30,8 @@ class CommunityViewController: UIViewController, UITableViewDelegate, UITableVie
         communityTable.delegate = self
         communityTable.dataSource = self
         searchBar.delegate = self
+        
+        DataService.ds.registerTableView(group: DB_USERS_PATH, tableView: communityTable)
     }
 
     // Whenever this view appears, it should update user's status on the profile icon on the top left corner.

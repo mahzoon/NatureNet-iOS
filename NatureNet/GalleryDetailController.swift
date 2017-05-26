@@ -35,6 +35,8 @@ class GalleryDetailController: UIViewController, UITableViewDelegate, UITableVie
     var maxNV = 0
     var maxNB = false
 
+    @IBOutlet weak var outsideCommentView: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -49,7 +51,10 @@ class GalleryDetailController: UIViewController, UITableViewDelegate, UITableVie
         
         FixTextViewHeight()
         
-        hideKeyboardWhenTappedOutside()
+        // to dismiss the keyboard when tapped on the view
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        outsideCommentView.addGestureRecognizer(tap)
         
         commentText.text = COMMENT_TEXTBOX_PLACEHOLDER
         commentText.textColor = UIColor.lightGray
@@ -57,6 +62,8 @@ class GalleryDetailController: UIViewController, UITableViewDelegate, UITableVie
         updateLikeAndDislikeButtonImages()
         
         galleryDetailsTable.estimatedRowHeight = CGFloat(COMMENT_CELL_ESTIMATED_HEIGHT)
+        
+        DataService.ds.registerTableView(group: DB_COMMENTS_PATH, tableView: galleryDetailsTable)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -339,6 +346,8 @@ class GalleryDetailController: UIViewController, UITableViewDelegate, UITableVie
                                                   contributionId: obsv.id,
                                                   completion: { success in
                                                     if success {
+                                                        self.commentText.text = ""
+                                                        self.commentText.resignFirstResponder()
                                                         self.galleryDetailsTable.reloadData()
                                                     }
                     })

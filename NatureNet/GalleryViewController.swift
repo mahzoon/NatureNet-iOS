@@ -27,6 +27,8 @@ class GalleryViewController: UIViewController, UITableViewDelegate, UITableViewD
         self.galleryTable.delegate = self
         self.galleryTable.dataSource = self
         self.searchBar.delegate = self
+        
+        DataService.ds.registerTableView(group: DB_OBSERVATIONS_PATH, tableView: galleryTable)
     }
 
     // Whenever this view appears, it should update user's status on the profile icon on the top left corner.

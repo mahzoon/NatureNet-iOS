@@ -35,6 +35,8 @@ class DesignIdeaDetailController: UIViewController, UITableViewDelegate, UITable
     var maxNV = 0
     var maxNB = false
     
+    @IBOutlet weak var outsideCommentView: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -49,12 +51,17 @@ class DesignIdeaDetailController: UIViewController, UITableViewDelegate, UITable
         
         FixTextViewHeight()
         
-        hideKeyboardWhenTappedOutside()
+        // to dismiss the keyboard when tapped on the view
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        outsideCommentView.addGestureRecognizer(tap)
         
         commentText.text = COMMENT_TEXTBOX_PLACEHOLDER
         commentText.textColor = UIColor.lightGray
         
         designIdeaDetailsTable.estimatedRowHeight = CGFloat(COMMENT_CELL_ESTIMATED_HEIGHT)
+        
+        DataService.ds.registerTableView(group: DB_COMMENTS_PATH, tableView: designIdeaDetailsTable)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -293,6 +300,8 @@ class DesignIdeaDetailController: UIViewController, UITableViewDelegate, UITable
                 if let idea = designIdea {
                     DataService.ds.WriteCommentOn(context: DB_DESIGNIDEAS_PATH, comment: commentText.text, contributionId: idea.id, completion: { success in
                         if success {
+                            self.commentText.text = ""
+                            self.commentText.resignFirstResponder()
                             self.designIdeaDetailsTable.reloadData()
                         }
                     })

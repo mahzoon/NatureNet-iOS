@@ -197,14 +197,17 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
                                             location[1] = Double(l.longitude)
                                         }
                                         let obsv = NNObservation(project: projectId, site: currentUser.affiliation, observer: currentUser.id, id: "", data: data, location: location, created: 0, updated: 0, status: "", likes: [String: Bool]())
-                                        DataService.ds.AddObservation(observation: obsv)
+                                        DataService.ds.AddObservation(observation: obsv, completion: { success in
+                                            if success {
+                                                let alert = UIAlertController(title: ADD_OBSV_SUCCESS_TITLE, message: ADD_OBSV_SUCCESS_MESSAGE, preferredStyle: .alert)
+                                                alert.addAction(UIAlertAction(title: ADD_OBSV_SUCCESS_BUTTON_TEXT, style: .default, handler: { val in
+                                                    self.dismiss(animated: true) {}
+                                                }))
+                                                self.present(alert, animated: true, completion: nil)
+                                            }
+                                        })
                                     }
                                 }
-                                // this is not an error message! actually a thank you message!!
-                                UtilityFunctions.showErrorMessage(theView: self, title: ADD_OBSV_SUCCESS_TITLE,
-                                                                  message: ADD_OBSV_SUCCESS_MESSAGE,
-                                                                  buttonText: ADD_OBSV_SUCCESS_BUTTON_TEXT)
-                                self.dismiss(animated: true) {}
                             }
                         }
                     })

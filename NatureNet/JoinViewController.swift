@@ -177,9 +177,11 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
             let user = NNUser(affiliation: affiliation, icon: iconUrl, id: "", bio: "", latestContrib: 0, name: display_name, groups: [String : AnyObject](), created: 0, updated: 0)
             DataService.ds.Join(nnuser: user, email: email, pass: pass, fullName: full_name, completion: { wasSuccess, err in
                 if wasSuccess {
-                    // this is actually a welcome message, not an error!
-                    UtilityFunctions.showErrorMessage(theView: self, title: JOIN_SUCCESS_TITLE, message: JOIN_SUCCESS_MESSAGE, buttonText: JOIN_SUCCESS_BUTTON_TEXT)
-                    self.dismiss(animated: true) {}
+                    let alert = UIAlertController(title: JOIN_SUCCESS_TITLE, message: JOIN_SUCCESS_MESSAGE, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: JOIN_SUCCESS_BUTTON_TEXT, style: .default, handler: { val in
+                        self.dismiss(animated: true) {}
+                    }))
+                    self.present(alert, animated: true, completion: nil)
                 } else {
                     UtilityFunctions.showErrorMessage(theView: self, title: JOIN_ERRORS_TITLE, message: err, buttonText: JOIN_ERRORS_BUTTON_TEXT)
                 }

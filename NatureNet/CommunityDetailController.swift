@@ -31,6 +31,8 @@ class CommunityDetailController: UIViewController, UITableViewDelegate, UITableV
 
         userDetailTable.delegate = self
         userDetailTable.dataSource = self
+        
+        DataService.ds.registerTableView(group: DB_COMMENTS_PATH, tableView: userDetailTable)
     }
     
     override func viewWillAppear(_ animated: Bool) {

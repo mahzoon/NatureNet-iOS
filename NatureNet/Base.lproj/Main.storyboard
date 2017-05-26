@@ -252,7 +252,7 @@ DESIGN this nature technology with your community</string>
                         <sections>
                             <tableViewSection headerTitle="Create New Account" id="HdR-vq-RuG">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="75" id="MJC-Tm-W4C">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="75" id="MJC-Tm-W4C">
                                         <rect key="frame" x="0.0" y="55.5" width="320" height="75"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MJC-Tm-W4C" id="LgQ-EV-F2j">
@@ -285,7 +285,7 @@ DESIGN this nature technology with your community</string>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="jyA-LV-oV1">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="jyA-LV-oV1">
                                         <rect key="frame" x="0.0" y="130.5" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jyA-LV-oV1" id="ga0-uK-2d7">
@@ -307,7 +307,7 @@ DESIGN this nature technology with your community</string>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="bQ1-Of-S3u">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="bQ1-Of-S3u">
                                         <rect key="frame" x="0.0" y="174.5" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bQ1-Of-S3u" id="nTL-g0-Crd">
@@ -329,7 +329,7 @@ DESIGN this nature technology with your community</string>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="lZc-bD-Lf5">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="lZc-bD-Lf5">
                                         <rect key="frame" x="0.0" y="218.5" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lZc-bD-Lf5" id="rlc-90-Q8V">
@@ -351,7 +351,7 @@ DESIGN this nature technology with your community</string>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="bgp-GL-X4t">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="bgp-GL-X4t">
                                         <rect key="frame" x="0.0" y="262.5" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bgp-GL-X4t" id="C5e-Ds-T6d">
@@ -377,7 +377,7 @@ DESIGN this nature technology with your community</string>
                             </tableViewSection>
                             <tableViewSection headerTitle="Affiliation" id="TRg-Kh-yqi">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="110" id="TZs-It-Cqe">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="110" id="TZs-It-Cqe">
                                         <rect key="frame" x="0.0" y="362.5" width="320" height="110"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="TZs-It-Cqe" id="2eO-fL-c7v">
@@ -484,7 +484,7 @@ DESIGN this nature technology with your community</string>
                             </tableViewSection>
                             <tableViewSection id="2yX-N8-UCQ">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="RV0-9I-NoT">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="RV0-9I-NoT">
                                         <rect key="frame" x="0.0" y="211" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="RV0-9I-NoT" id="YIU-6B-QZG">
@@ -506,7 +506,7 @@ DESIGN this nature technology with your community</string>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="L7Y-wN-A0i">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="L7Y-wN-A0i">
                                         <rect key="frame" x="0.0" y="255" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="L7Y-wN-A0i" id="Eic-hQ-2WJ">
@@ -1267,6 +1267,7 @@ DESIGN this nature technology with your community</string>
                         <outlet property="numDislikes" destination="N7Y-Ik-yJi" id="7dJ-1P-tJO"/>
                         <outlet property="numLikes" destination="B8Y-bW-IHU" id="MKe-b3-idC"/>
                         <outlet property="observation" destination="75c-a5-nCZ" id="qKk-I8-iaD"/>
+                        <outlet property="outsideCommentView" destination="Duy-DW-Odv" id="7i5-zF-xMK"/>
                         <outlet property="postDate" destination="0hu-Vo-Y9g" id="n7Y-kJ-sFv"/>
                         <outlet property="profileImage" destination="tpK-Qd-Vld" id="ndE-XW-EkN"/>
                         <outlet property="username" destination="jhJ-ah-d0W" id="bmc-Co-CIZ"/>
@@ -2406,6 +2407,7 @@ DESIGN this nature technology with your community</string>
                                             </tableView>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <gestureRecognizers/>
                                         <constraints>
                                             <constraint firstItem="58T-Kb-vaY" firstAttribute="top" secondItem="Yvd-9W-a2K" secondAttribute="top" constant="10" id="IfQ-ez-4QP"/>
                                             <constraint firstItem="58T-Kb-vaY" firstAttribute="leading" secondItem="Yvd-9W-a2K" secondAttribute="leading" constant="10" id="kcM-jw-JU9"/>
@@ -2505,6 +2507,7 @@ DESIGN this nature technology with your community</string>
                         <outlet property="likeButton" destination="nQK-XP-QxW" id="Fw0-ct-FXV"/>
                         <outlet property="numDislikes" destination="Hm1-DL-u6D" id="B7a-jn-deP"/>
                         <outlet property="numLikes" destination="2lX-7V-d0t" id="P3r-hh-vT7"/>
+                        <outlet property="outsideCommentView" destination="Yvd-9W-a2K" id="IHQ-Hx-s0d"/>
                         <outlet property="postDate" destination="Sdh-np-RUG" id="i0Q-fS-oQD"/>
                         <outlet property="profileImage" destination="aSW-3U-MXP" id="2V2-RF-58C"/>
                         <outlet property="status" destination="7Wm-XZ-JSc" id="ilG-Tj-hG0"/>
@@ -3410,7 +3413,7 @@ DESIGN this nature technology with your community</string>
                         <sections>
                             <tableViewSection headerTitle="Edit Profile" id="pnR-kH-KgZ">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="75" id="jgk-O1-X4r">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="75" id="jgk-O1-X4r">
                                         <rect key="frame" x="0.0" y="55.5" width="320" height="75"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jgk-O1-X4r" id="MRk-gf-gix">
@@ -3443,7 +3446,7 @@ DESIGN this nature technology with your community</string>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="kF2-r7-RH4">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="kF2-r7-RH4">
                                         <rect key="frame" x="0.0" y="130.5" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kF2-r7-RH4" id="L6u-Iw-Mf7">
@@ -3465,7 +3468,7 @@ DESIGN this nature technology with your community</string>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="WeN-WE-LtR">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="WeN-WE-LtR">
                                         <rect key="frame" x="0.0" y="174.5" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WeN-WE-LtR" id="7Ui-K7-6me">
@@ -3487,7 +3490,7 @@ DESIGN this nature technology with your community</string>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="r5s-Fq-9rS">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="r5s-Fq-9rS">
                                         <rect key="frame" x="0.0" y="218.5" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="r5s-Fq-9rS" id="LE7-tj-5uQ">
@@ -3509,7 +3512,7 @@ DESIGN this nature technology with your community</string>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="6kR-YJ-bja">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="6kR-YJ-bja">
                                         <rect key="frame" x="0.0" y="262.5" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6kR-YJ-bja" id="LuF-P2-Ash">
@@ -3535,7 +3538,7 @@ DESIGN this nature technology with your community</string>
                             </tableViewSection>
                             <tableViewSection headerTitle="Affiliation" id="Pjz-sU-6Ow">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="110" id="LkR-Xa-f0j">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="110" id="LkR-Xa-f0j">
                                         <rect key="frame" x="0.0" y="362.5" width="320" height="110"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="LkR-Xa-f0j" id="sZg-PZ-7fo">
@@ -3843,7 +3846,7 @@ DESIGN this nature technology with your community</string>
                             </tableViewSection>
                             <tableViewSection id="Lyo-Wa-TgO">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="ISz-3r-owR">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="ISz-3r-owR">
                                         <rect key="frame" x="0.0" y="211" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ISz-3r-owR" id="Jci-55-LCE">
@@ -3865,7 +3868,7 @@ DESIGN this nature technology with your community</string>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="vd1-Pc-1rS">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="vd1-Pc-1rS">
                                         <rect key="frame" x="0.0" y="255" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vd1-Pc-1rS" id="W27-Om-QCM">
@@ -3974,7 +3977,7 @@ DESIGN this nature technology with your community</string>
                         <sections>
                             <tableViewSection headerTitle="Create New Account" id="Aqu-Ie-z3a">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="75" id="NxT-Lf-2hJ">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="75" id="NxT-Lf-2hJ">
                                         <rect key="frame" x="0.0" y="55.5" width="320" height="75"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="NxT-Lf-2hJ" id="tFH-6y-EQf">
@@ -4007,7 +4010,7 @@ DESIGN this nature technology with your community</string>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="qeu-St-3Ij">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="qeu-St-3Ij">
                                         <rect key="frame" x="0.0" y="130.5" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qeu-St-3Ij" id="Hit-c7-1KF">
@@ -4029,7 +4032,7 @@ DESIGN this nature technology with your community</string>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="Ffe-Xe-B4A">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="Ffe-Xe-B4A">
                                         <rect key="frame" x="0.0" y="174.5" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ffe-Xe-B4A" id="w8X-nr-iP9">
@@ -4051,7 +4054,7 @@ DESIGN this nature technology with your community</string>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="9UG-IR-moQ">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="9UG-IR-moQ">
                                         <rect key="frame" x="0.0" y="218.5" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9UG-IR-moQ" id="Ln9-aY-R9V">
@@ -4073,7 +4076,7 @@ DESIGN this nature technology with your community</string>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="Hlw-6U-LDa">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="Hlw-6U-LDa">
                                         <rect key="frame" x="0.0" y="262.5" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Hlw-6U-LDa" id="Eha-CL-oEb">
@@ -4099,7 +4102,7 @@ DESIGN this nature technology with your community</string>
                             </tableViewSection>
                             <tableViewSection headerTitle="Affiliation" id="nQg-At-iX1">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="110" id="HZO-Rr-uf9">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="110" id="HZO-Rr-uf9">
                                         <rect key="frame" x="0.0" y="362.5" width="320" height="110"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="HZO-Rr-uf9" id="U71-jW-QJL">
@@ -4196,8 +4199,8 @@ DESIGN this nature technology with your community</string>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="aNP-t6-vCR"/>
+        <segue reference="R8q-c5-eIq"/>
+        <segue reference="71W-kp-jfl"/>
         <segue reference="MJm-91-2Fo"/>
-        <segue reference="DM5-U5-Q0J"/>
-        <segue reference="aRp-Ov-Q5x"/>
     </inferredMetricsTieBreakers>
 </document>
