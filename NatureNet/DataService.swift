@@ -353,6 +353,16 @@ class DataService  {
         return totalList
     }
 
+    func GetAllProjectsBySite() -> Array<(key : String, value : NNProject)> {
+        var n = Array<(String, NNProject)>()
+        for (k, v) in self.projects {
+            for u in v {
+                n.append((GetSiteName(with: k), u))
+            }
+        }
+        return n
+    }
+    
     //////////////////////////////////////////////////////////////
     //
     //                          Community

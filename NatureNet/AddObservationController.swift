@@ -8,9 +8,10 @@
 
 import UIKit
 import MapKit
+import CoreLocation
 
 class AddObservationController: UITableViewController, UIPickerViewDataSource, UIPickerViewDelegate,
-UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CLLocationManagerDelegate {
 
     
     @IBOutlet weak var observationTableView: UITableView!
@@ -28,10 +29,13 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
     
     var pickedImageLocation: CLLocationCoordinate2D?
     
-    var projectList = [NNProject]()
+    var projectList = Array<(key : String, value : NNProject)>()
     
     // activity indicator for upload
     var activityIndicator = UIActivityIndicatorView()
+    
+    // to capture user's location when taking picture
+    let locationManager = CLLocationManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,12 +55,16 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
             })
         }
         
-        projectList = DataService.ds.GetAllProjects()
+        projectList = DataService.ds.GetAllProjectsBySite()
         
         activityIndicator.center = self.view.center
         activityIndicator.hidesWhenStopped = true
         activityIndicator.activityIndicatorViewStyle = .gray
         self.view.addSubview(activityIndicator)
+        
+        self.locationManager.delegate = self;
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        self.locationManager.requestWhenInUseAuthorization()
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -94,7 +102,9 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
             return PICKER_NO_SELECTION
         }
         if row - 1 < projectList.count {
-            return projectList[row - 1].name
+            if let name = projectList[row - 1].value.name {
+                return projectList[row - 1].key + " - \(name)"
+            }
         }
         return nil
     }
@@ -102,19 +112,27 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
             if picker.sourceType == UIImagePickerControllerSourceType.camera {
+                self.locationManager.stopUpdatingLocation()
                 MediaManager.md.saveImageToPhotosLib(img: pickedImage, completion: { success, error, loc in
-                    self.pickedImageLocation = loc
                     if !success {
                         let ac = UIAlertController(title: SAVE_OBSV_ERROR_MESSAGE, message: error, preferredStyle: .alert)
                         ac.addAction(UIAlertAction(title: SAVE_OBSV_ERROR_BUTTON_TEXT, style: .default))
                         self.present(ac, animated: true)
+                    } else {
+                        //self.pickedImageLocation = loc
+                        DispatchQueue.main.async {
+                            self.observationImage.image = pickedImage
+                            self.pickedImage = true
+                        }
                     }
                 })
             }
             if picker.sourceType == UIImagePickerControllerSourceType.photoLibrary {
                 imagePicker.dismiss(animated: true, completion: {
-                    self.observationImage.image = pickedImage
-                    self.pickedImage = true
+                    DispatchQueue.main.async {
+                        self.observationImage.image = pickedImage
+                        self.pickedImage = true
+                    }
                     if let url = info[UIImagePickerControllerReferenceURL] as? URL {
                         self.pickedImageLocation = MediaManager.md.getImageCoordinates(url: url)
                     }
@@ -138,6 +156,7 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
         alert.addAction(UIAlertAction(title: ADD_OBSV_IMAGE_OPTIONS_TAKE_NEW, style: .default, handler: { (action: UIAlertAction) in
             if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
                 self.imagePicker.sourceType = UIImagePickerControllerSourceType.camera;
+                self.locationManager.startUpdatingLocation()
                 self.present(self.imagePicker, animated: true, completion: nil)
             } else {
                 UtilityFunctions.showErrorMessage(theView: self, title: ADD_OBSV_IMAGE_OPTIONS_ERR_CAM_TITLE, message: ADD_OBSV_IMAGE_OPTIONS_ERR_CAM_MSG, buttonText: ADD_OBSV_IMAGE_OPTIONS_ERR_CAM_BTN_TXT)
@@ -190,7 +209,7 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
                                 data["image"] = r.secureUrl
                                 // send to Firebase
                                 if let currentUser = DataService.ds.GetCurrentUser() {
-                                    if let projectId = self.projectList[self.projectPicker.selectedRow(inComponent: 0)].id {
+                                    if let projectId = self.projectList[self.projectPicker.selectedRow(inComponent: 0) - 1].value.id {
                                         var location: [Double] = [0, 0]
                                         if let l = self.pickedImageLocation {
                                             location[0] = Double(l.latitude)
@@ -220,4 +239,7 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
         self.dismiss(animated: true) {}
     }
 
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        self.pickedImageLocation = locations[0].coordinate
+    }
 }

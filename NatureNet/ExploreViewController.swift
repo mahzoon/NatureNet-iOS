@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class ExploreViewController: UIViewController, MKMapViewDelegate, UISearchBarDelegate {
+class ExploreViewController: UIViewController, MKMapViewDelegate, UISearchBarDelegate, CLLocationManagerDelegate {
 
     // reference to the search bar
     @IBOutlet weak var searchBar: UISearchBar!
@@ -33,6 +33,8 @@ class ExploreViewController: UIViewController, MKMapViewDelegate, UISearchBarDel
     
     var listObservations = [NNObservation]()
     
+    let locationManager = CLLocationManager()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -48,16 +50,25 @@ class ExploreViewController: UIViewController, MKMapViewDelegate, UISearchBarDel
         } else {
             profileButton.setImage(ICON_PROFILE_OFFLINE, for: .normal)
         }
-        
     }
     
     func mapViewDidFinishRenderingMap(_ mapView: MKMapView, fullyRendered: Bool) {
-        if firstTimeLoad {
+        if self.firstTimeLoad {
             let initialLocation = CLLocation(latitude: sample_latitude1, longitude: sample_longitude1)
-            DispatchQueue.main.async {
-                self.centerMapOnLocation(location: initialLocation)
+            self.centerMapOnLocation(location: initialLocation)
+            // check if we can center map on user location
+            self.checkUserLocation()
+            self.firstTimeLoad = false
+        }
+    }
+
+    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        DispatchQueue.main.async {
+            if !self.firstTimeLoad {
+                self.mapView.removeAnnotations(self.listObservations)
+                self.listObservations = DataService.ds.GetObservations(near: self.mapView.region, searchFilter: self.searchBar.text ?? "")
+                self.mapView.addAnnotations(self.listObservations)
             }
-            firstTimeLoad = false
         }
     }
     
@@ -67,7 +78,7 @@ class ExploreViewController: UIViewController, MKMapViewDelegate, UISearchBarDel
         let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, MAP_CENTER_REGION_RADIUS * 2.0, MAP_CENTER_REGION_RADIUS * 2.0)
         mapView.setRegion(coordinateRegion, animated: true)
     }
-
+    
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         if let v = view.detailCalloutAccessoryView {
             if v.subviews.count > 0 {
@@ -89,12 +100,6 @@ class ExploreViewController: UIViewController, MKMapViewDelegate, UISearchBarDel
                 }
             }
         }
-    }
-    
-    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
-        mapView.removeAnnotations(self.listObservations)
-        self.listObservations = DataService.ds.GetObservations(near: mapView.region, searchFilter: self.searchBar.text ?? "")
-        mapView.addAnnotations(self.listObservations)
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
@@ -187,5 +192,19 @@ class ExploreViewController: UIViewController, MKMapViewDelegate, UISearchBarDel
     // remove the focus from the search bar if the user clicked on the cross button on the search bar. This will also causes the keyboard to hide.
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         view.endEditing(true)
+    }
+    
+    func checkUserLocation() {
+        if CLLocationManager.locationServicesEnabled()
+        {
+            self.locationManager.delegate = self
+            self.locationManager.requestWhenInUseAuthorization()
+            self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            self.locationManager.startUpdatingLocation()
+            if let loc = self.locationManager.location {
+                self.centerMapOnLocation(location: loc)
+            }
+            self.locationManager.stopUpdatingLocation()
+        }
     }
 }
