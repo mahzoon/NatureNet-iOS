@@ -45,15 +45,36 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
         profileImage.layer.cornerRadius = profileImage.frame.size.width / 2
         profileImage.clipsToBounds = true
         
-        if let user = DataService.ds.GetCurrentUser() {
-            self.displayName.text = user.displayName
-            
+        self.user = DataService.ds.GetCurrentUser()
+        
+        self.displayName.text = user?.displayName
+        self.emailAddress.text = DataService.ds.GetCurrentUserEmail()
+        if let affiliationId = self.user?.affiliation {
+            let affiliationName = DataService.ds.GetSiteName(with: affiliationId)
+            if let index = DataService.ds.GetSiteNames().index(of: affiliationName) {
+                self.affiliationPicker.selectRow(index + 1, inComponent: 0, animated: true)
+            } else {
+                self.affiliationPicker.selectRow(0, inComponent: 0, animated: true)
+            }
+        } else {
+            self.affiliationPicker.selectRow(0, inComponent: 0, animated: true)
         }
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        DataService.ds.GetCurrentUserFullName { success, result in
+            if success {
+                self.fullName.text = result
+            }
+        }
+        self.profileImage.image = ICON_DEFAULT_USER_AVATAR
+        if let u = self.user {
+            // requesting the avatar icon
+            MediaManager.md.getOrDownloadIcon(requesterId: "ProfileViewController", urlString: u.avatarUrl, completion: { img, err in
+                if let i = img {
+                    DispatchQueue.main.async {
+                        self.profileImage.image = i
+                    }
+                }
+            })
+        }
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {

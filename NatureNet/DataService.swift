@@ -42,11 +42,11 @@ class DataService  {
     // The observations stored in an array sorted by their recency. The first item is the most recent one.
     private var observations = [NNObservation]()
     // reference to the observer handle of observations. This observer looks for additions to the observations, and updates the "observations" array if new observation is being added. The reference is mainly for "dispose" to remove the handle.
-    private var observationsAddHandle: UInt!
+    private var observationsAddHandle: UInt?
     // reference to the observer handle of observations. This observer looks for removals to the observations, and updates the "observations" array if an observation is being removed. The reference is mainly for "dispose" to remove the handle.
-    private var observationsRemoveHandle: UInt!
+    private var observationsRemoveHandle: UInt?
     // reference to the observer handle of observations. This observer looks for changes to the observations, and updates the "observations" array if an observation is being changed. The reference is mainly for "dispose" to remove the handle.
-    private var observationsChangeHandle: UInt!
+    private var observationsChangeHandle: UInt?
     
     // The design ideas stored in an array sorted by their recency. The first item is the most recent one.
     private var designIdeas = [NNDesignIdea]()
@@ -77,13 +77,19 @@ class DataService  {
         // initializing the reference to the database
         db_ref = Database.database().reference()
         
-        // initializing observers
+        // initializing observers except observations observer
         initSitesObserver()
         initProjectsObserver()
         initUsersObserver()
-        initObservationsObserver()
         initDesignIdeasObserver()
         initCommentsObserver()
+    }
+    
+    // this is separated since it makes a big request, and only needed when the user is viewing the explore screen
+    func initializeObservationsObserver() {
+        if self.observationsAddHandle == nil || self.observationsChangeHandle == nil || self.observationsRemoveHandle == nil {
+            initObservationsObserver()
+        }
     }
     
     func dispose() {
@@ -103,11 +109,17 @@ class DataService  {
         // remove users observer
         db_ref.removeObserver(withHandle: usersHandle)
         // remove add observations observer
-        db_ref.removeObserver(withHandle: observationsAddHandle)
+        if let obsvAddHandle = self.observationsAddHandle {
+            db_ref.removeObserver(withHandle: obsvAddHandle)
+        }
         // remove remove observations observer
-        db_ref.removeObserver(withHandle: observationsChangeHandle)
+        if let obsvRemoveHandle = self.observationsRemoveHandle {
+            db_ref.removeObserver(withHandle: obsvRemoveHandle)
+        }
         // remove change observations observer
-        db_ref.removeObserver(withHandle: observationsRemoveHandle)
+        if let obsvChangeHandle = self.observationsChangeHandle {
+            db_ref.removeObserver(withHandle: obsvChangeHandle)
+        }
         // remove add design ideas observer
         db_ref.removeObserver(withHandle: designIdeasAddHandle)
         // remove remove design ideas observer
@@ -205,6 +217,29 @@ class DataService  {
                     completion(true, "")
                 }
             }
+        }
+    }
+    
+    func GetCurrentUserEmail() -> String? {
+        return self.currentUser?.email
+    }
+    
+    func GetCurrentUserFullName(completion: @escaping (Bool, String) -> Void) {
+        if !LoggedIn() { completion(false, "") }
+        if let uid = currentUser?.uid {
+            db_ref.child("\(DB_USERS_PRIVATE_PATH)/\(uid)").observeSingleEvent(of: .value, with: { snapshot in
+                if let userDict = snapshot.value as? [String: AnyObject] {
+                    if let fullName = userDict["name"], (fullName as? String) != nil {
+                        completion(true, fullName as! String)
+                    } else {
+                        completion(false, "")
+                    }
+                } else {
+                    completion(false, "")
+                }
+            })
+        } else {
+            completion(false, "")
         }
     }
     
@@ -456,16 +491,22 @@ class DataService  {
         return nil
     }
     
-    func UpdateUserProfile(user: NNUser, fullname: String, demographics: [String: AnyObject]) {
+    func UpdateUserProfile(user: NNUser, fullname: String, demographics: [String: AnyObject], completion: @escaping (Bool) -> Void) {
         if !LoggedIn() { return }
         var c = user.getDictionaryRepresentation()
         let timestamp = Firebase.ServerValue.timestamp()
         c["updated_at"] = timestamp as AnyObject
-        db_ref.child("\(DB_USERS_PATH)/\(user.id)").setValue(c)
-        // update user-private information i.e. fullname, and demographics
-        db_ref.child("\(DB_USERS_PRIVATE_PATH)/\(user.id)/name").setValue(fullname)
-        db_ref.child("\(DB_USERS_PRIVATE_PATH)/\(user.id)/updated_at").setValue(timestamp)
-        db_ref.child("\(DB_USERS_PRIVATE_PATH)/\(user.id)/demographics").setValue(demographics)
+        db_ref.child("\(DB_USERS_PATH)/\(user.id)").setValue(c) { err, ref in
+            if err == nil {
+                // update user-private information i.e. fullname, and demographics
+                self.db_ref.child("\(DB_USERS_PRIVATE_PATH)/\(user.id)/name").setValue(fullname)
+                self.db_ref.child("\(DB_USERS_PRIVATE_PATH)/\(user.id)/updated_at").setValue(timestamp)
+                self.db_ref.child("\(DB_USERS_PRIVATE_PATH)/\(user.id)/demographics").setValue(demographics)
+                completion(true)
+            } else {
+                completion(false)
+            }
+        }
     }
 
     
