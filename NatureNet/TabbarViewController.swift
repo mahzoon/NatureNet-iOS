@@ -17,14 +17,14 @@ class TabbarViewController: UITabBarController {
     }
     
     func setupMiddleButton() {
-        let menuButton = UIButton(frame: CGRect(x: 0, y: 0, width: 64, height: 64))
+        let menuButton = UIButton(frame: CGRect(x: 0, y: 0, width: CAMERA_MENU_BUTTON_SIZE, height: CAMERA_MENU_BUTTON_SIZE))
         
         var menuButtonFrame = menuButton.frame
         menuButtonFrame.origin.y = view.bounds.height - menuButtonFrame.height
         menuButtonFrame.origin.x = view.bounds.width/2 - menuButtonFrame.size.width/2
         menuButton.frame = menuButtonFrame
         
-        menuButton.backgroundColor = UIColor.red
+        menuButton.layer.borderWidth = 0
         menuButton.layer.cornerRadius = menuButtonFrame.height/2
         view.addSubview(menuButton)
         

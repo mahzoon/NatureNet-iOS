@@ -862,7 +862,7 @@ DESIGN this nature technology with your community</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e3X-fL-MHK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="398" y="4484"/>
+            <point key="canvasLocation" x="1577" y="4403"/>
         </scene>
         <!--Observation-->
         <scene sceneID="Po8-IK-TI4">
@@ -1280,7 +1280,7 @@ DESIGN this nature technology with your community</string>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-969" y="3858"/>
+            <point key="canvasLocation" x="-182" y="3781"/>
         </scene>
         <!--Image-->
         <scene sceneID="E1T-WG-cLU">
@@ -1325,7 +1325,7 @@ DESIGN this nature technology with your community</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tkl-qt-gSG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-926" y="4654"/>
+            <point key="canvasLocation" x="-128" y="4660"/>
         </scene>
         <!--Project Details-->
         <scene sceneID="1z4-tM-r5E">
@@ -1724,6 +1724,7 @@ DESIGN this nature technology with your community</string>
                         <outlet property="projectDetailTable" destination="f5K-N6-bch" id="VHX-hw-C5J"/>
                         <outlet property="projectIcon" destination="wG3-Fj-LvS" id="vlD-pk-3cE"/>
                         <outlet property="projectName" destination="QjA-FM-Kj2" id="kPR-kc-mNm"/>
+                        <segue destination="2xp-oe-SFT" kind="presentation" identifier="SignIn" id="NIN-aW-QEi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5cR-eD-WDS" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2556,12 +2557,6 @@ DESIGN this nature technology with your community</string>
                                 </connections>
                             </button>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="camera" id="znK-lA-11o">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <connections>
-                                <segue destination="f5y-4d-APR" kind="presentation" id="j97-fr-U8g"/>
-                            </connections>
-                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="mapView" destination="EKO-l3-FUS" id="fa3-B2-DL1"/>
@@ -3141,6 +3136,7 @@ DESIGN this nature technology with your community</string>
                         <outlet property="userAvatar" destination="o1d-Zo-j50" id="sXZ-it-WLa"/>
                         <outlet property="userDetailTable" destination="deq-7w-GA5" id="7iM-JC-dMw"/>
                         <outlet property="username" destination="Ti5-iG-KJo" id="dpB-Fk-qHj"/>
+                        <segue destination="2xp-oe-SFT" kind="presentation" identifier="SignIn" id="Vbo-7o-gcA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="upH-pi-Tzv" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3778,6 +3774,7 @@ DESIGN this nature technology with your community</string>
                         <outlet property="observationImageButton" destination="Kyk-Mj-hpf" id="r0d-Fh-s2J"/>
                         <outlet property="observationTableView" destination="Cjc-sa-VQc" id="nqr-SW-hNV"/>
                         <outlet property="projectPicker" destination="SWM-un-ltH" id="Ujn-p0-lfG"/>
+                        <segue destination="2xp-oe-SFT" kind="presentation" identifier="SignIn" id="D8y-mf-L1R"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="plW-hh-pa2" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -4189,9 +4186,8 @@ DESIGN this nature technology with your community</string>
         <image name="signin screen - logo" width="816" height="265"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="QnA-m3-zE7"/>
         <segue reference="iN3-Ze-sCb"/>
         <segue reference="L4E-hR-TbY"/>
-        <segue reference="VGZ-Ad-eZH"/>
+        <segue reference="2UQ-Ff-6WK"/>
     </inferredMetricsTieBreakers>
 </document>
