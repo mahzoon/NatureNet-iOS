@@ -146,7 +146,7 @@ DESIGN this nature technology with your community</string>
                                                                 </constraints>
                                                                 <state key="normal" title="Explore"/>
                                                                 <connections>
-                                                                    <segue destination="V8V-zc-o2v" kind="show" identifier="Explore" animates="NO" action="showDetailViewController:sender:" id="rA3-6T-wNv"/>
+                                                                    <action selector="exploreButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="mK7-f8-be2"/>
                                                                 </connections>
                                                             </button>
                                                         </subviews>
@@ -236,6 +236,9 @@ DESIGN this nature technology with your community</string>
                     <navigationItem key="navigationItem" title="NatureNet" id="NCg-SU-XnC">
                         <barButtonItem key="backBarButtonItem" title=" " id="yyx-iq-Jog"/>
                     </navigationItem>
+                    <connections>
+                        <segue destination="V8V-zc-o2v" kind="show" identifier="Explore" id="td5-5f-qzh"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

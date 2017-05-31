@@ -18,17 +18,6 @@ class ExploreViewController: UIViewController, MKMapViewDelegate, UISearchBarDel
     // reference to the profile icon button on the top left corner
     @IBOutlet weak var profileButton: UIButton!
     
-    let sample_latitude1 = 35.232279//39.1949966
-    let sample_longitude1 = -80.700205//-106.8214056
-//    let sample_image1 = UIImage(named: "sample_image1")
-//    
-//    let sample_latitude2 = 35.292279//39.1949966
-//    let sample_longitude2 = -80.750205//-106.8214056
-//    let sample_image2 = UIImage(named: "sample_image3")
-    
-    let width = 100
-    let height = 75
-    
     var firstTimeLoad = true
     
     var listObservations = [NNObservation]()
@@ -54,7 +43,7 @@ class ExploreViewController: UIViewController, MKMapViewDelegate, UISearchBarDel
     
     func mapViewDidFinishRenderingMap(_ mapView: MKMapView, fullyRendered: Bool) {
         if self.firstTimeLoad {
-            let initialLocation = CLLocation(latitude: sample_latitude1, longitude: sample_longitude1)
+            let initialLocation = CLLocation(latitude: MAP_INITLOCATION_LATITUDE, longitude: MAP_INITLOCATION_LONGITUDE)
             self.centerMapOnLocation(location: initialLocation)
             // check if we can center map on user location
             self.checkUserLocation()
@@ -114,17 +103,16 @@ class ExploreViewController: UIViewController, MKMapViewDelegate, UISearchBarDel
             }
 
             let snapshotView = UIView()
-            let widthConstraint = NSLayoutConstraint(item: snapshotView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: CGFloat(self.width))
+            let widthConstraint = NSLayoutConstraint(item: snapshotView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: CGFloat(MAP_ANNOTATION_LAYOVER_WIDTH))
             snapshotView.addConstraint(widthConstraint)
             
-            let heightConstraint = NSLayoutConstraint(item: snapshotView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: CGFloat(self.height))
+            let heightConstraint = NSLayoutConstraint(item: snapshotView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: CGFloat(MAP_ANNOTATION_LAYOVER_HEIGHT))
             snapshotView.addConstraint(heightConstraint)
             
-            let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: self.width, height: self.height))
+            let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: MAP_ANNOTATION_LAYOVER_WIDTH, height: MAP_ANNOTATION_LAYOVER_HEIGHT))
             imageView.contentMode = .scaleAspectFill
             imageView.clipsToBounds = true
             
-            //imageView.image = annotation.observationImageUrl
             // set the picture here
             snapshotView.addSubview(imageView)
     

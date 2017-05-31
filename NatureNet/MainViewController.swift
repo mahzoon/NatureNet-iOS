@@ -10,15 +10,23 @@ import UIKit
 
 class MainViewController: UIViewController {
 
+    // activity indicator for loading observations
+    var activityIndicator = UIActivityIndicatorView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        activityIndicator.center = self.view.center
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.activityIndicatorViewStyle = .gray
+        self.view.addSubview(activityIndicator)
     }
 
     // when the main view appears, we need to check if the user logged in.
     // if the user is already logged in (from a previous session), then we go straight into "explore" screen
     override func viewDidAppear(_ animated: Bool) {
         if DataService.ds.LoggedIn() {
-            performSegue(withIdentifier: SEGUE_EXPLORE, sender: nil)
+            self.presentExploreScreen()
         }
     }
     
@@ -33,10 +41,27 @@ class MainViewController: UIViewController {
                 signInVC.parentVC = self
                 signInVC.successSegueId = SEGUE_EXPLORE
             }
-            if id == SEGUE_EXPLORE {
-                DataService.ds.initializeObservationsObserver()
-            }
         }
+    }
+    
+    @IBAction func exploreButtonTapped(_ sender: Any) {
+        self.presentExploreScreen()
+    }
+    
+    func presentExploreScreen() {
+        
+        // start activity spinner
+        //                self.activityIndicator.startAnimating()
+        //                UIApplication.shared.beginIgnoringInteractionEvents()
+        
+        DispatchQueue.global().async {
+            DataService.ds.initializeObservationsObserver()
+        }
+        
+        //                // stop activity spinner
+        //                self.activityIndicator.stopAnimating()
+        //                UIApplication.shared.endIgnoringInteractionEvents()
+        performSegue(withIdentifier: SEGUE_EXPLORE, sender: nil)
     }
     
 }

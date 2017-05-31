@@ -67,6 +67,10 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
         self.locationManager.requestWhenInUseAuthorization()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        self.observationImageButtonTapped("")
+    }
+    
     func textFieldDidBeginEditing(_ textField: UITextField) {
         let scrollOffset = CGPoint(x: textField.frame.minX, y: self.view.frame.maxY - textField.frame.maxY)
         observationTableView.setContentOffset(scrollOffset, animated: true)

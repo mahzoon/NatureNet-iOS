@@ -78,11 +78,13 @@ class DataService  {
         db_ref = Database.database().reference()
         
         // initializing observers except observations observer
-        initSitesObserver()
-        initProjectsObserver()
-        initUsersObserver()
-        initDesignIdeasObserver()
-        initCommentsObserver()
+        DispatchQueue.global().async {
+            self.initSitesObserver()
+            self.initProjectsObserver()
+            self.initUsersObserver()
+            self.initDesignIdeasObserver()
+            self.initCommentsObserver()
+        }
     }
     
     // this is separated since it makes a big request, and only needed when the user is viewing the explore screen
