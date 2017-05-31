@@ -16,6 +16,7 @@
 		2D632E1E1ED1349E007ECF51 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2D632E1D1ED1349E007ECF51 /* GoogleService-Info.plist */; };
 		2D632E491ED234FC007ECF51 /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D632E481ED234FC007ECF51 /* Project.swift */; };
 		2D632E4B1ED24941007ECF51 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D632E4A1ED24941007ECF51 /* User.swift */; };
+		2D73CD421EDD245D002E58CD /* TabbarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D73CD411EDD245D002E58CD /* TabbarViewController.swift */; };
 		2D7DF89A1ED2C48E00D509F3 /* DesignIdea.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D7DF8991ED2C48E00D509F3 /* DesignIdea.swift */; };
 		2D7DF89C1ED36D6600D509F3 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D7DF89B1ED36D6600D509F3 /* Comment.swift */; };
 		2D7DF8A01ED37A3000D509F3 /* ShowMoreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D7DF89F1ED37A3000D509F3 /* ShowMoreCell.swift */; };
@@ -81,6 +82,7 @@
 		2D632E1D1ED1349E007ECF51 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2D632E481ED234FC007ECF51 /* Project.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
 		2D632E4A1ED24941007ECF51 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		2D73CD411EDD245D002E58CD /* TabbarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabbarViewController.swift; sourceTree = "<group>"; };
 		2D7DF8991ED2C48E00D509F3 /* DesignIdea.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesignIdea.swift; sourceTree = "<group>"; };
 		2D7DF89B1ED36D6600D509F3 /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		2D7DF89F1ED37A3000D509F3 /* ShowMoreCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowMoreCell.swift; sourceTree = "<group>"; };
@@ -281,6 +283,7 @@
 				68FB9BCE1ECBE075006C88B1 /* ProjectViewController.swift */,
 				68FB9BC21ECBB240006C88B1 /* DesignIdeasViewController.swift */,
 				68FB9BD41ECBE267006C88B1 /* CommunityViewController.swift */,
+				2D73CD411EDD245D002E58CD /* TabbarViewController.swift */,
 			);
 			name = Menu;
 			sourceTree = "<group>";
@@ -649,6 +652,7 @@
 				68FB9BE81ECCFA47006C88B1 /* ProfileViewController.swift in Sources */,
 				2D632E491ED234FC007ECF51 /* Project.swift in Sources */,
 				68FB9BE61ECCFA11006C88B1 /* DesignIdeaDetailController.swift in Sources */,
+				2D73CD421EDD245D002E58CD /* TabbarViewController.swift in Sources */,
 				68FA5A401ECA1538002E66B1 /* AppDelegate.swift in Sources */,
 				682C316D1ECE48BB00F6D87D /* CommentCell.swift in Sources */,
 			);

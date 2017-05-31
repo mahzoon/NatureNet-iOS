@@ -33,6 +33,9 @@ class MainViewController: UIViewController {
                 signInVC.parentVC = self
                 signInVC.successSegueId = SEGUE_EXPLORE
             }
+            if id == SEGUE_EXPLORE {
+                DataService.ds.initializeObservationsObserver()
+            }
         }
     }
     

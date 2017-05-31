@@ -31,6 +31,7 @@ let DEFAULT_PIN_COLOR = UIColor.darkGray
 let JOIN_PROFILE_IMAGE = "join screen - user"
 let ADD_OBSV_IMAGE = "icon - observation default"
 // Icons used in code
+let ICON_CAMERA_TABBAR_BUTTON = UIImage(named: "menu - camera2")
 let ICON_PROFILE_ONLINE = UIImage(named: "icon - profile - online")
 let ICON_PROFILE_OFFLINE = UIImage(named: "icon - profile - offline")
 let ICON_DESIGN_IDEA_STATUS_DONE = UIImage(named: "icon - done")
@@ -181,6 +182,7 @@ let SEGUE_SIGNIN = "SignIn"
 let SEGUE_EXPLORE = "Explore"
 let SEGUE_PROFILE = "Profile"
 let SEGUE_DETAILS = "Details"
+let SEGUE_ADD_OBSV = "AddObservation"
 
 //
 // Cell Identifiers
