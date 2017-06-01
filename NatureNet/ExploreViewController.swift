@@ -33,12 +33,17 @@ class ExploreViewController: UIViewController, MKMapViewDelegate, UISearchBarDel
     
     // Whenever this view appears, it should update user's status on the profile icon on the top left corner.
     override func viewWillAppear(_ animated: Bool) {
+        mapView.showsUserLocation = true
         // set the status of the user (i.e signed in or not) on the profile icon
         if DataService.ds.LoggedIn() {
             profileButton.setImage(ICON_PROFILE_ONLINE, for: .normal)
         } else {
             profileButton.setImage(ICON_PROFILE_OFFLINE, for: .normal)
         }
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        mapView.showsUserLocation = false
     }
     
     func mapViewDidFinishRenderingMap(_ mapView: MKMapView, fullyRendered: Bool) {
