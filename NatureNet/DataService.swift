@@ -649,24 +649,26 @@ class DataService  {
     }
     
     func GetObservationsForProject(with id: String) -> [NNObservation] {
-        let listObs = self.observations.filter { (observation) -> Bool in
+        var listObs = self.observations.filter { (observation) -> Bool in
             if observation.project == id {
                 return true
             } else {
                 return false
             }
         }
+        listObs = listObs.sorted (by: {$0.updatedAt.int64Value > $1.updatedAt.int64Value})
         return listObs
     }
     
     func GetObservationsForUser(with id: String) -> [NNObservation] {
-        let listObs = self.observations.filter { (observation) -> Bool in
+        var listObs = self.observations.filter { (observation) -> Bool in
             if observation.observer == id {
                 return true
             } else {
                 return false
             }
         }
+        listObs = listObs.sorted (by: {$0.updatedAt.int64Value > $1.updatedAt.int64Value})
         return listObs
     }
     
