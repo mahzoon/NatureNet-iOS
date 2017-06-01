@@ -24,6 +24,8 @@ let APP_COLOR_SHADOW = UIColor(red: 157.0/255.0, green: 157.0/255.0, blue: 157.0
 let PIN_COLORS: [String: UIColor] = ["aces": UIColor.blue, "rcnc": UIColor.green, "aws": UIColor.red, "zz_elsewhere": UIColor.cyan]
 // default pin color
 let DEFAULT_PIN_COLOR = UIColor.darkGray
+// activity indicator opacity
+let ACTIVITY_INDICATOR_OPACITY = CGFloat(0.4)
 
 //
 // Icons names
@@ -62,6 +64,7 @@ let MAP_ANNOTATION_LAYOVER_HEIGHT = 75
 let MAP_INITLOCATION_LATITUDE = 35.232279
 let MAP_INITLOCATION_LONGITUDE = -80.700205
 let ADD_OBSV_PROJECT_PICKER_FONT_SIZE = CGFloat(14.0)
+let ACTIVITY_INDICATOR_TEXT_HEIGHT = CGFloat(40.0)
 //
 let COMMUNITY_LIST_INIT_COUNT = 15
 let COMMUNITY_LIST_LOAD_MORE_COUNT = 15
@@ -89,6 +92,8 @@ let COMMENT_TEXTBOX_PLACEHOLDER = "Comment"
 let PICKER_NO_SELECTION = "Select one"
 let LISTS_SHOW_MORE_TEXT = "Show more..."
 let NO_COMMENTS_TEXT = "No comments."
+let ACTIVITY_INDICATOR_TEXT_LOADING = "Loading..."
+let ACTIVITY_INDICATOR_TEXT_UPLOADING = "Uploading..."
 
 //
 // Messages
@@ -160,9 +165,12 @@ let ADD_OBSV_IMAGE_OPTIONS_ERR_CAM_BTN_TXT = "OK"
 let ADD_OBSV_SUCCESS_TITLE = "Thank you!"
 let ADD_OBSV_SUCCESS_MESSAGE = "We appreciate your contribution to the NatureNet community project."
 let ADD_OBSV_SUCCESS_BUTTON_TEXT = "Dismiss"
-let ADD_OBSV_UPLOAD_FAILED_TITLE = "Upload failed."
-let ADD_OBSV_UPLOAD_FAILED_MESSAGE = "You can tap submit again to try one more time. If you do not have internet connection, you can submit this observation again. Note that if you just took the observation image using the camera, the image is saved to your photo library. You could submit your observation later and choose the image from your photo library. Also, here is the error description: "
+let ADD_OBSV_UPLOAD_FAILED_TITLE = "Upload failed"
+let ADD_OBSV_UPLOAD_FAILED_MESSAGE = "You can tap submit again to try one more time. If you do not have internet connection, you can submit this observation later. If you just took the observation image using the camera, the image is already saved to your photo library. You can submit your observation later and choose the image from your photo library. Also, here is the error description: "
 let ADD_OBSV_UPLOAD_FAILED_BUTTON_TEXT = "Dismiss"
+let ADD_OBSV_UPLOAD_CANCELED_TITLE = "Upload canceled"
+let ADD_OBSV_UPLOAD_CANCELED_MESSAGE = "If you just took the observation image using the camera, the image is already saved to your photo library. You can submit your observation later and choose the image from your photo library."
+let ADD_OBSV_UPLOAD_CANCELED_BUTTON_TEXT = "Dismiss"
 
 // Observation Detail Screen
 let SAVE_OBSV_ALERT_TITLE:String = "How do you want to save this observation?"

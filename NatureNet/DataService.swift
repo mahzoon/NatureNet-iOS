@@ -87,13 +87,6 @@ class DataService  {
         }
     }
     
-    // this is separated since it makes a big request, and only needed when the user is viewing the explore screen
-    func initializeObservationsObserver() {
-        if self.observationsAddHandle == nil || self.observationsChangeHandle == nil || self.observationsRemoveHandle == nil {
-            initObservationsObserver()
-        }
-    }
-    
     func dispose() {
         // disposing all data objects
         sites.removeAll()
@@ -534,54 +527,86 @@ class DataService  {
     //
     //////////////////////////////////////////////////////////////
     
-    private func initObservationsObserver() {
-        // adding "add" observer to the observations
-        observationsAddHandle = db_ref.child(DB_OBSERVATIONS_PATH).observe(.childAdded, with: { (snapshot) in
-            // snapshot.value is a dictionary for one Observation
-            if let obsDict = snapshot.value as? [String: AnyObject] {
-                let observation = NNObservation.createObservationFromFirebase(with: obsDict)
-                // we don't bother adding observations that do not have updated_at timestamp. They are possibly test observations.
-                if observation.updatedAt != 0 {
+    func initObservationsObserver(completion: @escaping (Bool) -> Void) {
+        
+        // if we already initialized just return
+        if self.observationsAddHandle != nil && self.observationsRemoveHandle != nil && self.observationsChangeHandle != nil {
+            completion(true)
+            return
+        }
+        
+        // this grabs all observation data once then initializes to watch for additions/removals after initialization.
+        db_ref.child(DB_OBSERVATIONS_PATH).observeSingleEvent(of: .value, with: { snapshot in
+            // snapshot will contain the whole "obsrvations" key with its children to the leaf.
+            var lastCreatedDate: NSNumber = 0
+            if let obsDict = snapshot.value as? [String:[String:AnyObject]] {
+                // the obsDict looks like: {"obsId":{key:val,key:val,...}}
+                self.observations.removeAll()
+                for (_, obsSnapshot) in obsDict {
+                    // create an observation based on the snapshot
+                    let observation = NNObservation.createObservationFromFirebase(with: obsSnapshot)
+                    // add the observation to the "observations" list
                     self.observations.append(observation)
+                    // update last created observation
+                    if lastCreatedDate.int64Value < observation.createdAt.int64Value {
+                        lastCreatedDate = observation.createdAt
+                    }
                 }
+                self.reloadTables(section: DB_OBSERVATIONS_PATH)
+                completion(true)
+            } else {
+                completion(false)
             }
-            self.observations.sort(by: { (first, second) -> Bool in
-                return first.updatedAt.decimalValue > second.updatedAt.decimalValue
-            })
-            self.reloadTables(section: DB_OBSERVATIONS_PATH)
-        })
-        // adding "remove" observer to the observations
-        observationsRemoveHandle = db_ref.child(DB_OBSERVATIONS_PATH).observe(.childRemoved, with: { (snapshot) in
-            // snapshot.value is a dictionary for one Observation
-            if let obsDict = snapshot.value as? [String: AnyObject] {
-                let observation = NNObservation.createObservationFromFirebase(with: obsDict)
-                // find the observation in our array and remove it
-                let index = self.observations.index(where: { obsv -> Bool in
-                    obsv.id == observation.id
+            // creating add/remove/change observers
+            //
+            // adding "add" observer to the observations
+            self.observationsAddHandle = self.db_ref.child(DB_OBSERVATIONS_PATH).queryOrdered(byChild: "created_at").queryStarting(atValue: lastCreatedDate.int64Value + 1).observe(.childAdded, with: { (snapshot) in
+                // snapshot.value is a dictionary for one Observation
+                if let obsDict = snapshot.value as? [String: AnyObject] {
+                    let observation = NNObservation.createObservationFromFirebase(with: obsDict)
+                    // we don't bother adding observations that do not have updated_at timestamp. They are possibly test observations.
+                    if observation.updatedAt != 0 {
+                        self.observations.append(observation)
+                    }
+                }
+                self.observations.sort(by: { (first, second) -> Bool in
+                    return first.updatedAt.decimalValue > second.updatedAt.decimalValue
                 })
-                if let i = index {
-                    self.observations.remove(at: i)
-                }
-            }
-            self.reloadTables(section: DB_OBSERVATIONS_PATH)
-        })
-        // adding "change" observer to the observations
-        observationsChangeHandle = db_ref.child(DB_OBSERVATIONS_PATH).observe(.childChanged, with: { (snapshot) in
-            // snapshot.value is a dictionary for one Observation
-            if let obsDict = snapshot.value as? [String: AnyObject] {
-                let observation = NNObservation.createObservationFromFirebase(with: obsDict)
-                // find the observation and replace it with the new one
-                let index = self.observations.index(where: { obsv -> Bool in
-                    obsv.id == observation.id
-                })
-                if let i = index {
-                    self.observations[i] = observation
-                }
-            }
-            self.observations.sort(by: { (first, second) -> Bool in
-                return first.updatedAt.decimalValue > second.updatedAt.decimalValue
+                self.reloadTables(section: DB_OBSERVATIONS_PATH)
             })
-            self.reloadTables(section: DB_OBSERVATIONS_PATH)
+            // adding "remove" observer to the observations
+            self.observationsRemoveHandle = self.db_ref.child(DB_OBSERVATIONS_PATH).queryOrdered(byChild: "created_at").queryStarting(atValue: lastCreatedDate.int64Value + 1).observe(.childRemoved, with: { (snapshot) in
+                // snapshot.value is a dictionary for one Observation
+                if let obsDict = snapshot.value as? [String: AnyObject] {
+                    let observation = NNObservation.createObservationFromFirebase(with: obsDict)
+                    // find the observation in our array and remove it
+                    let index = self.observations.index(where: { obsv -> Bool in
+                        obsv.id == observation.id
+                    })
+                    if let i = index {
+                        self.observations.remove(at: i)
+                    }
+                }
+                self.reloadTables(section: DB_OBSERVATIONS_PATH)
+            })
+            // adding "change" observer to the observations
+            self.observationsChangeHandle = self.db_ref.child(DB_OBSERVATIONS_PATH).queryOrdered(byChild: "created_at").queryStarting(atValue: lastCreatedDate.int64Value + 1).observe(.childChanged, with: { (snapshot) in
+                // snapshot.value is a dictionary for one Observation
+                if let obsDict = snapshot.value as? [String: AnyObject] {
+                    let observation = NNObservation.createObservationFromFirebase(with: obsDict)
+                    // find the observation and replace it with the new one
+                    let index = self.observations.index(where: { obsv -> Bool in
+                        obsv.id == observation.id
+                    })
+                    if let i = index {
+                        self.observations[i] = observation
+                    }
+                }
+                self.observations.sort(by: { (first, second) -> Bool in
+                    return first.updatedAt.decimalValue > second.updatedAt.decimalValue
+                })
+                self.reloadTables(section: DB_OBSERVATIONS_PATH)
+            })
         })
     }
     

@@ -3777,6 +3777,7 @@ DESIGN this nature technology with your community</string>
                         <outlet property="observationImageButton" destination="Kyk-Mj-hpf" id="r0d-Fh-s2J"/>
                         <outlet property="observationTableView" destination="Cjc-sa-VQc" id="nqr-SW-hNV"/>
                         <outlet property="projectPicker" destination="SWM-un-ltH" id="Ujn-p0-lfG"/>
+                        <outlet property="submitButton" destination="X3W-NN-njB" id="4ze-di-wQw"/>
                         <segue destination="2xp-oe-SFT" kind="presentation" identifier="SignIn" id="D8y-mf-L1R"/>
                     </connections>
                 </tableViewController>

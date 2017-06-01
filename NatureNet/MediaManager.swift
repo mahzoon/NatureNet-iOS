@@ -28,6 +28,7 @@ class MediaManager {
     private var cloudinary_config = CLDConfiguration(cloudName: CLOUDINARY_CLOUD_NAME)
     private var cloudinary: CLDCloudinary?
     private var cloudinary_uploader: CLDUploader?
+    private var cloudinary_last_upload_request: CLDUploadRequest?
     
     func setupCloudinary() {
         cloudinary = CLDCloudinary(configuration: cloudinary_config)
@@ -99,8 +100,12 @@ class MediaManager {
     func uploadImage(image: UIImage, progressHandler: ((Progress) -> Void)?, completionHandler: ((CLDUploadResult?, NSError?) -> ())?) {
         let imgData = UIImagePNGRepresentation(image)
         if let data = imgData {
-            cloudinary_uploader?.upload(data: data, uploadPreset: CLOUDINARY_PRESET, params: nil, progress: progressHandler, completionHandler: completionHandler)
+            cloudinary_last_upload_request = cloudinary_uploader?.upload(data: data, uploadPreset: CLOUDINARY_PRESET, params: nil, progress: progressHandler, completionHandler: completionHandler)
         }
+    }
+    
+    func cancelUploadImage() {
+        cloudinary_last_upload_request?.cancel()
     }
     
     func getImageCoordinates(url: URL) -> CLLocationCoordinate2D? {

@@ -16,9 +16,11 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        activityIndicator.frame = self.view.frame
         activityIndicator.center = self.view.center
         activityIndicator.hidesWhenStopped = true
-        activityIndicator.activityIndicatorViewStyle = .gray
+        activityIndicator.activityIndicatorViewStyle = .whiteLarge
+        activityIndicator.layer.backgroundColor = UIColor(white: 0, alpha: ACTIVITY_INDICATOR_OPACITY).cgColor
         self.view.addSubview(activityIndicator)
     }
 
@@ -51,17 +53,16 @@ class MainViewController: UIViewController {
     func presentExploreScreen() {
         
         // start activity spinner
-        //                self.activityIndicator.startAnimating()
-        //                UIApplication.shared.beginIgnoringInteractionEvents()
+        self.activityIndicator.startAnimating()
+        UIApplication.shared.beginIgnoringInteractionEvents()
         
-        DispatchQueue.global().async {
-            DataService.ds.initializeObservationsObserver()
+        
+        DataService.ds.initObservationsObserver { success in
+            // stop activity spinner
+            self.activityIndicator.stopAnimating()
+            UIApplication.shared.endIgnoringInteractionEvents()
+            self.performSegue(withIdentifier: SEGUE_EXPLORE, sender: nil)
         }
-        
-        //                // stop activity spinner
-        //                self.activityIndicator.stopAnimating()
-        //                UIApplication.shared.endIgnoringInteractionEvents()
-        performSegue(withIdentifier: SEGUE_EXPLORE, sender: nil)
     }
     
 }

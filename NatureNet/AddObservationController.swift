@@ -23,6 +23,7 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
     @IBOutlet weak var locationText: UITextField!
     
     @IBOutlet weak var projectPicker: UIPickerView!
+    @IBOutlet weak var submitButton: UIBarButtonItem!
     
     var imagePicker: UIImagePickerController!
     var pickedImage = false
@@ -57,9 +58,17 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
 
         siteList = DataService.ds.GetSiteIds()
         
+        activityIndicator.frame = self.view.frame
         activityIndicator.center = self.view.center
         activityIndicator.hidesWhenStopped = true
-        activityIndicator.activityIndicatorViewStyle = .gray
+        activityIndicator.activityIndicatorViewStyle = .whiteLarge
+        activityIndicator.layer.backgroundColor = UIColor(white: 0, alpha: ACTIVITY_INDICATOR_OPACITY).cgColor
+        let activityIndicatorLabel = UILabel(frame: CGRect(x: 0, y: 0, width: activityIndicator.frame.width, height: ACTIVITY_INDICATOR_TEXT_HEIGHT))
+        activityIndicatorLabel.text = ACTIVITY_INDICATOR_TEXT_UPLOADING
+        activityIndicatorLabel.textColor = UIColor.white
+        activityIndicatorLabel.textAlignment = .center
+        activityIndicatorLabel.center = CGPoint(x: activityIndicator.center.x, y: activityIndicator.center.y + ACTIVITY_INDICATOR_TEXT_HEIGHT)
+        activityIndicator.addSubview(activityIndicatorLabel)
         self.view.addSubview(activityIndicator)
         
         self.locationManager.delegate = self;
@@ -159,7 +168,6 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
                 let projectList = DataService.ds.GetProjects(in: self.siteList[selectedIndex])
                 if row - 1 < projectList.count {
                     return projectList[row - 1].name
-                    //return projectList[row - 1].key + " - \(name)"
                 }
             }
         }
@@ -239,7 +247,7 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
                 UtilityFunctions.showErrorMessage(theView: self, title: OBSERVATION_NO_IMAGE_ERROR_TITLE,
                                                   message: OBSERVATION_NO_IMAGE_ERROR_MESSAGE,
                                                   buttonText: OBSERVATION_NO_IMAGE_ERROR_BUTTON_TEXT)
-            } else if projectPicker.selectedRow(inComponent: 0) == 0 {
+            } else if projectPicker.selectedRow(inComponent: 1) == 0 {
                 UtilityFunctions.showErrorMessage(theView: self, title: OBSERVATION_NO_PROJECT_ERROR_TITLE,
                                                   message: OBSERVATION_NO_PROJECT_ERROR_MESSAGE,
                                                   buttonText: OBSERVATION_NO_PROJECT_ERROR_BUTTON_TEXT)
@@ -250,28 +258,31 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
                 if let img = self.observationImage.image {
                     // start activity spinner
                     self.activityIndicator.startAnimating()
-                    UIApplication.shared.beginIgnoringInteractionEvents()
+                    self.submitButton.isEnabled = false
+                    //UIApplication.shared.beginIgnoringInteractionEvents()
                     MediaManager.md.uploadImage(image: img, progressHandler: { (Progress) in
                         // progress handler
                     }, completionHandler: { result, error in
                         // stop activity spinner
                         self.activityIndicator.stopAnimating()
-                        UIApplication.shared.endIgnoringInteractionEvents()
+                        self.submitButton.isEnabled = true
+                        //UIApplication.shared.endIgnoringInteractionEvents()
                         if let e = error {
-                            // completed but with error
-                            UtilityFunctions.showErrorMessage(theView: self, title: ADD_OBSV_UPLOAD_FAILED_TITLE, message: ADD_OBSV_UPLOAD_FAILED_MESSAGE + e.localizedDescription, buttonText: ADD_OBSV_UPLOAD_FAILED_BUTTON_TEXT)
+                            if e.localizedDescription == "cancelled" {
+                                UtilityFunctions.showErrorMessage(theView: self, title: ADD_OBSV_UPLOAD_CANCELED_TITLE, message: ADD_OBSV_UPLOAD_CANCELED_MESSAGE, buttonText: ADD_OBSV_UPLOAD_CANCELED_BUTTON_TEXT)
+                            } else {
+                                // had with error
+                                UtilityFunctions.showErrorMessage(theView: self, title: ADD_OBSV_UPLOAD_FAILED_TITLE, message: ADD_OBSV_UPLOAD_FAILED_MESSAGE + e.localizedDescription, buttonText: ADD_OBSV_UPLOAD_FAILED_BUTTON_TEXT)
+                            }
                         } else {
                             // completed successfully
                             if let r = result {
                                 data["image"] = r.secureUrl
                                 // send to Firebase
                                 if let currentUser = DataService.ds.GetCurrentUser() {
-                                    //if let projectId = self.projectList[self.projectPicker.selectedRow(inComponent: 0) - 1].value.id {
-                                    
                                     let selectedSiteIndex = self.projectPicker.selectedRow(inComponent: 0)
                                     let projectList = DataService.ds.GetProjects(in: self.siteList[selectedSiteIndex])
                                     if let projectId = projectList[self.projectPicker.selectedRow(inComponent: 1) - 1].id {
-                                    //if let projectId = self.projectList[self.projectPicker.selectedRow(inComponent: 0) - 1].value.id {
                                         var location: [Double] = [0, 0]
                                         if let l = self.pickedImageLocation {
                                             location[0] = Double(l.latitude)
@@ -298,7 +309,11 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
     }
     
     @IBAction func cancelButtonTapped(_ sender: Any) {
-        self.dismiss(animated: true) {}
+        if self.activityIndicator.isAnimating {
+            MediaManager.md.cancelUploadImage()
+        } else {
+            self.dismiss(animated: true) {}
+        }
     }
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
