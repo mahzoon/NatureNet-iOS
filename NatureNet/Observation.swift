@@ -45,6 +45,10 @@ class NNObservation: NSObject, MKAnnotation {
     var observationImageUrl: String {
         return data["image"] ?? ""
     }
+    // returns the document attached to the observation (if any)
+    var observationDoc: String {
+        return data["doc"] ?? ""
+    }
     // returns coordinates object
     var locationCoordinate: CLLocationCoordinate2D {
         if location.count != 2 {

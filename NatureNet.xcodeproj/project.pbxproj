@@ -21,6 +21,7 @@
 		2D7DF89C1ED36D6600D509F3 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D7DF89B1ED36D6600D509F3 /* Comment.swift */; };
 		2D7DF8A01ED37A3000D509F3 /* ShowMoreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D7DF89F1ED37A3000D509F3 /* ShowMoreCell.swift */; };
 		2D7DF8A21ED3969800D509F3 /* MediaManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D7DF8A11ED3969800D509F3 /* MediaManager.swift */; };
+		2DEF4D6D1EE0D87900A516D6 /* DocumentViewerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DEF4D6C1EE0D87900A516D6 /* DocumentViewerController.swift */; };
 		55CF19DD967736F8B7750455 /* Pods_NatureNetUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B238D5A0816A2E3FC6B7731A /* Pods_NatureNetUITests.framework */; };
 		682C31681ECE316F00F6D87D /* UtilityFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682C31671ECE316F00F6D87D /* UtilityFunctions.swift */; };
 		682C316B1ECE366B00F6D87D /* ToDo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682C316A1ECE366B00F6D87D /* ToDo.swift */; };
@@ -87,6 +88,7 @@
 		2D7DF89B1ED36D6600D509F3 /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		2D7DF89F1ED37A3000D509F3 /* ShowMoreCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowMoreCell.swift; sourceTree = "<group>"; };
 		2D7DF8A11ED3969800D509F3 /* MediaManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaManager.swift; sourceTree = "<group>"; };
+		2DEF4D6C1EE0D87900A516D6 /* DocumentViewerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentViewerController.swift; sourceTree = "<group>"; };
 		3D47BBC3D482560B7F12A934 /* Pods_NatureNet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NatureNet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		57426900216948F158F226CD /* Pods-NatureNetUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NatureNetUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-NatureNetUITests/Pods-NatureNetUITests.release.xcconfig"; sourceTree = "<group>"; };
 		682C31671ECE316F00F6D87D /* UtilityFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilityFunctions.swift; sourceTree = "<group>"; };
@@ -296,6 +298,7 @@
 				68FB9BE31ECCF944006C88B1 /* GalleryDetailController.swift */,
 				68FB9BE51ECCFA11006C88B1 /* DesignIdeaDetailController.swift */,
 				2D5D105F1ED01603008A8FEA /* ImageViewController.swift */,
+				2DEF4D6C1EE0D87900A516D6 /* DocumentViewerController.swift */,
 			);
 			name = Details;
 			sourceTree = "<group>";
@@ -617,6 +620,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2DEF4D6D1EE0D87900A516D6 /* DocumentViewerController.swift in Sources */,
 				68FB9BC91ECBD948006C88B1 /* GalleryCell.swift in Sources */,
 				68FB9BC51ECBB2F4006C88B1 /* DesignIdeasCell.swift in Sources */,
 				68FB9BE01ECCF8FA006C88B1 /* CommunityDetailController.swift in Sources */,

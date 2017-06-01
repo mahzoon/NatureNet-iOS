@@ -32,9 +32,21 @@ class ImageViewController: UIViewController, UIScrollViewDelegate {
                 if let i = img {
                     DispatchQueue.main.async {
                         self.theImage.image = i
+                        // update the scrollview's min scale to fit the image
+                        self.setMinZoomScale()
                     }
                 }
             })
+        }
+    }
+    
+    func setMinZoomScale() {
+        if let w = self.theImage.image?.size.width, let h = self.theImage.image?.size.height {
+            let widthScale = self.view.bounds.size.width / w
+            let heightScale = self.view.bounds.size.height / h
+            let minScale = min(widthScale, heightScale)
+            self.imageScrollView.minimumZoomScale = minScale
+            self.imageScrollView.zoomScale = minScale
         }
     }
     
@@ -42,29 +54,30 @@ class ImageViewController: UIViewController, UIScrollViewDelegate {
         return theImage
     }
     
-//    @IBAction func singleTapDetected(_ sender: Any) {
-//        if barVisible {
-//            hideBars()
-//        } else {
-//            showBars()
-//        }
-//    }
+    @IBAction func holdGestureOnImageDetected(_ sender: Any) {
+        let alert = UIAlertController(title: SAVE_OBSV_ALERT_TITLE, message: SAVE_OBSV_ALERT_MESSAGE, preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: SAVE_OBSV_ALERT_OPTION_CANCEL, style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: SAVE_OBSV_ALERT_OPTION_SAVE_PHOTO, style: .default, handler: { (action: UIAlertAction) in
+            if let img = self.theImage.image {
+                UIImageWriteToSavedPhotosAlbum(img, self, #selector(self.image(_:didFinishSavingWithError:contextInfo:)), nil)
+            }
+        }))
+        alert.addAction(UIAlertAction(title: SAVE_OBSV_ALERT_OPTION_SHARE, style: .default, handler: { (action: UIAlertAction) in
+            let activityVC = UIActivityViewController(activityItems: [self.theImage.image ?? ""], applicationActivities: nil)
+            self.present(activityVC, animated: true, completion: nil)
+        }))
+        present(alert, animated: true, completion: nil)
+    }
     
-//    func zoomImage() {
-//        
-//    }
-//
-//    func hideBars() {
-//        self.navigationController?.isNavigationBarHidden = true
-//        self.tabBarController?.tabBar.isHidden = true
-//        self.barVisible = false
-//        self.view.backgroundColor = UIColor.black
-//    }
-//    
-//    func showBars() {
-//        self.navigationController?.isNavigationBarHidden = false
-//        self.tabBarController?.tabBar.isHidden = false
-//        self.barVisible = true
-//        self.view.backgroundColor = UIColor.white
-//    }
+    func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
+        if let error = error {
+            let ac = UIAlertController(title: SAVE_OBSV_ERROR_MESSAGE, message: error.localizedDescription, preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: SAVE_OBSV_ERROR_BUTTON_TEXT, style: .default))
+            present(ac, animated: true)
+        } else {
+            let ac = UIAlertController(title: SAVE_OBSV_SUCCESS_TITLE, message: SAVE_OBSV_SUCCESS_MESSAGE, preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: SAVE_OBSV_SUCCESS_BUTTON_TEXT, style: .default))
+            present(ac, animated: true)
+        }
+    }
 }

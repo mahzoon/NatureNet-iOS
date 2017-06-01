@@ -29,6 +29,9 @@ class GalleryDetailController: UIViewController, UITableViewDelegate, UITableVie
     @IBOutlet weak var likeButton: UIButton!
     @IBOutlet weak var dislikeButton: UIButton!
     @IBOutlet weak var commentLabel: UILabel!
+    
+    var attachedDocumentPath: URL?
+    
     var observationObj: NNObservation?
     
     var pages = 0
@@ -100,6 +103,27 @@ class GalleryDetailController: UIViewController, UITableViewDelegate, UITableVie
                     }
                 }
             })
+            
+            // load the document (if there is any attached to the observation)
+            if obsv.observationDoc != "" {
+                MediaManager.md.getOrDownloadDoc(requesterId: "GalleryDetailController.img", urlString: obsv.observationDoc, completion: { data, result in
+                    // save the document in the "Documents" folder
+                    do {
+                        self.attachedDocumentPath = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
+                        var fName: String = obsv.id
+                        if obsv.observationText != "" {
+                            fName = obsv.observationText
+                        }
+                        self.attachedDocumentPath = self.attachedDocumentPath?.appendingPathComponent(fName + ".pdf")
+                        if let d = data {
+                            if let path = self.attachedDocumentPath {
+                                try d.write(to: path)
+                            }
+                        }
+                    }
+                    catch { }
+                })
+            }
         }
     }
     
@@ -236,8 +260,7 @@ class GalleryDetailController: UIViewController, UITableViewDelegate, UITableVie
             }
         }))
         alert.addAction(UIAlertAction(title: SAVE_OBSV_ALERT_OPTION_SHARE, style: .default, handler: { (action: UIAlertAction) in
-            // GET CONTENTS OF THE OBSERVATION
-            let activityVC = UIActivityViewController(activityItems: [self.descriptionText.text ?? "", self.observation.image ?? ""], applicationActivities: nil)
+            let activityVC = UIActivityViewController(activityItems: [self.descriptionText.text ?? "", self.observation.image ?? "", self.attachedDocumentPath ?? ""], applicationActivities: nil)
             self.present(activityVC, animated: true, completion: nil)
         }))
         present(alert, animated: true, completion: nil)
@@ -258,11 +281,25 @@ class GalleryDetailController: UIViewController, UITableViewDelegate, UITableVie
     // send the observation image to the ImageViewController
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let id = segue.identifier {
-            if id == SEGUE_DETAILS {
+            if id == SEGUE_DOCUMENT_DETAIL {
+                if let dest = segue.destination as? DocumentViewerController {
+                    dest.documentPath = self.attachedDocumentPath
+                }
+            }
+            if id == SEGUE_IMAGE_DETAIL {
                 if let dest = segue.destination as? ImageViewController {
                     dest.observationImageUrl = self.observationObj?.observationImageUrl
                 }
             }
+        }
+    }
+    
+    
+    @IBAction func observationTapped(_ sender: Any) {
+        if attachedDocumentPath != nil {
+            self.performSegue(withIdentifier: SEGUE_DOCUMENT_DETAIL, sender: nil)
+        } else {
+            self.performSegue(withIdentifier: SEGUE_IMAGE_DETAIL, sender: nil)
         }
     }
     

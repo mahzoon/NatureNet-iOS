@@ -22,6 +22,7 @@ class MediaManager {
     
     private let iconCache = NSCache<NSString, UIImage>()
     private let imageCache = NSCache<NSString, UIImage>()
+    private let docCache = NSCache<NSString, NSData>()
     
     private var tasks = [String: URLSessionDataTask]()
     
@@ -44,7 +45,19 @@ class MediaManager {
             completion(img, "")
         } else {
             // step 3: the image needs to be downloaded and set in the cache
-            downloadImage(requesterId: requesterId, urlString: url, cache: self.iconCache, completion: completion)
+            downloadFile(requesterId: requesterId, urlString: url, completion: { data, results in
+                if let d = data {
+                    if let img = UIImage(data: d) {
+                        // set the image in cache
+                        self.iconCache.setObject(img, forKey: url as NSString)
+                        completion(img, "")
+                    } else {
+                        completion(nil, "cannot covert the downloaded content to an image.")
+                    }
+                } else {
+                    completion(nil, results)
+                }
+            })
         }
     }
     
@@ -57,11 +70,43 @@ class MediaManager {
             completion(img, "")
         } else {
             // step 3: the image needs to be downloaded and set in the cache
-            downloadImage(requesterId: requesterId, urlString: url, cache: self.imageCache, completion: completion)
+            downloadFile(requesterId: requesterId, urlString: url, completion: { data, results in
+                if let d = data {
+                    if let img = UIImage(data: d) {
+                        // set the image in cache
+                        self.imageCache.setObject(img, forKey: url as NSString)
+                        completion(img, "")
+                    } else {
+                        completion(nil, "cannot covert the downloaded content to an image.")
+                    }
+                } else {
+                    completion(nil, results)
+                }
+            })
         }
     }
     
-    private func downloadImage(requesterId: String, urlString: String, cache: NSCache<NSString, UIImage>, completion: @escaping (UIImage?, String) -> Void) {
+    func getOrDownloadDoc(requesterId: String, urlString: String, completion: @escaping (Data?, String) -> Void) {
+        let url = makeUrlSecure(url: urlString)
+        // step 1: cancel previous requests with the same requester if any
+        tasks[requesterId]?.cancel()
+        // step 2: check cache, if the doc is already downloaded send back the doc
+        if let doc = docCache.object(forKey: url as NSString) {
+            completion(doc as Data, "")
+        } else {
+            // step 3: the doc needs to be downloaded and set in the cache
+            downloadFile(requesterId: requesterId, urlString: url, completion: { data, results in
+                if let d = data {
+                    self.docCache.setObject(d as NSData, forKey: url as NSString)
+                    completion(d, "")
+                } else {
+                    completion(nil, results)
+                }
+            })
+        }
+    }
+    
+    private func downloadFile(requesterId: String, urlString: String, completion: @escaping (Data?, String) -> Void) {
         if let url = URL(string: urlString) {
             let task = URLSession(configuration: URLSessionConfiguration.default).dataTask(with: URLRequest(url: url),
                                                                                            completionHandler: { (data, response, error) in
@@ -72,17 +117,7 @@ class MediaManager {
                     print(e)
                     completion(nil, e.localizedDescription)
                 } else {
-                    if let d = data {
-                        if let img = UIImage(data: d) {
-                            // set the image in cache
-                            cache.setObject(img, forKey: urlString as NSString)
-                            completion(img, "")
-                        } else {
-                            completion(nil, "cannot covert the downloaded content to an image.")
-                        }
-                    } else {
-                        completion(nil, "no data received.")
-                    }
+                    completion(data, "")
                 }
                 
             })

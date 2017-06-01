@@ -561,6 +561,48 @@ DESIGN this nature technology with your community</string>
             </objects>
             <point key="canvasLocation" x="-126" y="-546"/>
         </scene>
+        <!--Document Viewer-->
+        <scene sceneID="5uW-LQ-iDx">
+            <objects>
+                <viewController title="Document Viewer" id="t8U-mQ-iMv" customClass="DocumentViewerController" customModule="NatureNet" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="THW-gv-RXd"/>
+                        <viewControllerLayoutGuide type="bottom" id="8wx-fc-kjK"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="S7q-Iq-3En">
+                        <rect key="frame" x="0.0" y="64" width="320" height="455"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x92-da-gux">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="455"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="S4R-4J-pfR" appends="YES" id="YUP-Sf-uwU"/>
+                                </connections>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="8wx-fc-kjK" firstAttribute="top" secondItem="x92-da-gux" secondAttribute="bottom" id="5xB-ii-uvl"/>
+                            <constraint firstItem="x92-da-gux" firstAttribute="leading" secondItem="S7q-Iq-3En" secondAttribute="leading" id="IQj-nc-ZgI"/>
+                            <constraint firstAttribute="trailing" secondItem="x92-da-gux" secondAttribute="trailing" id="dVs-Yy-6qi"/>
+                            <constraint firstItem="x92-da-gux" firstAttribute="top" secondItem="THW-gv-RXd" secondAttribute="bottom" id="sRP-5d-3QB"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="webView" destination="x92-da-gux" id="ufG-59-kxU"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="y94-pT-Y51" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.20000000000000001" id="S4R-4J-pfR">
+                    <connections>
+                        <action selector="documentHoldGesture:" destination="t8U-mQ-iMv" id="WBd-X5-HtR"/>
+                    </connections>
+                </pongPressGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="617" y="4660"/>
+        </scene>
         <!--Deprecated-->
         <scene sceneID="pjn-Py-va0">
             <objects>
@@ -1250,6 +1292,9 @@ DESIGN this nature technology with your community</string>
                             <constraint firstAttribute="trailing" secondItem="cR5-Xd-BrU" secondAttribute="trailing" id="eQA-so-y6B"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="Observation" id="icg-JJ-NkI">
+                        <barButtonItem key="backBarButtonItem" title=" " id="0dJ-xW-xle"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="affiliation" destination="mvn-k2-PgC" id="fEA-qY-ATb"/>
                         <outlet property="commentContainer" destination="Sqd-rq-Nxk" id="fko-T0-7T1"/>
@@ -1269,6 +1314,8 @@ DESIGN this nature technology with your community</string>
                         <outlet property="profileImage" destination="tpK-Qd-Vld" id="ndE-XW-EkN"/>
                         <outlet property="username" destination="jhJ-ah-d0W" id="bmc-Co-CIZ"/>
                         <segue destination="2xp-oe-SFT" kind="presentation" identifier="SignIn" id="2UQ-Ff-6WK"/>
+                        <segue destination="e63-kA-9pU" kind="show" identifier="ImageDetail" id="etu-3K-KzO"/>
+                        <segue destination="t8U-mQ-iMv" kind="show" identifier="DocumentDetail" id="eD8-ah-YIr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8BL-ph-Bkh" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1279,7 +1326,7 @@ DESIGN this nature technology with your community</string>
                 </pongPressGestureRecognizer>
                 <tapGestureRecognizer id="VrL-B8-DPe">
                     <connections>
-                        <segue destination="e63-kA-9pU" kind="show" identifier="Details" id="uIG-5d-jgA"/>
+                        <action selector="observationTapped:" destination="2em-3J-HRi" id="pVf-nH-CmS"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
@@ -1294,31 +1341,34 @@ DESIGN this nature technology with your community</string>
                         <viewControllerLayoutGuide type="bottom" id="s3v-mD-VXV"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="xkd-kg-EZA">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="455"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.5" maximumZoomScale="10" translatesAutoresizingMaskIntoConstraints="NO" id="69M-8T-jwa">
-                                <rect key="frame" x="0.0" y="20" width="320" height="528"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.10000000000000001" maximumZoomScale="5" translatesAutoresizingMaskIntoConstraints="NO" id="69M-8T-jwa">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="455"/>
                                 <subviews>
                                     <imageView multipleTouchEnabled="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sample_image1" translatesAutoresizingMaskIntoConstraints="NO" id="ksY-Cn-s3G">
-                                        <rect key="frame" x="0.0" y="39" width="600" height="450"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="450"/>
                                         <gestureRecognizers/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="ENu-ha-ueE" appends="YES" id="JX3-7V-XLk"/>
+                                        </connections>
                                     </imageView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="ksY-Cn-s3G" secondAttribute="trailing" id="H4i-Dx-ryR"/>
-                                    <constraint firstItem="ksY-Cn-s3G" firstAttribute="leading" secondItem="69M-8T-jwa" secondAttribute="leading" id="L0K-oY-CwC"/>
-                                    <constraint firstAttribute="bottom" secondItem="ksY-Cn-s3G" secondAttribute="bottom" id="owG-T4-qkP"/>
-                                    <constraint firstItem="ksY-Cn-s3G" firstAttribute="centerY" secondItem="69M-8T-jwa" secondAttribute="centerY" id="saM-RJ-pgP"/>
+                                    <constraint firstItem="ksY-Cn-s3G" firstAttribute="top" secondItem="69M-8T-jwa" secondAttribute="top" id="YEK-Wa-b37"/>
+                                    <constraint firstItem="ksY-Cn-s3G" firstAttribute="leading" secondItem="69M-8T-jwa" secondAttribute="leading" id="fu2-Zz-jzN"/>
+                                    <constraint firstAttribute="bottom" secondItem="ksY-Cn-s3G" secondAttribute="bottom" id="hyB-cp-pkb"/>
+                                    <constraint firstAttribute="trailing" secondItem="ksY-Cn-s3G" secondAttribute="trailing" id="vUb-a8-PF4"/>
                                 </constraints>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="69M-8T-jwa" firstAttribute="leading" secondItem="xkd-kg-EZA" secondAttribute="leading" id="2sG-8h-t2r"/>
-                            <constraint firstItem="69M-8T-jwa" firstAttribute="top" secondItem="Z0v-Fy-YBj" secondAttribute="bottom" id="MDy-co-gJ7"/>
-                            <constraint firstItem="69M-8T-jwa" firstAttribute="centerY" secondItem="xkd-kg-EZA" secondAttribute="centerY" id="Pgv-0Y-t8E"/>
-                            <constraint firstAttribute="trailing" secondItem="69M-8T-jwa" secondAttribute="trailing" id="TnP-2m-HMK"/>
+                            <constraint firstAttribute="trailing" secondItem="69M-8T-jwa" secondAttribute="trailing" id="6ev-I1-XIv"/>
+                            <constraint firstItem="69M-8T-jwa" firstAttribute="top" secondItem="Z0v-Fy-YBj" secondAttribute="bottom" id="HWE-Wk-WVM"/>
+                            <constraint firstItem="s3v-mD-VXV" firstAttribute="top" secondItem="69M-8T-jwa" secondAttribute="bottom" id="L3a-tV-d8Y"/>
+                            <constraint firstItem="69M-8T-jwa" firstAttribute="leading" secondItem="xkd-kg-EZA" secondAttribute="leading" id="UjU-Gk-ZsR"/>
                         </constraints>
                     </view>
                     <connections>
@@ -1327,8 +1377,13 @@ DESIGN this nature technology with your community</string>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tkl-qt-gSG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="ENu-ha-ueE">
+                    <connections>
+                        <action selector="holdGestureOnImageDetected:" destination="e63-kA-9pU" id="xqT-01-RS9"/>
+                    </connections>
+                </pongPressGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-128" y="4660"/>
+            <point key="canvasLocation" x="-129.375" y="4659.5070422535209"/>
         </scene>
         <!--Project Details-->
         <scene sceneID="1z4-tM-r5E">
@@ -4190,8 +4245,8 @@ DESIGN this nature technology with your community</string>
         <image name="signin screen - logo" width="816" height="265"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="D8y-mf-L1R"/>
         <segue reference="L4E-hR-TbY"/>
         <segue reference="iN3-Ze-sCb"/>
+        <segue reference="2UQ-Ff-6WK"/>
     </inferredMetricsTieBreakers>
 </document>

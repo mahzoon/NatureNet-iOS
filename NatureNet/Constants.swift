@@ -176,7 +176,7 @@ let ADD_OBSV_UPLOAD_CANCELED_BUTTON_TEXT = "Dismiss"
 let SAVE_OBSV_ALERT_TITLE:String = "How do you want to save this observation?"
 let SAVE_OBSV_ALERT_MESSAGE: String? = nil
 let SAVE_OBSV_ALERT_OPTION_SAVE_PHOTO = "Save the image to my photo library"
-let SAVE_OBSV_ALERT_OPTION_SHARE = "Share the content in another app"
+let SAVE_OBSV_ALERT_OPTION_SHARE = "View the content in another app"
 let SAVE_OBSV_ALERT_OPTION_CANCEL = "Cancel"
 let SAVE_OBSV_ERROR_MESSAGE = "Could not save the observation: "
 let SAVE_OBSV_ERROR_BUTTON_TEXT = "OK"
@@ -197,6 +197,8 @@ let SEGUE_EXPLORE = "Explore"
 let SEGUE_PROFILE = "Profile"
 let SEGUE_DETAILS = "Details"
 let SEGUE_ADD_OBSV = "AddObservation"
+let SEGUE_IMAGE_DETAIL = "ImageDetail"
+let SEGUE_DOCUMENT_DETAIL = "DocumentDetail"
 
 //
 // Cell Identifiers
