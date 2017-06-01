@@ -290,7 +290,10 @@ class DataService  {
     func GetSiteId(by index: Int) -> String? {
         return self.sites[index].key
     }
-
+    // returning site ids
+    func GetSiteIds() -> [String] {
+        return self.sites.map{(k, v) -> String in return k}
+    }
     
     //////////////////////////////////////////////////////////////
     //
@@ -327,6 +330,19 @@ class DataService  {
             }
             self.reloadTables(section: DB_PROJECTS_PATH)
         })
+    }
+    
+    // returns list of projects
+//    func GetProjects() -> [String: [NNProject]] {
+//        return self.projects
+//    }
+    
+    // returns list of projects in a siteId
+    func GetProjects(in siteId: String) -> [NNProject] {
+        if let prjs = self.projects[siteId] {
+            return prjs
+        }
+        return []
     }
     
     // returns number of projects in the site index.

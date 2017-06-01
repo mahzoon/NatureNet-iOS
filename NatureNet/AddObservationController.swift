@@ -29,7 +29,7 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
     
     var pickedImageLocation: CLLocationCoordinate2D?
     
-    var projectList = Array<(key : String, value : NNProject)>()
+    var siteList = [String]()
     
     // activity indicator for upload
     var activityIndicator = UIActivityIndicatorView()
@@ -54,8 +54,8 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
                 self.performSegue(withIdentifier: SEGUE_SIGNIN, sender: nil)
             })
         }
-        
-        projectList = DataService.ds.GetAllProjectsBySite()
+
+        siteList = DataService.ds.GetSiteIds()
         
         activityIndicator.center = self.view.center
         activityIndicator.hidesWhenStopped = true
@@ -65,9 +65,7 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
         self.locationManager.delegate = self;
         self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
         self.locationManager.requestWhenInUseAuthorization()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
+        
         self.observationImageButtonTapped("")
     }
     
@@ -93,21 +91,76 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
+        return 2
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        // the first item would be "select a project"
-        return projectList.count + 1
+        if component == 0 {
+            return siteList.count
+        }
+        if component == 1 {
+            //return projectList.count + 1
+            let selectedIndex = self.projectPicker.selectedRow(inComponent: 0)
+            if selectedIndex >= 0 && selectedIndex < self.siteList.count {
+                // the first item would be "select a project"
+                return DataService.ds.GetProjects(in: self.siteList[selectedIndex]).count + 1
+            }
+        }
+        return 0
     }
     
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        if row == 0 {
-            return PICKER_NO_SELECTION
+//    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+//        
+//    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if component == 0 {
+            self.projectPicker.reloadComponent(1)
+            self.projectPicker.selectRow(0, inComponent: 1, animated: true)
         }
-        if row - 1 < projectList.count {
-            if let name = projectList[row - 1].value.name {
-                return projectList[row - 1].key + " - \(name)"
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
+        if component == 0 {
+            return self.projectPicker.frame.size.width / 3
+        }
+        if component == 1 {
+            return 2 * (self.projectPicker.frame.size.width / 3)
+        }
+        return 0
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+        
+        var label: UILabel
+        if let view = view as? UILabel { label = view }
+        else { label = UILabel() }
+        
+        label.text = getTitleForPickerView(row: row, component: component)
+        label.font = UIFont.systemFont(ofSize: ADD_OBSV_PROJECT_PICKER_FONT_SIZE)
+        label.textAlignment = .center
+        label.adjustsFontSizeToFitWidth = true
+        label.minimumScaleFactor = 0.5
+        
+        return label
+        
+    }
+    
+    func getTitleForPickerView(row: Int, component: Int) -> String? {
+        if component == 0 {
+            return DataService.ds.GetSiteName(with: self.siteList[row])
+        }
+        if component == 1 {
+            if row == 0 {
+                return PICKER_NO_SELECTION
+            }
+            let selectedIndex = self.projectPicker.selectedRow(inComponent: 0)
+            if selectedIndex >= 0 && selectedIndex < self.siteList.count {
+                let projectList = DataService.ds.GetProjects(in: self.siteList[selectedIndex])
+                if row - 1 < projectList.count {
+                    return projectList[row - 1].name
+                    //return projectList[row - 1].key + " - \(name)"
+                }
             }
         }
         return nil
@@ -213,7 +266,12 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
                                 data["image"] = r.secureUrl
                                 // send to Firebase
                                 if let currentUser = DataService.ds.GetCurrentUser() {
-                                    if let projectId = self.projectList[self.projectPicker.selectedRow(inComponent: 0) - 1].value.id {
+                                    //if let projectId = self.projectList[self.projectPicker.selectedRow(inComponent: 0) - 1].value.id {
+                                    
+                                    let selectedSiteIndex = self.projectPicker.selectedRow(inComponent: 0)
+                                    let projectList = DataService.ds.GetProjects(in: self.siteList[selectedSiteIndex])
+                                    if let projectId = projectList[self.projectPicker.selectedRow(inComponent: 1) - 1].id {
+                                    //if let projectId = self.projectList[self.projectPicker.selectedRow(inComponent: 0) - 1].value.id {
                                         var location: [Double] = [0, 0]
                                         if let l = self.pickedImageLocation {
                                             location[0] = Double(l.latitude)
