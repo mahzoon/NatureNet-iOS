@@ -98,6 +98,8 @@ class GalleryDetailController: UIViewController, UITableViewDelegate, UITableVie
             self.descriptionText.text = obsv.observationText
             if DataService.ds.GetCommentsOnObservation(with: obsv.id).count == 0 {
                 self.commentLabel.text = NO_COMMENTS_TEXT
+            } else {
+                self.commentLabel.text = COMMENTS_TEXT
             }
             self.numLikes.text = "\(obsv.Likes.count)"
             self.numDislikes.text = "\(obsv.Dislikes.count)"
@@ -161,6 +163,11 @@ class GalleryDetailController: UIViewController, UITableViewDelegate, UITableVie
             maxNB = false
             ret_val = total
         }
+        if ret_val == 0 {
+            self.commentLabel.text = NO_COMMENTS_TEXT
+        } else {
+            self.commentLabel.text = COMMENTS_TEXT
+        }
         return ret_val
     }
     
@@ -177,7 +184,7 @@ class GalleryDetailController: UIViewController, UITableViewDelegate, UITableVie
                     let comment = listComments[indexPath.row]
                     if let user = DataService.ds.GetUser(by: comment.commenter) {
                         c.configureCell(name: user.displayName, comment: comment.comment)
-                        return c.getSize() + CGFloat(5.0)
+                        return c.getCommentHeight() + CGFloat(5.0)
                     }
                 }
             }
@@ -391,12 +398,10 @@ class GalleryDetailController: UIViewController, UITableViewDelegate, UITableVie
                                                   comment: commentText.text,
                                                   contributionId: obsv.id,
                                                   completion: { success in
-                                                    if success {
-                                                        self.commentText.text = ""
-                                                        self.commentText.resignFirstResponder()
-                                                        self.galleryDetailsTable.reloadData()
-                                                    }
                     })
+                    self.commentText.text = ""
+                    self.commentText.resignFirstResponder()
+                    self.galleryDetailsTable.reloadData()
                 }
             }
         }

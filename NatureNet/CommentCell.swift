@@ -22,8 +22,8 @@ class CommentCell: UITableViewCell {
         self.comment.text = comment
     }
     
-    func getSize() -> CGFloat {
+    func getCommentHeight() -> CGFloat {
         comment.sizeToFit()
-        return comment.frame.height
+        return max(comment.frame.height, username.frame.height)
     }
 }

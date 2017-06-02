@@ -173,7 +173,7 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
     }
     
     func trySubmitJoinRequest(iconUrl: String, email: String, pass: String, display_name: String, full_name: String) {
-        if let affiliation = DataService.ds.GetSiteId(by: affiliationPicker.selectedRow(inComponent: 0)) {
+        if let affiliation = DataService.ds.GetSiteId(by: affiliationPicker.selectedRow(inComponent: 0) - 1) {
             let user = NNUser(affiliation: affiliation, icon: iconUrl, id: "", bio: "", latestContrib: 0, name: display_name, groups: [String : AnyObject](), created: 0, updated: 0)
             DataService.ds.Join(nnuser: user, email: email, pass: pass, fullName: full_name, completion: { wasSuccess, err in
                 if wasSuccess {

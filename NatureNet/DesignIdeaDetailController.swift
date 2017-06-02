@@ -84,6 +84,8 @@ class DesignIdeaDetailController: UIViewController, UITableViewDelegate, UITable
             self.ideaText.text = idea.content
             if DataService.ds.GetCommentsOnDesignIdea(with: idea.id).count == 0 {
                 self.commentLabel.text = NO_COMMENTS_TEXT
+            } else {
+                self.commentLabel.text = COMMENTS_TEXT
             }
             self.numLikes.text = "\(idea.Likes.count)"
             self.numDislikes.text = "\(idea.Dislikes.count)"
@@ -125,6 +127,11 @@ class DesignIdeaDetailController: UIViewController, UITableViewDelegate, UITable
             maxNB = false
             ret_val = total
         }
+        if ret_val == 0 {
+            self.commentLabel.text = NO_COMMENTS_TEXT
+        } else {
+            self.commentLabel.text = COMMENTS_TEXT
+        }
         return ret_val
     }
     
@@ -141,7 +148,7 @@ class DesignIdeaDetailController: UIViewController, UITableViewDelegate, UITable
                     let comment = listComments[indexPath.row]
                     if let user = DataService.ds.GetUser(by: comment.commenter) {
                         c.configureCell(name: user.displayName, comment: comment.comment)
-                        return c.getSize() + CGFloat(5.0)
+                        return c.getCommentHeight() + CGFloat(5.0)
                     }
                 }
             }
@@ -299,12 +306,10 @@ class DesignIdeaDetailController: UIViewController, UITableViewDelegate, UITable
             } else {
                 if let idea = designIdea {
                     DataService.ds.WriteCommentOn(context: DB_DESIGNIDEAS_PATH, comment: commentText.text, contributionId: idea.id, completion: { success in
-                        if success {
-                            self.commentText.text = ""
-                            self.commentText.resignFirstResponder()
-                            self.designIdeaDetailsTable.reloadData()
-                        }
                     })
+                    self.commentText.text = ""
+                    self.commentText.resignFirstResponder()
+                    self.designIdeaDetailsTable.reloadData()
                 }
             }
         }

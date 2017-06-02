@@ -575,7 +575,7 @@ class DataService  {
                 self.reloadTables(section: DB_OBSERVATIONS_PATH)
             })
             // adding "remove" observer to the observations
-            self.observationsRemoveHandle = self.db_ref.child(DB_OBSERVATIONS_PATH).queryOrdered(byChild: "created_at").queryStarting(atValue: lastCreatedDate.int64Value + 1).observe(.childRemoved, with: { (snapshot) in
+            self.observationsRemoveHandle = self.db_ref.child(DB_OBSERVATIONS_PATH).observe(.childRemoved, with: { (snapshot) in
                 // snapshot.value is a dictionary for one Observation
                 if let obsDict = snapshot.value as? [String: AnyObject] {
                     let observation = NNObservation.createObservationFromFirebase(with: obsDict)
@@ -590,7 +590,7 @@ class DataService  {
                 self.reloadTables(section: DB_OBSERVATIONS_PATH)
             })
             // adding "change" observer to the observations
-            self.observationsChangeHandle = self.db_ref.child(DB_OBSERVATIONS_PATH).queryOrdered(byChild: "created_at").queryStarting(atValue: lastCreatedDate.int64Value + 1).observe(.childChanged, with: { (snapshot) in
+            self.observationsChangeHandle = self.db_ref.child(DB_OBSERVATIONS_PATH).observe(.childChanged, with: { (snapshot) in
                 // snapshot.value is a dictionary for one Observation
                 if let obsDict = snapshot.value as? [String: AnyObject] {
                     let observation = NNObservation.createObservationFromFirebase(with: obsDict)
