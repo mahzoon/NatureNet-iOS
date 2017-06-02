@@ -16,6 +16,8 @@ class GalleryDetailController: UIViewController, UITableViewDelegate, UITableVie
     @IBOutlet weak var username: UILabel!
     @IBOutlet weak var postDate: UILabel!
     @IBOutlet weak var affiliation: UILabel!
+    @IBOutlet weak var observationProjectDesc: UILabel!
+    @IBOutlet weak var observationProject: UILabel!
     @IBOutlet weak var descriptionText: UILabel!
     @IBOutlet weak var numLikes: UILabel!
     @IBOutlet weak var numDislikes: UILabel!
@@ -86,6 +88,13 @@ class GalleryDetailController: UIViewController, UITableViewDelegate, UITableVie
                 })
             }
             self.postDate.text = UtilityFunctions.convertTimestampToDateString(date: obsv.updatedAt)
+            if let prjName = DataService.ds.GetProject(by: obsv.project)?.name {
+                self.observationProject.text = "\"\(prjName)\""
+                self.observationProjectDesc.text = OBSERVATION_PROJECT_TEXT_DESCRIPTION
+            } else {
+                self.observationProject.text = ""
+                self.observationProjectDesc.text = ""
+            }
             self.descriptionText.text = obsv.observationText
             if DataService.ds.GetCommentsOnObservation(with: obsv.id).count == 0 {
                 self.commentLabel.text = NO_COMMENTS_TEXT

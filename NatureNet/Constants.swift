@@ -94,6 +94,7 @@ let LISTS_SHOW_MORE_TEXT = "Show more..."
 let NO_COMMENTS_TEXT = "No comments."
 let ACTIVITY_INDICATOR_TEXT_LOADING = "Loading..."
 let ACTIVITY_INDICATOR_TEXT_UPLOADING = "Uploading..."
+let OBSERVATION_PROJECT_TEXT_DESCRIPTION = "A contribution to "
 
 //
 // Messages

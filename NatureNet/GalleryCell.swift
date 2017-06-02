@@ -49,11 +49,13 @@ class GalleryCell: UITableViewCell {
     
     func configureCell(id: String, username: String, affiliation: String, project: String, avatar: String, obsImage: String, text: String, num_likes: String, num_dislikes: String, num_comments: String, date: NSNumber, observation: NNObservation?, controller: UIViewController) {
         self.cellId = id
-        // in CommunityDetailsController we use a header-less version of this gallery cell, so username might be nil in this case.
+        // in CommunityDetailsController we use a header-less version of this gallery cell, so username/affiliation might be nil in this case.
         if (self.username != nil) {
             self.username.text = username
         }
-        self.affiliation.text = affiliation
+        if (self.affiliation != nil) {
+            self.affiliation.text = affiliation
+        }
         self.projectName.text = project
         self.descriptionText.text = text
         self.likes.text = num_likes
