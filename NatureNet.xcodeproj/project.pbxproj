@@ -412,7 +412,7 @@
 				TargetAttributes = {
 					68FA5A3B1ECA1538002E66B1 = {
 						CreatedOnToolsVersion = 8.3;
-						DevelopmentTeam = 34N446J27K;
+						DevelopmentTeam = 6L33LY5G5P;
 						ProvisioningStyle = Automatic;
 					};
 					68FA5A521ECA1538002E66B1 = {
@@ -813,11 +813,11 @@
 			baseConfigurationReference = 14C42650132EA9362369106F /* Pods-NatureNet.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 34N446J27K;
+				DEVELOPMENT_TEAM = 6L33LY5G5P;
 				INFOPLIST_FILE = NatureNet/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = NatureNet;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.NatureNet.NatureNet-Testing";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -828,11 +828,11 @@
 			baseConfigurationReference = D3BA5C7F0CDDC64F30967187 /* Pods-NatureNet.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 34N446J27K;
+				DEVELOPMENT_TEAM = 6L33LY5G5P;
 				INFOPLIST_FILE = NatureNet/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = NatureNet;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.NatureNet.NatureNet-Testing";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};

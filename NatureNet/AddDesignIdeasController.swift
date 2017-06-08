@@ -12,10 +12,12 @@ class AddDesignIdeasController: UITableViewController {
 
     @IBOutlet weak var ideaText: UITextView!
     
+    @IBOutlet var addIdeaTableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        ideaText.becomeFirstResponder()
+        //ideaText.becomeFirstResponder()
         if !DataService.ds.LoggedIn() {
             UtilityFunctions.showAuthenticationRequiredMessage(theView: self, completion: { 
                 self.performSegue(withIdentifier: SEGUE_SIGNIN, sender: nil)
@@ -23,6 +25,11 @@ class AddDesignIdeasController: UITableViewController {
         }
     }
 
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        addIdeaTableView.FixHeaderLayout()
+    }
+    
     @IBAction func addButtonTapped(_ sender: Any) {
         view.endEditing(true)
         if !DataService.ds.LoggedIn() {
