@@ -44,7 +44,7 @@ class ProjectCell: UITableViewCell {
         if isShowMore {
             self.projectIcon.image = nil
         } else {
-            self.projectIcon.image = ICON_DEFAULT_PROJECT
+            self.projectIcon.image = ICON_PROJECT_DEFAULT
         }
         
         if !useDefaultIcon {

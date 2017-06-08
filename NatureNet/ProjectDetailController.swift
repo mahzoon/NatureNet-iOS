@@ -58,7 +58,7 @@ class ProjectDetailController: UIViewController, UITableViewDelegate, UITableVie
         self.descriptionText.text = project?.descriptionText
         self.title = self.projectName.text
         
-        self.projectIcon.image = ICON_DEFAULT_PROJECT
+        self.projectIcon.image = ICON_PROJECT_DEFAULT
         // requesting the icon
         if let p = project {
             MediaManager.md.getOrDownloadIcon(requesterId: "ProjectDetailController", urlString: p.iconUrl, completion: { img, err in

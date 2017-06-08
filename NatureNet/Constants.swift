@@ -39,12 +39,13 @@ let ICON_PROFILE_OFFLINE = UIImage(named: "icon - profile - offline")
 let ICON_DESIGN_IDEA_STATUS_DONE = UIImage(named: "icon - done")
 let ICON_DESIGN_IDEA_STATUS_DISCUSSING = UIImage(named: "icon - discussing")
 let ICON_DEFAULT_USER_AVATAR = UIImage(named: "join screen - user")
-let ICON_DEFAULT_PROJECT = UIImage(named: "icon - project - default")
+let ICON_PROJECT_DEFAULT = UIImage(named: "icon - project - default")
 let IMAGE_DEFAULT_OBSERVATION = UIImage(named: "image - observation - default")
 let ICON_LIKE_GRAY = UIImage(named: "icon - like - gray")
 let ICON_LIKE_GREEN = UIImage(named: "icon - like")
 let ICON_DISLIKE_GRAY = UIImage(named: "icon - dislike - gray")
 let ICON_DISLIKE_RED = UIImage(named: "icon - dislike")
+let ICON_PROJECT_DEFAULT_LINK = "https://res.cloudinary.com/university-of-colorado/image/upload/v1464880363/static/Backyard_bd5me8.png"
 
 //
 // Sizes
@@ -121,6 +122,9 @@ let OBSERVATION_NO_PROJECT_ERROR_BUTTON_TEXT = "OK"
 let OFFLINE_WARNING_TITLE = "Seems that you are offline"
 let OFFLINE_WARNING_MESSAGE = "No worries. Your data will be synced automatically once you are back online."
 let OFFLINE_WARNING_BUTTON_TEXT = "Dismiss"
+let PROJECT_EMPTY_ERROR_TITLE = "Empty content?!"
+let PROJECT_EMPTY_ERROR_MESSAGE = "You did not enter complete information for the project. A project must have a title, description, and at least one associated site."
+let PROJECT_EMPTY_ERROR_BUTTON_TEXT = "OK"
 
 // Sign in Screen
 let SIGN_IN_ERRORS_TITLE = "Sign in"
@@ -193,6 +197,12 @@ let SAVE_OBSV_SUCCESS_BUTTON_TEXT = "OK"
 let ADD_IDEA_SUCCESS_TITLE = "Thank you!"
 let ADD_IDEA_SUCCESS_MESSAGE = "We appreciate your contribution to the NatureNet community project. You will receive an email notification once a community member responds to your idea. We also encourage you to visit our issue tracking github page at github.com/naturenet and participate in the discussions or even involve in the software development."
 let ADD_IDEA_SUCCESS_BUTTON_TEXT = "Dismiss"
+
+// Add project screen
+let ADD_PROJECT_SUCCESS_TITLE = "Done!"
+let ADD_PROJECT_SUCCESS_MESSAGE = "The project was added successfully."
+let ADD_PROJECT_SUCCESS_BUTTON_TEXT = "Dismiss"
+
 
 //
 // Segue names
