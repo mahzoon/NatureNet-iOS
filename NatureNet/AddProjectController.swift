@@ -8,13 +8,15 @@
 
 import UIKit
 
-class AddProjectController: UITableViewController {
+class AddProjectController: UITableViewController, UITextViewDelegate {
     
     @IBOutlet var addProjectTableView: UITableView!
     @IBOutlet weak var addProjectTextView: UITextView!
     
     var sitesIds = [String]()
     var switchValues = [Int: Bool]()
+    var projectTitleText = ""
+    var projectDescriptionText = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -112,6 +114,7 @@ class AddProjectController: UITableViewController {
         if indexPath.section == 1 {
             if let cell = tableView.dequeueReusableCell(withIdentifier: TEXT_VIEW_CELL_ID) as? TextViewCell {
                 cell.configureCell()
+                cell.textBox.delegate = self
                 return cell
             } else {
                 return TextViewCell()
@@ -139,22 +142,29 @@ class AddProjectController: UITableViewController {
                 self.performSegue(withIdentifier: SEGUE_SIGNIN, sender: nil)
             })
         } else {
-            if getProjectText() == "" || getProjectDescription() == "" || isNoSiteSelected() {
+            if projectTitleText == "" || projectDescriptionText == "" {
                 UtilityFunctions.showErrorMessage(theView: self, title: PROJECT_EMPTY_ERROR_TITLE,
                                                   message: PROJECT_EMPTY_ERROR_MESSAGE,
                                                   buttonText: PROJECT_EMPTY_ERROR_BUTTON_TEXT)
-            } else {
-                let project = NNProject(desc: getProjectDescription(), icon: ICON_PROJECT_DEFAULT_LINK, id: "", latestContrib: 0, name: getProjectText(), sites: getCheckedSites(), created: 0, updated: 0)
-                DataService.ds.AddProject(project: project, completion: { success in
-                    if (success) {
-                        let alert = UIAlertController(title: ADD_PROJECT_SUCCESS_TITLE, message: ADD_PROJECT_SUCCESS_MESSAGE, preferredStyle: .alert)
-                        alert.addAction(UIAlertAction(title: ADD_PROJECT_SUCCESS_BUTTON_TEXT, style: .default, handler: { val in
-                            self.dismiss(animated: true) {}
-                        }))
-                        self.present(alert, animated: true, completion: nil)
-                    }
-                })
+                return
             }
+            if isNoSiteSelected() {
+                UtilityFunctions.showErrorMessage(theView: self, title: PROJECT_EMPTY_ERROR_TITLE,
+                                                  message: PROJECT_EMPTY_SITE_ERROR_MESSAGE,
+                                                  buttonText: PROJECT_EMPTY_ERROR_BUTTON_TEXT)
+                return
+            }
+                
+            let project = NNProject(desc: projectDescriptionText, icon: ICON_PROJECT_DEFAULT_LINK, id: "", latestContrib: 0, name: projectTitleText, sites: getCheckedSites(), created: 0, updated: 0)
+            DataService.ds.AddProject(project: project, completion: { success in
+                if (success) {
+                    let alert = UIAlertController(title: ADD_PROJECT_SUCCESS_TITLE, message: ADD_PROJECT_SUCCESS_MESSAGE, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: ADD_PROJECT_SUCCESS_BUTTON_TEXT, style: .default, handler: { val in
+                        self.dismiss(animated: true) {}
+                    }))
+                    self.present(alert, animated: true, completion: nil)
+                }
+            })
         }
     }
     
@@ -168,30 +178,11 @@ class AddProjectController: UITableViewController {
     func getCheckedSites() -> [String: AnyObject] {
         var siteDict = [String: AnyObject]()
         for (index, siteId) in sitesIds.enumerated() {
-            if let c = addProjectTableView.cellForRow(at: IndexPath(row: index, section: 2)), (c as? SiteSwitchCell) != nil {
-                let cell = c as! SiteSwitchCell
-                if cell.siteSwitch.isOn {
-                    siteDict[siteId] = true as AnyObject
-                }
+            if let b = switchValues[index], b {
+                siteDict[siteId] = true as AnyObject
             }
         }
         return siteDict
-    }
-    
-    func getProjectText() -> String {
-        if let c = addProjectTableView.cellForRow(at: IndexPath(row: 0, section: 0)), (c as? TextFieldCell) != nil {
-            let cell = c as! TextFieldCell
-            return cell.textBox.text ?? ""
-        }
-        return ""
-    }
-    
-    func getProjectDescription() -> String {
-        if let c = addProjectTableView.cellForRow(at: IndexPath(row: 0, section: 1)), (c as? TextViewCell) != nil {
-            let cell = c as! TextViewCell
-            return cell.textBox.text ?? ""
-        }
-        return ""
     }
     
     @IBAction func cancelButtonTapped(_ sender: Any) {
@@ -200,5 +191,13 @@ class AddProjectController: UITableViewController {
     
     @IBAction func switchValueChanged(_ sender: UISwitch) {
         switchValues[sender.tag] = sender.isOn
+    }
+    
+    @IBAction func projectTitleChanged(_ sender: UITextField) {
+        self.projectTitleText = sender.text ?? ""
+    }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        self.projectDescriptionText = textView.text
     }
 }

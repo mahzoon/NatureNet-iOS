@@ -133,6 +133,7 @@ let OFFLINE_WARNING_BUTTON_TEXT = "Dismiss"
 let PROJECT_EMPTY_ERROR_TITLE = "Empty content?!"
 let PROJECT_EMPTY_ERROR_MESSAGE = "You did not enter complete information for the project. A project must have a title, description, and at least one associated site."
 let PROJECT_EMPTY_ERROR_BUTTON_TEXT = "OK"
+let PROJECT_EMPTY_SITE_ERROR_MESSAGE = "You did not associate any sites to this project. A project must have a title, description, and at least one associated site."
 
 // Sign in Screen
 let SIGN_IN_ERRORS_TITLE = "Sign in"
