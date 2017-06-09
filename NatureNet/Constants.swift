@@ -104,6 +104,7 @@ let PROJECT_DESCRIPTION_TEXT = "Project Description"
 let PROJECT_SITE_TEXT = "Associated Sites"
 let PROJECT_TITLE_INSTRUCTIONS = "We recommend to use a short title, no more than four words."
 let PROJECT_DESCRIPTION_INSTRUCTIONS = "Use hashtags in your description to make it more searchable."
+let PROJECT_SITES_INSTRUCTIONS = "Select at least one site associated to your project."
 
 //
 // Messages

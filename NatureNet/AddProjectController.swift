@@ -81,6 +81,9 @@ class AddProjectController: UITableViewController {
         if section == 1 {
             return PROJECT_DESCRIPTION_INSTRUCTIONS
         }
+        if section == 2 {
+            return PROJECT_SITES_INSTRUCTIONS
+        }
         return ""
     }
     
