@@ -45,7 +45,6 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
         super.viewDidLoad()
         projectPicker.delegate = self
         projectPicker.dataSource = self
-        projectPicker.selectedRow(inComponent: 0)
         
         descriptionText.delegate = self
         locationText.delegate = self
@@ -81,6 +80,12 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
         self.locationManager.requestWhenInUseAuthorization()
         
         self.observationImageButtonTapped("")
+        
+        if let user = DataService.ds.GetCurrentUser() {
+            if let i = siteList.index(of: user.affiliation) {
+                self.projectPicker.selectRow(i, inComponent: 0, animated: true)
+            }
+        }
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
