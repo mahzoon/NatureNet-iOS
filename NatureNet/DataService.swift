@@ -352,14 +352,16 @@ class DataService  {
     // returns a specific project which is located at siteIndex and has index="position" in the array.
     func GetProject(in siteIndex:Int, at position: Int, searchFilter: String) -> NNProject? {
         if searchFilter != "" {
-            if let ps = self.projects[self.sites[siteIndex].key]?.filter({ (e: NNProject) -> Bool in
+            if var ps = self.projects[self.sites[siteIndex].key]?.filter({ (e: NNProject) -> Bool in
                 return (e.name.lowercased().range(of: searchFilter.lowercased()) != nil)}) {
+                ps.sort(by: {$0.updatedAt.int64Value > $1.updatedAt.int64Value})
                 if position < ps.count {
                     return ps[position]
                 }
             }
         } else {
-            if let ps = self.projects[self.sites[siteIndex].key] {
+            if var ps = self.projects[self.sites[siteIndex].key] {
+                ps.sort(by: {$0.updatedAt.int64Value > $1.updatedAt.int64Value})
                 if position < ps.count {
                     return ps[position]
                 }
