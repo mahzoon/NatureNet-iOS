@@ -14,9 +14,9 @@ class TextViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        textBox.text = ""
     }
     
     func configureCell() {
-        textBox.text = ""
     }
 }

@@ -14,6 +14,7 @@ class AddProjectController: UITableViewController {
     @IBOutlet weak var addProjectTextView: UITextView!
     
     var sitesIds = [String]()
+    var switchValues = [Int: Bool]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +28,10 @@ class AddProjectController: UITableViewController {
         sitesIds = DataService.ds.GetSiteIds()
         hideKeyboardWhenTappedOutside()
         addProjectTextView.attributedText = ADD_PROJECT_DESCRIPTION()
+        
+        for (index, _) in sitesIds.enumerated() {
+            switchValues[index] = false
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -114,7 +119,11 @@ class AddProjectController: UITableViewController {
         }
         if indexPath.section == 2 {
             if let cell = tableView.dequeueReusableCell(withIdentifier: SITE_SWITCH_CELL_ID) as? SiteSwitchCell {
-                cell.configureCell(siteName: DataService.ds.GetSiteName(with: sitesIds[indexPath.row]))
+                if let val = switchValues[indexPath.row] {
+                    cell.configureCell(siteName: DataService.ds.GetSiteName(with: sitesIds[indexPath.row]), value: val, index: indexPath.row)
+                } else {
+                    cell.configureCell(siteName: DataService.ds.GetSiteName(with: sitesIds[indexPath.row]), value: false, index: indexPath.row)
+                }
                 return cell
             } else {
                 return SiteSwitchCell()
@@ -187,5 +196,9 @@ class AddProjectController: UITableViewController {
     
     @IBAction func cancelButtonTapped(_ sender: Any) {
         self.dismiss(animated: true) {}
+    }
+    
+    @IBAction func switchValueChanged(_ sender: UISwitch) {
+        switchValues[sender.tag] = sender.isOn
     }
 }

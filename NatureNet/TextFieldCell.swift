@@ -19,10 +19,10 @@ class TextFieldCell: UITableViewCell, UITextFieldDelegate {
         super.awakeFromNib()
         
         textBox.delegate = self
+        textBox.text = ""
     }
     
     func configureCell(returnCallback: @escaping (Void) -> (Void)) {
-        textBox.text = ""
         self.textFieldReturnCallback = returnCallback
     }
     

@@ -15,10 +15,12 @@ class SiteSwitchCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        siteSwitch.isOn = false
     }
     
-    func configureCell(siteName: String) {
+    func configureCell(siteName: String, value: Bool, index: Int) {
         siteLabel.text = siteName
-        siteSwitch.isOn = false
+        siteSwitch.isOn = value
+        siteSwitch.tag = index
     }
 }
