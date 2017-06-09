@@ -265,5 +265,12 @@ let DESIGN_IDEA_STATUS_DONE = "done"
 let DESIGN_IDEA_TYPE = ""
 let DESIGN_IDEA_GROUP = "idea"
 
+func ADD_DESIGN_IDEA_DESCRIPTION() -> NSMutableAttributedString {
+    let m = NSMutableAttributedString(string: "NatureNet project evolves based on your design ideas. Your design ideas can be a new way of using NatureNet in your community, a new way to use mobile technology for learning about sustainability or changes in the environment, or a new feature on this mobile app. Learn more about crowdsourcing design \n\nPlease write your design idea here:", attributes: [NSFontAttributeName:UIFont(
+        name: "Helvetica",
+        size: 16.0)!])
+    m.addAttribute(NSLinkAttributeName, value: NSURL(string: "https://link.springer.com/chapter/10.1007/978-3-319-14956-1_14")!, range: NSMakeRange(264, 38))
+    return m
+}
 
 

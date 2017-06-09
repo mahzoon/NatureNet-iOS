@@ -10,6 +10,7 @@ import UIKit
 
 class AddDesignIdeasController: UITableViewController {
 
+    @IBOutlet weak var ideaDescription: UITextView!
     @IBOutlet weak var ideaText: UITextView!
     
     @IBOutlet var addIdeaTableView: UITableView!
@@ -23,6 +24,8 @@ class AddDesignIdeasController: UITableViewController {
                 self.performSegue(withIdentifier: SEGUE_SIGNIN, sender: nil)
             })
         }
+        hideKeyboardWhenTappedOutside()
+        ideaDescription.attributedText = ADD_DESIGN_IDEA_DESCRIPTION()
     }
 
     override func viewDidLayoutSubviews() {
