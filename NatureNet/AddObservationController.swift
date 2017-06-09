@@ -9,6 +9,8 @@
 import UIKit
 import MapKit
 import CoreLocation
+import Photos
+import AVFoundation
 
 class AddObservationController: UITableViewController, UIPickerViewDataSource, UIPickerViewDelegate,
 UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CLLocationManagerDelegate {
@@ -207,7 +209,9 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
         let alert = UIAlertController(title: ADD_OBSV_IMAGE_OPTIONS_TITLE, message: ADD_OBSV_IMAGE_OPTIONS_MSG, preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: ADD_OBSV_IMAGE_OPTIONS_CANCEL, style: .cancel, handler: nil))
         alert.addAction(UIAlertAction(title: ADD_OBSV_IMAGE_OPTIONS_PICK_EXISTING, style: .default, handler: { (action: UIAlertAction) in
-            if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.photoLibrary) {
+            if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.photoLibrary) &&
+                (PHPhotoLibrary.authorizationStatus() == PHAuthorizationStatus.authorized ||
+                 PHPhotoLibrary.authorizationStatus() == PHAuthorizationStatus.notDetermined) {
                 self.imagePicker.sourceType = UIImagePickerControllerSourceType.photoLibrary;
                 self.present(self.imagePicker, animated: true, completion: nil)
             } else {
@@ -215,7 +219,9 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
             }
         }))
         alert.addAction(UIAlertAction(title: ADD_OBSV_IMAGE_OPTIONS_TAKE_NEW, style: .default, handler: { (action: UIAlertAction) in
-            if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
+            if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) &&
+                (AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo) == AVAuthorizationStatus.authorized ||
+                    AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo) == AVAuthorizationStatus.notDetermined) {
                 self.imagePicker.sourceType = UIImagePickerControllerSourceType.camera;
                 self.locationManager.startUpdatingLocation()
                 self.present(self.imagePicker, animated: true, completion: nil)
