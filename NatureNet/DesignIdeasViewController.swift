@@ -135,6 +135,8 @@ class DesignIdeasViewController: UIViewController, UITableViewDelegate, UITableV
                 if let cell = sender as? DesignIdeasCell {
                     if let dest = segue.destination as? DesignIdeaDetailController {
                         dest.designIdea = cell.designIdea
+                        dest.commentTextShouldBeSelected = cell.tappedCommentButton
+                        cell.tappedCommentButton = false
                     }
                 }
             }

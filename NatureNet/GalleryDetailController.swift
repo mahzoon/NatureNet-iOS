@@ -35,6 +35,7 @@ class GalleryDetailController: UIViewController, UITableViewDelegate, UITableVie
     var attachedDocumentPath: URL?
     
     var observationObj: NNObservation?
+    var commentTextShouldBeSelected = false
     
     var pages = 0
     var maxNV = 0
@@ -69,6 +70,10 @@ class GalleryDetailController: UIViewController, UITableViewDelegate, UITableVie
         galleryDetailsTable.estimatedRowHeight = CGFloat(COMMENT_CELL_ESTIMATED_HEIGHT)
         
         DataService.ds.registerTableView(group: DB_COMMENTS_PATH, tableView: galleryDetailsTable)
+        
+        if commentTextShouldBeSelected {
+            self.commentText.becomeFirstResponder()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {

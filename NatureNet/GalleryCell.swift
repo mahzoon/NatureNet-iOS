@@ -33,6 +33,8 @@ class GalleryCell: UITableViewCell {
     // an id for the cell. This id is used for requesting icons and images
     var cellId: String = ""
     
+    var tappedCommentButton = false
+    
     // this is a reference to the super view controller and used to display messages
     var parentController :UIViewController?
     
@@ -163,5 +165,9 @@ class GalleryCell: UITableViewCell {
     }
     
     @IBAction func commentTapped(_ sender: Any) {
+        tappedCommentButton = true
+        if let p = parentController {
+            p.performSegue(withIdentifier: SEGUE_DETAILS, sender: self)
+        }
     }
 }

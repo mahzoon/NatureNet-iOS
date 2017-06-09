@@ -30,6 +30,7 @@ class DesignIdeaDetailController: UIViewController, UITableViewDelegate, UITable
     
     @IBOutlet weak var commentLabel: UILabel!
     var designIdea: NNDesignIdea?
+    var commentTextShouldBeSelected = false
     
     var pages = 0
     var maxNV = 0
@@ -62,6 +63,10 @@ class DesignIdeaDetailController: UIViewController, UITableViewDelegate, UITable
         designIdeaDetailsTable.estimatedRowHeight = CGFloat(COMMENT_CELL_ESTIMATED_HEIGHT)
         
         DataService.ds.registerTableView(group: DB_COMMENTS_PATH, tableView: designIdeaDetailsTable)
+        
+        if commentTextShouldBeSelected {
+            self.commentText.becomeFirstResponder()
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {

@@ -145,6 +145,8 @@ class ProjectDetailController: UIViewController, UITableViewDelegate, UITableVie
                 if let cell = sender as? GalleryCell {
                     if let dest = segue.destination as? GalleryDetailController {
                         dest.observationObj = cell.observation
+                        dest.commentTextShouldBeSelected = cell.tappedCommentButton
+                        cell.tappedCommentButton = false
                     }
                 }
             }
