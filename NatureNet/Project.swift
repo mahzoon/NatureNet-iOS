@@ -23,6 +23,8 @@ class NNProject {
     var name: String!
     // sites that this project belongs to
     var sites: [String]!
+    // sites that this project belongs to
+    var sitesRaw: [String: AnyObject]!
     // timestamp of the creation time
     var createdAt: NSNumber!
     // timestamp of the updated time
@@ -35,6 +37,7 @@ class NNProject {
         self.id = id
         self.latestContribution = latestContrib
         self.name = name
+        self.sitesRaw = sites
         self.sites = []
         // to extract sites we need only the key of the passed dictionary
         for (k, _) in sites {
@@ -42,6 +45,19 @@ class NNProject {
         }
         self.createdAt = created
         self.updatedAt = updated
+    }
+    
+    func getDictionaryRepresentation() -> [String: AnyObject] {
+        var retVal = [String: AnyObject]()
+        retVal["created_at"] = self.createdAt
+        retVal["updated_at"] = self.updatedAt
+        retVal["id"] = self.id as AnyObject
+        retVal["description"] = self.descriptionText as AnyObject
+        retVal["icon_url"] = self.iconUrl as AnyObject
+        retVal["latest_contribution"] = self.latestContribution as AnyObject
+        retVal["name"] = self.name as AnyObject
+        retVal["sites"] = self.sitesRaw as AnyObject
+        return retVal
     }
     
     static func createProjectFromFirebase(with snapshot: [String: AnyObject]) -> NNProject {

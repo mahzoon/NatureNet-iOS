@@ -26,6 +26,10 @@
 		682C31681ECE316F00F6D87D /* UtilityFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682C31671ECE316F00F6D87D /* UtilityFunctions.swift */; };
 		682C316B1ECE366B00F6D87D /* ToDo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682C316A1ECE366B00F6D87D /* ToDo.swift */; };
 		682C316D1ECE48BB00F6D87D /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682C316C1ECE48BB00F6D87D /* CommentCell.swift */; };
+		683C421C1EE9F2FF008C6190 /* AddProjectController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683C421B1EE9F2FF008C6190 /* AddProjectController.swift */; };
+		683C421E1EEA0078008C6190 /* TextViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683C421D1EEA0078008C6190 /* TextViewCell.swift */; };
+		683C42201EEA0172008C6190 /* SiteSwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683C421F1EEA0172008C6190 /* SiteSwitchCell.swift */; };
+		683C42221EEA150F008C6190 /* TextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683C42211EEA150F008C6190 /* TextFieldCell.swift */; };
 		689E31051ECA4C150039C2F3 /* JoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 689E31041ECA4C150039C2F3 /* JoinViewController.swift */; };
 		689E31091ECA87530039C2F3 /* SigninViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 689E31081ECA87530039C2F3 /* SigninViewController.swift */; };
 		689E310B1ECB7A2F0039C2F3 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 689E310A1ECB7A2F0039C2F3 /* RoundedButton.swift */; };
@@ -94,6 +98,10 @@
 		682C31671ECE316F00F6D87D /* UtilityFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilityFunctions.swift; sourceTree = "<group>"; };
 		682C316A1ECE366B00F6D87D /* ToDo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToDo.swift; sourceTree = "<group>"; };
 		682C316C1ECE48BB00F6D87D /* CommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
+		683C421B1EE9F2FF008C6190 /* AddProjectController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddProjectController.swift; sourceTree = "<group>"; };
+		683C421D1EEA0078008C6190 /* TextViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextViewCell.swift; sourceTree = "<group>"; };
+		683C421F1EEA0172008C6190 /* SiteSwitchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SiteSwitchCell.swift; sourceTree = "<group>"; };
+		683C42211EEA150F008C6190 /* TextFieldCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldCell.swift; sourceTree = "<group>"; };
 		689E31041ECA4C150039C2F3 /* JoinViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JoinViewController.swift; sourceTree = "<group>"; };
 		689E31081ECA87530039C2F3 /* SigninViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SigninViewController.swift; sourceTree = "<group>"; };
 		689E310A1ECB7A2F0039C2F3 /* RoundedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
@@ -203,6 +211,9 @@
 				68FB9BD21ECBE242006C88B1 /* CommunityCell.swift */,
 				682C316C1ECE48BB00F6D87D /* CommentCell.swift */,
 				2D7DF89F1ED37A3000D509F3 /* ShowMoreCell.swift */,
+				683C421F1EEA0172008C6190 /* SiteSwitchCell.swift */,
+				683C421D1EEA0078008C6190 /* TextViewCell.swift */,
+				683C42211EEA150F008C6190 /* TextFieldCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -308,6 +319,7 @@
 			children = (
 				68FB9BD81ECCF7FE006C88B1 /* AddObservationController.swift */,
 				68FB9BDA1ECCF856006C88B1 /* AddDesignIdeasController.swift */,
+				683C421B1EE9F2FF008C6190 /* AddProjectController.swift */,
 			);
 			name = Add;
 			sourceTree = "<group>";
@@ -621,6 +633,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2DEF4D6D1EE0D87900A516D6 /* DocumentViewerController.swift in Sources */,
+				683C421C1EE9F2FF008C6190 /* AddProjectController.swift in Sources */,
 				68FB9BC91ECBD948006C88B1 /* GalleryCell.swift in Sources */,
 				68FB9BC51ECBB2F4006C88B1 /* DesignIdeasCell.swift in Sources */,
 				68FB9BE01ECCF8FA006C88B1 /* CommunityDetailController.swift in Sources */,
@@ -635,6 +648,7 @@
 				68FB9BCD1ECBD9D7006C88B1 /* GalleryViewController.swift in Sources */,
 				682C31681ECE316F00F6D87D /* UtilityFunctions.swift in Sources */,
 				68FB9BE21ECCF912006C88B1 /* ProjectDetailController.swift in Sources */,
+				683C42221EEA150F008C6190 /* TextFieldCell.swift in Sources */,
 				689E310B1ECB7A2F0039C2F3 /* RoundedButton.swift in Sources */,
 				68FB9BE41ECCF944006C88B1 /* GalleryDetailController.swift in Sources */,
 				689E31091ECA87530039C2F3 /* SigninViewController.swift in Sources */,
@@ -651,9 +665,11 @@
 				2D632E4B1ED24941007ECF51 /* User.swift in Sources */,
 				68FB9BD51ECBE267006C88B1 /* CommunityViewController.swift in Sources */,
 				689E31051ECA4C150039C2F3 /* JoinViewController.swift in Sources */,
+				683C421E1EEA0078008C6190 /* TextViewCell.swift in Sources */,
 				68FB9BCF1ECBE075006C88B1 /* ProjectViewController.swift in Sources */,
 				68FB9BD11ECBE096006C88B1 /* ProjectCell.swift in Sources */,
 				68FB9BE81ECCFA47006C88B1 /* ProfileViewController.swift in Sources */,
+				683C42201EEA0172008C6190 /* SiteSwitchCell.swift in Sources */,
 				2D632E491ED234FC007ECF51 /* Project.swift in Sources */,
 				68FB9BE61ECCFA11006C88B1 /* DesignIdeaDetailController.swift in Sources */,
 				2D73CD421EDD245D002E58CD /* TabbarViewController.swift in Sources */,

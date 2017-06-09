@@ -55,6 +55,9 @@ let COMMENT_CELL_ESTIMATED_HEIGHT = 35.0
 let RECENT_OBSV_ESTIMATED_HEIGHT = 250.0
 let DESIGN_IDEA_CELL_ITEM_HEIGHT = 180.0
 let PROJECT_CELL_ITEM_HEIGHT = 50.0
+let ADD_PROJECT_HEADER_CELL_HEIGHT = 35.0
+let ADD_PROJECT_TITLE_CELL_HEIGHT = 35.0
+let ADD_PROJECT_DESCRIPTION_CELL_HEIGHT = 100.0
 let GALLERY_CELL_ITEM_HEIGHT = 300.0
 let COMMUNITY_CELL_ITEM_HEIGHT = 50.0
 let SHOW_MORE_CELL_HEIGHT = 50.0
@@ -85,7 +88,6 @@ let DETAILED_OBSV_LIST_LOAD_MORE_COUNT = 5
 let COMMENT_LIST_INIT_COUNT = 5
 let COMMENT_LIST_LOAD_MORE_COUNT = 5
 
-
 //
 // Texts
 //
@@ -97,6 +99,11 @@ let COMMENTS_TEXT = "Comments:"
 let ACTIVITY_INDICATOR_TEXT_LOADING = "Loading..."
 let ACTIVITY_INDICATOR_TEXT_UPLOADING = "Uploading..."
 let OBSERVATION_PROJECT_TEXT_DESCRIPTION = "A contribution to "
+let PROJECT_TITLE_TEXT = "Project Title"
+let PROJECT_DESCRIPTION_TEXT = "Project Description"
+let PROJECT_SITE_TEXT = "Associated Sites"
+let PROJECT_TITLE_INSTRUCTIONS = "We recommend to use a short title, no more than four words."
+let PROJECT_DESCRIPTION_INSTRUCTIONS = "Use hashtags in your description to make it more searchable."
 
 //
 // Messages
@@ -225,6 +232,9 @@ let GALLERY_CELL_ID = "GalleryCell"
 let SHOW_MORE_CELL_ID = "ShowMoreCell"
 let COMMENT_CELL_ID = "CommentCell"
 let EXPLORE_ANNOTATION_ID = "ExploreAnnotation"
+let TEXT_FIELD_CELL_ID = "TextFieldCell"
+let TEXT_VIEW_CELL_ID = "TextViewCell"
+let SITE_SWITCH_CELL_ID = "SiteSwitchCell"
 
 //
 // Database reference names

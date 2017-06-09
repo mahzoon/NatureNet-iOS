@@ -409,6 +409,24 @@ class DataService  {
         return n
     }
     
+    func AddProject(project: NNProject, completion: @escaping (Bool) -> Void) {
+        if !LoggedIn() { return }
+        // add the project to the path
+        let newProjectRef = db_ref.child(DB_PROJECTS_PATH).childByAutoId()
+        project.id = newProjectRef.key
+        var c = project.getDictionaryRepresentation()
+        let timestamp = Firebase.ServerValue.timestamp()
+        c["created_at"] = timestamp as AnyObject
+        c["updated_at"] = timestamp as AnyObject
+        newProjectRef.setValue(c) { error, ref in
+            if error == nil {
+                completion(true)
+            } else {
+                completion(false)
+            }
+        }
+    }
+    
     //////////////////////////////////////////////////////////////
     //
     //                          Community

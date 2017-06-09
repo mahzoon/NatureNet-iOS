@@ -601,7 +601,7 @@ DESIGN this nature technology with your community</string>
                     </connections>
                 </pongPressGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="617" y="4660"/>
+            <point key="canvasLocation" x="2246" y="4699"/>
         </scene>
         <!--Deprecated-->
         <scene sceneID="pjn-Py-va0">
@@ -907,7 +907,7 @@ DESIGN this nature technology with your community</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e3X-fL-MHK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1577" y="4403"/>
+            <point key="canvasLocation" x="1873" y="-125"/>
         </scene>
         <!--Observation-->
         <scene sceneID="Po8-IK-TI4">
@@ -1357,7 +1357,7 @@ DESIGN this nature technology with your community</string>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-182" y="3781"/>
+            <point key="canvasLocation" x="1028" y="3818"/>
         </scene>
         <!--Image-->
         <scene sceneID="E1T-WG-cLU">
@@ -1410,7 +1410,7 @@ DESIGN this nature technology with your community</string>
                     </connections>
                 </pongPressGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-129.375" y="4659.5070422535209"/>
+            <point key="canvasLocation" x="1500" y="4699"/>
         </scene>
         <!--Project Details-->
         <scene sceneID="1z4-tM-r5E">
@@ -1817,7 +1817,7 @@ DESIGN this nature technology with your community</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5cR-eD-WDS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1517" y="2837"/>
+            <point key="canvasLocation" x="-1388" y="2836"/>
         </scene>
         <!--Add Design Idea-->
         <scene sceneID="mrb-Xv-4ik">
@@ -1840,46 +1840,7 @@ DESIGN this nature technology with your community</string>
 Please write your idea here:</string>
                                             <attributes>
                                                 <font key="NSFont" size="16" name="Helvetica"/>
-                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.1200000000000001" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
-                                                    <tabStops>
-                                                        <textTab alignment="left" location="28">
-                                                            <options/>
-                                                        </textTab>
-                                                        <textTab alignment="left" location="56">
-                                                            <options/>
-                                                        </textTab>
-                                                        <textTab alignment="left" location="84">
-                                                            <options/>
-                                                        </textTab>
-                                                        <textTab alignment="left" location="112">
-                                                            <options/>
-                                                        </textTab>
-                                                        <textTab alignment="left" location="140">
-                                                            <options/>
-                                                        </textTab>
-                                                        <textTab alignment="left" location="168">
-                                                            <options/>
-                                                        </textTab>
-                                                        <textTab alignment="left" location="196">
-                                                            <options/>
-                                                        </textTab>
-                                                        <textTab alignment="left" location="224">
-                                                            <options/>
-                                                        </textTab>
-                                                        <textTab alignment="left" location="252">
-                                                            <options/>
-                                                        </textTab>
-                                                        <textTab alignment="left" location="280">
-                                                            <options/>
-                                                        </textTab>
-                                                        <textTab alignment="left" location="308">
-                                                            <options/>
-                                                        </textTab>
-                                                        <textTab alignment="left" location="336">
-                                                            <options/>
-                                                        </textTab>
-                                                    </tabStops>
-                                                </paragraphStyle>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.1200000000000001" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
                                             </attributes>
                                         </fragment>
                                     </attributedString>
@@ -1947,7 +1908,7 @@ Please write your idea here:</string>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="56e-Ee-ybB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-4494.375" y="4484.1549295774648"/>
+            <point key="canvasLocation" x="-4774" y="4499"/>
         </scene>
         <!--Design Ideas-->
         <scene sceneID="Q9C-OZ-lFF">
@@ -2668,7 +2629,7 @@ Please write your idea here:</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qSO-kl-u80" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-5988.75" y="4483.0985915492956"/>
+            <point key="canvasLocation" x="-4828" y="3635"/>
         </scene>
         <!--Explore-->
         <scene sceneID="PLn-rd-56S">
@@ -2725,7 +2686,7 @@ Please write your idea here:</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b3R-Ym-JZe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-598.125" y="2567.9577464788731"/>
+            <point key="canvasLocation" x="506" y="2569"/>
         </scene>
         <!--Dummy-->
         <scene sceneID="i1A-si-L6t">
@@ -2745,7 +2706,7 @@ Please write your idea here:</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jK0-rs-xT3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1271" y="1747"/>
+            <point key="canvasLocation" x="2912" y="1746"/>
         </scene>
         <!--Communities-->
         <scene sceneID="x7d-jw-Mu3">
@@ -2773,10 +2734,10 @@ Please write your idea here:</string>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="CommunityCell" id="eGh-4Q-ZrV" customClass="CommunityCell" customModule="NatureNet" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="56" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="55" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eGh-4Q-ZrV" id="2Hn-T2-9HL">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="1oV-Ns-9je">
@@ -3367,6 +3328,11 @@ Please write your idea here:</string>
                                 </connections>
                             </button>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="Aas-Df-dC3">
+                            <connections>
+                                <segue destination="cmU-5b-LCJ" kind="presentation" id="T1K-G0-nvX"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="profileButton" destination="xlC-vw-rd7" id="JPK-qJ-O4y"/>
@@ -3521,7 +3487,7 @@ Please write your idea here:</string>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IyY-fb-j9T" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-598" y="1747"/>
+            <point key="canvasLocation" x="506" y="1747"/>
         </scene>
         <!--Profile View Controller-->
         <scene sceneID="4c1-4y-3WH">
@@ -3776,7 +3742,7 @@ Please write your idea here:</string>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qeq-dG-Vnb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-5316" y="4485"/>
+            <point key="canvasLocation" x="-5634" y="4499"/>
         </scene>
         <!--Add Observation-->
         <scene sceneID="u8G-Aq-bqP">
@@ -3914,7 +3880,7 @@ Please write your idea here:</string>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="plW-hh-pa2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="398" y="2568"/>
+            <point key="canvasLocation" x="1873" y="2568"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="2hs-nR-NPI">
@@ -3933,7 +3899,7 @@ Please write your idea here:</string>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fMC-vn-Sbw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="398" y="1744"/>
+            <point key="canvasLocation" x="1873" y="1743"/>
         </scene>
         <!--Sign In-->
         <scene sceneID="D0Z-Jb-2Mc">
@@ -4298,6 +4264,174 @@ Please write your idea here:</string>
             </objects>
             <point key="canvasLocation" x="-2291" y="6383"/>
         </scene>
+        <!--Add Project-->
+        <scene sceneID="Xxe-vf-dLW">
+            <objects>
+                <tableViewController title="Add Project" id="Kdv-QK-dG6" customClass="AddProjectController" customModule="NatureNet" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="100" sectionHeaderHeight="35" sectionFooterHeight="30" id="aMR-8T-aze">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="jfJ-Ur-Aly">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="253"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fLx-ye-LK6">
+                                    <rect key="frame" x="15" y="10" width="290" height="233"/>
+                                    <attributedString key="attributedText">
+                                        <fragment>
+                                            <string key="content">Crowdsourcing design is a way for anyone to contribute to the NatureNet experience. Designers change the world and the NatureNet project gives everyone a chance to be a designer. Your design idea can be a new way of using NatureNet in your community, a new way to use mobile technology for learning about sustainability or changes in the environment, or a new feature on the web site.</string>
+                                            <attributes>
+                                                <font key="NSFont" size="16" name="Helvetica"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.1200000000000001" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="fLx-ye-LK6" firstAttribute="leading" secondItem="jfJ-Ur-Aly" secondAttribute="leading" constant="15" id="IUl-sM-859"/>
+                                <constraint firstAttribute="bottom" secondItem="fLx-ye-LK6" secondAttribute="bottom" constant="10" id="PDI-Ru-unZ"/>
+                                <constraint firstAttribute="trailing" secondItem="fLx-ye-LK6" secondAttribute="trailing" constant="15" id="iMx-vj-PQv"/>
+                                <constraint firstItem="fLx-ye-LK6" firstAttribute="top" secondItem="jfJ-Ur-Aly" secondAttribute="top" constant="10" id="kr9-jy-gYE"/>
+                            </constraints>
+                        </view>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="TextFieldCell" rowHeight="35" id="eXf-bE-Dkn" customClass="TextFieldCell" customModule="NatureNet" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="309" width="320" height="35"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eXf-bE-Dkn" id="G8s-Vk-vHz">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="34.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="project name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="go7-49-2Pz">
+                                            <rect key="frame" x="15" y="5" width="305" height="24.5"/>
+                                            <nil key="textColor"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits" returnKeyType="next"/>
+                                        </textField>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="go7-49-2Pz" secondAttribute="bottom" constant="5" id="3bS-Rq-rqR"/>
+                                        <constraint firstAttribute="trailing" secondItem="go7-49-2Pz" secondAttribute="trailing" id="Vea-rH-qcg"/>
+                                        <constraint firstItem="go7-49-2Pz" firstAttribute="top" secondItem="G8s-Vk-vHz" secondAttribute="top" constant="5" id="eUi-7e-j30"/>
+                                        <constraint firstItem="go7-49-2Pz" firstAttribute="leading" secondItem="G8s-Vk-vHz" secondAttribute="leading" constant="15" id="xC3-Kf-KXu"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
+                                <connections>
+                                    <outlet property="textBox" destination="go7-49-2Pz" id="WNb-Ah-frK"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="TextViewCell" rowHeight="35" id="IaX-1F-qZ0" customClass="TextViewCell" customModule="NatureNet" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="344" width="320" height="35"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="IaX-1F-qZ0" id="APq-MY-iEP">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="34.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="project desc" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="jrv-ma-UIJ">
+                                            <rect key="frame" x="10" y="0.0" width="302" height="34.5"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        </textView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="jrv-ma-UIJ" secondAttribute="trailing" constant="8" id="3Te-Iw-w3d"/>
+                                        <constraint firstItem="jrv-ma-UIJ" firstAttribute="top" secondItem="APq-MY-iEP" secondAttribute="top" id="Mwd-oD-pHE"/>
+                                        <constraint firstItem="jrv-ma-UIJ" firstAttribute="leading" secondItem="APq-MY-iEP" secondAttribute="leading" constant="10" id="asB-m9-AQg"/>
+                                        <constraint firstAttribute="bottom" secondItem="jrv-ma-UIJ" secondAttribute="bottom" id="hru-ia-GhN"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
+                                <connections>
+                                    <outlet property="textBox" destination="jrv-ma-UIJ" id="oRn-3k-97v"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="SiteSwitchCell" rowHeight="53" id="OZN-TH-Qmi" customClass="SiteSwitchCell" customModule="NatureNet" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="379" width="320" height="53"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="OZN-TH-Qmi" id="bSJ-6e-EZ2">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="52"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rJ3-t7-Fwu">
+                                            <rect key="frame" x="15" y="8" width="297" height="37"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="site name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="icg-eI-J24">
+                                                    <rect key="frame" x="0.0" y="0.0" width="248" height="37"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eLY-k9-W24">
+                                                    <rect key="frame" x="248" y="0.0" width="51" height="37"/>
+                                                </switch>
+                                            </subviews>
+                                        </stackView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="rJ3-t7-Fwu" firstAttribute="leading" secondItem="bSJ-6e-EZ2" secondAttribute="leading" constant="15" id="Ju6-EU-hx4"/>
+                                        <constraint firstAttribute="bottom" secondItem="rJ3-t7-Fwu" secondAttribute="bottom" constant="8" id="XK9-Vm-wov"/>
+                                        <constraint firstAttribute="trailing" secondItem="rJ3-t7-Fwu" secondAttribute="trailing" constant="8" id="b6I-fm-geH"/>
+                                        <constraint firstItem="rJ3-t7-Fwu" firstAttribute="top" secondItem="bSJ-6e-EZ2" secondAttribute="top" constant="8" id="myk-0d-Lfh"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
+                                <connections>
+                                    <outlet property="siteLabel" destination="icg-eI-J24" id="9ds-OK-31A"/>
+                                    <outlet property="siteSwitch" destination="eLY-k9-W24" id="DBq-7K-TLW"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <sections/>
+                        <connections>
+                            <outlet property="dataSource" destination="Kdv-QK-dG6" id="bK2-ti-ky0"/>
+                            <outlet property="delegate" destination="Kdv-QK-dG6" id="wxM-4w-cua"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Add a Project" id="UY1-it-0IP">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="WDO-xd-l8w">
+                            <connections>
+                                <action selector="cancelButtonTapped:" destination="Kdv-QK-dG6" id="Gfl-AI-A4Z"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Add" id="FYV-F0-htX">
+                            <connections>
+                                <action selector="addButtonTapped:" destination="Kdv-QK-dG6" id="Jc4-Ze-xfh"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="addProjectTableView" destination="aMR-8T-aze" id="exo-dV-hcG"/>
+                        <segue destination="2xp-oe-SFT" kind="presentation" identifier="SignIn" id="SH1-bw-nAz"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QlV-vF-m6b" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-500.625" y="2567.9577464788731"/>
+        </scene>
+        <!--Add Project Nav Controller-->
+        <scene sceneID="bgG-dk-Bjj">
+            <objects>
+                <navigationController title="Add Project Nav Controller" automaticallyAdjustsScrollViewInsets="NO" id="cmU-5b-LCJ" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ESb-mD-BwY">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Kdv-QK-dG6" kind="relationship" relationship="rootViewController" id="XFJ-1r-Wb8"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Rn4-oV-3Ru" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1386" y="2158"/>
+        </scene>
     </scenes>
     <resources>
         <image name="icon - comment" width="25" height="25"/>
@@ -4320,8 +4454,8 @@ Please write your idea here:</string>
         <image name="signin screen - logo" width="816" height="265"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="au8-FN-eZl"/>
-        <segue reference="adI-Jl-7TC"/>
+        <segue reference="71W-kp-jfl"/>
+        <segue reference="SH1-bw-nAz"/>
         <segue reference="MJm-91-2Fo"/>
     </inferredMetricsTieBreakers>
 </document>
