@@ -36,6 +36,7 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
     
     // activity indicator for upload
     var activityIndicator = UIActivityIndicatorView()
+    @IBOutlet weak var progressIndicator: UIProgressView!
     
     // to capture user's location when taking picture
     let locationManager = CLLocationManager()
@@ -60,8 +61,7 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
 
         siteList = DataService.ds.GetSiteIds()
         
-        activityIndicator.frame = self.view.frame
-        activityIndicator.center = self.view.center
+        activityIndicator.frame = CGRect(x: self.view.frame.minX, y: self.view.frame.minY + 2, width: self.view.frame.width, height: self.view.frame.height)
         activityIndicator.hidesWhenStopped = true
         activityIndicator.activityIndicatorViewStyle = .whiteLarge
         activityIndicator.layer.backgroundColor = UIColor(white: 0, alpha: ACTIVITY_INDICATOR_OPACITY).cgColor
@@ -72,6 +72,9 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
         activityIndicatorLabel.center = CGPoint(x: activityIndicator.center.x, y: activityIndicator.center.y + ACTIVITY_INDICATOR_TEXT_HEIGHT)
         activityIndicator.addSubview(activityIndicatorLabel)
         self.view.addSubview(activityIndicator)
+        
+        self.progressIndicator.isHidden = true
+        self.progressIndicator.setProgress(0, animated: false)
         
         self.locationManager.delegate = self;
         self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -255,7 +258,8 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
                                                   buttonText: OBSERVATION_NO_PROJECT_ERROR_BUTTON_TEXT)
             } else {
                 view.endEditing(true)
-                
+                self.progressIndicator.setProgress(0, animated: false)
+                self.progressIndicator.isHidden = false
                 var data = ["text": self.descriptionText.text ?? "", "image": ""]
                 // upload image to Cloudinary
                 if let img = self.observationImage.image {
@@ -264,10 +268,13 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
                     self.submitButton.isEnabled = false
                     //UIApplication.shared.beginIgnoringInteractionEvents()
                     MediaManager.md.uploadImage(image: img, progressHandler: { (Progress) in
-                        // progress handler
+                        DispatchQueue.main.async {
+                            self.progressIndicator.setProgress(Float(Progress.fractionCompleted), animated: true)
+                        }
                     }, completionHandler: { result, error in
                         // stop activity spinner
                         self.activityIndicator.stopAnimating()
+                        self.progressIndicator.isHidden = true
                         self.submitButton.isEnabled = true
                         //UIApplication.shared.endIgnoringInteractionEvents()
                         if let e = error {
