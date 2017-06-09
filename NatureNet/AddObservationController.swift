@@ -118,10 +118,6 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
         return 0
     }
     
-//    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-//        
-//    }
-    
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if component == 0 {
             self.projectPicker.reloadComponent(1)
@@ -252,6 +248,7 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
                                                   message: OBSERVATION_NO_PROJECT_ERROR_MESSAGE,
                                                   buttonText: OBSERVATION_NO_PROJECT_ERROR_BUTTON_TEXT)
             } else {
+                view.endEditing(true)
                 
                 var data = ["text": self.descriptionText.text ?? "", "image": ""]
                 // upload image to Cloudinary
