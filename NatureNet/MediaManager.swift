@@ -133,7 +133,7 @@ class MediaManager {
     }
 
     func uploadImage(image: UIImage, progressHandler: ((Progress) -> Void)?, completionHandler: ((CLDUploadResult?, NSError?) -> ())?) {
-        let imgData = UIImagePNGRepresentation(image)
+        let imgData = UIImagePNGRepresentation(image.fixOrientation())
         if let data = imgData {
             cloudinary_last_upload_request = cloudinary_uploader?.upload(data: data, uploadPreset: CLOUDINARY_PRESET, params: nil, progress: progressHandler, completionHandler: completionHandler)
         }
