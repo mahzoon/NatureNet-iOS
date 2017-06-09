@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -1832,34 +1832,12 @@ DESIGN this nature technology with your community</string>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <textView clipsSubviews="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ayj-vI-zAI">
-                                    <rect key="frame" x="15" y="10" width="290" height="272"/>
+                                    <rect key="frame" x="15" y="10" width="290" height="277"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <attributedString key="attributedText">
-                                        <fragment content="NatureNet project evolves based on your design ideas. Your design ideas can be a new way of using ">
+                                        <fragment content="Design Idea Description">
                                             <attributes>
-                                                <font key="NSFont" size="16" name="Helvetica"/>
-                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
-                                            </attributes>
-                                        </fragment>
-                                        <fragment content="NatureNet">
-                                            <attributes>
-                                                <font key="NSFont" size="16" name="Helvetica"/>
-                                                <font key="NSOriginalFont" size="16" name="Helvetica"/>
-                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
-                                            </attributes>
-                                        </fragment>
-                                        <fragment>
-                                            <string key="content"> in your community, a new way to use mobile technology for learning about sustainability or changes in the environment, or a new feature on this mobile app. https://link.springer.com/chapter/10.1007/978-3-319-14956-1_14
-
-</string>
-                                            <attributes>
-                                                <font key="NSFont" size="16" name="Helvetica"/>
-                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
-                                            </attributes>
-                                        </fragment>
-                                        <fragment content="Please write your design idea here:">
-                                            <attributes>
-                                                <font key="NSFont" size="16" name="Helvetica"/>
+                                                <font key="NSFont" size="16" name="Helvetica-Light"/>
                                                 <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.1200000000000001" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
                                             </attributes>
                                         </fragment>
@@ -1873,7 +1851,7 @@ DESIGN this nature technology with your community</string>
                                 <constraint firstAttribute="trailing" secondItem="ayj-vI-zAI" secondAttribute="trailing" constant="15" id="9BB-cK-lqh"/>
                                 <constraint firstItem="ayj-vI-zAI" firstAttribute="top" secondItem="Rig-CZ-Ax7" secondAttribute="top" constant="10" id="Ear-fl-l8j"/>
                                 <constraint firstItem="ayj-vI-zAI" firstAttribute="leading" secondItem="Rig-CZ-Ax7" secondAttribute="leading" constant="15" id="gYb-y6-Hvp"/>
-                                <constraint firstAttribute="bottom" secondItem="ayj-vI-zAI" secondAttribute="bottom" constant="10" id="m8S-OI-gxe"/>
+                                <constraint firstAttribute="bottom" secondItem="ayj-vI-zAI" secondAttribute="bottom" constant="5" id="m8S-OI-gxe"/>
                             </constraints>
                         </view>
                         <sections>
@@ -3194,7 +3172,7 @@ DESIGN this nature technology with your community</string>
                                         <rect key="frame" x="0.0" y="458" width="300" height="55"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="CrR-6e-vEG" id="0kL-qe-0jL">
-                                            <rect key="frame" x="0.0" y="0.0" width="300" height="54.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="300" height="55"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zQa-0V-ujc">
@@ -3523,7 +3501,7 @@ DESIGN this nature technology with your community</string>
                             <tableViewSection headerTitle="Edit Profile" id="pnR-kH-KgZ">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="75" id="jgk-O1-X4r">
-                                        <rect key="frame" x="0.0" y="55" width="320" height="75"/>
+                                        <rect key="frame" x="0.0" y="56" width="320" height="75"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jgk-O1-X4r" id="MRk-gf-gix">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="74"/>
@@ -3556,10 +3534,10 @@ DESIGN this nature technology with your community</string>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="kF2-r7-RH4">
-                                        <rect key="frame" x="0.0" y="130" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="131" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kF2-r7-RH4" id="L6u-Iw-Mf7">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email Address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="i5U-ED-8uW">
@@ -3578,10 +3556,10 @@ DESIGN this nature technology with your community</string>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="WeN-WE-LtR">
-                                        <rect key="frame" x="0.0" y="174" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="175" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WeN-WE-LtR" id="7Ui-K7-6me">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yQl-tJ-Jup">
@@ -3600,10 +3578,10 @@ DESIGN this nature technology with your community</string>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="r5s-Fq-9rS">
-                                        <rect key="frame" x="0.0" y="218" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="219" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="r5s-Fq-9rS" id="LE7-tj-5uQ">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Display name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oPX-XC-ctL">
@@ -3622,10 +3600,10 @@ DESIGN this nature technology with your community</string>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="6kR-YJ-bja">
-                                        <rect key="frame" x="0.0" y="262" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="263" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6kR-YJ-bja" id="LuF-P2-Ash">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Full name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="E7u-8B-YFN">
@@ -3648,10 +3626,10 @@ DESIGN this nature technology with your community</string>
                             <tableViewSection headerTitle="Affiliation" id="Pjz-sU-6Ow">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="150" id="LkR-Xa-f0j">
-                                        <rect key="frame" x="0.0" y="362" width="320" height="151"/>
+                                        <rect key="frame" x="0.0" y="363" width="320" height="150"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="LkR-Xa-f0j" id="sZg-PZ-7fo">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="149.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="149"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RVv-Mq-ySN">
@@ -3674,7 +3652,7 @@ DESIGN this nature technology with your community</string>
                                         <rect key="frame" x="0.0" y="549" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="zRi-rK-Juz" id="4aY-ur-d8f">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vsI-Tj-2Wi">
@@ -3968,7 +3946,7 @@ DESIGN this nature technology with your community</string>
                                         <rect key="frame" x="0.0" y="211" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ISz-3r-owR" id="Jci-55-LCE">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email Address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jNR-5W-1T1">
@@ -3990,7 +3968,7 @@ DESIGN this nature technology with your community</string>
                                         <rect key="frame" x="0.0" y="255" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vd1-Pc-1rS" id="W27-Om-QCM">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="V3w-27-JKc">
@@ -4016,7 +3994,7 @@ DESIGN this nature technology with your community</string>
                                         <rect key="frame" x="0.0" y="355" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pGU-5i-6Ej" id="Pqg-pE-Lv9">
-                                            <rect key="frame" x="0.0" y="0.0" width="273" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="273" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Join NatureNet" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yhe-u5-eQr">
@@ -4096,10 +4074,10 @@ DESIGN this nature technology with your community</string>
                             <tableViewSection headerTitle="Create New Account" id="Aqu-Ie-z3a">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="75" id="NxT-Lf-2hJ">
-                                        <rect key="frame" x="0.0" y="55" width="320" height="75"/>
+                                        <rect key="frame" x="0.0" y="56" width="320" height="75"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="NxT-Lf-2hJ" id="tFH-6y-EQf">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="75"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="74"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="itt-Oe-VFl">
@@ -4129,10 +4107,10 @@ DESIGN this nature technology with your community</string>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="qeu-St-3Ij">
-                                        <rect key="frame" x="0.0" y="130" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="131" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qeu-St-3Ij" id="Hit-c7-1KF">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email Address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oUq-hc-7do">
@@ -4151,10 +4129,10 @@ DESIGN this nature technology with your community</string>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="Ffe-Xe-B4A">
-                                        <rect key="frame" x="0.0" y="174" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="175" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ffe-Xe-B4A" id="w8X-nr-iP9">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Gvk-UG-ovF">
@@ -4173,10 +4151,10 @@ DESIGN this nature technology with your community</string>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="9UG-IR-moQ">
-                                        <rect key="frame" x="0.0" y="218" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="219" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9UG-IR-moQ" id="Ln9-aY-R9V">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Display name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Chn-Go-zrV">
@@ -4195,10 +4173,10 @@ DESIGN this nature technology with your community</string>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="Hlw-6U-LDa">
-                                        <rect key="frame" x="0.0" y="262" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="263" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Hlw-6U-LDa" id="Eha-CL-oEb">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Full name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NWM-Ef-cn5">
@@ -4221,10 +4199,10 @@ DESIGN this nature technology with your community</string>
                             <tableViewSection headerTitle="Affiliation" id="nQg-At-iX1">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="150" id="HZO-Rr-uf9">
-                                        <rect key="frame" x="0.0" y="362" width="320" height="150"/>
+                                        <rect key="frame" x="0.0" y="363" width="320" height="150"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="HZO-Rr-uf9" id="U71-jW-QJL">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="150"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="149"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uAr-Y5-Uuv">
@@ -4304,26 +4282,27 @@ DESIGN this nature technology with your community</string>
                             <rect key="frame" x="0.0" y="0.0" width="320" height="253"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fLx-ye-LK6">
+                                <textView clipsSubviews="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Toa-rm-zEv">
                                     <rect key="frame" x="15" y="10" width="290" height="233"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <attributedString key="attributedText">
-                                        <fragment>
-                                            <string key="content">Projects in NatureNet are defined by naturalists who need citizens' contributions for a specific nature activity. If you are a naturalist and you want to add your own project to NatureNet, submit your project information here:</string>
+                                        <fragment content="Project Description Text">
                                             <attributes>
-                                                <font key="NSFont" size="16" name="Helvetica"/>
+                                                <font key="NSFont" size="16" name="Helvetica-Light"/>
                                                 <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.1200000000000001" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
                                             </attributes>
                                         </fragment>
                                     </attributedString>
-                                    <nil key="highlightedColor"/>
-                                </label>
+                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    <dataDetectorType key="dataDetectorTypes" link="YES" lookupSuggestion="YES"/>
+                                </textView>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstItem="fLx-ye-LK6" firstAttribute="leading" secondItem="jfJ-Ur-Aly" secondAttribute="leading" constant="15" id="IUl-sM-859"/>
-                                <constraint firstAttribute="bottom" secondItem="fLx-ye-LK6" secondAttribute="bottom" constant="10" id="PDI-Ru-unZ"/>
-                                <constraint firstAttribute="trailing" secondItem="fLx-ye-LK6" secondAttribute="trailing" constant="15" id="iMx-vj-PQv"/>
-                                <constraint firstItem="fLx-ye-LK6" firstAttribute="top" secondItem="jfJ-Ur-Aly" secondAttribute="top" constant="10" id="kr9-jy-gYE"/>
+                                <constraint firstItem="Toa-rm-zEv" firstAttribute="top" secondItem="jfJ-Ur-Aly" secondAttribute="top" constant="10" id="4Xx-Fu-Xvh"/>
+                                <constraint firstItem="Toa-rm-zEv" firstAttribute="leading" secondItem="jfJ-Ur-Aly" secondAttribute="leading" constant="15" id="Fgx-Fz-MLe"/>
+                                <constraint firstAttribute="trailing" secondItem="Toa-rm-zEv" secondAttribute="trailing" constant="15" id="KLz-VB-a6M"/>
+                                <constraint firstAttribute="bottom" secondItem="Toa-rm-zEv" secondAttribute="bottom" constant="10" id="SER-RM-wdL"/>
                             </constraints>
                         </view>
                         <prototypes>
@@ -4435,6 +4414,7 @@ DESIGN this nature technology with your community</string>
                     </navigationItem>
                     <connections>
                         <outlet property="addProjectTableView" destination="aMR-8T-aze" id="exo-dV-hcG"/>
+                        <outlet property="addProjectTextView" destination="Toa-rm-zEv" id="ZsM-Bc-ASg"/>
                         <segue destination="2xp-oe-SFT" kind="presentation" identifier="SignIn" id="SH1-bw-nAz"/>
                     </connections>
                 </tableViewController>
@@ -4484,6 +4464,6 @@ DESIGN this nature technology with your community</string>
     <inferredMetricsTieBreakers>
         <segue reference="MJm-91-2Fo"/>
         <segue reference="poZ-sa-YE6"/>
-        <segue reference="SH1-bw-nAz"/>
+        <segue reference="au8-FN-eZl"/>
     </inferredMetricsTieBreakers>
 </document>

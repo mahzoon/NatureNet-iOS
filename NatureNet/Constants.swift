@@ -267,10 +267,18 @@ let DESIGN_IDEA_TYPE = ""
 let DESIGN_IDEA_GROUP = "idea"
 
 func ADD_DESIGN_IDEA_DESCRIPTION() -> NSMutableAttributedString {
-    let m = NSMutableAttributedString(string: "NatureNet project evolves based on your design ideas. Your design ideas can be a new way of using NatureNet in your community, a new way to use mobile technology for learning about sustainability or changes in the environment, or a new feature on this mobile app. Learn more about crowdsourcing design \n\nPlease write your design idea here:", attributes: [NSFontAttributeName:UIFont(
-        name: "Helvetica",
-        size: 16.0)!])
-    m.addAttribute(NSLinkAttributeName, value: NSURL(string: "https://link.springer.com/chapter/10.1007/978-3-319-14956-1_14")!, range: NSMakeRange(264, 38))
+    let m = NSMutableAttributedString(string: "Design Ideas in NatureNet directs the technology towards your suggestions and needs. Examples of design ideas include a new feature for using NatureNet in your community, a new way to use mobile technology for learning about sustainability or changes in the environment, or a new function for this mobile app. \nLearn more about participatory design \n\nPlease write your design idea here:", attributes: [NSFontAttributeName:UIFont.systemFont(ofSize: 17.0)])
+    m.addAttribute(NSLinkAttributeName, value: NSURL(string: "https://en.wikipedia.org/wiki/Participatory_design")!, range: NSMakeRange(311, 38))
+    let paragraphStyle = NSMutableParagraphStyle()
+    paragraphStyle.lineSpacing = 3
+    m.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyle, range: NSMakeRange(0, m.length))
+    return m
+}
+func ADD_PROJECT_DESCRIPTION() -> NSMutableAttributedString {
+    let m = NSMutableAttributedString(string: "Projects in NatureNet are a call to action! They identify a question, a problem, or a topic that contributions can shed light on. Examples might include: examples of rainwater run-off, how many geese are present in our park, which non-native plants are invasive in our park. Please give your project a short name (1-3 words) and a description. We suggest you add hashtags to your description such as: #capstone #subproject #water #pollution", attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 17.0)])
+    let paragraphStyle = NSMutableParagraphStyle()
+    paragraphStyle.lineSpacing = 3
+    m.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyle, range: NSMakeRange(0, m.length))
     return m
 }
 

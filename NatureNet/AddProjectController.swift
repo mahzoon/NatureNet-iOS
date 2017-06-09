@@ -11,6 +11,7 @@ import UIKit
 class AddProjectController: UITableViewController {
     
     @IBOutlet var addProjectTableView: UITableView!
+    @IBOutlet weak var addProjectTextView: UITextView!
     
     var sitesIds = [String]()
     
@@ -25,6 +26,7 @@ class AddProjectController: UITableViewController {
         
         sitesIds = DataService.ds.GetSiteIds()
         hideKeyboardWhenTappedOutside()
+        addProjectTextView.attributedText = ADD_PROJECT_DESCRIPTION()
     }
     
     override func viewDidLayoutSubviews() {
