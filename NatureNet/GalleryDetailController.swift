@@ -106,8 +106,7 @@ class GalleryDetailController: UIViewController, UITableViewDelegate, UITableVie
             } else {
                 self.commentLabel.text = COMMENTS_TEXT
             }
-            self.numLikes.text = "\(obsv.Likes.count)"
-            self.numDislikes.text = "\(obsv.Dislikes.count)"
+            updateLikeAndDislikeButtonImages()
             
             // load the observation image
             self.observation.image = IMAGE_DEFAULT_OBSERVATION
@@ -405,6 +404,7 @@ class GalleryDetailController: UIViewController, UITableViewDelegate, UITableVie
                                                   completion: { success in
                     })
                     self.commentText.text = ""
+                    FixTextViewHeight()
                     self.commentText.resignFirstResponder()
                     self.galleryDetailsTable.reloadData()
                 }

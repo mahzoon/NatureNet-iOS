@@ -29,6 +29,8 @@ class DesignIdeasViewController: UIViewController, UITableViewDelegate, UITableV
         searchBar.delegate = self
         
         DataService.ds.registerTableView(group: DB_DESIGNIDEAS_PATH, tableView: designIdeasTable)
+        
+        hideKeyboardWhenTappedOutside()
     }
 
     // Whenever this view appears, it should update user's status on the profile icon on the top left corner.

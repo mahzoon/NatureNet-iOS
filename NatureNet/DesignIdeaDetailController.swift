@@ -92,8 +92,7 @@ class DesignIdeaDetailController: UIViewController, UITableViewDelegate, UITable
             } else {
                 self.commentLabel.text = COMMENTS_TEXT
             }
-            self.numLikes.text = "\(idea.Likes.count)"
-            self.numDislikes.text = "\(idea.Dislikes.count)"
+            updateLikeAndDislikeButtonImages()
             
             // load the status image
             self.status.image = nil
@@ -313,6 +312,7 @@ class DesignIdeaDetailController: UIViewController, UITableViewDelegate, UITable
                     DataService.ds.WriteCommentOn(context: DB_DESIGNIDEAS_PATH, comment: commentText.text, contributionId: idea.id, completion: { success in
                     })
                     self.commentText.text = ""
+                    FixTextViewHeight()
                     self.commentText.resignFirstResponder()
                     self.designIdeaDetailsTable.reloadData()
                 }

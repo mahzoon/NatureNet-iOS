@@ -29,6 +29,8 @@ class ExploreViewController: UIViewController, MKMapViewDelegate, UISearchBarDel
         
         mapView.delegate = self
         searchBar.delegate = self
+        
+        hideKeyboardWhenTappedOutside()
     }
     
     // Whenever this view appears, it should update user's status on the profile icon on the top left corner.
