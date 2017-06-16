@@ -203,13 +203,24 @@ class DataService  {
                     let timestamp = Firebase.ServerValue.timestamp()
                     c["created_at"] = timestamp as AnyObject
                     c["updated_at"] = timestamp as AnyObject
-                    self.db_ref.child("\(DB_USERS_PATH)/\(u.uid)").setValue(c)
+                    
                     let user_private = ["id": u.uid as AnyObject,
                                         "created_at": timestamp as AnyObject,
                                         "updated_at": timestamp as AnyObject,
                                         "name": fullName as AnyObject]
-                    self.db_ref.child("\(DB_USERS_PRIVATE_PATH)/\(u.uid)").setValue(user_private)
-                    completion(true, "")
+                    self.db_ref.child("\(DB_USERS_PRIVATE_PATH)/\(u.uid)").setValue(user_private) { error, ref in
+                        if error == nil {
+                            self.db_ref.child("\(DB_USERS_PATH)/\(u.uid)").setValue(c) { error, ref in
+                                if error == nil {
+                                    completion(true, "")
+                                } else {
+                                    completion(false, error.debugDescription)
+                                }
+                            }
+                        } else {
+                            completion(false, error.debugDescription)
+                        }
+                    }
                 }
             }
         }
@@ -731,9 +742,9 @@ class DataService  {
         newObservationRef.setValue(c) { error, ref in
             if error == nil {
                 // change the observation's activity's latest_contribution
-                self.db_ref.child("\(DB_PROJECTS_PATH)/\(observation.project)/\(DB_LATEST_CONTRIBUTION)").setValue(timestamp)
+                self.db_ref.child("\(DB_PROJECTS_PATH)/\(observation.project!)/\(DB_LATEST_CONTRIBUTION)").setValue(timestamp)
                 // change the user's latest_contribution
-                self.db_ref.child("\(DB_USERS_PATH)/\(observation.observer)/\(DB_LATEST_CONTRIBUTION)").setValue(timestamp)
+                self.db_ref.child("\(DB_USERS_PATH)/\(observation.observer!)/\(DB_LATEST_CONTRIBUTION)").setValue(timestamp)
                 completion(true)
             } else {
                 completion(false)
@@ -871,7 +882,7 @@ class DataService  {
         newIdeaRef.setValue(c) { error, ref in
             if error == nil {
                 // change the user's latest_contribution
-                self.db_ref.child("\(DB_USERS_PATH)/\(idea.submitter)/\(DB_LATEST_CONTRIBUTION)").setValue(timestamp, withCompletionBlock: { error, ref in
+                self.db_ref.child("\(DB_USERS_PATH)/\(idea.submitter!)/\(DB_LATEST_CONTRIBUTION)").setValue(timestamp, withCompletionBlock: { error, ref in
                     if error == nil {
                         completion(true)
                     } else {
@@ -992,7 +1003,7 @@ class DataService  {
         if let u = currentUser {
             // adding the comment to the "comments" key
             let newCommentRef = db_ref.child(DB_COMMENTS_PATH).childByAutoId()
-            var c = NNComment(comment: comment, commenter: u.uid, id: newCommentRef.key, context: context, parentContrib: contributionId, created: 0, updated: 0).getDictionaryRepresentation()
+            var c = NNComment(comment: comment, commenter: u.uid, id: newCommentRef.key, context: context, parentContrib: contributionId, status: "", created: 0, updated: 0).getDictionaryRepresentation()
             let timestamp = Firebase.ServerValue.timestamp()
             c["created_at"] = timestamp as AnyObject
             c["updated_at"] = timestamp as AnyObject

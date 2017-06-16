@@ -10,10 +10,10 @@
 		133C14B401C71355193C8758 /* Pods_NatureNet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D47BBC3D482560B7F12A934 /* Pods_NatureNet.framework */; };
 		2457FA8CEE8E2A30FCC7ABB8 /* Pods_NatureNetTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82B281EA9CADC8590AB3AB68 /* Pods_NatureNetTests.framework */; };
 		2D272F421ED1273B00401CE6 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D272F411ED1273B00401CE6 /* DataService.swift */; };
+		2D431B2F1EF4781A0068E963 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2D431B2E1EF4781A0068E963 /* GoogleService-Info.plist */; };
 		2D5D103C1ECEBFFB008A8FEA /* UITable+HeaderAutoResize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D5D103B1ECEBFFB008A8FEA /* UITable+HeaderAutoResize.swift */; };
 		2D5D103E1ECF9471008A8FEA /* RoundedTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D5D103D1ECF9471008A8FEA /* RoundedTextView.swift */; };
 		2D5D10601ED01603008A8FEA /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D5D105F1ED01603008A8FEA /* ImageViewController.swift */; };
-		2D632E1E1ED1349E007ECF51 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2D632E1D1ED1349E007ECF51 /* GoogleService-Info.plist */; };
 		2D632E491ED234FC007ECF51 /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D632E481ED234FC007ECF51 /* Project.swift */; };
 		2D632E4B1ED24941007ECF51 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D632E4A1ED24941007ECF51 /* User.swift */; };
 		2D73CD421EDD245D002E58CD /* TabbarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D73CD411EDD245D002E58CD /* TabbarViewController.swift */; };
@@ -81,10 +81,10 @@
 /* Begin PBXFileReference section */
 		14C42650132EA9362369106F /* Pods-NatureNet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NatureNet.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NatureNet/Pods-NatureNet.debug.xcconfig"; sourceTree = "<group>"; };
 		2D272F411ED1273B00401CE6 /* DataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
+		2D431B2E1EF4781A0068E963 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2D5D103B1ECEBFFB008A8FEA /* UITable+HeaderAutoResize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITable+HeaderAutoResize.swift"; sourceTree = "<group>"; };
 		2D5D103D1ECF9471008A8FEA /* RoundedTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedTextView.swift; sourceTree = "<group>"; };
 		2D5D105F1ED01603008A8FEA /* ImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
-		2D632E1D1ED1349E007ECF51 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2D632E481ED234FC007ECF51 /* Project.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
 		2D632E4A1ED24941007ECF51 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		2D73CD411EDD245D002E58CD /* TabbarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabbarViewController.swift; sourceTree = "<group>"; };
@@ -261,10 +261,10 @@
 				689E31021ECA1E630039C2F3 /* View */,
 				689E31011ECA1E550039C2F3 /* Controller */,
 				68FA5A3F1ECA1538002E66B1 /* AppDelegate.swift */,
-				2D632E1D1ED1349E007ECF51 /* GoogleService-Info.plist */,
 				68FA5A431ECA1538002E66B1 /* Main.storyboard */,
 				68FA5A491ECA1538002E66B1 /* Assets.xcassets */,
 				68FA5A4B1ECA1538002E66B1 /* LaunchScreen.storyboard */,
+				2D431B2E1EF4781A0068E963 /* GoogleService-Info.plist */,
 				68FA5A4E1ECA1538002E66B1 /* Info.plist */,
 			);
 			path = NatureNet;
@@ -467,7 +467,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				68FA5A4D1ECA1538002E66B1 /* LaunchScreen.storyboard in Resources */,
-				2D632E1E1ED1349E007ECF51 /* GoogleService-Info.plist in Resources */,
+				2D431B2F1EF4781A0068E963 /* GoogleService-Info.plist in Resources */,
 				68FA5A4A1ECA1538002E66B1 /* Assets.xcassets in Resources */,
 				68FA5A451ECA1538002E66B1 /* Main.storyboard in Resources */,
 			);

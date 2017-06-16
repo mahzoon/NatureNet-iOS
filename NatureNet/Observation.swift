@@ -32,6 +32,8 @@ class NNObservation: NSObject, MKAnnotation {
     var status: String!
     // likes is a dictionary of users who liked/disliked this observation. If the value of the dictionary is true the user liked this else disliked it. So, the key is user id and the value is true(like) or false(dislike).
     var likes: [String: Bool]
+    // user specified location
+    var locationCustom: String!
     
     // returns the text of the observation
     var observationText: String {
@@ -88,7 +90,7 @@ class NNObservation: NSObject, MKAnnotation {
     }
     
     // the initializer.
-    init(project: String, site: String, observer: String, id: String, data: [String: String], location: [Double], created: NSNumber, updated: NSNumber, status: String, likes: [String: Bool]) {
+    init(project: String, site: String, observer: String, id: String, data: [String: String], location: [Double], created: NSNumber, updated: NSNumber, status: String, likes: [String: Bool], userSpecLocation: String) {
         self.project = project
         self.site = site
         self.id = id
@@ -99,6 +101,7 @@ class NNObservation: NSObject, MKAnnotation {
         self.updatedAt = updated
         self.status = status
         self.likes = likes
+        self.locationCustom = userSpecLocation
     }
     
     func getDictionaryRepresentation() -> [String: AnyObject] {
@@ -111,6 +114,7 @@ class NNObservation: NSObject, MKAnnotation {
         retVal["data"] = self.data as AnyObject
         retVal["l"] = ["0": self.coordinate.latitude, "1": self.coordinate.longitude] as AnyObject
         retVal["observer"] = self.observer as AnyObject
+        retVal["where"] = self.locationCustom as AnyObject
         retVal["source"] = DB_SOURCE as AnyObject
         return retVal
     }
@@ -126,6 +130,7 @@ class NNObservation: NSObject, MKAnnotation {
         var obsCreated: NSNumber = 0
         var obsUpdated: NSNumber = 0
         var obsStatus = ""
+        var obsLocationCustom = ""
         var obsLikes = [String: Bool]()
         // setting values when possible
         if let tmp = snapshot["activity"], (tmp as? String) != nil {
@@ -155,10 +160,13 @@ class NNObservation: NSObject, MKAnnotation {
         if let tmp = snapshot["status"], (tmp as? String) != nil {
             obsStatus = tmp as! String
         }
+        if let tmp = snapshot["where"], (tmp as? String) != nil {
+            obsLocationCustom = tmp as! String
+        }
         if let tmp = snapshot["likes"], (tmp as? [String: Bool]) != nil {
             obsLikes = tmp as! [String: Bool]
         }
-        let observation = NNObservation(project: obsProject, site: obsSite, observer: obsObserver, id: obsId, data: obsData, location: obsLocation, created: obsCreated, updated: obsUpdated, status: obsStatus, likes: obsLikes)
+        let observation = NNObservation(project: obsProject, site: obsSite, observer: obsObserver, id: obsId, data: obsData, location: obsLocation, created: obsCreated, updated: obsUpdated, status: obsStatus, likes: obsLikes, userSpecLocation: obsLocationCustom)
         return observation
     }
 

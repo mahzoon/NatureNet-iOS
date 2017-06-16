@@ -303,7 +303,7 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
                                             location[0] = Double(l.latitude)
                                             location[1] = Double(l.longitude)
                                         }
-                                        let obsv = NNObservation(project: projectId, site: currentUser.affiliation, observer: currentUser.id, id: "", data: data, location: location, created: 0, updated: 0, status: "", likes: [String: Bool]())
+                                        let obsv = NNObservation(project: projectId, site: currentUser.affiliation, observer: currentUser.id, id: "", data: data, location: location, created: 0, updated: 0, status: "", likes: [String: Bool](), userSpecLocation: self.locationText.text ?? "")
                                         DataService.ds.AddObservation(observation: obsv, completion: { success in
                                             if success {
                                                 let alert = UIAlertController(title: ADD_OBSV_SUCCESS_TITLE, message: ADD_OBSV_SUCCESS_MESSAGE, preferredStyle: .alert)

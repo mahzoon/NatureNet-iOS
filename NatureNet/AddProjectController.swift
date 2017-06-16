@@ -154,17 +154,19 @@ class AddProjectController: UITableViewController, UITextViewDelegate {
                                                   buttonText: PROJECT_EMPTY_ERROR_BUTTON_TEXT)
                 return
             }
-                
-            let project = NNProject(desc: projectDescriptionText, icon: ICON_PROJECT_DEFAULT_LINK, id: "", latestContrib: 0, name: projectTitleText, sites: getCheckedSites(), created: 0, updated: 0)
-            DataService.ds.AddProject(project: project, completion: { success in
-                if (success) {
-                    let alert = UIAlertController(title: ADD_PROJECT_SUCCESS_TITLE, message: ADD_PROJECT_SUCCESS_MESSAGE, preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: ADD_PROJECT_SUCCESS_BUTTON_TEXT, style: .default, handler: { val in
-                        self.dismiss(animated: true) {}
-                    }))
-                    self.present(alert, animated: true, completion: nil)
-                }
-            })
+            
+            if let userId = DataService.ds.GetCurrentUserId() {
+                let project = NNProject(desc: projectDescriptionText, icon: ICON_PROJECT_DEFAULT_LINK, id: "", latestContrib: 0, name: projectTitleText, sites: getCheckedSites(), submitter: userId, source:DB_SOURCE, created: 0, updated: 0)
+                DataService.ds.AddProject(project: project, completion: { success in
+                    if (success) {
+                        let alert = UIAlertController(title: ADD_PROJECT_SUCCESS_TITLE, message: ADD_PROJECT_SUCCESS_MESSAGE, preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: ADD_PROJECT_SUCCESS_BUTTON_TEXT, style: .default, handler: { val in
+                            self.dismiss(animated: true) {}
+                        }))
+                        self.present(alert, animated: true, completion: nil)
+                    }
+                })
+            }
         }
     }
     

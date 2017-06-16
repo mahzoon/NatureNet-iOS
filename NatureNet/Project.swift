@@ -25,13 +25,17 @@ class NNProject {
     var sites: [String]!
     // sites that this project belongs to
     var sitesRaw: [String: AnyObject]!
+    // source
+    var source: String!
+    // submitter
+    var submitter: String!
     // timestamp of the creation time
     var createdAt: NSNumber!
     // timestamp of the updated time
     var updatedAt: NSNumber!
     
     // the initializer. Note that sites is a dictionary of siteId -> true
-    init(desc: String, icon: String, id: String, latestContrib: NSNumber, name: String, sites: [String: AnyObject], created: NSNumber, updated: NSNumber) {
+    init(desc: String, icon: String, id: String, latestContrib: NSNumber, name: String, sites: [String: AnyObject], submitter: String, source: String, created: NSNumber, updated: NSNumber) {
         self.descriptionText = desc
         self.iconUrl = icon
         self.id = id
@@ -43,6 +47,8 @@ class NNProject {
         for (k, _) in sites {
             self.sites.append(k)
         }
+        self.submitter = submitter
+        self.source = source
         self.createdAt = created
         self.updatedAt = updated
     }
@@ -57,6 +63,8 @@ class NNProject {
         retVal["latest_contribution"] = self.latestContribution as AnyObject
         retVal["name"] = self.name as AnyObject
         retVal["sites"] = self.sitesRaw as AnyObject
+        retVal["submitter"] = self.submitter as AnyObject
+        retVal["source"] = self.source as AnyObject
         return retVal
     }
     
@@ -66,6 +74,8 @@ class NNProject {
         var activityId = ""
         var activityDesc = ""
         var activityIcon = ""
+        var activitySubmitter = ""
+        var activitySource = ""
         var activityLatest: NSNumber = 0
         var activitySites: [String:AnyObject] = ["": "" as AnyObject]
         var activityCreated: NSNumber = 0
@@ -89,13 +99,19 @@ class NNProject {
         if let tmp = snapshot["sites"], (tmp as? [String:AnyObject]) != nil {
             activitySites = tmp as! [String:AnyObject]
         }
+        if let tmp = snapshot["submitter"], (tmp as? String) != nil {
+            activitySubmitter = tmp as! String
+        }
+        if let tmp = snapshot["source"], (tmp as? String) != nil {
+            activitySource = tmp as! String
+        }
         if let tmp = snapshot["created_at"], (tmp as? NSNumber) != nil {
             activityCreated = tmp as! NSNumber
         }
         if let tmp = snapshot["updated_at"], (tmp as? NSNumber) != nil {
             activityUpdated = tmp as! NSNumber
         }
-        let project = NNProject(desc: activityDesc, icon: activityIcon, id: activityId, latestContrib: activityLatest, name: activityName, sites: activitySites, created: activityCreated, updated: activityUpdated)
+        let project = NNProject(desc: activityDesc, icon: activityIcon, id: activityId, latestContrib: activityLatest, name: activityName, sites: activitySites, submitter: activitySubmitter, source: activitySource, created: activityCreated, updated: activityUpdated)
         return project
     }
     
