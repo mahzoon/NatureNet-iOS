@@ -58,6 +58,9 @@ let PROJECT_CELL_ITEM_HEIGHT = 50.0
 let ADD_PROJECT_HEADER_CELL_HEIGHT = 35.0
 let ADD_PROJECT_TITLE_CELL_HEIGHT = 35.0
 let ADD_PROJECT_DESCRIPTION_CELL_HEIGHT = 100.0
+let ADD_DESIGNIDEA_DESCRIPTION_CELL_HEIGHT = 120.0
+let ADD_DESIGNIDEA_CATEGORY_CELL_HEIGHT = 50.0
+let ADD_DESIGNIDEA_HEADER_CELL_HEIGHT = 35.0
 let GALLERY_CELL_ITEM_HEIGHT = 300.0
 let COMMUNITY_CELL_ITEM_HEIGHT = 50.0
 let SHOW_MORE_CELL_HEIGHT = 50.0
@@ -105,6 +108,10 @@ let PROJECT_SITE_TEXT = "Associated Sites"
 let PROJECT_TITLE_INSTRUCTIONS = "We recommend to use a short title, no more than four words."
 let PROJECT_DESCRIPTION_INSTRUCTIONS = "Use hashtags in your description to make it more searchable."
 let PROJECT_SITES_INSTRUCTIONS = "Select at least one site associated to your project."
+let DESIGNIDEA_TEXT = "Please write your design idea here"
+let DESIGNIDEA_CATEGORY_TEXT = "Categories"
+let DESIGNIDEA_TEXT_INSTRUCTIONS = "Use hashtags in your description to make it more searchable."
+let DESIGNIDEA_CATEGORIES_INSTRUCTIONS = "You can select one or more category that fits best with your design idea."
 
 //
 // Messages
@@ -264,12 +271,12 @@ let CLOUDINARY_PRESET = "ios-preset"
 let DESIGN_IDEA_STATUS_DISCUSSING = "doing"
 let DESIGN_IDEA_STATUS_TO_DO = "to do"
 let DESIGN_IDEA_STATUS_DONE = "done"
-let DESIGN_IDEA_TYPE = ""
+let DESIGN_IDEA_All_TYPES = ["New Features", "Project Ideas", "Community Ideas", "Improvement Ideas"]
 let DESIGN_IDEA_GROUP = "idea"
 
 func ADD_DESIGN_IDEA_DESCRIPTION() -> NSMutableAttributedString {
-    let m = NSMutableAttributedString(string: "Design Ideas in NatureNet directs the technology towards your suggestions and needs. Examples of design ideas include a new feature for using NatureNet in your community, a new way to use mobile technology for learning about sustainability or changes in the environment, or a new function for this mobile app. \nLearn more about participatory design \n\nPlease write your design idea here:", attributes: [NSFontAttributeName:UIFont.systemFont(ofSize: 17.0)])
-    m.addAttribute(NSLinkAttributeName, value: NSURL(string: "https://en.wikipedia.org/wiki/Participatory_design")!, range: NSMakeRange(311, 38))
+    let m = NSMutableAttributedString(string: "Design Ideas in NatureNet directs the technology towards your suggestions and needs. Examples of design ideas include a new feature for using NatureNet in your community, a new way to use mobile technology for learning about sustainability or changes in the environment, or a new function for this mobile app. \nLearn more about participatory design", attributes: [NSFontAttributeName:UIFont.systemFont(ofSize: 17.0)])
+    m.addAttribute(NSLinkAttributeName, value: NSURL(string: "https://en.wikipedia.org/wiki/Participatory_design")!, range: NSMakeRange(311, 37))
     let paragraphStyle = NSMutableParagraphStyle()
     paragraphStyle.lineSpacing = 3
     m.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyle, range: NSMakeRange(0, m.length))
