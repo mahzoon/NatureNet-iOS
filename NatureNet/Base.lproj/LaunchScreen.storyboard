@@ -5,6 +5,7 @@
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -23,10 +24,19 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash screen" translatesAutoresizingMaskIntoConstraints="NO" id="SMn-7G-Rvh">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="v2.0 (4)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bIX-W9-War">
+                                <rect key="frame" x="16" y="632.5" width="343" height="14.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.22352941176470587" green="0.72549019607843135" blue="0.45490196078431372" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="SMn-7G-Rvh" secondAttribute="trailing" id="0Gl-wO-r4X"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="bIX-W9-War" secondAttribute="trailing" id="3zb-a8-dl1"/>
+                            <constraint firstItem="bIX-W9-War" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" id="4K4-21-hV7"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="bIX-W9-War" secondAttribute="bottom" constant="20" id="KyX-KT-iYA"/>
                             <constraint firstItem="SMn-7G-Rvh" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="fH7-HY-xVN"/>
                             <constraint firstItem="SMn-7G-Rvh" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="yaq-08-A6q"/>
                             <constraint firstAttribute="bottom" secondItem="SMn-7G-Rvh" secondAttribute="bottom" id="z6c-gj-8WN"/>
