@@ -264,6 +264,7 @@ let DB_LATEST_CONTRIBUTION = "latest_contribution"
 //
 let CLOUDINARY_CLOUD_NAME = "university-of-colorado"
 let CLOUDINARY_PRESET = "ios-preset"
+let CLOUDINARY_BASE_URL = "https://res.cloudinary.com/university-of-colorado/image/upload/"
 
 //
 // Other constants

@@ -119,6 +119,30 @@ class NNObservation: NSObject, MKAnnotation {
         return retVal
     }
     
+    func getThumbnailUrlWithHeight(height: Int) -> String {
+        if observationImageUrl != "" {
+            let index = observationImageUrl.range(of: "/", options:String.CompareOptions.backwards, range: nil, locale: nil)
+            if let idIndex = index {
+                let thumbnailUrl = CLOUDINARY_BASE_URL + "h_\(height)" +
+                    observationImageUrl.substring(from: idIndex.lowerBound)
+                return thumbnailUrl
+            }
+        }
+        return ""
+    }
+    
+    func getThumbnailUrlWithWidth(width: Int) -> String {
+        if observationImageUrl != "" {
+            let index = observationImageUrl.range(of: "/", options:String.CompareOptions.backwards, range: nil, locale: nil)
+            if let idIndex = index {
+                let thumbnailUrl = CLOUDINARY_BASE_URL + "w_\(width)" +
+                    observationImageUrl.substring(from: idIndex.lowerBound)
+                return thumbnailUrl
+            }
+        }
+        return ""
+    }
+    
     static func createObservationFromFirebase(with snapshot: [String: AnyObject]) -> NNObservation {
         // setting default values
         var obsProject = ""

@@ -81,22 +81,18 @@ class GalleryCell: UITableViewCell {
             })
         }
         
-//        if text != "" {
-//            self.descriptionText.isHidden = false
-//        } else {
-//            self.descriptionText.isHidden = true
-//        }
-        
         // load the observation image
         self.observationImage.image = IMAGE_DEFAULT_OBSERVATION
-        // requesting the icon
-        MediaManager.md.getOrDownloadImage(requesterId: cellId + ".img", urlString: obsImage, completion: { img, err in
-            if let i = img {
-                DispatchQueue.main.async {
-                    self.observationImage.image = i
+        if let obsv = self.observation {
+            // display a thumbnail of the observation
+            MediaManager.md.getOrDownloadImage(requesterId: cellId + ".img", urlString: obsv.getThumbnailUrlWithWidth(width: Int(self.observationImage.frame.width)), completion: { img, err in
+                if let i = img {
+                    DispatchQueue.main.async {
+                        self.observationImage.image = i
+                    }
                 }
-            }
-        })
+            })
+        }
         
         updateLikeAndDislikeButtonImages()
     }

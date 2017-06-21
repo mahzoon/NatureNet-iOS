@@ -84,7 +84,7 @@ class ExploreViewController: UIViewController, MKMapViewDelegate, UISearchBarDel
                     if let observationId = v.accessibilityIdentifier {
                         if let observation = DataService.ds.GetObservation(with: observationId) {
                             // load the observation image
-                            MediaManager.md.getOrDownloadImage(requesterId: "\(observationId)", urlString: observation.observationImageUrl, completion: { img, err in
+                            MediaManager.md.getOrDownloadImage(requesterId: "\(observationId)", urlString: observation.getThumbnailUrlWithWidth(width: MAP_ANNOTATION_LAYOVER_WIDTH), completion: { img, err in
                                 if let i = img {
                                     DispatchQueue.main.async {
                                         imageView.image = i
@@ -104,11 +104,11 @@ class ExploreViewController: UIViewController, MKMapViewDelegate, UISearchBarDel
             var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: EXPLORE_ANNOTATION_ID)
             if annotationView == nil {
                 annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: EXPLORE_ANNOTATION_ID)
-                annotationView?.canShowCallout = true
-            } else {
-                annotationView!.annotation = annotation
             }
 
+            annotationView?.annotation = annotation
+            annotationView?.canShowCallout = true
+            
             let snapshotView = UIView()
             let widthConstraint = NSLayoutConstraint(item: snapshotView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: CGFloat(MAP_ANNOTATION_LAYOVER_WIDTH))
             snapshotView.addConstraint(widthConstraint)
