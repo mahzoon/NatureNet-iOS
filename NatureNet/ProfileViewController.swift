@@ -180,4 +180,20 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
     @IBAction func cancelButtonTapped(_ sender: Any) {
         self.dismiss(animated: true) {}
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let id = segue.identifier {
+            if id == SEGUE_MY_OBSERVATIONS {
+                if let dest = segue.destination as? MyObservationsController {
+                    dest.user = self.user
+                }
+            }
+            if id == SEGUE_MY_DESIGNIDEAS {
+                
+            }
+            if id == SEGUE_MY_PROJECTS {
+                
+            }
+        }
+    }
 }

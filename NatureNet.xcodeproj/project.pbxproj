@@ -11,6 +11,7 @@
 		2457FA8CEE8E2A30FCC7ABB8 /* Pods_NatureNetTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82B281EA9CADC8590AB3AB68 /* Pods_NatureNetTests.framework */; };
 		2D272F421ED1273B00401CE6 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D272F411ED1273B00401CE6 /* DataService.swift */; };
 		2D431B2F1EF4781A0068E963 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2D431B2E1EF4781A0068E963 /* GoogleService-Info.plist */; };
+		2D45242C1EFB30670050D4DB /* MyObservationsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D45242B1EFB30670050D4DB /* MyObservationsController.swift */; };
 		2D5D103C1ECEBFFB008A8FEA /* UITable+HeaderAutoResize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D5D103B1ECEBFFB008A8FEA /* UITable+HeaderAutoResize.swift */; };
 		2D5D103E1ECF9471008A8FEA /* RoundedTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D5D103D1ECF9471008A8FEA /* RoundedTextView.swift */; };
 		2D5D10601ED01603008A8FEA /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D5D105F1ED01603008A8FEA /* ImageViewController.swift */; };
@@ -82,6 +83,7 @@
 		14C42650132EA9362369106F /* Pods-NatureNet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NatureNet.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NatureNet/Pods-NatureNet.debug.xcconfig"; sourceTree = "<group>"; };
 		2D272F411ED1273B00401CE6 /* DataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		2D431B2E1EF4781A0068E963 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		2D45242B1EFB30670050D4DB /* MyObservationsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyObservationsController.swift; sourceTree = "<group>"; };
 		2D5D103B1ECEBFFB008A8FEA /* UITable+HeaderAutoResize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITable+HeaderAutoResize.swift"; sourceTree = "<group>"; };
 		2D5D103D1ECF9471008A8FEA /* RoundedTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedTextView.swift; sourceTree = "<group>"; };
 		2D5D105F1ED01603008A8FEA /* ImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
@@ -310,6 +312,7 @@
 				68FB9BE51ECCFA11006C88B1 /* DesignIdeaDetailController.swift */,
 				2D5D105F1ED01603008A8FEA /* ImageViewController.swift */,
 				2DEF4D6C1EE0D87900A516D6 /* DocumentViewerController.swift */,
+				2D45242B1EFB30670050D4DB /* MyObservationsController.swift */,
 			);
 			name = Details;
 			sourceTree = "<group>";
@@ -642,6 +645,7 @@
 				68FB9BD71ECBE9D7006C88B1 /* Observation.swift in Sources */,
 				68FB9BC71ECBD2A5006C88B1 /* ShadowedView.swift in Sources */,
 				2D7DF89C1ED36D6600D509F3 /* Comment.swift in Sources */,
+				2D45242C1EFB30670050D4DB /* MyObservationsController.swift in Sources */,
 				68FB9BDB1ECCF856006C88B1 /* AddDesignIdeasController.swift in Sources */,
 				2D7DF8A01ED37A3000D509F3 /* ShowMoreCell.swift in Sources */,
 				68FB9BC31ECBB240006C88B1 /* DesignIdeasViewController.swift in Sources */,

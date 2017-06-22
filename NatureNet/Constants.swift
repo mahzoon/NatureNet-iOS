@@ -230,6 +230,9 @@ let SEGUE_DETAILS = "Details"
 let SEGUE_ADD_OBSV = "AddObservation"
 let SEGUE_IMAGE_DETAIL = "ImageDetail"
 let SEGUE_DOCUMENT_DETAIL = "DocumentDetail"
+let SEGUE_MY_OBSERVATIONS = "Observations"
+let SEGUE_MY_DESIGNIDEAS = "DesignIdeas"
+let SEGUE_MY_PROJECTS = "Projects"
 
 //
 // Cell Identifiers
