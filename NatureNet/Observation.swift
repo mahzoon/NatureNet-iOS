@@ -133,11 +133,21 @@ class NNObservation: NSObject, MKAnnotation {
     
     func getThumbnailUrlWithWidth(width: Int) -> String {
         if observationImageUrl != "" {
-            let index = observationImageUrl.range(of: "/", options:String.CompareOptions.backwards, range: nil, locale: nil)
-            if let idIndex = index {
-                let thumbnailUrl = CLOUDINARY_BASE_URL + "w_\(width)" +
-                    observationImageUrl.substring(from: idIndex.lowerBound)
-                return thumbnailUrl
+            if !observationImageUrl.contains(CLOUDINARY_BASE_URL) {
+                // no api for thumbnails
+                return observationImageUrl
+            } else {
+                // use cloudinary api functions to get a thumbnail
+                let index = observationImageUrl.range(of: "/", options:String.CompareOptions.backwards, range: nil, locale: nil)
+                if let idIndex = index {
+                    let imageId = observationImageUrl.substring(from: idIndex.lowerBound)
+                    let nonBaseUrl = observationImageUrl.substring(from: CLOUDINARY_BASE_URL.index(CLOUDINARY_BASE_URL.startIndex, offsetBy: CLOUDINARY_BASE_URL.characters.count))
+                    let imageIdComponents = nonBaseUrl.components(separatedBy: "/")
+                    if imageIdComponents.count > 2 {
+                        return "\(CLOUDINARY_BASE_URL)w_\(width)/\(imageIdComponents[1])\(imageId)"
+                    }
+                    return "\(CLOUDINARY_BASE_URL)w_\(width)\(imageId)"
+                }
             }
         }
         return ""
