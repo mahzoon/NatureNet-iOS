@@ -64,8 +64,13 @@ class ImageViewController: UIViewController, UIScrollViewDelegate {
         }))
         alert.addAction(UIAlertAction(title: SAVE_OBSV_ALERT_OPTION_SHARE, style: .default, handler: { (action: UIAlertAction) in
             let activityVC = UIActivityViewController(activityItems: [self.theImage.image ?? ""], applicationActivities: nil)
+            activityVC.popoverPresentationController?.sourceView = self.theImage
             self.present(activityVC, animated: true, completion: nil)
         }))
+        if let popoverPresentationController = alert.popoverPresentationController {
+            popoverPresentationController.sourceView = self.theImage
+            popoverPresentationController.sourceRect = self.theImage.bounds
+        }
         present(alert, animated: true, completion: nil)
     }
     

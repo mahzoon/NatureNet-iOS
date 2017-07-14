@@ -281,8 +281,13 @@ class GalleryDetailController: UIViewController, UITableViewDelegate, UITableVie
         }))
         alert.addAction(UIAlertAction(title: SAVE_OBSV_ALERT_OPTION_SHARE, style: .default, handler: { (action: UIAlertAction) in
             let activityVC = UIActivityViewController(activityItems: [self.descriptionText.text ?? "", self.observation.image ?? "", self.attachedDocumentPath ?? ""], applicationActivities: nil)
+            activityVC.popoverPresentationController?.sourceView = self.observation
             self.present(activityVC, animated: true, completion: nil)
         }))
+        if let popoverPresentationController = alert.popoverPresentationController {
+            popoverPresentationController.sourceView = self.observation
+            popoverPresentationController.sourceRect = self.observation.bounds
+        }
         present(alert, animated: true, completion: nil)
     }
     

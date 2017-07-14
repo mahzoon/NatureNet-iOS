@@ -41,6 +41,8 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
     // to capture user's location when taking picture
     let locationManager = CLLocationManager()
     
+    var showFirstTimePopup = true
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         projectPicker.delegate = self
@@ -79,12 +81,17 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
         self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
         self.locationManager.requestWhenInUseAuthorization()
         
-        self.observationImageButtonTapped("")
-        
         if let user = DataService.ds.GetCurrentUser() {
             if let i = siteList.index(of: user.affiliation) {
                 self.projectPicker.selectRow(i, inComponent: 0, animated: true)
             }
+        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if self.showFirstTimePopup {
+            self.observationImageButtonTapped("")
+            self.showFirstTimePopup = false
         }
     }
     
@@ -242,6 +249,10 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
                 self.observationImage.image = UIImage(named: ADD_OBSV_IMAGE)
                 self.pickedImage = false
             }))
+        }
+        if let popoverPresentationController = alert.popoverPresentationController {
+            popoverPresentationController.sourceView = self.observationImage
+            popoverPresentationController.sourceRect = self.observationImage.bounds
         }
         present(alert, animated: true, completion: nil)
     }
