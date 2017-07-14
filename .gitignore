@@ -12,4 +12,5 @@
 
 #********** Firebase **********
 
-GoogleService-Info.plist
+GoogleService-Info*
+./NatureNet/GoogleService-Info.plist
