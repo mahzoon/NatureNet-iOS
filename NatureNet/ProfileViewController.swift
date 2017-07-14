@@ -160,6 +160,10 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
                 self.pickedImage = false
             }))
         }
+        if let popoverPresentationController = alert.popoverPresentationController {
+            popoverPresentationController.sourceView = self.profileImage
+            popoverPresentationController.sourceRect = self.profileImage.bounds
+        }
         present(alert, animated: true, completion: nil)
     }
     

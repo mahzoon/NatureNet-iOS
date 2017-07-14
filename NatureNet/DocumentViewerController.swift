@@ -27,12 +27,25 @@ class DocumentViewerController: UIViewController {
     }
     
     @IBAction func documentHoldGesture(_ sender: Any) {
-        let alert = UIAlertController(title: SAVE_OBSV_ALERT_TITLE, message: SAVE_OBSV_ALERT_MESSAGE, preferredStyle: .actionSheet)
-        alert.addAction(UIAlertAction(title: SAVE_OBSV_ALERT_OPTION_CANCEL, style: .cancel, handler: nil))
-        alert.addAction(UIAlertAction(title: SAVE_OBSV_ALERT_OPTION_SHARE, style: .default, handler: { (action: UIAlertAction) in
-            let activityVC = UIActivityViewController(activityItems: [self.documentPath ?? ""], applicationActivities: nil)
-            self.present(activityVC, animated: true, completion: nil)
-        }))
-        present(alert, animated: true, completion: nil)
+        if popoverPresentationController?.sourceView == nil {
+            // popup in ipad
+            let alert = UIAlertController(title: SAVE_OBSV_ALERT_TITLE, message: SAVE_OBSV_ALERT_MESSAGE, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: SAVE_OBSV_ALERT_OPTION_CANCEL, style: .cancel, handler: nil))
+            alert.addAction(UIAlertAction(title: SAVE_OBSV_ALERT_OPTION_SHARE, style: .default, handler: { (action: UIAlertAction) in
+                let activityVC = UIActivityViewController(activityItems: [self.documentPath ?? ""], applicationActivities: nil)
+                activityVC.popoverPresentationController?.sourceView = self.webView
+                self.present(activityVC, animated: true, completion: nil)
+            }))
+            present(alert, animated: true, completion: nil)
+        } else {
+            // action sheet on iphone
+            let alert = UIAlertController(title: SAVE_OBSV_ALERT_TITLE, message: SAVE_OBSV_ALERT_MESSAGE, preferredStyle: .actionSheet)
+            alert.addAction(UIAlertAction(title: SAVE_OBSV_ALERT_OPTION_CANCEL, style: .cancel, handler: nil))
+            alert.addAction(UIAlertAction(title: SAVE_OBSV_ALERT_OPTION_SHARE, style: .default, handler: { (action: UIAlertAction) in
+                let activityVC = UIActivityViewController(activityItems: [self.documentPath ?? ""], applicationActivities: nil)
+                self.present(activityVC, animated: true, completion: nil)
+            }))
+            present(alert, animated: true, completion: nil)
+        }
     }
 }
