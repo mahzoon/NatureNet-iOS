@@ -17,10 +17,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
         FirebaseApp.configure()
         // enabling offline capabilities of Firebase database object
         Database.database().isPersistenceEnabled = true
+        
+        // detect first time launch
+        if UserDefaults.standard.object(forKey: "firstTimeNNv2") == nil {
+            // remove all settings
+            UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
+            UserDefaults.standard.synchronize()
+            
+            // sign out of firebase
+            DataService.ds.SignOut()
+            
+            UserDefaults.standard.set(false, forKey: "firstTimeNNv2")
+        }
+        
         // creating cloudinary instances for uploading image
         MediaManager.md.setupCloudinary()
         return true
