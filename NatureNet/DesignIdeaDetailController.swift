@@ -96,11 +96,21 @@ class DesignIdeaDetailController: UIViewController, UITableViewDelegate, UITable
             
             // load the status image
             self.status.image = nil
-            if idea.status.lowercased() == DESIGN_IDEA_STATUS_DONE {
-                self.status.image = ICON_DESIGN_IDEA_STATUS_DONE
-            }
-            if idea.status.lowercased() == DESIGN_IDEA_STATUS_DISCUSSING || idea.status.lowercased() == DESIGN_IDEA_STATUS_TO_DO {
-                self.status.image = ICON_DESIGN_IDEA_STATUS_DISCUSSING
+            switch idea.status.lowercased() {
+                case DESIGN_IDEA_STATUS_DONE:
+                    self.status.image = ICON_DESIGN_IDEA_STATUS_DONE
+                    break
+                case DESIGN_IDEA_STATUS_DISCUSSING:
+                    self.status.image = ICON_DESIGN_IDEA_STATUS_DISCUSSING
+                    break
+                case DESIGN_IDEA_STATUS_TESTING:
+                    self.status.image = ICON_DESIGN_IDEA_STATUS_TESTING
+                    break
+                case DESIGN_IDEA_STATUS_DEVELOPING:
+                    self.status.image = ICON_DESIGN_IDEA_STATUS_DEVELOPING
+                    break
+                default:
+                    self.status.image = ICON_DESIGN_IDEA_STATUS_DISCUSSING
             }
         }
         
