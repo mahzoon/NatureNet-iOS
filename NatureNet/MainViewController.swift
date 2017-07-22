@@ -12,15 +12,31 @@ class MainViewController: UIViewController {
 
     // activity indicator for loading observations
     var activityIndicator = UIActivityIndicatorView()
+    var progressBar = UIProgressView()
+    var connectionTimer = Timer()
+    
+    var connectionMessage = UIAlertController(title: OFFLINE_WARNING_TITLE, message: OFFLINE_WARNING_MESSAGE, preferredStyle: .alert)
+    var messageIsShowing = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        connectionMessage.addAction(UIAlertAction(title: OFFLINE_WARNING_BUTTON_TEXT, style: .cancel, handler: { (UIAlertAction) in
+            self.messageIsShowing = false
+            UIApplication.shared.beginIgnoringInteractionEvents()
+        }))
         
         activityIndicator.frame = self.view.frame
         activityIndicator.center = self.view.center
         activityIndicator.hidesWhenStopped = true
         activityIndicator.activityIndicatorViewStyle = .whiteLarge
         activityIndicator.layer.backgroundColor = UIColor(white: 0, alpha: ACTIVITY_INDICATOR_OPACITY).cgColor
+        progressBar.frame = CGRect(x: self.view.frame.width / 3,
+                                   y: self.view.center.y + 70,
+                                   width: self.view.frame.width / 3,
+                                   height: 5)
+        progressBar.progress = 0
+        activityIndicator.addSubview(progressBar)
         self.view.addSubview(activityIndicator)
     }
 
@@ -56,14 +72,44 @@ class MainViewController: UIViewController {
         self.activityIndicator.startAnimating()
         UIApplication.shared.beginIgnoringInteractionEvents()
         
-        
-        DataService.ds.initObservationsObserver { success in
-            // stop activity spinner
-            self.activityIndicator.stopAnimating()
-            UIApplication.shared.endIgnoringInteractionEvents()
-            self.performSegue(withIdentifier: SEGUE_EXPLORE, sender: nil)
+        DataService.ds.initializeObservers { success in
+            if self.progressBar.progress == 1.0 {
+                return
+            }
+            self.progressBar.progress = self.progressBar.progress + 1.0/6.0
+            if self.progressBar.progress == 1.0 {
+                self.connectionTimer.invalidate()
+                if self.messageIsShowing {
+                    self.connectionMessage.dismiss(animated: true, completion: { 
+                        // stop activity spinner
+                        self.activityIndicator.stopAnimating()
+                        UIApplication.shared.endIgnoringInteractionEvents()
+                        self.performSegue(withIdentifier: SEGUE_EXPLORE, sender: nil)
+                    })
+                } else {
+                    // stop activity spinner
+                    self.activityIndicator.stopAnimating()
+                    UIApplication.shared.endIgnoringInteractionEvents()
+                    self.performSegue(withIdentifier: SEGUE_EXPLORE, sender: nil)
+                }
+            }
         }
+        
+        connectionTimer = Timer.scheduledTimer(timeInterval: 5, target: self,
+                                               selector: #selector(self.CheckConnection),
+                                               userInfo: nil, repeats: true)
     }
     
+    func CheckConnection() {
+        if self.progressBar.progress < 1.0 {
+            if !DataService.ds.IsConnected() && !self.messageIsShowing {
+                self.present(connectionMessage, animated: true, completion: {
+                    self.messageIsShowing = true
+                    UIApplication.shared.endIgnoringInteractionEvents()
+                })
+                return
+            }
+        }
+    }
 }
 

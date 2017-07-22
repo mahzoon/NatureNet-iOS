@@ -47,6 +47,21 @@ class UtilityFunctions {
         result = result && (cos((region.center.longitude - point.longitude) * .pi / 180.0) > cos((region.span.longitudeDelta/2.0) * .pi / 180.0))
         return result
     }
+    
+    static func getVisibleViewController() -> UIViewController? {
+        var visible = UIApplication.shared.keyWindow?.rootViewController
+        while visible?.presentedViewController != nil {
+            visible = visible?.presentedViewController
+        }
+        
+        if let navigationController = visible as? UINavigationController {
+            visible = navigationController.viewControllers.first
+        }
+        if let tabBarController = visible as? UITabBarController {
+            visible = tabBarController.selectedViewController
+        }
+        return visible
+    }
 }
 
 extension UIViewController {
