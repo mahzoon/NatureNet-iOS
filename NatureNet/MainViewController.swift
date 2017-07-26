@@ -27,15 +27,16 @@ class MainViewController: UIViewController {
         }))
         
         activityIndicator.frame = self.view.frame
-        activityIndicator.center = self.view.center
+        //activityIndicator.center = self.view.center
         activityIndicator.hidesWhenStopped = true
         activityIndicator.activityIndicatorViewStyle = .whiteLarge
         activityIndicator.layer.backgroundColor = UIColor(white: 0, alpha: ACTIVITY_INDICATOR_OPACITY).cgColor
         progressBar.frame = CGRect(x: self.view.frame.width / 3,
-                                   y: self.view.center.y + 70,
+                                   y: self.view.center.y + 50,
                                    width: self.view.frame.width / 3,
                                    height: 5)
         progressBar.progress = 0
+        progressBar.progressTintColor = UIColor.white
         activityIndicator.addSubview(progressBar)
         self.view.addSubview(activityIndicator)
     }

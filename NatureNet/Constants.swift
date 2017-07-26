@@ -25,7 +25,7 @@ let PIN_COLORS: [String: UIColor] = ["aces": UIColor.blue, "rcnc": UIColor.green
 // default pin color
 let DEFAULT_PIN_COLOR = UIColor.darkGray
 // activity indicator opacity
-let ACTIVITY_INDICATOR_OPACITY = CGFloat(0.4)
+let ACTIVITY_INDICATOR_OPACITY = CGFloat(0.7)
 
 //
 // Icons names
