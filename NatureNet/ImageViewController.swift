@@ -15,6 +15,9 @@ class ImageViewController: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var imageScrollView: UIScrollView!
     @IBOutlet weak var theImage: UIImageView!
     
+    @IBOutlet weak var imageConstraintRight: NSLayoutConstraint!
+    @IBOutlet weak var imageConstraintLeft: NSLayoutConstraint!
+    
     var observationImageUrl: String?
     
     override func viewDidLoad() {
@@ -34,6 +37,7 @@ class ImageViewController: UIViewController, UIScrollViewDelegate {
                         self.theImage.image = i
                         // update the scrollview's min scale to fit the image
                         self.setMinZoomScale()
+                        self.updateConstraints()
                     }
                 }
             })
@@ -42,16 +46,40 @@ class ImageViewController: UIViewController, UIScrollViewDelegate {
     
     func setMinZoomScale() {
         if let w = self.theImage.image?.size.width, let h = self.theImage.image?.size.height {
-            let widthScale = self.view.bounds.size.width / w
-            let heightScale = self.view.bounds.size.height / h
+            let widthScale = self.imageScrollView.bounds.size.width / w
+            let heightScale = self.imageScrollView.bounds.size.height / h
             let minScale = min(widthScale, heightScale)
             self.imageScrollView.minimumZoomScale = minScale
             self.imageScrollView.zoomScale = minScale
         }
     }
     
+    func updateConstraints() {
+        if let image = theImage.image {
+            let imageWidth = image.size.width
+            let imageHeight = image.size.height
+            
+            let viewWidth = imageScrollView.bounds.size.width
+            let viewHeight = imageScrollView.bounds.size.height
+            
+            // center image if it is smaller than the scroll view
+            var hPadding = (viewWidth - imageScrollView.zoomScale * imageWidth) / 2
+            if hPadding < 0 { hPadding = 0 }
+            
+            imageConstraintLeft.constant = hPadding
+            imageConstraintRight.constant = hPadding
+            
+            view.layoutIfNeeded()
+        }
+    }
+
+    
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return theImage
+    }
+    
+    func scrollViewDidZoom(_ scrollView: UIScrollView) {
+        self.updateConstraints()
     }
     
     @IBAction func holdGestureOnImageDetected(_ sender: Any) {
