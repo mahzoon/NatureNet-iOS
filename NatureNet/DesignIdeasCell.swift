@@ -44,7 +44,7 @@ class DesignIdeasCell: UITableViewCell {
     
     func configureCell(id: String, username: String, affiliation: String, avatar: String, text: String,
                        num_likes: String, num_dislikes: String, num_comments: String,
-                       status: String, date: NSNumber, designIdea: NNDesignIdea?, controller: UIViewController) {
+                       statusTxt: String, date: NSNumber, designIdea: NNDesignIdea?, controller: UIViewController) {
         self.cellId = id
         self.username.text = username
         self.affiliation.text = affiliation
@@ -72,11 +72,21 @@ class DesignIdeasCell: UITableViewCell {
         
         // load the status image
         self.status.image = nil
-        if status.lowercased() == DESIGN_IDEA_STATUS_DONE {
-            self.status.image = ICON_DESIGN_IDEA_STATUS_DONE
-        }
-        if status.lowercased() == DESIGN_IDEA_STATUS_DISCUSSING || status.lowercased() == DESIGN_IDEA_STATUS_TO_DO {
-            self.status.image = ICON_DESIGN_IDEA_STATUS_DISCUSSING
+        switch statusTxt.lowercased() {
+            case DESIGN_IDEA_STATUS_DONE:
+                self.status.image = ICON_DESIGN_IDEA_STATUS_DONE
+                break
+            case DESIGN_IDEA_STATUS_DISCUSSING:
+                self.status.image = ICON_DESIGN_IDEA_STATUS_DISCUSSING
+                break
+            case DESIGN_IDEA_STATUS_TESTING:
+                self.status.image = ICON_DESIGN_IDEA_STATUS_TESTING
+                break
+            case DESIGN_IDEA_STATUS_DEVELOPING:
+                self.status.image = ICON_DESIGN_IDEA_STATUS_DEVELOPING
+                break
+            default:
+                self.status.image = ICON_DESIGN_IDEA_STATUS_DISCUSSING
         }
         
         tappedCommentButton = false
