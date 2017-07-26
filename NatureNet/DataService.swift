@@ -67,6 +67,16 @@ class DataService  {
     // reference to the observer handle of comments. This observer looks for changes to the comments, and updates the "commentsOnObservations" or "commentsOnDesignIdeas" arrays if a comment is being changed. The reference is mainly for "dispose" to remove the handle.
     private var commentsChangeHandle: UInt!
     
+    private var observerInitStatus: [String: InitializationStatus] =
+        [ "sites": InitializationStatus.NotInitialized,
+          "projects": InitializationStatus.NotInitialized,
+          "users": InitializationStatus.NotInitialized,
+          "designideas": InitializationStatus.NotInitialized,
+          "comments": InitializationStatus.NotInitialized,
+          "observations": InitializationStatus.NotInitialized ]
+    
+    private var isConnected = false
+    
     private var reloadTableList = [DB_COMMENTS_PATH: [UITableView](),
                                    DB_PROJECTS_PATH: [UITableView](),
                                    DB_USERS_PATH: [UITableView](),
@@ -77,14 +87,27 @@ class DataService  {
         // initializing the reference to the database
         db_ref = Database.database().reference()
         
-        // initializing observers except observations observer
-        DispatchQueue.global().async {
-            self.initSitesObserver()
-            self.initProjectsObserver()
-            self.initUsersObserver()
-            self.initDesignIdeasObserver()
-            self.initCommentsObserver()
-        }
+        // monitor connection status
+        db_ref.child(".info/connected").observe(.value, with: { (snapshot) in
+            if let connected = snapshot.value as? Int {
+                if connected == 1 { self.isConnected = true }
+                if connected != 1 {
+                    self.isConnected = false
+                    let alertController = UIAlertController(title: OFFLINE_WARNING_TITLE, message: OFFLINE_WARNING_MESSAGE, preferredStyle: .alert)
+                    alertController.addAction(UIAlertAction(title: OFFLINE_WARNING_BUTTON_TEXT, style: .cancel, handler: nil))
+                    UtilityFunctions.getVisibleViewController()?.present(alertController, animated: true, completion: nil)
+                }
+            }
+        })
+    }
+    
+    func initializeObservers(observerCompletion: @escaping (Void) -> Void) {
+        self.initSitesObserver(completion: observerCompletion)
+        self.initProjectsObserver(completion: observerCompletion)
+        self.initUsersObserver(completion: observerCompletion)
+        self.initObservationsObserver(completion: observerCompletion)
+        self.initDesignIdeasObserver(completion: observerCompletion)
+        self.initCommentsObserver(completion: observerCompletion)
     }
     
     func dispose() {
@@ -133,6 +156,10 @@ class DataService  {
         self.reloadTableList[group]?.append(tableView)
     }
     
+    func IsConnected() -> Bool {
+        return self.isConnected
+    }
+    
     private func reloadTables(section: String) {
         if let tables = self.reloadTableList[section] {
             for table in tables {
@@ -142,6 +169,7 @@ class DataService  {
             }
         }
     }
+    
     
     //////////////////////////////////////////////////////////////
     //
@@ -182,11 +210,11 @@ class DataService  {
     // To signout user from Firebase, call this function. SignOut returns a tuple containing result status as a boolean and error if any as a string. In case of successful signout, the return value will be (true, ""). But, in case of error the return value will be (false, <error description>).
     func SignOut() -> (Bool, String){
         do {
+            currentUser = nil
             try Auth.auth().signOut()
         } catch let signOutError as NSError {
             return (false, signOutError.localizedDescription)
         }
-        currentUser = nil
         return (true, "")
     }
     
@@ -255,7 +283,18 @@ class DataService  {
     //
     //////////////////////////////////////////////////////////////
     
-    private func initSitesObserver() {
+    private func initSitesObserver(completion: @escaping (Void) -> Void) {
+        
+        if observerInitStatus["sites"] == InitializationStatus.Initialized {
+            completion()
+            return
+        }
+        if observerInitStatus["sites"] == InitializationStatus.Started {
+            if sitesHandle != nil {
+                db_ref.removeObserver(withHandle: sitesHandle)
+            }
+        }
+        
         // adding observer to the sites
         sitesHandle = db_ref.child(DB_SITES_PATH).observe(.value, with: { (snapshot) in
             // snapshot will be the whole "sites" key with its children to the leaf. For example, if site/aces/description value changes, added, or removed, the whole sites/ will be returned. So, we can replace the "sites" array with site names in the snapshot.
@@ -270,7 +309,10 @@ class DataService  {
                 }
                 self.sites = sitesDict.sorted(by: {$0.key < $1.key})
             }
+            self.observerInitStatus["sites"] = InitializationStatus.Initialized
+            completion()
         })
+        observerInitStatus["sites"] = InitializationStatus.Started
     }
     
     // returns the number of sites.
@@ -305,7 +347,18 @@ class DataService  {
     //
     //////////////////////////////////////////////////////////////
     
-    private func initProjectsObserver() {
+    private func initProjectsObserver(completion: @escaping (Void) -> Void) {
+        
+        if observerInitStatus["projects"] == InitializationStatus.Initialized {
+            completion()
+            return
+        }
+        if observerInitStatus["projects"] == InitializationStatus.Started {
+            if projectsHandle != nil {
+                db_ref.removeObserver(withHandle: projectsHandle)
+            }
+        }
+        
         // adding observer to the projects (activities)
         projectsHandle = db_ref.child(DB_PROJECTS_PATH).observe(.value, with: { (snapshot) in
             // snapshot will contain the whole "activities" key with its children to the leaf.
@@ -333,7 +386,10 @@ class DataService  {
                 self.projects[k] = v.sorted(by: { $0.name < $1.name })
             }
             self.reloadTables(section: DB_PROJECTS_PATH)
+            self.observerInitStatus["projects"] = InitializationStatus.Initialized
+            completion()
         })
+        observerInitStatus["projects"] = InitializationStatus.Started
     }
     
     // returns list of projects
@@ -446,7 +502,18 @@ class DataService  {
     //
     //////////////////////////////////////////////////////////////
     
-    private func initUsersObserver() {
+    private func initUsersObserver(completion: @escaping (Void) -> Void) {
+        
+        if observerInitStatus["users"] == InitializationStatus.Initialized {
+            completion()
+            return
+        }
+        if observerInitStatus["users"] == InitializationStatus.Started {
+            if usersHandle != nil {
+                db_ref.removeObserver(withHandle: usersHandle)
+            }
+        }
+        
         // adding observer to the users
         usersHandle = db_ref.child(DB_USERS_PATH).observe(.value, with: { (snapshot) in
             // snapshot will contain the whole "users" key with its children to the leaf.
@@ -472,7 +539,10 @@ class DataService  {
                 self.users[k] = v.sorted(by: { $0.displayName < $1.displayName })
             }
             self.reloadTables(section: DB_USERS_PATH)
+            self.observerInitStatus["users"] = InitializationStatus.Initialized
+            completion()
         })
+        observerInitStatus["users"] = InitializationStatus.Started
     }
     
     // returns number of users in the site index.
@@ -558,11 +628,10 @@ class DataService  {
     //
     //////////////////////////////////////////////////////////////
     
-    func initObservationsObserver(completion: @escaping (Bool) -> Void) {
+    func initObservationsObserver(completion: @escaping (Void) -> Void) {
         
-        // if we already initialized just return
-        if self.observationsAddHandle != nil && self.observationsRemoveHandle != nil && self.observationsChangeHandle != nil {
-            completion(true)
+        if observerInitStatus["observations"] == InitializationStatus.Initialized {
+            completion()
             return
         }
         
@@ -584,9 +653,6 @@ class DataService  {
                     }
                 }
                 self.reloadTables(section: DB_OBSERVATIONS_PATH)
-                completion(true)
-            } else {
-                completion(false)
             }
             // creating add/remove/change observers
             //
@@ -638,7 +704,10 @@ class DataService  {
                 })
                 self.reloadTables(section: DB_OBSERVATIONS_PATH)
             })
+            self.observerInitStatus["observations"] = InitializationStatus.Initialized
+            completion()
         })
+        observerInitStatus["observations"] = InitializationStatus.Started
     }
     
     func GetNumObervations(searchFilter: String) -> Int {
@@ -759,7 +828,24 @@ class DataService  {
     //
     //////////////////////////////////////////////////////////////
     
-    private func initDesignIdeasObserver() {
+    private func initDesignIdeasObserver(completion: @escaping (Void) -> Void) {
+        
+        if observerInitStatus["designideas"] == InitializationStatus.Initialized {
+            completion()
+            return
+        }
+        if observerInitStatus["designideas"] == InitializationStatus.Started {
+            if designIdeasAddHandle != nil {
+                db_ref.removeObserver(withHandle: designIdeasAddHandle)
+            }
+            if designIdeasRemoveHandle != nil {
+                db_ref.removeObserver(withHandle: designIdeasRemoveHandle)
+            }
+            if designIdeasChangeHandle != nil {
+                db_ref.removeObserver(withHandle: designIdeasChangeHandle)
+            }
+        }
+        
         // adding "add" observer to the design ideas
         designIdeasAddHandle = db_ref.child(DB_DESIGNIDEAS_PATH).observe(.childAdded, with: { (snapshot) in
             // snapshot.value is a dictionary for one Design Idea
@@ -774,6 +860,8 @@ class DataService  {
                 return first.updatedAt.decimalValue > second.updatedAt.decimalValue
             })
             self.reloadTables(section: DB_DESIGNIDEAS_PATH)
+            self.observerInitStatus["designideas"] = InitializationStatus.Initialized
+            completion()
         })
         // adding "remove" observer to the design ideas
         designIdeasRemoveHandle = db_ref.child(DB_DESIGNIDEAS_PATH).observe(.childRemoved, with: { (snapshot) in
@@ -811,6 +899,7 @@ class DataService  {
             })
             self.reloadTables(section: DB_DESIGNIDEAS_PATH)
         })
+        observerInitStatus["designideas"] = InitializationStatus.Started
     }
     
     func GetNumDesignIdeas(searchFilter: String) -> Int {
@@ -902,7 +991,24 @@ class DataService  {
     //
     //////////////////////////////////////////////////////////////
     
-    private func initCommentsObserver() {
+    private func initCommentsObserver(completion: @escaping (Void) -> Void) {
+        
+        if observerInitStatus["comments"] == InitializationStatus.Initialized {
+            completion()
+            return
+        }
+        if observerInitStatus["comments"] == InitializationStatus.Started {
+            if commentsAddHandle != nil {
+                db_ref.removeObserver(withHandle: commentsAddHandle)
+            }
+            if commentsRemoveHandle != nil {
+                db_ref.removeObserver(withHandle: commentsRemoveHandle)
+            }
+            if commentsChangeHandle != nil {
+                db_ref.removeObserver(withHandle: commentsChangeHandle)
+            }
+        }
+        
         // adding observer to the comments
         commentsAddHandle = db_ref.child(DB_COMMENTS_PATH).observe(.childAdded, with: { (snapshot) in
             // snapshot.value is a dictionary for one Comment
@@ -925,6 +1031,8 @@ class DataService  {
                 return first.updatedAt.decimalValue > second.updatedAt.decimalValue
             })
             self.reloadTables(section: DB_COMMENTS_PATH)
+            self.observerInitStatus["comments"] = InitializationStatus.Initialized
+            completion()
         })
         // adding observer to the comments
         commentsRemoveHandle = db_ref.child(DB_COMMENTS_PATH).observe(.childRemoved, with: { (snapshot) in
@@ -974,6 +1082,7 @@ class DataService  {
             }
             self.reloadTables(section: DB_COMMENTS_PATH)
         })
+        observerInitStatus["comments"] = InitializationStatus.Started
     }
     
     func GetCommentsOnDesignIdea(with id: String) -> [NNComment] {
@@ -1085,4 +1194,10 @@ class DataService  {
             }
         }
     }
+}
+
+enum InitializationStatus {
+    case NotInitialized
+    case Started
+    case Initialized
 }

@@ -1357,12 +1357,12 @@ DESIGN this nature technology with your community</string>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1028" y="3818"/>
+            <point key="canvasLocation" x="981" y="3838"/>
         </scene>
         <!--Image-->
         <scene sceneID="E1T-WG-cLU">
             <objects>
-                <viewController title="Image" id="e63-kA-9pU" customClass="ImageViewController" customModule="NatureNet" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Image" automaticallyAdjustsScrollViewInsets="NO" id="e63-kA-9pU" customClass="ImageViewController" customModule="NatureNet" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Z0v-Fy-YBj"/>
                         <viewControllerLayoutGuide type="bottom" id="s3v-mD-VXV"/>
@@ -1371,10 +1371,10 @@ DESIGN this nature technology with your community</string>
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.10000000000000001" maximumZoomScale="5" translatesAutoresizingMaskIntoConstraints="NO" id="69M-8T-jwa">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" minimumZoomScale="0.10000000000000001" maximumZoomScale="5" translatesAutoresizingMaskIntoConstraints="NO" id="69M-8T-jwa">
                                 <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                                 <subviews>
-                                    <imageView multipleTouchEnabled="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image - observation - default" translatesAutoresizingMaskIntoConstraints="NO" id="ksY-Cn-s3G">
+                                    <imageView multipleTouchEnabled="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="200" placeholderIntrinsicHeight="200" image="image - observation - default" translatesAutoresizingMaskIntoConstraints="NO" id="ksY-Cn-s3G">
                                         <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
                                         <gestureRecognizers/>
                                         <connections>
@@ -1399,6 +1399,8 @@ DESIGN this nature technology with your community</string>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="imageConstraintLeft" destination="fu2-Zz-jzN" id="fNh-nV-YLh"/>
+                        <outlet property="imageConstraintRight" destination="vUb-a8-PF4" id="Vy9-UK-RI0"/>
                         <outlet property="imageScrollView" destination="69M-8T-jwa" id="UJJ-Uf-ikL"/>
                         <outlet property="theImage" destination="ksY-Cn-s3G" id="MnM-Hg-JsM"/>
                     </connections>
@@ -1410,7 +1412,7 @@ DESIGN this nature technology with your community</string>
                     </connections>
                 </pongPressGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1500" y="4699"/>
+            <point key="canvasLocation" x="1500" y="4698.5915492957747"/>
         </scene>
         <!--Project Details-->
         <scene sceneID="1z4-tM-r5E">
@@ -1443,7 +1445,7 @@ DESIGN this nature technology with your community</string>
                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="PcG-4Y-JTc">
                                                     <rect key="frame" x="0.0" y="15" width="300" height="65"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon - project - default" translatesAutoresizingMaskIntoConstraints="NO" id="wG3-Fj-LvS">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon - project" translatesAutoresizingMaskIntoConstraints="NO" id="wG3-Fj-LvS">
                                                             <rect key="frame" x="0.0" y="0.0" width="40" height="65"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="40" id="zst-Zh-EZh"/>
@@ -3306,7 +3308,7 @@ DESIGN this nature technology with your community</string>
                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="SZT-wm-4Bj">
                                                     <rect key="frame" x="5" y="5" width="310" height="39.5"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon - project - default" translatesAutoresizingMaskIntoConstraints="NO" id="GvH-S8-P1C">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon - project" translatesAutoresizingMaskIntoConstraints="NO" id="GvH-S8-P1C">
                                                             <rect key="frame" x="0.0" y="0.0" width="39.5" height="39.5"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="GvH-S8-P1C" secondAttribute="height" multiplier="40:40" id="XeD-rz-lZW"/>
@@ -4755,7 +4757,7 @@ DESIGN this nature technology with your community</string>
         <image name="icon - num_observations" width="512" height="512"/>
         <image name="icon - observation default" width="512" height="512"/>
         <image name="icon - profile - offline" width="25" height="25"/>
-        <image name="icon - project - default" width="80" height="80"/>
+        <image name="icon - project" width="160" height="160"/>
         <image name="image - observation - default" width="200" height="200"/>
         <image name="join screen - user" width="512" height="512"/>
         <image name="main screen - cloud 1" width="1024" height="531"/>
@@ -4768,7 +4770,7 @@ DESIGN this nature technology with your community</string>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="poZ-sa-YE6"/>
-        <segue reference="AhZ-vX-APW"/>
         <segue reference="sFL-HX-YV4"/>
+        <segue reference="2UQ-Ff-6WK"/>
     </inferredMetricsTieBreakers>
 </document>
