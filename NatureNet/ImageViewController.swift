@@ -21,6 +21,7 @@ class ImageViewController: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var imageConstraintTop: NSLayoutConstraint!
     @IBOutlet weak var imageConstraintBottom: NSLayoutConstraint!
     
+    
     var observationImageUrl: String?
     
     override func viewDidLoad() {

@@ -22,6 +22,8 @@
 		2D7DF89C1ED36D6600D509F3 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D7DF89B1ED36D6600D509F3 /* Comment.swift */; };
 		2D7DF8A01ED37A3000D509F3 /* ShowMoreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D7DF89F1ED37A3000D509F3 /* ShowMoreCell.swift */; };
 		2D7DF8A21ED3969800D509F3 /* MediaManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D7DF8A11ED3969800D509F3 /* MediaManager.swift */; };
+		2D928DD81F455D1300A59F44 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D928DD71F455D1300A59F44 /* MapViewController.swift */; };
+		2D928DDA1F45606600A59F44 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D928DD91F45606600A59F44 /* ListViewController.swift */; };
 		2DEF4D6D1EE0D87900A516D6 /* DocumentViewerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DEF4D6C1EE0D87900A516D6 /* DocumentViewerController.swift */; };
 		55CF19DD967736F8B7750455 /* Pods_NatureNetUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B238D5A0816A2E3FC6B7731A /* Pods_NatureNetUITests.framework */; };
 		682C31681ECE316F00F6D87D /* UtilityFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682C31671ECE316F00F6D87D /* UtilityFunctions.swift */; };
@@ -95,6 +97,8 @@
 		2D7DF89F1ED37A3000D509F3 /* ShowMoreCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowMoreCell.swift; sourceTree = "<group>"; };
 		2D7DF8A11ED3969800D509F3 /* MediaManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaManager.swift; sourceTree = "<group>"; };
 		2D925D691F421C12006021B4 /* NatureNet.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NatureNet.entitlements; sourceTree = "<group>"; };
+		2D928DD71F455D1300A59F44 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		2D928DD91F45606600A59F44 /* ListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		2DEF4D6C1EE0D87900A516D6 /* DocumentViewerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentViewerController.swift; sourceTree = "<group>"; };
 		3D47BBC3D482560B7F12A934 /* Pods_NatureNet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NatureNet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		57426900216948F158F226CD /* Pods-NatureNetUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NatureNetUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-NatureNetUITests/Pods-NatureNetUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -301,6 +305,8 @@
 				68FB9BC21ECBB240006C88B1 /* DesignIdeasViewController.swift */,
 				68FB9BD41ECBE267006C88B1 /* CommunityViewController.swift */,
 				2D73CD411EDD245D002E58CD /* TabbarViewController.swift */,
+				2D928DD71F455D1300A59F44 /* MapViewController.swift */,
+				2D928DD91F45606600A59F44 /* ListViewController.swift */,
 			);
 			name = Menu;
 			sourceTree = "<group>";
@@ -658,6 +664,7 @@
 				2D45242C1EFB30670050D4DB /* MyObservationsController.swift in Sources */,
 				68FB9BDB1ECCF856006C88B1 /* AddDesignIdeasController.swift in Sources */,
 				2D7DF8A01ED37A3000D509F3 /* ShowMoreCell.swift in Sources */,
+				2D928DD81F455D1300A59F44 /* MapViewController.swift in Sources */,
 				68FB9BC31ECBB240006C88B1 /* DesignIdeasViewController.swift in Sources */,
 				68FB9BCD1ECBD9D7006C88B1 /* GalleryViewController.swift in Sources */,
 				682C31681ECE316F00F6D87D /* UtilityFunctions.swift in Sources */,
@@ -682,6 +689,7 @@
 				683C421E1EEA0078008C6190 /* TextViewCell.swift in Sources */,
 				68FB9BCF1ECBE075006C88B1 /* ProjectViewController.swift in Sources */,
 				68FB9BD11ECBE096006C88B1 /* ProjectCell.swift in Sources */,
+				2D928DDA1F45606600A59F44 /* ListViewController.swift in Sources */,
 				68FB9BE81ECCFA47006C88B1 /* ProfileViewController.swift in Sources */,
 				683C42201EEA0172008C6190 /* SiteSwitchCell.swift in Sources */,
 				2D632E491ED234FC007ECF51 /* Project.swift in Sources */,

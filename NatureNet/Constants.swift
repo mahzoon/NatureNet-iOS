@@ -239,6 +239,8 @@ let SEGUE_DOCUMENT_DETAIL = "DocumentDetail"
 let SEGUE_MY_OBSERVATIONS = "Observations"
 let SEGUE_MY_DESIGNIDEAS = "DesignIdeas"
 let SEGUE_MY_PROJECTS = "Projects"
+let SEGUE_EMBED_MAP = "EmbedGalleryMap"
+let SEGUE_EMBED_LIST = "EmbedGalleryList"
 
 //
 // Cell Identifiers
