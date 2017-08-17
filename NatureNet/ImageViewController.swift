@@ -18,6 +18,9 @@ class ImageViewController: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var imageConstraintRight: NSLayoutConstraint!
     @IBOutlet weak var imageConstraintLeft: NSLayoutConstraint!
     
+    @IBOutlet weak var imageConstraintTop: NSLayoutConstraint!
+    @IBOutlet weak var imageConstraintBottom: NSLayoutConstraint!
+    
     var observationImageUrl: String?
     
     override func viewDidLoad() {
@@ -66,8 +69,15 @@ class ImageViewController: UIViewController, UIScrollViewDelegate {
             var hPadding = (viewWidth - imageScrollView.zoomScale * imageWidth) / 2
             if hPadding < 0 { hPadding = 0 }
             
+            // center image if it is smaller than the scroll view
+            var wPadding = (viewHeight - imageScrollView.zoomScale * imageHeight) / 2
+            if wPadding < 0 { wPadding = 0 }
+            
             imageConstraintLeft.constant = hPadding
             imageConstraintRight.constant = hPadding
+            
+            imageConstraintTop.constant = wPadding
+            imageConstraintBottom.constant = wPadding
             
             view.layoutIfNeeded()
         }

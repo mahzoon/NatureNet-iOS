@@ -1399,8 +1399,10 @@ DESIGN this nature technology with your community</string>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="imageConstraintBottom" destination="hyB-cp-pkb" id="DZX-eQ-WsA"/>
                         <outlet property="imageConstraintLeft" destination="fu2-Zz-jzN" id="fNh-nV-YLh"/>
                         <outlet property="imageConstraintRight" destination="vUb-a8-PF4" id="Vy9-UK-RI0"/>
+                        <outlet property="imageConstraintTop" destination="YEK-Wa-b37" id="KAC-L2-0RH"/>
                         <outlet property="imageScrollView" destination="69M-8T-jwa" id="UJJ-Uf-ikL"/>
                         <outlet property="theImage" destination="ksY-Cn-s3G" id="MnM-Hg-JsM"/>
                     </connections>
