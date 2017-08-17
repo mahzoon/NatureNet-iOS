@@ -1456,7 +1456,7 @@ DESIGN this nature technology with your community</string>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Gbg-Ol-PuM">
                                                             <rect key="frame" x="50" y="0.0" width="250" height="65"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Project Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QjA-FM-Kj2">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Project Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="7" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QjA-FM-Kj2">
                                                                     <rect key="frame" x="0.0" y="0.0" width="250" height="25"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="25" id="hrL-cI-OCY"/>
@@ -5119,8 +5119,8 @@ DESIGN this nature technology with your community</string>
         <image name="signin screen - logo" width="816" height="265"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="2UQ-Ff-6WK"/>
-        <segue reference="iN3-Ze-sCb"/>
+        <segue reference="NIN-aW-QEi"/>
         <segue reference="L4E-hR-TbY"/>
+        <segue reference="MJm-91-2Fo"/>
     </inferredMetricsTieBreakers>
 </document>
