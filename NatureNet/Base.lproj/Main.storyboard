@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -13,7 +13,7 @@
         <!--NatureNet-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController title="NatureNet" id="BYZ-38-t0r" customClass="MainViewController" customModule="NatureNet" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MainPage" title="NatureNet" id="BYZ-38-t0r" customClass="MainViewController" customModule="NatureNet" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -570,11 +570,11 @@ DESIGN this nature technology with your community</string>
                         <viewControllerLayoutGuide type="bottom" id="8wx-fc-kjK"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="S7q-Iq-3En">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="455"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x92-da-gux">
-                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="455"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <gestureRecognizers/>
                                 <connections>
@@ -912,23 +912,23 @@ DESIGN this nature technology with your community</string>
         <!--Observation-->
         <scene sceneID="Po8-IK-TI4">
             <objects>
-                <viewController title="Observation" automaticallyAdjustsScrollViewInsets="NO" id="2em-3J-HRi" customClass="GalleryDetailController" customModule="NatureNet" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ObservationPage" title="Observation" automaticallyAdjustsScrollViewInsets="NO" id="2em-3J-HRi" customClass="GalleryDetailController" customModule="NatureNet" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="j0X-Kq-xpS"/>
                         <viewControllerLayoutGuide type="bottom" id="uj5-BE-R4w"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="qg9-x3-JSg">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="455"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="cR5-Xd-BrU">
-                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="455"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Duy-DW-Odv">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="461"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="412"/>
                                         <subviews>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ruZ-Fs-J6U">
-                                                <rect key="frame" x="10" y="10" width="300" height="451"/>
+                                                <rect key="frame" x="10" y="10" width="300" height="402"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <view key="tableHeaderView" contentMode="scaleToFill" id="vhn-nc-ZQ2">
                                                     <rect key="frame" x="0.0" y="0.0" width="300" height="390"/>
@@ -1239,7 +1239,7 @@ DESIGN this nature technology with your community</string>
                                         </constraints>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="aIY-Vp-gU6">
-                                        <rect key="frame" x="0.0" y="461" width="320" height="43"/>
+                                        <rect key="frame" x="0.0" y="412" width="320" height="43"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sqd-rq-Nxk">
                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -1368,11 +1368,11 @@ DESIGN this nature technology with your community</string>
                         <viewControllerLayoutGuide type="bottom" id="s3v-mD-VXV"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="xkd-kg-EZA">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="455"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" minimumZoomScale="0.10000000000000001" maximumZoomScale="5" translatesAutoresizingMaskIntoConstraints="NO" id="69M-8T-jwa">
-                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="455"/>
                                 <subviews>
                                     <imageView multipleTouchEnabled="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="200" placeholderIntrinsicHeight="200" image="image - observation - default" translatesAutoresizingMaskIntoConstraints="NO" id="ksY-Cn-s3G">
                                         <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
@@ -2274,7 +2274,7 @@ DESIGN this nature technology with your community</string>
         <!--Design Idea-->
         <scene sceneID="dQs-QB-no7">
             <objects>
-                <viewController title="Design Idea" id="zJX-Qg-ZB2" customClass="DesignIdeaDetailController" customModule="NatureNet" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DesignIdeaPage" title="Design Idea" id="zJX-Qg-ZB2" customClass="DesignIdeaDetailController" customModule="NatureNet" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="xee-fY-E7B"/>
                         <viewControllerLayoutGuide type="bottom" id="jGj-ZY-IlA"/>
@@ -4769,8 +4769,8 @@ DESIGN this nature technology with your community</string>
         <image name="signin screen - logo" width="816" height="265"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="poZ-sa-YE6"/>
-        <segue reference="sFL-HX-YV4"/>
-        <segue reference="2UQ-Ff-6WK"/>
+        <segue reference="VGZ-Ad-eZH"/>
+        <segue reference="iN3-Ze-sCb"/>
+        <segue reference="L4E-hR-TbY"/>
     </inferredMetricsTieBreakers>
 </document>

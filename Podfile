@@ -10,6 +10,7 @@ target 'NatureNet' do
   pod 'Firebase/Database'
   pod 'Firebase/Auth'
   pod 'Firebase/Crash'
+  pod ‘Firebase/Messaging’
   pod 'Cloudinary'
 
   target 'NatureNetTests' do

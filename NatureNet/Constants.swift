@@ -221,6 +221,10 @@ let ADD_PROJECT_SUCCESS_TITLE = "Done!"
 let ADD_PROJECT_SUCCESS_MESSAGE = "The project was added successfully."
 let ADD_PROJECT_SUCCESS_BUTTON_TEXT = "Dismiss"
 
+// notification
+let NOTIFICATION_MESSAGE_BODY = "Do you want to see the comment?"
+let NOTIFICATION_MESSAGE_BUTTON_CANCEL = "No"
+let NOTIFICATION_MESSAGE_BUTTON_OK = "Yes"
 
 //
 // Segue names
@@ -263,6 +267,7 @@ let DB_COMMENTS_PATH = "comments"
 let DB_LIKES_PATH = "likes"
 let DB_SOURCE = "ios"
 let DB_LATEST_CONTRIBUTION = "latest_contribution"
+let DB_NOTIFICATION_TOKEN = "notification_token"
 
 //
 // Cloudinary

@@ -94,6 +94,7 @@
 		2D7DF89B1ED36D6600D509F3 /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		2D7DF89F1ED37A3000D509F3 /* ShowMoreCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowMoreCell.swift; sourceTree = "<group>"; };
 		2D7DF8A11ED3969800D509F3 /* MediaManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaManager.swift; sourceTree = "<group>"; };
+		2D925D691F421C12006021B4 /* NatureNet.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NatureNet.entitlements; sourceTree = "<group>"; };
 		2DEF4D6C1EE0D87900A516D6 /* DocumentViewerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentViewerController.swift; sourceTree = "<group>"; };
 		3D47BBC3D482560B7F12A934 /* Pods_NatureNet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NatureNet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		57426900216948F158F226CD /* Pods-NatureNetUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NatureNetUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-NatureNetUITests/Pods-NatureNetUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -257,6 +258,7 @@
 		68FA5A3E1ECA1538002E66B1 /* NatureNet */ = {
 			isa = PBXGroup;
 			children = (
+				2D925D691F421C12006021B4 /* NatureNet.entitlements */,
 				682C316A1ECE366B00F6D87D /* ToDo.swift */,
 				682C31691ECE318600F6D87D /* Utility */,
 				689E31031ECA1E680039C2F3 /* Model */,
@@ -429,6 +431,14 @@
 						CreatedOnToolsVersion = 8.3;
 						DevelopmentTeam = 6L33LY5G5P;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					68FA5A521ECA1538002E66B1 = {
 						CreatedOnToolsVersion = 8.3;
@@ -833,6 +843,7 @@
 			baseConfigurationReference = 14C42650132EA9362369106F /* Pods-NatureNet.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = NatureNet/NatureNet.entitlements;
 				DEVELOPMENT_TEAM = 6L33LY5G5P;
 				INFOPLIST_FILE = NatureNet/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -848,6 +859,7 @@
 			baseConfigurationReference = D3BA5C7F0CDDC64F30967187 /* Pods-NatureNet.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = NatureNet/NatureNet.entitlements;
 				DEVELOPMENT_TEAM = 6L33LY5G5P;
 				INFOPLIST_FILE = NatureNet/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;

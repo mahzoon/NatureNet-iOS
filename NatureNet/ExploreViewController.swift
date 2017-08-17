@@ -24,6 +24,8 @@ class ExploreViewController: UIViewController, MKMapViewDelegate, UISearchBarDel
     
     let locationManager = CLLocationManager()
     
+    public var transitionItemId = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -41,6 +43,12 @@ class ExploreViewController: UIViewController, MKMapViewDelegate, UISearchBarDel
             profileButton.setImage(ICON_PROFILE_ONLINE, for: .normal)
         } else {
             profileButton.setImage(ICON_PROFILE_OFFLINE, for: .normal)
+        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if transitionItemId != "" {
+            performSegue(withIdentifier: SEGUE_DETAILS, sender: nil)
         }
     }
     
@@ -177,6 +185,13 @@ class ExploreViewController: UIViewController, MKMapViewDelegate, UISearchBarDel
                                     dest.observationObj = observation
                                 }
                             }
+                        }
+                    } else {
+                        if transitionItemId != "" {
+                            if let observation = DataService.ds.GetObservation(with: transitionItemId) {
+                                dest.observationObj = observation
+                            }
+                            transitionItemId = ""
                         }
                     }
                 }

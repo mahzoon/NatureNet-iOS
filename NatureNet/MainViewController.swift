@@ -18,6 +18,15 @@ class MainViewController: UIViewController {
     var connectionMessage = UIAlertController(title: OFFLINE_WARNING_TITLE, message: OFFLINE_WARNING_MESSAGE, preferredStyle: .alert)
     var messageIsShowing = false
     
+    //public var transitionItemId = "-KpJP-yraeMPlM8FqlEO"
+    //public var transitionViewId = "observations"
+    
+    //public var transitionItemId = "-KcFL55-AZld0rB0o-bD"
+    //public var transitionViewId = "designidea"
+    
+    public var transitionItemId = ""
+    public var transitionViewId = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -60,6 +69,16 @@ class MainViewController: UIViewController {
                 signInVC.parentVC = self
                 signInVC.successSegueId = SEGUE_EXPLORE
             }
+            if id == SEGUE_EXPLORE {
+                if self.transitionItemId != "" && self.transitionViewId != "" {
+                    if let tabBarController = segue.destination as? TabbarViewController {
+                        tabBarController.transitionItemId = self.transitionItemId
+                        tabBarController.transitionViewId = self.transitionViewId
+                    }
+                }
+                self.transitionViewId = ""
+                self.transitionItemId = ""
+            }
         }
     }
     
@@ -72,6 +91,7 @@ class MainViewController: UIViewController {
         // start activity spinner
         self.activityIndicator.startAnimating()
         UIApplication.shared.beginIgnoringInteractionEvents()
+        self.progressBar.progress = 0.0
         
         DataService.ds.initializeObservers { success in
             if self.progressBar.progress == 1.0 {

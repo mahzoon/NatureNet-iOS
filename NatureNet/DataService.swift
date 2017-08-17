@@ -187,6 +187,7 @@ class DataService  {
                 // the localized description contains error's description
                 completion(false, e.localizedDescription)
             } else {
+                UtilityFunctions.setupNotifications()
                 completion(true, "")
             }
         }
@@ -210,6 +211,7 @@ class DataService  {
     // To signout user from Firebase, call this function. SignOut returns a tuple containing result status as a boolean and error if any as a string. In case of successful signout, the return value will be (true, ""). But, in case of error the return value will be (false, <error description>).
     func SignOut() -> (Bool, String){
         do {
+            self.UpdateUserNotificationToken(token: "")
             currentUser = nil
             try Auth.auth().signOut()
         } catch let signOutError as NSError {
@@ -240,6 +242,7 @@ class DataService  {
                         if error == nil {
                             self.db_ref.child("\(DB_USERS_PATH)/\(u.uid)").setValue(c) { error, ref in
                                 if error == nil {
+                                    UtilityFunctions.setupNotifications()
                                     completion(true, "")
                                 } else {
                                     completion(false, error.debugDescription)
@@ -618,6 +621,12 @@ class DataService  {
             } else {
                 completion(false)
             }
+        }
+    }
+    
+    func UpdateUserNotificationToken(token: String) {
+        if let user = currentUser {
+            db_ref.child("\(DB_USERS_PATH)/\(user.uid)/\(DB_NOTIFICATION_TOKEN)").setValue(token)
         }
     }
 

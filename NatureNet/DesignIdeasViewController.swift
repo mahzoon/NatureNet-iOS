@@ -21,6 +21,8 @@ class DesignIdeasViewController: UIViewController, UITableViewDelegate, UITableV
     var maxNV = 0
     var maxNB = false
     
+    public var transitionItemId = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -40,6 +42,12 @@ class DesignIdeasViewController: UIViewController, UITableViewDelegate, UITableV
             profileButton.setImage(ICON_PROFILE_ONLINE, for: .normal)
         } else {
             profileButton.setImage(ICON_PROFILE_OFFLINE, for: .normal)
+        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if transitionItemId != "" {
+            performSegue(withIdentifier: SEGUE_DETAILS, sender: nil)
         }
     }
     
@@ -139,6 +147,15 @@ class DesignIdeasViewController: UIViewController, UITableViewDelegate, UITableV
                         dest.designIdea = cell.designIdea
                         dest.commentTextShouldBeSelected = cell.tappedCommentButton
                         cell.tappedCommentButton = false
+                    }
+                } else {
+                    if transitionItemId != "" {
+                        if let idea = DataService.ds.GetDesignIdea(with: transitionItemId) {
+                            if let dest = segue.destination as? DesignIdeaDetailController {
+                                dest.designIdea = idea
+                            }
+                        }
+                        transitionItemId = ""
                     }
                 }
             }
