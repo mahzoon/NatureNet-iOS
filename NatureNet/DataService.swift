@@ -83,6 +83,8 @@ class DataService  {
                                    DB_OBSERVATIONS_PATH: [UITableView](),
                                    DB_DESIGNIDEAS_PATH: [UITableView]()]
     
+    private var connectionTimer = Timer()
+    
     init() {
         // initializing the reference to the database
         db_ref = Database.database().reference()
@@ -93,12 +95,21 @@ class DataService  {
                 if connected == 1 { self.isConnected = true }
                 if connected != 1 {
                     self.isConnected = false
-                    let alertController = UIAlertController(title: OFFLINE_WARNING_TITLE, message: OFFLINE_WARNING_MESSAGE, preferredStyle: .alert)
-                    alertController.addAction(UIAlertAction(title: OFFLINE_WARNING_BUTTON_TEXT, style: .cancel, handler: nil))
-                    UtilityFunctions.getVisibleViewController()?.present(alertController, animated: true, completion: nil)
+                    
+                    self.connectionTimer = Timer.scheduledTimer(timeInterval: 5, target: self,
+                                                           selector: #selector(self.displayConnectionErrorMessage),
+                                                           userInfo: nil, repeats: false)
                 }
             }
         })
+    }
+    
+    @objc func displayConnectionErrorMessage() {
+        if !self.isConnected {
+            let alertController = UIAlertController(title: OFFLINE_WARNING_TITLE, message: OFFLINE_WARNING_MESSAGE, preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: OFFLINE_WARNING_BUTTON_TEXT, style: .cancel, handler: nil))
+            UtilityFunctions.getVisibleViewController()?.present(alertController, animated: true, completion: nil)
+        }
     }
     
     func initializeObservers(observerCompletion: @escaping (Void) -> Void) {
