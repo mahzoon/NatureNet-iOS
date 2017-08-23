@@ -24,6 +24,8 @@ class ProjectViewController: UIViewController, UITableViewDelegate, UITableViewD
     // maxNB states that if all possible cells for each section is being displayed or not. For example, maxNB[0] = false means that in section 0 (first section) we are not showing all possible items (i.e we have "show more" button being displayed in the first section).
     var maxNB = [Int: Bool]()
     
+    public var transitionItemId = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -43,6 +45,12 @@ class ProjectViewController: UIViewController, UITableViewDelegate, UITableViewD
             profileButton.setImage(ICON_PROFILE_ONLINE, for: .normal)
         } else {
             profileButton.setImage(ICON_PROFILE_OFFLINE, for: .normal)
+        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if transitionItemId != "" {
+            performSegue(withIdentifier: SEGUE_DETAILS, sender: nil)
         }
     }
 
@@ -138,6 +146,15 @@ class ProjectViewController: UIViewController, UITableViewDelegate, UITableViewD
                 if let cell = sender as? ProjectCell, !cell.isShowMore {
                     if let dest = segue.destination as? ProjectDetailController {
                         dest.project = cell.project
+                    }
+                } else {
+                    if transitionItemId != "" {
+                        if let project = DataService.ds.GetProject(by: transitionItemId) {
+                            if let dest = segue.destination as? ProjectDetailController {
+                                dest.project = project
+                            }
+                        }
+                        transitionItemId = ""
                     }
                 }
             }

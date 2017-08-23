@@ -570,11 +570,11 @@ DESIGN this nature technology with your community</string>
                         <viewControllerLayoutGuide type="bottom" id="8wx-fc-kjK"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="S7q-Iq-3En">
-                        <rect key="frame" x="0.0" y="64" width="320" height="455"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x92-da-gux">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="455"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <gestureRecognizers/>
                                 <connections>
@@ -918,17 +918,17 @@ DESIGN this nature technology with your community</string>
                         <viewControllerLayoutGuide type="bottom" id="uj5-BE-R4w"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="qg9-x3-JSg">
-                        <rect key="frame" x="0.0" y="64" width="320" height="455"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="cR5-Xd-BrU">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="455"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Duy-DW-Odv">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="412"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="461"/>
                                         <subviews>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ruZ-Fs-J6U">
-                                                <rect key="frame" x="10" y="10" width="300" height="402"/>
+                                                <rect key="frame" x="10" y="10" width="300" height="451"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <view key="tableHeaderView" contentMode="scaleToFill" id="vhn-nc-ZQ2">
                                                     <rect key="frame" x="0.0" y="0.0" width="300" height="390"/>
@@ -1093,7 +1093,7 @@ DESIGN this nature technology with your community</string>
                                                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Xxe-HT-lC8">
                                                                                     <rect key="frame" x="90" y="0.0" width="65" height="30"/>
                                                                                     <subviews>
-                                                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vKV-Na-gqs">
+                                                                                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vKV-Na-gqs">
                                                                                             <rect key="frame" x="0.0" y="0.0" width="25" height="30"/>
                                                                                             <constraints>
                                                                                                 <constraint firstAttribute="width" constant="25" id="2NW-Eg-aB5"/>
@@ -1103,7 +1103,7 @@ DESIGN this nature technology with your community</string>
                                                                                                 <action selector="dislikeTapped:" destination="2em-3J-HRi" eventType="touchUpInside" id="KP6-Ow-I4a"/>
                                                                                             </connections>
                                                                                         </button>
-                                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="99" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N7Y-Ik-yJi">
+                                                                                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="99" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N7Y-Ik-yJi">
                                                                                             <rect key="frame" x="30" y="0.0" width="35" height="30"/>
                                                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                                             <nil key="textColor"/>
@@ -1239,7 +1239,7 @@ DESIGN this nature technology with your community</string>
                                         </constraints>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="aIY-Vp-gU6">
-                                        <rect key="frame" x="0.0" y="412" width="320" height="43"/>
+                                        <rect key="frame" x="0.0" y="461" width="320" height="43"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sqd-rq-Nxk">
                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -1368,11 +1368,11 @@ DESIGN this nature technology with your community</string>
                         <viewControllerLayoutGuide type="bottom" id="s3v-mD-VXV"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="xkd-kg-EZA">
-                        <rect key="frame" x="0.0" y="64" width="320" height="455"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" minimumZoomScale="0.10000000000000001" maximumZoomScale="5" translatesAutoresizingMaskIntoConstraints="NO" id="69M-8T-jwa">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="455"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                                 <subviews>
                                     <imageView multipleTouchEnabled="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="200" placeholderIntrinsicHeight="200" image="image - observation - default" translatesAutoresizingMaskIntoConstraints="NO" id="ksY-Cn-s3G">
                                         <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
@@ -1675,7 +1675,7 @@ DESIGN this nature technology with your community</string>
                                                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="d26-Wf-OiR">
                                                                             <rect key="frame" x="101.5" y="0.0" width="77" height="30"/>
                                                                             <subviews>
-                                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nft-9E-JEJ">
+                                                                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nft-9E-JEJ">
                                                                                     <rect key="frame" x="0.0" y="0.0" width="25" height="30"/>
                                                                                     <constraints>
                                                                                         <constraint firstAttribute="width" constant="25" id="5hV-t7-xfv"/>
@@ -1685,7 +1685,7 @@ DESIGN this nature technology with your community</string>
                                                                                         <action selector="dislikeTapped:" destination="Ct7-Sx-UF2" eventType="touchUpInside" id="SlX-CX-p53"/>
                                                                                     </connections>
                                                                                 </button>
-                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wA2-1Y-YUp">
+                                                                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wA2-1Y-YUp">
                                                                                     <rect key="frame" x="30" y="0.0" width="47" height="30"/>
                                                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                                     <nil key="textColor"/>
@@ -2093,7 +2093,7 @@ DESIGN this nature technology with your community</string>
                                                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="i09-UV-Ngc">
                                                                             <rect key="frame" x="75" y="0.0" width="50" height="30"/>
                                                                             <subviews>
-                                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JJX-TD-GKt">
+                                                                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JJX-TD-GKt">
                                                                                     <rect key="frame" x="0.0" y="0.0" width="25" height="30"/>
                                                                                     <constraints>
                                                                                         <constraint firstAttribute="width" constant="25" id="nXM-GT-aVj"/>
@@ -2103,7 +2103,7 @@ DESIGN this nature technology with your community</string>
                                                                                         <action selector="dislikeTapped:" destination="V1D-mm-zhG" eventType="touchUpInside" id="BmX-Dq-pjV"/>
                                                                                     </connections>
                                                                                 </button>
-                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yrY-HU-TAM">
+                                                                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yrY-HU-TAM">
                                                                                     <rect key="frame" x="30" y="0.0" width="20" height="30"/>
                                                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                                     <nil key="textColor"/>
@@ -2421,7 +2421,7 @@ DESIGN this nature technology with your community</string>
                                                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="2iJ-XX-hg5">
                                                                                     <rect key="frame" x="90" y="0.0" width="65" height="30"/>
                                                                                     <subviews>
-                                                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p4p-vn-g3U">
+                                                                                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p4p-vn-g3U">
                                                                                             <rect key="frame" x="0.0" y="0.0" width="25" height="30"/>
                                                                                             <constraints>
                                                                                                 <constraint firstAttribute="width" constant="25" id="aO3-2V-J0R"/>
@@ -2431,7 +2431,7 @@ DESIGN this nature technology with your community</string>
                                                                                                 <action selector="dislikeTapped:" destination="zJX-Qg-ZB2" eventType="touchUpInside" id="gMj-UV-Xkc"/>
                                                                                             </connections>
                                                                                         </button>
-                                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="99" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hm1-DL-u6D">
+                                                                                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="99" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hm1-DL-u6D">
                                                                                             <rect key="frame" x="30" y="0.0" width="35" height="30"/>
                                                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                                             <nil key="textColor"/>
@@ -4656,7 +4656,7 @@ DESIGN this nature technology with your community</string>
                                                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="8vf-qp-qtt">
                                                                             <rect key="frame" x="101.5" y="0.0" width="77" height="30"/>
                                                                             <subviews>
-                                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="33Q-cl-kGD">
+                                                                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="33Q-cl-kGD">
                                                                                     <rect key="frame" x="0.0" y="0.0" width="25" height="30"/>
                                                                                     <constraints>
                                                                                         <constraint firstAttribute="width" constant="25" id="0DA-Kp-pgL"/>
@@ -4666,7 +4666,7 @@ DESIGN this nature technology with your community</string>
                                                                                         <action selector="dislikeTapped:" destination="ZpT-1E-v5h" eventType="touchUpInside" id="4BS-8Y-sRS"/>
                                                                                     </connections>
                                                                                 </button>
-                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hlT-4E-GIs">
+                                                                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hlT-4E-GIs">
                                                                                     <rect key="frame" x="30" y="0.0" width="47" height="30"/>
                                                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                                     <nil key="textColor"/>
@@ -4795,6 +4795,10 @@ DESIGN this nature technology with your community</string>
         <scene sceneID="WAk-Yi-s1S">
             <objects>
                 <viewController id="ghU-Kt-pyT" customClass="MapViewController" customModule="NatureNet" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="GeO-w9-S6u"/>
+                        <viewControllerLayoutGuide type="bottom" id="D7k-iN-FGU"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Whu-dH-pig">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="369"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -4823,6 +4827,10 @@ DESIGN this nature technology with your community</string>
         <scene sceneID="9dB-6f-iaQ">
             <objects>
                 <viewController id="LQ2-3A-Ocl" customClass="ListViewController" customModule="NatureNet" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="g2F-j8-IQC"/>
+                        <viewControllerLayoutGuide type="bottom" id="8zy-3S-o7E"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="X7c-tH-Dfr">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="369"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -4957,7 +4965,7 @@ DESIGN this nature technology with your community</string>
                                                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="nFY-H6-7jT">
                                                                             <rect key="frame" x="105" y="0.0" width="80" height="30"/>
                                                                             <subviews>
-                                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uIO-af-Czy">
+                                                                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uIO-af-Czy">
                                                                                     <rect key="frame" x="0.0" y="0.0" width="25" height="30"/>
                                                                                     <constraints>
                                                                                         <constraint firstAttribute="width" constant="25" id="j1u-aN-HIY"/>
@@ -4967,7 +4975,7 @@ DESIGN this nature technology with your community</string>
                                                                                         <action selector="dislikeTapped:" destination="wNb-pK-oNS" eventType="touchUpInside" id="lYl-Qe-QBF"/>
                                                                                     </connections>
                                                                                 </button>
-                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="roz-Z6-bJH">
+                                                                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="roz-Z6-bJH">
                                                                                     <rect key="frame" x="30" y="0.0" width="50" height="30"/>
                                                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                                     <nil key="textColor"/>
@@ -5119,8 +5127,8 @@ DESIGN this nature technology with your community</string>
         <image name="signin screen - logo" width="816" height="265"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="NIN-aW-QEi"/>
-        <segue reference="L4E-hR-TbY"/>
-        <segue reference="MJm-91-2Fo"/>
+        <segue reference="poZ-sa-YE6"/>
+        <segue reference="sFL-HX-YV4"/>
+        <segue reference="SH1-bw-nAz"/>
     </inferredMetricsTieBreakers>
 </document>

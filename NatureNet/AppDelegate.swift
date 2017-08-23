@@ -82,7 +82,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                     alertController.addAction(UIAlertAction(title: NOTIFICATION_MESSAGE_BUTTON_CANCEL, style: .cancel, handler: nil))
                     alertController.addAction(UIAlertAction(title: NOTIFICATION_MESSAGE_BUTTON_OK, style: .default, handler: { (UIAlertAction) in
                         mainVC.transitionItemId = itemId as! String
-                        mainVC.transitionViewId = (context as! String) + "s"
+                        mainVC.transitionViewId = (context as! String)
                         mainVC.dismiss(animated: false, completion: nil)
                     }))
                     UtilityFunctions.getVisibleViewController()?.present(alertController, animated: true, completion: nil)
@@ -97,7 +97,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             if let context = response.notification.request.content.userInfo["context"] {
                 if let mainVC = self.window?.rootViewController as? MainViewController {
                     mainVC.transitionItemId = itemId as! String
-                    mainVC.transitionViewId = (context as! String) + "s"
+                    mainVC.transitionViewId = (context as! String)
                     mainVC.dismiss(animated: false, completion: nil)
                 }
             }

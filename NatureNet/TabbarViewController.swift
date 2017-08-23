@@ -37,6 +37,14 @@ class TabbarViewController: UITabBarController {
                 }
             }
         }
+        if transitionViewId == DB_PROJECTS_PATH {
+            self.selectedIndex = 1
+            if let navigationController = selectedViewController as? UINavigationController {
+                if let projectVC = navigationController.viewControllers.first as? ProjectViewController {
+                    projectVC.transitionItemId = self.transitionItemId
+                }
+            }
+        }
         transitionViewId = ""
         transitionItemId = ""
     }
