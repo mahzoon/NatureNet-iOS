@@ -97,7 +97,7 @@ class MainViewController: UIViewController {
             if self.progressBar.progress == 1.0 {
                 return
             }
-            self.progressBar.progress = self.progressBar.progress + 1.0/6.0
+            self.progressBar.progress = self.progressBar.progress + 1.0/5.0
             if self.progressBar.progress == 1.0 {
                 self.connectionTimer.invalidate()
                 if self.messageIsShowing {

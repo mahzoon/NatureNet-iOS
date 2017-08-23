@@ -102,6 +102,9 @@ class DataService  {
                 }
             }
         })
+        
+        // observing change in sites:
+        self.initSitesObserver {}
     }
     
     @objc func displayConnectionErrorMessage() {
@@ -113,7 +116,6 @@ class DataService  {
     }
     
     func initializeObservers(observerCompletion: @escaping (Void) -> Void) {
-        self.initSitesObserver(completion: observerCompletion)
         self.initProjectsObserver(completion: observerCompletion)
         self.initUsersObserver(completion: observerCompletion)
         self.initObservationsObserver(completion: observerCompletion)
