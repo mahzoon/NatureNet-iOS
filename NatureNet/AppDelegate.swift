@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        // setting up push notifications
+        // setting up push notifications for ios
         UtilityFunctions.setupNotifications()
         
         FirebaseApp.configure()
@@ -45,14 +45,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
 
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-//        var token = ""
-//        for i in 0..<deviceToken.count {
-//            token = token + String(format: "%02.2hhx", arguments: [deviceToken[i]])
-//        }
         // set notification_token for the user on firebase
         if let t = Messaging.messaging().fcmToken {
             DataService.ds.UpdateUserNotificationToken(token: t)
         }
+        // subscribing to topics
+        Messaging.messaging().subscribe(toTopic: DB_DESIGNIDEAS_PATH)
+        Messaging.messaging().subscribe(toTopic: DB_PROJECTS_PATH)
     }
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
@@ -63,32 +62,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     @available(iOS 10.0, *)
     func userNotificationCenter(_ center: UNUserNotificationCenter,  willPresent notification: UNNotification, withCompletionHandler   completionHandler: @escaping (_ options:   UNNotificationPresentationOptions) -> Void) {
         
-        // custom code to handle push while app is in the foreground
-        print("Handle push from foreground\(notification.request.content.userInfo)")
+        completionHandler([.alert,.badge,.sound])
         
-        let dict = notification.request.content.userInfo["aps"] as! NSDictionary
-        let d : [String : Any] = dict["alert"] as! [String : Any]
-        let body : String = d["body"] as! String
-        let title : String = d["title"] as! String
-        print("Title:\(title) + body:\(body)")
-        
-        if let itemId = notification.request.content.userInfo["parent"] {
-            if let context = notification.request.content.userInfo["context"] {
-                if let mainVC = self.window?.rootViewController as? MainViewController {
-                    
-                    let alertController = UIAlertController(title: notification.request.content.userInfo["title"] as? String,
-                                                            message: NOTIFICATION_MESSAGE_BODY,
-                                                            preferredStyle: .alert)
-                    alertController.addAction(UIAlertAction(title: NOTIFICATION_MESSAGE_BUTTON_CANCEL, style: .cancel, handler: nil))
-                    alertController.addAction(UIAlertAction(title: NOTIFICATION_MESSAGE_BUTTON_OK, style: .default, handler: { (UIAlertAction) in
-                        mainVC.transitionItemId = itemId as! String
-                        mainVC.transitionViewId = (context as! String)
-                        mainVC.dismiss(animated: false, completion: nil)
-                    }))
-                    UtilityFunctions.getVisibleViewController()?.present(alertController, animated: true, completion: nil)
-                }
-            }
-        }
     }
     
     @available(iOS 10.0, *)

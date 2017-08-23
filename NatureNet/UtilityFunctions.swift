@@ -68,7 +68,7 @@ class UtilityFunctions {
         let application = UIApplication.shared
         if #available(iOS 10.0, *) {
             // For iOS 10 display notification (sent via APNS)
-            UNUserNotificationCenter.current().delegate = UIApplication.shared.delegate as! AppDelegate as! UNUserNotificationCenterDelegate
+            UNUserNotificationCenter.current().delegate = UIApplication.shared.delegate as! AppDelegate
             
             let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
             UNUserNotificationCenter.current().requestAuthorization(

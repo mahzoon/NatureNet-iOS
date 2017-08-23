@@ -283,8 +283,8 @@ let CLOUDINARY_BASE_URL = "https://res.cloudinary.com/university-of-colorado/ima
 //
 let DESIGN_IDEA_STATUS_DISCUSSING = "doing"
 let DESIGN_IDEA_STATUS_TO_DO = "to do"
-let DESIGN_IDEA_STATUS_DEVELOPING = "testing"
-let DESIGN_IDEA_STATUS_TESTING = "developing"
+let DESIGN_IDEA_STATUS_DEVELOPING = "developing"
+let DESIGN_IDEA_STATUS_TESTING = "testing"
 let DESIGN_IDEA_STATUS_DONE = "done"
 let DESIGN_IDEA_All_TYPES = ["New Features", "Project Ideas", "Community Ideas", "Improvement Ideas"]
 let DESIGN_IDEA_GROUP = "idea"
