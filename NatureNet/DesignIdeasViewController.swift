@@ -146,6 +146,7 @@ class DesignIdeasViewController: UIViewController, UITableViewDelegate, UITableV
                     if let dest = segue.destination as? DesignIdeaDetailController {
                         dest.designIdea = cell.designIdea
                         dest.commentTextShouldBeSelected = cell.tappedCommentButton
+                        dest.parentController = self
                         cell.tappedCommentButton = false
                     }
                 } else {
@@ -153,6 +154,7 @@ class DesignIdeasViewController: UIViewController, UITableViewDelegate, UITableV
                         if let idea = DataService.ds.GetDesignIdea(with: transitionItemId) {
                             if let dest = segue.destination as? DesignIdeaDetailController {
                                 dest.designIdea = idea
+                                dest.parentController = self
                             }
                         }
                         transitionItemId = ""
@@ -165,6 +167,14 @@ class DesignIdeasViewController: UIViewController, UITableViewDelegate, UITableV
     // remove the focus from the search bar if the user clicked on the cross button on the search bar. This will also causes the keyboard to hide.
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         view.endEditing(true)
+    }
+    
+    public func searchFor(text: String) {
+        searchBar.text = text
+        // reset the pages for each section
+        self.pages = 0
+        // reload the data
+        designIdeasTable.reloadData()
     }
     
     @IBAction func showMoreTapped(_ sender: Any) {

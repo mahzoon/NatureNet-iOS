@@ -570,11 +570,11 @@ DESIGN this nature technology with your community</string>
                         <viewControllerLayoutGuide type="bottom" id="8wx-fc-kjK"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="S7q-Iq-3En">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="455"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x92-da-gux">
-                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="455"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <gestureRecognizers/>
                                 <connections>
@@ -918,17 +918,17 @@ DESIGN this nature technology with your community</string>
                         <viewControllerLayoutGuide type="bottom" id="uj5-BE-R4w"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="qg9-x3-JSg">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="455"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="cR5-Xd-BrU">
-                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="455"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Duy-DW-Odv">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="461"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="412"/>
                                         <subviews>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ruZ-Fs-J6U">
-                                                <rect key="frame" x="10" y="10" width="300" height="451"/>
+                                                <rect key="frame" x="10" y="10" width="300" height="402"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <view key="tableHeaderView" contentMode="scaleToFill" id="vhn-nc-ZQ2">
                                                     <rect key="frame" x="0.0" y="0.0" width="300" height="390"/>
@@ -1233,7 +1233,7 @@ DESIGN this nature technology with your community</string>
                                         </constraints>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="aIY-Vp-gU6">
-                                        <rect key="frame" x="0.0" y="461" width="320" height="43"/>
+                                        <rect key="frame" x="0.0" y="412" width="320" height="43"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sqd-rq-Nxk">
                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -1362,11 +1362,11 @@ DESIGN this nature technology with your community</string>
                         <viewControllerLayoutGuide type="bottom" id="s3v-mD-VXV"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="xkd-kg-EZA">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="455"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" minimumZoomScale="0.10000000000000001" maximumZoomScale="5" translatesAutoresizingMaskIntoConstraints="NO" id="69M-8T-jwa">
-                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="455"/>
                                 <subviews>
                                     <imageView multipleTouchEnabled="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="200" placeholderIntrinsicHeight="200" image="image - observation - default" translatesAutoresizingMaskIntoConstraints="NO" id="ksY-Cn-s3G">
                                         <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
@@ -2041,22 +2041,17 @@ DESIGN this nature technology with your community</string>
                                                                         <constraint firstAttribute="height" constant="60" id="HVq-4m-9IQ"/>
                                                                     </constraints>
                                                                 </stackView>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oYc-3s-7Jv">
+                                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Ik7-xY-Wn5">
                                                                     <rect key="frame" x="0.0" y="65" width="290" height="162"/>
+                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="g19-y0-D87"/>
+                                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="ITN-bF-TI7"/>
                                                                     </constraints>
-                                                                    <attributedString key="attributedText">
-                                                                        <fragment>
-                                                                            <string key="content">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                                                            <attributes>
-                                                                                <font key="NSFont" size="12" name="HelveticaNeue"/>
-                                                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
-                                                                            </attributes>
-                                                                        </fragment>
-                                                                    </attributedString>
-                                                                    <nil key="highlightedColor"/>
-                                                                </label>
+                                                                    <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                                    <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                                                                </textView>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="VKM-IT-N0U">
                                                                     <rect key="frame" x="0.0" y="232" width="290" height="30"/>
                                                                     <subviews>
@@ -2168,13 +2163,13 @@ DESIGN this nature technology with your community</string>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <connections>
-                                            <outlet property="Ideatext" destination="oYc-3s-7Jv" id="dwb-bs-UnY"/>
                                             <outlet property="affiliation" destination="C9F-b6-aiD" id="qbA-YD-XAc"/>
                                             <outlet property="affiliationIcon" destination="Tuy-8R-iIL" id="spr-Pl-rYR"/>
                                             <outlet property="avatar" destination="0It-eB-WVD" id="705-s0-CFA"/>
                                             <outlet property="comments" destination="95Z-mT-SNf" id="bY2-ER-KyX"/>
                                             <outlet property="dislikeButton" destination="JJX-TD-GKt" id="0Rr-ts-gPc"/>
                                             <outlet property="dislikes" destination="yrY-HU-TAM" id="L4g-nW-WYf"/>
+                                            <outlet property="ideaContent" destination="Ik7-xY-Wn5" id="0Tl-1k-KbA"/>
                                             <outlet property="likeButton" destination="42G-f6-LnE" id="OJp-Vr-73g"/>
                                             <outlet property="likes" destination="sE8-eu-dMh" id="XpL-w2-CLW"/>
                                             <outlet property="postDate" destination="gdb-1r-OHr" id="PT4-57-xwS"/>
@@ -2367,21 +2362,17 @@ DESIGN this nature technology with your community</string>
                                                                         </stackView>
                                                                     </subviews>
                                                                 </stackView>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qpy-rf-ZQf">
+                                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="RME-2E-RVS">
                                                                     <rect key="frame" x="0.0" y="80" width="300" height="50"/>
+                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="3If-nY-RFp"/>
+                                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="dIW-OL-JzO"/>
                                                                     </constraints>
-                                                                    <attributedString key="attributedText">
-                                                                        <fragment content="test">
-                                                                            <attributes>
-                                                                                <font key="NSFont" size="12" name="Helvetica"/>
-                                                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                                            </attributes>
-                                                                        </fragment>
-                                                                    </attributedString>
-                                                                    <nil key="highlightedColor"/>
-                                                                </label>
+                                                                    <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                                    <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                                                                </textView>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q51-ed-9KP">
                                                                     <rect key="frame" x="0.0" y="140" width="300" height="30"/>
                                                                     <subviews>
@@ -2643,7 +2634,7 @@ DESIGN this nature technology with your community</string>
                         <outlet property="commentTextHeightConstraint" destination="eJw-dt-c8v" id="1pz-W3-JC7"/>
                         <outlet property="designIdeaDetailsTable" destination="58T-Kb-vaY" id="iWq-oG-LY5"/>
                         <outlet property="dislikeButton" destination="p4p-vn-g3U" id="gMs-oG-QhS"/>
-                        <outlet property="ideaText" destination="qpy-rf-ZQf" id="VnU-KZ-5q0"/>
+                        <outlet property="ideaText" destination="RME-2E-RVS" id="X21-XZ-3W7"/>
                         <outlet property="keyboardViewHeightConstraint" destination="dzS-14-3eT" id="zDR-pJ-6FL"/>
                         <outlet property="likeButton" destination="nQK-XP-QxW" id="Fw0-ct-FXV"/>
                         <outlet property="numDislikes" destination="Hm1-DL-u6D" id="B7a-jn-deP"/>
@@ -5115,8 +5106,8 @@ DESIGN this nature technology with your community</string>
         <image name="signin screen - logo" width="816" height="265"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="MJm-91-2Fo"/>
         <segue reference="poZ-sa-YE6"/>
         <segue reference="DM5-U5-Q0J"/>
-        <segue reference="sFL-HX-YV4"/>
     </inferredMetricsTieBreakers>
 </document>

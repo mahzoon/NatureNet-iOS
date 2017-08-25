@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DesignIdeasCell: UITableViewCell {
+class DesignIdeasCell: UITableViewCell, UITextViewDelegate {
 
     @IBOutlet weak var username: UILabel!
     @IBOutlet weak var affiliation: UILabel!
@@ -16,7 +16,7 @@ class DesignIdeasCell: UITableViewCell {
     
     @IBOutlet weak var affiliationIcon: UILabel!
     @IBOutlet weak var postDate: UILabel!
-    @IBOutlet weak var Ideatext: UILabel!
+    //@IBOutlet weak var Ideatext: UILabel!
     @IBOutlet weak var likes: UILabel!
     @IBOutlet weak var dislikes: UILabel!
     @IBOutlet weak var comments: UILabel!
@@ -24,6 +24,8 @@ class DesignIdeasCell: UITableViewCell {
     
     @IBOutlet weak var likeButton: UIButton!
     @IBOutlet weak var dislikeButton: UIButton!
+    
+    @IBOutlet weak var ideaContent: UITextView!
     
     var designIdea: NNDesignIdea?
     
@@ -48,10 +50,14 @@ class DesignIdeasCell: UITableViewCell {
         self.cellId = id
         self.username.text = username
         self.affiliation.text = affiliation
-        self.Ideatext.text = text
+        //self.Ideatext.text = text
         self.likes.text = num_likes
         self.dislikes.text = num_dislikes
         self.comments.text = num_comments
+        
+        self.ideaContent.attributedText = UtilityFunctions.convertTextToAttributedString(text: text)
+        self.ideaContent.delegate = self
+        
         self.parentController = controller
         
         self.postDate.text = UtilityFunctions.convertTimestampToDateString(date: date)
@@ -160,5 +166,12 @@ class DesignIdeasCell: UITableViewCell {
         if let p = parentController {
             p.performSegue(withIdentifier: SEGUE_DETAILS, sender: self)
         }
-    }    
+    }
+    
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
+        if let p = parentController as? DesignIdeasViewController {
+            p.searchFor(text: URL.absoluteString)
+        }
+        return false
+    }
 }
