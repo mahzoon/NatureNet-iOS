@@ -32,6 +32,8 @@ class DesignIdeasViewController: UIViewController, UITableViewDelegate, UITableV
         
         DataService.ds.registerTableView(group: DB_DESIGNIDEAS_PATH, tableView: designIdeasTable)
         
+        designIdeasTable.estimatedRowHeight = CGFloat(DESIGN_IDEA_CELL_ITEM_HEIGHT)
+        
         hideKeyboardWhenTappedOutside()
     }
 
@@ -76,7 +78,14 @@ class DesignIdeasViewController: UIViewController, UITableViewDelegate, UITableV
         if maxNB && maxNV == indexPath.row {
             return CGFloat(SHOW_MORE_CELL_HEIGHT)
         }
-        return CGFloat(DESIGN_IDEA_CELL_ITEM_HEIGHT)
+        //return CGFloat(DESIGN_IDEA_CELL_ITEM_HEIGHT)
+        if let cell = tableView.dequeueReusableCell(withIdentifier: DESIGN_IDEAS_CELL_ID) as? DesignIdeasCell {
+                let searchText = self.searchBar.text ?? ""
+                if let idea = DataService.ds.GetDesignIdea(at: indexPath.row, searchFilter: searchText) {
+                    return cell.getTextHeight(text: idea.content) + CGFloat(140.0)
+                }
+            }
+        return UITableViewAutomaticDimension
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

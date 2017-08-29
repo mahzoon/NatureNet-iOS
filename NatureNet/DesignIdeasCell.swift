@@ -57,6 +57,7 @@ class DesignIdeasCell: UITableViewCell, UITextViewDelegate {
         
         self.ideaContent.attributedText = UtilityFunctions.convertTextToAttributedString(text: text)
         self.ideaContent.delegate = self
+        self.ideaContent.layoutIfNeeded()
         
         self.parentController = controller
         
@@ -97,6 +98,12 @@ class DesignIdeasCell: UITableViewCell, UITextViewDelegate {
         
         tappedCommentButton = false
         updateLikeAndDislikeButtonImages()
+    }
+    
+    func getTextHeight(text: String) -> CGFloat {
+        ideaContent.attributedText = UtilityFunctions.convertTextToAttributedString(text: text)
+        ideaContent.sizeToFit()
+        return ideaContent.frame.height
     }
     
     @IBAction func likeTapped(_ sender: Any) {
