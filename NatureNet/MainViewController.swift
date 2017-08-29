@@ -22,7 +22,7 @@ class MainViewController: UIViewController {
     //public var transitionViewId = "observations"
     
     //public var transitionItemId = "-KcFL55-AZld0rB0o-bD"
-    //public var transitionViewId = "designidea"
+    //public var transitionViewId = "ideas"
     
     public var transitionItemId = ""
     public var transitionViewId = ""

@@ -139,6 +139,8 @@ class GalleryDetailController: UIViewController, UITableViewDelegate, UITableVie
                     catch { }
                 })
             }
+        } else {
+            self.navigationController?.popViewController(animated: true)
         }
     }
     

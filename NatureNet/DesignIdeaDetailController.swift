@@ -115,6 +115,8 @@ class DesignIdeaDetailController: UIViewController, UITableViewDelegate, UITable
                 default:
                     self.status.image = ICON_DESIGN_IDEA_STATUS_DISCUSSING
             }
+        } else {
+            self.navigationController?.popViewController(animated: true)
         }
         
     }
