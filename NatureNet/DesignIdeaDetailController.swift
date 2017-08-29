@@ -16,7 +16,7 @@ class DesignIdeaDetailController: UIViewController, UITableViewDelegate, UITable
     @IBOutlet weak var username: UILabel!
     @IBOutlet weak var postDate: UILabel!
     @IBOutlet weak var affiliation: UILabel!
-    @IBOutlet weak var ideaText: UILabel!
+    @IBOutlet weak var ideaText: UITextView!
     @IBOutlet weak var numLikes: UILabel!
     @IBOutlet weak var numDislikes: UILabel!
     @IBOutlet weak var status: UIImageView!
@@ -36,6 +36,8 @@ class DesignIdeaDetailController: UIViewController, UITableViewDelegate, UITable
     var maxNV = 0
     var maxNB = false
     
+    var parentController: DesignIdeasViewController?
+    
     @IBOutlet weak var outsideCommentView: UIView!
     
     override func viewDidLoad() {
@@ -44,6 +46,7 @@ class DesignIdeaDetailController: UIViewController, UITableViewDelegate, UITable
         designIdeaDetailsTable.delegate = self
         designIdeaDetailsTable.dataSource = self
         commentText.delegate = self
+        ideaText.delegate = self
         
         keyboardViewHeightConstraint.constant = 0
         
@@ -86,7 +89,7 @@ class DesignIdeaDetailController: UIViewController, UITableViewDelegate, UITable
                 })
             }
             self.postDate.text = UtilityFunctions.convertTimestampToDateString(date: idea.updatedAt)
-            self.ideaText.text = idea.content
+            self.ideaText.attributedText = UtilityFunctions.convertTextToAttributedString(text: idea.content)
             if DataService.ds.GetCommentsOnDesignIdea(with: idea.id).count == 0 {
                 self.commentLabel.text = NO_COMMENTS_TEXT
             } else {
@@ -112,6 +115,8 @@ class DesignIdeaDetailController: UIViewController, UITableViewDelegate, UITable
                 default:
                     self.status.image = ICON_DESIGN_IDEA_STATUS_DISCUSSING
             }
+        } else {
+            self.navigationController?.popViewController(animated: true)
         }
         
     }
@@ -328,5 +333,11 @@ class DesignIdeaDetailController: UIViewController, UITableViewDelegate, UITable
                 }
             }
         }
+    }
+    
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
+        parentController?.searchFor(text: URL.absoluteString)
+        self.navigationController?.popViewController(animated: true)
+        return false
     }
 }

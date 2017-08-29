@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import MapKit
+import UserNotifications
 
 class UtilityFunctions {
     
@@ -61,6 +62,59 @@ class UtilityFunctions {
             visible = tabBarController.selectedViewController
         }
         return visible
+    }
+    
+    static func setupNotifications() {
+        let application = UIApplication.shared
+        if #available(iOS 10.0, *) {
+            // For iOS 10 display notification (sent via APNS)
+            UNUserNotificationCenter.current().delegate = UIApplication.shared.delegate as! AppDelegate
+            
+            let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+            UNUserNotificationCenter.current().requestAuthorization(
+                options: authOptions,
+                completionHandler: {_, _ in })
+            
+            // For iOS 10 data message (sent via FCM)
+            //FIRMessaging.messaging().remoteMessageDelegate = self
+            
+        } else {
+            let settings: UIUserNotificationSettings =
+                UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+            application.registerUserNotificationSettings(settings)
+        }
+        
+        application.registerForRemoteNotifications()
+    }
+    
+    static func NSRangeFromRange(text: String, range : Range<String.Index>) -> NSRange {
+        let utf16view = text.utf16
+        let from = String.UTF16View.Index(range.lowerBound, within: utf16view)
+        let to = String.UTF16View.Index(range.upperBound, within: utf16view)
+        return NSMakeRange(from - utf16view.startIndex, to - from)
+    }
+    
+    static func getOccurranceIndices(text: String, query: String) -> [Range<String.Index>] {
+        var searchRange = text.startIndex..<text.endIndex
+        var indices: [Range<String.Index>] = []
+        while let range = text.range(of: query, options: .caseInsensitive, range: searchRange) {
+            searchRange = range.upperBound..<searchRange.upperBound
+            indices.append(range)
+        }
+        return indices
+    }
+    
+    static func convertTextToAttributedString(text: String) -> NSMutableAttributedString {
+        let s = NSMutableAttributedString(string: text)
+        for word in text.components(separatedBy: [",", " ", "\n"]) {
+            if word.hasPrefix("#") || word.hasPrefix("@")  {
+                let ranges = getOccurranceIndices(text: text, query: word)
+                for range in ranges {
+                    s.addAttribute(NSLinkAttributeName, value: word, range: NSRangeFromRange(text: text, range : range))
+                }
+            }
+        }
+        return s
     }
 }
 

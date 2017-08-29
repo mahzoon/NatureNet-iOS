@@ -221,6 +221,10 @@ let ADD_PROJECT_SUCCESS_TITLE = "Done!"
 let ADD_PROJECT_SUCCESS_MESSAGE = "The project was added successfully."
 let ADD_PROJECT_SUCCESS_BUTTON_TEXT = "Dismiss"
 
+// notification
+let NOTIFICATION_MESSAGE_BODY = "Do you want to see the comment?"
+let NOTIFICATION_MESSAGE_BUTTON_CANCEL = "No"
+let NOTIFICATION_MESSAGE_BUTTON_OK = "Yes"
 
 //
 // Segue names
@@ -235,6 +239,8 @@ let SEGUE_DOCUMENT_DETAIL = "DocumentDetail"
 let SEGUE_MY_OBSERVATIONS = "Observations"
 let SEGUE_MY_DESIGNIDEAS = "DesignIdeas"
 let SEGUE_MY_PROJECTS = "Projects"
+let SEGUE_EMBED_MAP = "EmbedGalleryMap"
+let SEGUE_EMBED_LIST = "EmbedGalleryList"
 
 //
 // Cell Identifiers
@@ -263,6 +269,7 @@ let DB_COMMENTS_PATH = "comments"
 let DB_LIKES_PATH = "likes"
 let DB_SOURCE = "ios"
 let DB_LATEST_CONTRIBUTION = "latest_contribution"
+let DB_NOTIFICATION_TOKEN = "notification_token"
 
 //
 // Cloudinary
@@ -276,8 +283,8 @@ let CLOUDINARY_BASE_URL = "https://res.cloudinary.com/university-of-colorado/ima
 //
 let DESIGN_IDEA_STATUS_DISCUSSING = "doing"
 let DESIGN_IDEA_STATUS_TO_DO = "to do"
-let DESIGN_IDEA_STATUS_DEVELOPING = "testing"
-let DESIGN_IDEA_STATUS_TESTING = "developing"
+let DESIGN_IDEA_STATUS_DEVELOPING = "developing"
+let DESIGN_IDEA_STATUS_TESTING = "testing"
 let DESIGN_IDEA_STATUS_DONE = "done"
 let DESIGN_IDEA_All_TYPES = ["New Features", "Project Ideas", "Community Ideas", "Improvement Ideas"]
 let DESIGN_IDEA_GROUP = "idea"

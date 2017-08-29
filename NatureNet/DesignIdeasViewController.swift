@@ -21,6 +21,8 @@ class DesignIdeasViewController: UIViewController, UITableViewDelegate, UITableV
     var maxNV = 0
     var maxNB = false
     
+    public var transitionItemId = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -29,6 +31,8 @@ class DesignIdeasViewController: UIViewController, UITableViewDelegate, UITableV
         searchBar.delegate = self
         
         DataService.ds.registerTableView(group: DB_DESIGNIDEAS_PATH, tableView: designIdeasTable)
+        
+        designIdeasTable.estimatedRowHeight = CGFloat(DESIGN_IDEA_CELL_ITEM_HEIGHT)
         
         hideKeyboardWhenTappedOutside()
     }
@@ -40,6 +44,12 @@ class DesignIdeasViewController: UIViewController, UITableViewDelegate, UITableV
             profileButton.setImage(ICON_PROFILE_ONLINE, for: .normal)
         } else {
             profileButton.setImage(ICON_PROFILE_OFFLINE, for: .normal)
+        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if transitionItemId != "" {
+            performSegue(withIdentifier: SEGUE_DETAILS, sender: nil)
         }
     }
     
@@ -68,7 +78,14 @@ class DesignIdeasViewController: UIViewController, UITableViewDelegate, UITableV
         if maxNB && maxNV == indexPath.row {
             return CGFloat(SHOW_MORE_CELL_HEIGHT)
         }
-        return CGFloat(DESIGN_IDEA_CELL_ITEM_HEIGHT)
+        //return CGFloat(DESIGN_IDEA_CELL_ITEM_HEIGHT)
+        if let cell = tableView.dequeueReusableCell(withIdentifier: DESIGN_IDEAS_CELL_ID) as? DesignIdeasCell {
+                let searchText = self.searchBar.text ?? ""
+                if let idea = DataService.ds.GetDesignIdea(at: indexPath.row, searchFilter: searchText) {
+                    return cell.getTextHeight(text: idea.content) + CGFloat(140.0)
+                }
+            }
+        return UITableViewAutomaticDimension
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -138,7 +155,18 @@ class DesignIdeasViewController: UIViewController, UITableViewDelegate, UITableV
                     if let dest = segue.destination as? DesignIdeaDetailController {
                         dest.designIdea = cell.designIdea
                         dest.commentTextShouldBeSelected = cell.tappedCommentButton
+                        dest.parentController = self
                         cell.tappedCommentButton = false
+                    }
+                } else {
+                    if transitionItemId != "" {
+                        if let idea = DataService.ds.GetDesignIdea(with: transitionItemId) {
+                            if let dest = segue.destination as? DesignIdeaDetailController {
+                                dest.designIdea = idea
+                                dest.parentController = self
+                            }
+                        }
+                        transitionItemId = ""
                     }
                 }
             }
@@ -148,6 +176,14 @@ class DesignIdeasViewController: UIViewController, UITableViewDelegate, UITableV
     // remove the focus from the search bar if the user clicked on the cross button on the search bar. This will also causes the keyboard to hide.
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         view.endEditing(true)
+    }
+    
+    public func searchFor(text: String) {
+        searchBar.text = text
+        // reset the pages for each section
+        self.pages = 0
+        // reload the data
+        designIdeasTable.reloadData()
     }
     
     @IBAction func showMoreTapped(_ sender: Any) {

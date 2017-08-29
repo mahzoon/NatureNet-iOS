@@ -28,6 +28,10 @@
 	<string>When taking photo, NatureNet needs to access your location to attach this information to your observation.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>To select an existing photo, NatureNet needs to access your Photo Library.</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>remote-notification</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

@@ -83,6 +83,8 @@ class DataService  {
                                    DB_OBSERVATIONS_PATH: [UITableView](),
                                    DB_DESIGNIDEAS_PATH: [UITableView]()]
     
+    private var connectionTimer = Timer()
+    
     init() {
         // initializing the reference to the database
         db_ref = Database.database().reference()
@@ -93,16 +95,27 @@ class DataService  {
                 if connected == 1 { self.isConnected = true }
                 if connected != 1 {
                     self.isConnected = false
-                    let alertController = UIAlertController(title: OFFLINE_WARNING_TITLE, message: OFFLINE_WARNING_MESSAGE, preferredStyle: .alert)
-                    alertController.addAction(UIAlertAction(title: OFFLINE_WARNING_BUTTON_TEXT, style: .cancel, handler: nil))
-                    UtilityFunctions.getVisibleViewController()?.present(alertController, animated: true, completion: nil)
+                    
+                    self.connectionTimer = Timer.scheduledTimer(timeInterval: 5, target: self,
+                                                           selector: #selector(self.displayConnectionErrorMessage),
+                                                           userInfo: nil, repeats: false)
                 }
             }
         })
+        
+        // observing change in sites:
+        self.initSitesObserver {}
+    }
+    
+    @objc func displayConnectionErrorMessage() {
+        if !self.isConnected {
+            let alertController = UIAlertController(title: OFFLINE_WARNING_TITLE, message: OFFLINE_WARNING_MESSAGE, preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: OFFLINE_WARNING_BUTTON_TEXT, style: .cancel, handler: nil))
+            UtilityFunctions.getVisibleViewController()?.present(alertController, animated: true, completion: nil)
+        }
     }
     
     func initializeObservers(observerCompletion: @escaping (Void) -> Void) {
-        self.initSitesObserver(completion: observerCompletion)
         self.initProjectsObserver(completion: observerCompletion)
         self.initUsersObserver(completion: observerCompletion)
         self.initObservationsObserver(completion: observerCompletion)
@@ -187,6 +200,7 @@ class DataService  {
                 // the localized description contains error's description
                 completion(false, e.localizedDescription)
             } else {
+                UtilityFunctions.setupNotifications()
                 completion(true, "")
             }
         }
@@ -210,6 +224,7 @@ class DataService  {
     // To signout user from Firebase, call this function. SignOut returns a tuple containing result status as a boolean and error if any as a string. In case of successful signout, the return value will be (true, ""). But, in case of error the return value will be (false, <error description>).
     func SignOut() -> (Bool, String){
         do {
+            self.UpdateUserNotificationToken(token: "")
             currentUser = nil
             try Auth.auth().signOut()
         } catch let signOutError as NSError {
@@ -240,6 +255,7 @@ class DataService  {
                         if error == nil {
                             self.db_ref.child("\(DB_USERS_PATH)/\(u.uid)").setValue(c) { error, ref in
                                 if error == nil {
+                                    UtilityFunctions.setupNotifications()
                                     completion(true, "")
                                 } else {
                                     completion(false, error.debugDescription)
@@ -618,6 +634,12 @@ class DataService  {
             } else {
                 completion(false)
             }
+        }
+    }
+    
+    func UpdateUserNotificationToken(token: String) {
+        if let user = currentUser {
+            db_ref.child("\(DB_USERS_PATH)/\(user.uid)/\(DB_NOTIFICATION_TOKEN)").setValue(token)
         }
     }
 

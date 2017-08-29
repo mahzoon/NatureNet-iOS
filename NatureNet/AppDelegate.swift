@@ -9,14 +9,19 @@
 import UIKit
 import CoreData
 import Firebase
+import FirebaseMessaging
+import UserNotifications
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
 
     var window: UIWindow?
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        
+        // setting up push notifications for ios
+        UtilityFunctions.setupNotifications()
         
         FirebaseApp.configure()
         // enabling offline capabilities of Firebase database object
@@ -39,6 +44,41 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        // set notification_token for the user on firebase
+        if let t = Messaging.messaging().fcmToken {
+            DataService.ds.UpdateUserNotificationToken(token: t)
+        }
+        // subscribing to topics
+        Messaging.messaging().subscribe(toTopic: DB_DESIGNIDEAS_PATH)
+        Messaging.messaging().subscribe(toTopic: DB_PROJECTS_PATH)
+    }
+    
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        print("Registration failed!")
+    }
+
+    // Firebase notification received
+    @available(iOS 10.0, *)
+    func userNotificationCenter(_ center: UNUserNotificationCenter,  willPresent notification: UNNotification, withCompletionHandler   completionHandler: @escaping (_ options:   UNNotificationPresentationOptions) -> Void) {
+        
+        completionHandler([.alert,.badge,.sound])
+        
+    }
+    
+    @available(iOS 10.0, *)
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        if let itemId = response.notification.request.content.userInfo["parent"] {
+            if let context = response.notification.request.content.userInfo["context"] {
+                if let mainVC = self.window?.rootViewController as? MainViewController {
+                    mainVC.transitionItemId = itemId as! String
+                    mainVC.transitionViewId = (context as! String)
+                    mainVC.dismiss(animated: false, completion: nil)
+                }
+            }
+        }
+    }
+    
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
