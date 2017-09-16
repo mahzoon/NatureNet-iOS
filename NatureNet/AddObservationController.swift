@@ -188,36 +188,80 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            if picker.sourceType == UIImagePickerControllerSourceType.camera {
-                self.locationManager.stopUpdatingLocation()
-                MediaManager.md.saveImageToPhotosLib(img: pickedImage, completion: { success, error, loc in
-                    if !success {
-                        let ac = UIAlertController(title: SAVE_OBSV_ERROR_MESSAGE, message: error, preferredStyle: .alert)
-                        ac.addAction(UIAlertAction(title: SAVE_OBSV_ERROR_BUTTON_TEXT, style: .default))
-                        self.present(ac, animated: true)
-                    } else {
-                        //self.pickedImageLocation = loc
-                        DispatchQueue.main.async {
-                            self.observationImage.image = pickedImage
-                            self.pickedImage = true
+        imagePicker.dismiss(animated: true, completion: {
+            if let thePickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+                if picker.sourceType == UIImagePickerControllerSourceType.camera {
+                    self.locationManager.stopUpdatingLocation()
+                    
+                    let authStatus = PHPhotoLibrary.authorizationStatus()
+                    switch authStatus {
+                    case .authorized:
+                        self.saveImage(img: thePickedImage)
+                        break
+                    case .denied:
+                        // prompt to ask change photos access settings to save the photo
+                        let alert = UIAlertController(title: ADD_OBSV_IMAGE_OPTIONS_ERR_LIB_TITLE, message: ADD_OBSV_IMAGE_OPTIONS_ERR_LIB_MSG, preferredStyle: .alert )
+                        alert.addAction(UIAlertAction(title: ADD_OBSV_IMAGE_OPTIONS_ERR_LIB_BTN_DISMISS, style: .cancel))
+                        alert.addAction(UIAlertAction(title: ADD_OBSV_IMAGE_OPTIONS_ERR_LIB_BTN_SETTINGS, style: .default) { alert in
+                            UIApplication.shared.openURL(URL(string: UIApplicationOpenSettingsURLString)!)
+                        })
+                        if let theView = UtilityFunctions.getVisibleViewController() {
+                            theView.present(alert, animated: true, completion: nil)
                         }
+                        break
+                    default:
+                        
+                        let alert = UIAlertController(title: ADD_OBSV_IMAGE_OPTIONS_SAVE_PHOTO_ASK_PERM_TITLE, message: ADD_OBSV_IMAGE_OPTIONS_SAVE_PHOTO_ASK_PERM_MSG, preferredStyle: .alert )
+                        let allowAction = UIAlertAction(title: ADD_OBSV_IMAGE_OPTIONS_SAVE_PHOTO_ASK_PERM_BTN_ALLOW, style: .default, handler: { (alert) -> Void in
+                            PHPhotoLibrary.requestAuthorization({ (status) in
+                                if status == PHAuthorizationStatus.authorized {
+                                    self.saveImage(img: thePickedImage)
+                                }
+                            })
+                        })
+                        alert.addAction(allowAction)
+                        alert.addAction(UIAlertAction(title: ADD_OBSV_IMAGE_OPTIONS_SAVE_PHOTO_ASK_PERM_BTN_NO, style: .cancel))
+                        if let theView = UtilityFunctions.getVisibleViewController() {
+                            theView.present(alert, animated: true, completion: nil)
+                        }
+                        break
                     }
-                })
-            }
-            if picker.sourceType == UIImagePickerControllerSourceType.photoLibrary {
-                imagePicker.dismiss(animated: true, completion: {
+                    
+                }
+                if picker.sourceType == UIImagePickerControllerSourceType.photoLibrary {
                     DispatchQueue.main.async {
-                        self.observationImage.image = pickedImage
+                        self.observationImage.image = thePickedImage
                         self.pickedImage = true
                     }
                     if let url = info[UIImagePickerControllerReferenceURL] as? URL {
                         self.pickedImageLocation = MediaManager.md.getImageCoordinates(url: url)
                     }
-                })
+                }
+            } else {
+                // the picked item is not an image -- not supported
+                let alert = UIAlertController(title: ADD_OBSV_IMAGE_OPTIONS_NOT_SUPPORTED_TITLE, message: ADD_OBSV_IMAGE_OPTIONS_NOT_SUPPORTED_MSG, preferredStyle: .alert )
+                alert.addAction(UIAlertAction(title: ADD_OBSV_IMAGE_OPTIONS_ERR_LIB_BTN_DISMISS, style: .cancel))
+                if let theView = UtilityFunctions.getVisibleViewController() {
+                    theView.present(alert, animated: true, completion: nil)
+                }
             }
-        }
-        imagePicker.dismiss(animated: true, completion: nil)
+        })
+    }
+    
+    func saveImage(img: UIImage) {
+        MediaManager.md.saveImageToPhotosLib(img: img, completion: { success, error, loc in
+            if !success {
+                let ac = UIAlertController(title: SAVE_OBSV_ERROR_MESSAGE, message: error, preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: SAVE_OBSV_ERROR_BUTTON_TEXT, style: .default))
+                self.present(ac, animated: true)
+            } else {
+                //self.pickedImageLocation = loc
+                DispatchQueue.main.async {
+                    self.observationImage.image = img
+                    self.pickedImage = true
+                }
+            }
+        })
     }
     
     @IBAction func observationImageButtonTapped(_ sender: Any) {
@@ -227,7 +271,7 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
             if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.photoLibrary) &&
                 (PHPhotoLibrary.authorizationStatus() == PHAuthorizationStatus.authorized ||
                  PHPhotoLibrary.authorizationStatus() == PHAuthorizationStatus.notDetermined) {
-                self.imagePicker.sourceType = UIImagePickerControllerSourceType.photoLibrary;
+                self.imagePicker.sourceType = UIImagePickerControllerSourceType.photoLibrary
                 self.present(self.imagePicker, animated: true, completion: nil)
             } else {
                 UtilityFunctions.showErrorMessage(theView: self, title: ADD_OBSV_IMAGE_OPTIONS_ERR_LIB_TITLE, message: ADD_OBSV_IMAGE_OPTIONS_ERR_LIB_MSG, buttonText: ADD_OBSV_IMAGE_OPTIONS_ERR_LIB_BTN_TXT)
@@ -237,7 +281,7 @@ UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
             if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) &&
                 (AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo) == AVAuthorizationStatus.authorized ||
                     AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo) == AVAuthorizationStatus.notDetermined) {
-                self.imagePicker.sourceType = UIImagePickerControllerSourceType.camera;
+                self.imagePicker.sourceType = UIImagePickerControllerSourceType.camera
                 self.locationManager.startUpdatingLocation()
                 self.present(self.imagePicker, animated: true, completion: nil)
             } else {
