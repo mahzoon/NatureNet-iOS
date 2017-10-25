@@ -1,5 +1,6 @@
 # NatureNet iOS Application
 A platform for sharing place-based nature observations and contributing design ideas. See more details about NatureNet project here: https://nature-net.org
+
 This iOS app can be downloaded for free from here:
 https://itunes.apple.com/us/app/naturenet/id1104382694?mt=8
 
