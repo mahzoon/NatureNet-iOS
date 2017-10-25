@@ -1,9 +1,11 @@
 # NatureNet iOS Application
-Developed using Swift - A platform for sharing place-based nature observations and contributing design ideas
+A platform for sharing place-based nature observations and contributing design ideas. See more details about NatureNet project here: https://nature-net.org
+This iOS app can be downloaded for free from here:
+https://itunes.apple.com/us/app/naturenet/id1104382694?mt=8
 
-Instructions:
+Instructions to contribute:
 
-Download Xcode from here: https://developer.apple.com/xcode/downloads/ or go to App Store search Xcode and install it (App Store: https://itunes.apple.com/us/app/xcode/id497799835?ls=1&mt=12).
+Download Xcode from here: https://developer.apple.com/xcode/downloads/ or go to App Store search Xcode and install it (Xcode in App Store: https://itunes.apple.com/us/app/xcode/id497799835?ls=1&mt=12).
 
 Download the source code of this entire project from Github. Click "Download Zip" on the right on the Github page to download the code on your computer. Or, if you have git on your computer, you can pull/fork this respostory to your local computer.
 
