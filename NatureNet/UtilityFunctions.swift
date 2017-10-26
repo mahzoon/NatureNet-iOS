@@ -87,31 +87,23 @@ class UtilityFunctions {
         application.registerForRemoteNotifications()
     }
     
-    static func NSRangeFromRange(text: String, range : Range<String.Index>) -> NSRange {
-        let utf16view = text.utf16
-        let from = String.UTF16View.Index(range.lowerBound, within: utf16view)
-        let to = String.UTF16View.Index(range.upperBound, within: utf16view)
-        return NSMakeRange(from - utf16view.startIndex, to - from)
-    }
-    
-    static func getOccurranceIndices(text: String, query: String) -> [Range<String.Index>] {
-        var searchRange = text.startIndex..<text.endIndex
-        var indices: [Range<String.Index>] = []
-        while let range = text.range(of: query, options: .caseInsensitive, range: searchRange) {
-            searchRange = range.upperBound..<searchRange.upperBound
-            indices.append(range)
-        }
-        return indices
-    }
-    
     static func convertTextToAttributedString(text: String) -> NSMutableAttributedString {
         let s = NSMutableAttributedString(string: text)
-        for word in text.components(separatedBy: [",", " ", "\n"]) {
-            if word.hasPrefix("#") || word.hasPrefix("@")  {
-                let ranges = getOccurranceIndices(text: text, query: word)
-                for range in ranges {
-                    s.addAttribute(NSLinkAttributeName, value: word, range: NSRangeFromRange(text: text, range : range))
-                }
+        let nsText = text as NSString
+        var searchRange = NSMakeRange(0, nsText.length)
+        for word in nsText.components(separatedBy: [",", " ", "\n"]) {
+            if word == "" {
+                continue
+            }
+            let range = nsText.range(of: word, options: .caseInsensitive, range: searchRange)
+            if range.length == 0 {
+                continue
+            }
+            if word.hasPrefix("#") || word.hasPrefix("@") {
+                s.addAttribute(NSLinkAttributeName, value: word, range: range)
+            }
+            if nsText.length > range.upperBound {
+                searchRange = NSMakeRange(range.upperBound, nsText.length - range.upperBound)
             }
         }
         return s
