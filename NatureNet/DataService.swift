@@ -85,9 +85,10 @@ class DataService  {
     
     private var connectionTimer = Timer()
     
-    init() {
+    func initialize () {
         // initializing the reference to the database
         db_ref = Database.database().reference()
+        db_ref.keepSynced(true)
         
         // monitor connection status
         db_ref.child(".info/connected").observe(.value, with: { (snapshot) in
@@ -115,7 +116,7 @@ class DataService  {
         }
     }
     
-    func initializeObservers(observerCompletion: @escaping (Void) -> Void) {
+    func initializeObservers(observerCompletion: @escaping () -> Void) {
         self.initProjectsObserver(completion: observerCompletion)
         self.initUsersObserver(completion: observerCompletion)
         self.initObservationsObserver(completion: observerCompletion)
@@ -299,7 +300,7 @@ class DataService  {
     //
     //////////////////////////////////////////////////////////////
     
-    private func initSitesObserver(completion: @escaping (Void) -> Void) {
+    private func initSitesObserver(completion: @escaping () -> Void) {
         
         if observerInitStatus["sites"] == InitializationStatus.Initialized {
             completion()
@@ -363,7 +364,7 @@ class DataService  {
     //
     //////////////////////////////////////////////////////////////
     
-    private func initProjectsObserver(completion: @escaping (Void) -> Void) {
+    private func initProjectsObserver(completion: @escaping () -> Void) {
         
         if observerInitStatus["projects"] == InitializationStatus.Initialized {
             completion()
@@ -518,7 +519,7 @@ class DataService  {
     //
     //////////////////////////////////////////////////////////////
     
-    private func initUsersObserver(completion: @escaping (Void) -> Void) {
+    private func initUsersObserver(completion: @escaping () -> Void) {
         
         if observerInitStatus["users"] == InitializationStatus.Initialized {
             completion()
@@ -650,7 +651,7 @@ class DataService  {
     //
     //////////////////////////////////////////////////////////////
     
-    func initObservationsObserver(completion: @escaping (Void) -> Void) {
+    func initObservationsObserver(completion: @escaping () -> Void) {
         
         if observerInitStatus["observations"] == InitializationStatus.Initialized {
             completion()
@@ -674,6 +675,9 @@ class DataService  {
                         lastCreatedDate = observation.createdAt
                     }
                 }
+                self.observations.sort(by: { (first, second) -> Bool in
+                    return first.updatedAt.decimalValue > second.updatedAt.decimalValue
+                })
                 self.reloadTables(section: DB_OBSERVATIONS_PATH)
             }
             // creating add/remove/change observers
@@ -850,7 +854,7 @@ class DataService  {
     //
     //////////////////////////////////////////////////////////////
     
-    private func initDesignIdeasObserver(completion: @escaping (Void) -> Void) {
+    private func initDesignIdeasObserver(completion: @escaping () -> Void) {
         
         if observerInitStatus["designideas"] == InitializationStatus.Initialized {
             completion()
@@ -1013,7 +1017,7 @@ class DataService  {
     //
     //////////////////////////////////////////////////////////////
     
-    private func initCommentsObserver(completion: @escaping (Void) -> Void) {
+    private func initCommentsObserver(completion: @escaping () -> Void) {
         
         if observerInitStatus["comments"] == InitializationStatus.Initialized {
             completion()

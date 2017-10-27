@@ -26,6 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         FirebaseApp.configure()
         // enabling offline capabilities of Firebase database object
         Database.database().isPersistenceEnabled = true
+        DataService.ds.initialize()
         
         // detect first time launch
         if UserDefaults.standard.object(forKey: "firstTimeNNv2") == nil {

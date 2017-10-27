@@ -13,7 +13,7 @@ class TextFieldCell: UITableViewCell, UITextFieldDelegate {
 
     @IBOutlet weak var textBox: UITextField!
     
-    var textFieldReturnCallback: ((Void) -> (Void))?
+    var textFieldReturnCallback: (() -> (Void))?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -22,7 +22,7 @@ class TextFieldCell: UITableViewCell, UITextFieldDelegate {
         textBox.text = ""
     }
     
-    func configureCell(returnCallback: @escaping (Void) -> (Void)) {
+    func configureCell(returnCallback: @escaping () -> (Void)) {
         self.textFieldReturnCallback = returnCallback
     }
     
