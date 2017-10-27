@@ -111,33 +111,37 @@ class GalleryDetailController: UIViewController, UITableViewDelegate, UITableVie
             // load the observation image
             self.observation.image = IMAGE_DEFAULT_OBSERVATION
             // requesting the icon
-            MediaManager.md.getOrDownloadImage(requesterId: "GalleryDetailController.img", urlString: obsv.observationImageUrl, completion: { img, err in
-                if let i = img {
-                    DispatchQueue.main.async {
-                        self.observation.image = i
+            DispatchQueue.global(qos: .background).async {
+                MediaManager.md.getOrDownloadImage(requesterId: "GalleryDetailController.img", urlString: obsv.observationImageUrl, completion: { img, err in
+                    if let i = img {
+                        DispatchQueue.main.async {
+                            self.observation.image = i
+                        }
                     }
-                }
-            })
+                })
+            }
             
             // load the document (if there is any attached to the observation)
             if obsv.observationDoc != "" {
-                MediaManager.md.getOrDownloadDoc(requesterId: "GalleryDetailController.img", urlString: obsv.observationDoc, completion: { data, result in
-                    // save the document in the "Documents" folder
-                    do {
-                        self.attachedDocumentPath = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
-                        var fName: String = obsv.id
-                        if obsv.observationText != "" {
-                            fName = obsv.observationText
-                        }
-                        self.attachedDocumentPath = self.attachedDocumentPath?.appendingPathComponent(fName + ".pdf")
-                        if let d = data {
-                            if let path = self.attachedDocumentPath {
-                                try d.write(to: path)
+                DispatchQueue.global(qos: .background).async {
+                    MediaManager.md.getOrDownloadDoc(requesterId: "GalleryDetailController.img", urlString: obsv.observationDoc, completion: { data, result in
+                        // save the document in the "Documents" folder
+                        do {
+                            self.attachedDocumentPath = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
+                            var fName: String = obsv.id
+                            if obsv.observationText != "" {
+                                fName = obsv.observationText
+                            }
+                            self.attachedDocumentPath = self.attachedDocumentPath?.appendingPathComponent(fName + ".pdf")
+                            if let d = data {
+                                if let path = self.attachedDocumentPath {
+                                    try d.write(to: path)
+                                }
                             }
                         }
-                    }
-                    catch { }
-                })
+                        catch { }
+                    })
+                }
             }
         } else {
             self.navigationController?.popViewController(animated: true)

@@ -35,16 +35,18 @@ class ImageViewController: UIViewController, UIScrollViewDelegate {
         self.theImage.image = IMAGE_DEFAULT_OBSERVATION
         // requesting the icon
         if let url = observationImageUrl {
-            MediaManager.md.getOrDownloadImage(requesterId: "ImageViewController", urlString: url, completion: { img, err in
-                if let i = img {
-                    DispatchQueue.main.async {
-                        self.theImage.image = i
-                        // update the scrollview's min scale to fit the image
-                        self.setMinZoomScale()
-                        self.updateConstraints()
+            DispatchQueue.global(qos: .background).async {
+                MediaManager.md.getOrDownloadImage(requesterId: "ImageViewController", urlString: url, completion: { img, err in
+                    if let i = img {
+                        DispatchQueue.main.async {
+                            self.theImage.image = i
+                            // update the scrollview's min scale to fit the image
+                            self.setMinZoomScale()
+                            self.updateConstraints()
+                        }
                     }
-                }
-            })
+                })
+            }
         }
     }
     

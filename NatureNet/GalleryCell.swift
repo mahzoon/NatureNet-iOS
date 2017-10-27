@@ -72,26 +72,31 @@ class GalleryCell: UITableViewCell {
         if (self.avatar != nil) {
             self.avatar.image = ICON_DEFAULT_USER_AVATAR
             // requesting the icon
-            MediaManager.md.getOrDownloadIcon(requesterId: cellId, urlString: avatar, completion: { img, err in
-                if let i = img {
-                    DispatchQueue.main.async {
-                        self.avatar.image = i
+            DispatchQueue.global(qos: .background).async {
+                MediaManager.md.getOrDownloadIcon(requesterId: self.cellId, urlString: avatar, completion: { img, err in
+                    if let i = img {
+                        DispatchQueue.main.async {
+                            self.avatar.image = i
+                        }
                     }
-                }
-            })
+                })
+            }
         }
         
         // load the observation image
         self.observationImage.image = IMAGE_DEFAULT_OBSERVATION
         if let obsv = self.observation {
             // display a thumbnail of the observation
-            MediaManager.md.getOrDownloadImage(requesterId: cellId + ".img", urlString: obsv.getThumbnailUrlWithWidth(width: Int(self.observationImage.frame.width)), completion: { img, err in
-                if let i = img {
-                    DispatchQueue.main.async {
-                        self.observationImage.image = i
+            let width = Int(self.observationImage.frame.width)
+            DispatchQueue.global(qos: .background).async {
+                MediaManager.md.getOrDownloadImage(requesterId: self.cellId + ".img", urlString: obsv.getThumbnailUrlWithWidth(width: width), completion: { img, err in
+                    if let i = img {
+                        DispatchQueue.main.async {
+                            self.observationImage.image = i
+                        }
                     }
-                }
-            })
+                })
+            }
         }
         
         updateLikeAndDislikeButtonImages()
