@@ -287,6 +287,18 @@ let CLOUDINARY_PRESET = "ios-preset"
 let CLOUDINARY_BASE_URL = "https://res.cloudinary.com/university-of-colorado/image/upload/"
 
 //
+// User Settings -- these are keys to "UserDefaults" object
+//
+let USER_SETTINGS_FIRSTTIMELOAD_KEY = "FirstTimeNNv2"
+let USER_SETTINGS_LAST_PROJECTID_KEY = "LastProjectID"
+
+//
+// Notifications
+//
+let NOTIFICATION_OBJECT_ITEM_KEY = "parent"
+let NOTIFICATION_OBJECT_CONTEXT_KEY = "context"
+
+//
 // Other constants
 //
 let DESIGN_IDEA_STATUS_DISCUSSING = "doing"

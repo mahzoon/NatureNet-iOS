@@ -29,7 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         DataService.ds.initialize()
         
         // detect first time launch
-        if UserDefaults.standard.object(forKey: "firstTimeNNv2") == nil {
+        if UserDefaults.standard.object(forKey: USER_SETTINGS_FIRSTTIMELOAD_KEY) == nil {
             // remove all settings
             UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
             UserDefaults.standard.synchronize()
@@ -37,7 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             // sign out of firebase
             DataService.ds.SignOut()
             
-            UserDefaults.standard.set(false, forKey: "firstTimeNNv2")
+            UserDefaults.standard.set(false, forKey: USER_SETTINGS_FIRSTTIMELOAD_KEY)
         }
         
         // creating cloudinary instances for uploading image
@@ -69,8 +69,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     @available(iOS 10.0, *)
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        if let itemId = response.notification.request.content.userInfo["parent"] {
-            if let context = response.notification.request.content.userInfo["context"] {
+        if let itemId = response.notification.request.content.userInfo[NOTIFICATION_OBJECT_ITEM_KEY] {
+            if let context = response.notification.request.content.userInfo[NOTIFICATION_OBJECT_CONTEXT_KEY] {
                 if let mainVC = self.window?.rootViewController as? MainViewController {
                     mainVC.transitionItemId = itemId as! String
                     mainVC.transitionViewId = (context as! String)
