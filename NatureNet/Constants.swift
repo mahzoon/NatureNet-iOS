@@ -229,11 +229,6 @@ let ADD_PROJECT_SUCCESS_TITLE = "Done!"
 let ADD_PROJECT_SUCCESS_MESSAGE = "The project was added successfully."
 let ADD_PROJECT_SUCCESS_BUTTON_TEXT = "Dismiss"
 
-// notification
-let NOTIFICATION_MESSAGE_BODY = "Do you want to see the comment?"
-let NOTIFICATION_MESSAGE_BUTTON_CANCEL = "No"
-let NOTIFICATION_MESSAGE_BUTTON_OK = "Yes"
-
 //
 // Segue names
 //
@@ -297,6 +292,9 @@ let USER_SETTINGS_LAST_PROJECTID_KEY = "LastProjectID"
 //
 let NOTIFICATION_OBJECT_ITEM_KEY = "parent"
 let NOTIFICATION_OBJECT_CONTEXT_KEY = "context"
+let NOTIFICATION_SETUP_FAILED_TITLE = "Notification Setup Failed."
+let NOTIFICATION_SETUP_FAILED_MESSAGE = "Sorry, notification registration failed."
+let NOTIFICATION_SETUP_FAILED_BUTTON_SIGNIN_TEXT = "OK"
 
 //
 // Other constants

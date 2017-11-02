@@ -56,7 +56,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-        print("Registration failed!")
+        if let visible_controller = UtilityFunctions.getVisibleViewController() {
+            UtilityFunctions.showErrorMessage(theView: visible_controller,
+                title: NOTIFICATION_SETUP_FAILED_TITLE,
+                message: NOTIFICATION_SETUP_FAILED_MESSAGE,
+                buttonText: NOTIFICATION_SETUP_FAILED_BUTTON_SIGNIN_TEXT)
+        }
     }
 
     // Firebase notification received
